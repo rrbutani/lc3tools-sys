@@ -46,11 +46,10 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            Check the [changelog](https://github.com/rrbutani/{{ repo name }}/tree/${{ github.ref }}/CHANGELOG.md#${{ github.ref }}).
+            Check the [changelog](https://github.com/rrbutani/lc3tools-sys/tree/${{ github.ref }}/CHANGELOG.md#${{ github.ref }}).
           draft: false
           prerelease: false
 
       - name: Publish
         run: |
           cargo publish --token ${{ secrets.CARGO_TOKEN }}
-        # {{ todo: set CARGO_TOKEN in secrets }}

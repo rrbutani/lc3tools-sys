@@ -1,4 +1,4 @@
-## Contributing to `{{ crate name }}`
+## Contributing to `lc3tools-sys`
 
 Thanks for considering contributing! Here are some of the conventions I try to follow.
 
@@ -16,10 +16,6 @@ alias git-log-stat='git log --oneline | cut -d ' ' -f2- | grep '^[^ ]*:.*$' | cu
 ### Formatting
 
 This repo _should_ run `rustfmt` in CI. Regardless, we encourage you to run `cargo fmt` locally before submitting a PR.
-
-### Project Structure
-
-{{ details on the project's structure; else delete }}
 
 ### Licensing
 

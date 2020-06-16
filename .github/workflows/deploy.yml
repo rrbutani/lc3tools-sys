@@ -29,7 +29,7 @@ jobs:
             ~/.cargo/bin
             ~/.cargo/.crates2.json
             ~/.cargo/.crates.toml
-          key: deploy-${{ hashFiles('src/lib.rs') }} # {{ replace this as appropriate }}
+          key: deploy-${{ hashFiles('src/lib.rs') }}
 
       - name: Run cargo doc
         uses: actions-rs/cargo@v1

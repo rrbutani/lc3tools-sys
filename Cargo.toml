@@ -1,30 +1,30 @@
 [package]
-name = "{{ crate name }}"
-version = "{{ crate verion }}"
+name = "lc3tools-sys"
+version = "1.0.6-alpha0"
 authors = ["Rahul Butani <r.r.butan.i+crates@gmail.com>"]
 edition = "2018"
 
-description = "{{ crate description }}"
-documentation = "https://docs.rs/{{ crate name }}"
-homepage = "https://github.com/rrbutani/{{ crate repo }}"
-repository = "https://github.com/rrbutani/{{ crate repo }}"
+description = "Rust bindings for LC3Tools"
+documentation = "https://docs.rs/lc3tools-sys"
+homepage = "https://github.com/rrbutani/lc3tools-sys"
+repository = "https://github.com/rrbutani/lc3tools-sys"
 
 readme = "README.md"
 
-# keywords = {{ crate keywords }}
-# categories = {{ crate categories: https://crates.io/category_slugs }}
+keywords = ["bindings", "lc-3", "simulator", "lc3tools"]
+categories = ["simulation", "external-ffi-bindings"]
 
-# license = {{ crate license }}
+license = "Apache-2.0"
 
 exclude = [".github"]
 
 
 [badges]
-github-actions = { repository = "rrbutani/{{ crate name }}", workflow = "full" }
-# [TODO] # codecov = { repository = "rrbutani/xterm-js-sys", branch = "main", service = "github" }
+github-actions = { repository = "rrbutani/lc3tools-sys", workflow = "full" }
+# [TODO] # codecov = { repository = "rrbutani/lc3tools-sys", branch = "main", service = "github" }
 
-is-it-maintained-issue-resolution = { repository = "rrbutani/{{ crate name }}" }
-is-it-maintained-open-issues = { repository = "rrbutani/{{ crate name }}" }
+is-it-maintained-issue-resolution = { repository = "rrbutani/lc3tools-sys" }
+is-it-maintained-open-issues = { repository = "rrbutani/lc3tools-sys" }
 maintenance = { status = "actively-developed" }
 
 
@@ -50,4 +50,3 @@ targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin", "x86_64-pc-windows
 rustdoc-args = ["--cfg", "docs"]
 all-features = true
 default-target = "x86_64-unknown-linux-gnu"
-# {{ todo: include wasm/change the default if applicable }}
