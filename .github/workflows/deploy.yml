@@ -1,0 +1,71 @@
+on:
+  push:
+    # Publish docs for the main branch only
+    branches:
+      - main
+
+name: deploy
+
+jobs:
+  deploy:
+    name: Deploy docs
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          override: true
+
+      # A very lazy form of caching.
+      - name: Cache!
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/target
+            ~/.cargo/bin
+            ~/.cargo/.crates2.json
+            ~/.cargo/.crates.toml
+          key: deploy-${{ hashFiles('src/lib.rs') }} # {{ replace this as appropriate }}
+
+      - name: Run cargo doc
+        uses: actions-rs/cargo@v1
+        with:
+          command: doc
+          args: --all-features --document-private-items
+          # → target/doc
+
+      - name: Run cargo rustdoc # just to show the stats!
+        uses: actions-rs/cargo@v1
+        with:
+          command: rustdoc
+          args: --all-features -- --cfg docs -Z unstable-options --show-coverage
+
+      - name: Move everything into place
+        run: |
+          mkdir -p deploy
+          mv target/doc deploy/docs
+          echo "Try /docs." > deploy/index.html
+
+      - name: Prepare tag
+        id: prepare_tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          TAG_NAME="${GITHUB_REF##refs/tags/}"
+          echo "::set-output name=tag_name::${TAG_NAME}"
+          echo "::set-output name=deploy_tag_name::deploy-${TAG_NAME}"
+
+      - name: Push to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy
+          publish_branch: gh-pages
+          force_orphan: true
+          tag_name: ${{ steps.prepare_tag.outputs.deploy_tag_name }}
+          tag_message: 'Deployment ${{ steps.prepare_tag.outputs.tag_name }}'
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'

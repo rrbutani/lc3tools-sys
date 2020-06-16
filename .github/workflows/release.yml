@@ -1,0 +1,56 @@
+on:
+  push:
+    # Only on tags:
+    tags: '*.*.*'
+
+name: release
+
+jobs:
+  publish:
+    name: Publishes to crates.io
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - uses: actions-rs/cargo@v1
+
+      - name: Check that the tag matches the crate version.
+        run: |
+          cargo update
+          C_VER="$(cargo pkgid | cut -d'#' -f2)"
+          T_VER=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          if [[ "${C_VER}" != "${T_VER}" ]]; then
+            echo "Crate version doesn't match the tag version! (`${C_VER}` vs `${T_VER}`)"
+            exit 2
+          fi
+
+      - name: Check that this version has a changelog entry
+        run: |
+          T_VER=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          grep -q "# ${T_VER}" CHANGELOG.md || exit 3
+
+      - name: Create Release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Check the [changelog](https://github.com/rrbutani/{{ repo name }}/tree/${{ github.ref }}/CHANGELOG.md#${{ github.ref }}).
+          draft: false
+          prerelease: false
+
+      - name: Publish
+        run: |
+          cargo publish --token ${{ secrets.CARGO_TOKEN }}
+        # {{ todo: set CARGO_TOKEN in secrets }}

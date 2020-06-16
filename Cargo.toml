@@ -1,0 +1,53 @@
+[package]
+name = "{{ crate name }}"
+version = "{{ crate verion }}"
+authors = ["Rahul Butani <r.r.butan.i+crates@gmail.com>"]
+edition = "2018"
+
+description = "{{ crate description }}"
+documentation = "https://docs.rs/{{ crate name }}"
+homepage = "https://github.com/rrbutani/{{ crate repo }}"
+repository = "https://github.com/rrbutani/{{ crate repo }}"
+
+readme = "README.md"
+
+# keywords = {{ crate keywords }}
+# categories = {{ crate categories: https://crates.io/category_slugs }}
+
+# license = {{ crate license }}
+
+exclude = [".github"]
+
+
+[badges]
+github-actions = { repository = "rrbutani/{{ crate name }}", workflow = "full" }
+# [TODO] # codecov = { repository = "rrbutani/xterm-js-sys", branch = "main", service = "github" }
+
+is-it-maintained-issue-resolution = { repository = "rrbutani/{{ crate name }}" }
+is-it-maintained-open-issues = { repository = "rrbutani/{{ crate name }}" }
+maintenance = { status = "actively-developed" }
+
+
+[lib]
+
+
+[dependencies]
+
+[dev-dependencies]
+
+
+[profile.release]
+opt-level = 3
+lto = true
+
+
+[features]
+default = []
+
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin", "x86_64-pc-windows-msvc"]
+rustdoc-args = ["--cfg", "docs"]
+all-features = true
+default-target = "x86_64-unknown-linux-gnu"
+# {{ todo: include wasm/change the default if applicable }}

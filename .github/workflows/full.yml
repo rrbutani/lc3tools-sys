@@ -1,0 +1,331 @@
+on:
+  push:
+  pull_request:
+  schedule:
+    # New nightlies are usually out ~25 mins after midnight, UTC
+    # i.e.: https://static.rust-lang.org/dist/2020-06-06/
+    # (we'll wait 40 mins to be safe)
+    - cron:  '40 0 * * *'
+
+name: full
+
+jobs:
+  check:
+    name: Check + test
+
+    strategy:
+      fail-fast: false
+      matrix:
+        rust:
+          - stable
+          # - beta
+          - nightly
+          - 1.43.0 # {{ replace with MSRV as necessary }}
+        target:
+          - x86_64-unknown-linux-gnu
+          # - wasm32-unknown-unknown
+          # - wasm32-wasi
+        features:
+          - "''"
+          # {{ update with features as necessary }}
+        cargo-cache-ver: ["0.4.3"]
+        cargo-sweep-ver: ["0.5.0"]
+        rust-latest-ver: ["1.4.0"]
+        # Note: remember to update these below as well when making changes!
+
+    continue-on-error: ${{ matrix.rust == 'nightly' }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Cache the binaries
+        id: bin-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/.crates2.json
+            ~/.cargo/.crates.toml
+          key: ${{ matrix.cargo-cache-ver }}-${{ matrix.cargo-sweep-ver }}-${{ matrix.rust-latest-ver }}-cargo-bins
+
+      # We don't bother using actions-rs/install for this because:
+      #  - we want to be able to install cargo-cache with specific features
+      #    which actions-rs/install doesn't support
+      #  - cache-cache with `--features ci-autoclean` is designed to install
+      #    fast anyways
+      #  - the cache should pick up the installation of these tools
+      #  - this happens infrequently so it doesn't even really matter
+      #
+      # Note that these are always installed with the version of Rust that's on the
+      # GitHub Ubuntu runners by default (usually the current stable version). Ideally
+      # we'd use the version of Rust we're using for the job but we can't because we
+      # need rust-latest to figure out if we can use the caches to get the version of
+      # Rust we're using for the job (a circle).
+      - name: Install cargo-cache and cargo-sweep and rust-latest
+        # The versions here are intentionally pinned.
+        # When changing versions, remember to change them below, too.
+        if: steps.bin-cache.outputs.cache-hit != 'true'
+        run: |
+          cargo install cargo-cache \
+            --vers =${{ matrix.cargo-cache-ver }} \
+            --no-default-features \
+            --features ci-autoclean
+          cargo install cargo-sweep \
+            --vers =${{ matrix.cargo-sweep-ver }}
+          cargo install rust-latest \
+            --vers =${{ matrix.rust-latest-ver }}
+
+      - name: Get feature and toolchain key
+        id: keys
+        run: |
+          echo "::set-output name=features::$(echo '${{ matrix.features }}' | sed 's/,/+/g')"
+          echo "::set-output name=toolchain::$(rust-latest -c '${{ matrix.rust }}')"
+
+      # The split between the 'toolchain' and 'build artifact' caches has gotten
+      # pretty weird; it's really should be called "all the things we can cache
+      # without calculating the lock file" and "everything else".
+      #
+      # It really makes more sense for the registry and the ~/.cargo/git to be
+      # part of the build artifact cache (since, what actually gets put in those
+      # folders will vary with the deps), but this isn't too bad. Most toolchain
+      # versions (with the exception of the MSRV) will vary fast enough that
+      # the registry doesn't become too stale. And for the MSRV, hopefully its
+      # caches will get pushed out frequently enough (caches are LIFOed on date
+      # created, iiuc) that this isn't a problem.
+      - name: Cache the toolchain
+        id: toolchain-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          # ~/.cache/.wasm-pack # {{ for wasm }}
+          # Update: we're going to skip caching the toolchain for now; the cache is
+          # frequently slower than just grabbing the toolchain from rlo/dist
+          # /usr/share/rust/.rustup
+          # ^ == ~/.rustup; this action doesn't resolve the symlink
+          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.target }}-${{ steps.keys.outputs.features }}-toolchain
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust }}
+          target: ${{ matrix.target }}
+          override: true
+
+      - name: Generate Cargo.lock
+        uses: actions-rs/cargo@v1
+        with:
+          command: update
+
+      - name: Cache the build artifacts
+        uses: actions/cache@v2
+        with:
+          path: target
+          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.target }}-${{ steps.keys.outputs.features }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ steps.keys.outputs.toolchain }}-${{ matrix.target }}-${{ steps.keys.outputs.features }}-cargo-
+          # ^ means we don't have to start from scratch when the deps change
+
+      - name: Mark all files for cargo-sweep
+        run: cargo-sweep sweep -s
+
+      - name: Run cargo check
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+          args: >-
+            --target ${{ matrix.target }}
+            --all-targets
+            --no-default-features
+            --features ${{ matrix.features }}
+
+      - name: Run cargo check release
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+          args: >-
+            --target ${{ matrix.target }}
+            --all-targets
+            --no-default-features
+            --features ${{ matrix.features }}
+            --release
+
+      # Run the non-wasm tests:
+      - name: Run cargo test
+        if: matrix.target == 'x86_64-unknown-linux-gnu'
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: >-
+            --target ${{ matrix.target }}
+            --no-default-features
+            --features ${{ matrix.features }}
+            --no-fail-fast
+
+      # Run the non-wasm tests:
+      - name: Run cargo test release
+        if: matrix.target == 'x86_64-unknown-linux-gnu'
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: >-
+            --target ${{ matrix.target }}
+            --no-default-features
+            --features ${{ matrix.features }}
+            --no-fail-fast
+            --release
+
+# {{ for wasm }}
+#       # Run the wasm tests only on 'wasm32-unknown-unknown'
+#       - name: Install wasm-pack to run wasm tests
+#         if: matrix.target == 'wasm32-unknown-unknown'
+#         uses: jetli/wasm-pack-action@v0.3.0
+#         with:
+#           version: 'latest'
+#
+#       # Run the wasm tests only on 'wasm32-unknown-unknown'
+#       - name: Run cargo test (wasm)
+#         if: matrix.target == 'wasm32-unknown-unknown'
+#         run: >-
+#           wasm-pack
+#           test
+#           --node
+#           --
+#           --no-default-features
+#           --features ${{ matrix.features }}
+#           --no-fail-fast
+#
+#       # Run wasm tests only on 'wasm32-unknown-unknown'
+#       - name: Run cargo test release (wasm)
+#         if: matrix.target == 'wasm32-unknown-unknown'
+#         run: >-
+#           wasm-pack
+#           test
+#           --node
+#           --release
+#           --
+#           --no-default-features
+#           --features ${{ matrix.features }}
+#           --no-fail-fast
+
+      - name: Clean up the target folder and cargo's caches
+        # Since we're using the CI version of cargo-cache there aren't any
+        # options, which is fine.
+        run: |
+          cargo-cache
+          cargo-sweep sweep -f
+
+  lint:
+    name: Format + run clippy
+
+    strategy:
+      fail-fast: false
+      matrix:
+        rust: [ stable, nightly ]
+        cargo-cache-ver: ["0.4.3"]
+        cargo-sweep-ver: ["0.5.0"]
+        rust-latest-ver: ["1.4.0"]
+        # Note: change these above as well.
+
+    continue-on-error: ${{ matrix.rust == 'nightly' }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      # Caching is still beneficial for this task since `cargo clippy` basically
+      # runs `cargo check` which grabs deps and builds them.
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ matrix.rust }}-cargo-clippy-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ matrix.rust }}-cargo-clippy-
+
+      - name: Cache the binaries
+        id: bin-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/.crates2.json
+            ~/.cargo/.crates.toml
+          key: ${{ matrix.cargo-cache-ver }}-${{ matrix.cargo-sweep-ver }}-${{ matrix.rust-latest-ver }}-cargo-bins
+
+      - name: Install cargo-cache and cargo-sweep and rust-latest
+        if: steps.bin-cache.outputs.cache-hit != 'true'
+        run: |
+          cargo install cargo-cache --vers =${{ matrix.cargo-cache-ver }} \
+            --no-default-features --features ci-autoclean
+          cargo install cargo-sweep --vers =${{ matrix.cargo-sweep-ver }}
+          cargo install rust-latest --vers =${{ matrix.rust-latest-ver }}
+
+      - name: Get toolchain key
+        id: keys
+        run: |
+          echo "::set-output name=toolchain::$(rust-latest -c '${{ matrix.rust }}')"
+
+      - name: Cache the toolchain
+        id: toolchain-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          # /usr/share/rust/.rustup
+          # Update: we're going to skip caching the toolchain for now; the cache is
+          # frequently slower than just grabbing the toolchain from rlo/dist
+          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.target }}-${{ steps.keys.outputs.features }}-toolchain
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust }}
+          override: true
+          components: rustfmt, clippy
+          target: wasm32-wasi
+
+      - name: Generate Cargo.lock
+        uses: actions-rs/cargo@v1
+        with:
+          command: update
+
+      - name: Cache the build artifacts
+        uses: actions/cache@v2
+        with:
+          path: target
+          key: ${{ steps.keys.outputs.toolchain }}-cargo-clippy-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ steps.keys.outputs.toolchain }}-cargo-clippy-
+
+      - name: Mark all files for cargo-sweep
+        run: cargo-sweep sweep -s
+
+      - name: Run cargo fmt
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
+
+      # Since we don't run any builds in this task, we shouldn't need to run clean
+      # before (← is the workaround for rust-lang/rust-clippy#4612).
+      - name: Run cargo clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --all --all-features -- -D warnings
+
+      - name: Format and lint the examples
+        run: |
+          cd examples
+          cargo fmt --all -- --check
+          cargo clippy --all --target wasm32-wasi -- -D warnings
+
+      - name: Clean up the target folder and cargo's caches
+        run: |
+          cargo-cache
+          cargo-sweep sweep -f
