@@ -9,7 +9,7 @@ Rust bindings for [LC3Tools][lc3tools].
 Add this to your `Cargo.toml`:
 ```TOML
 [dependencies]
-lc3tools-sys = 1.0.6-alpha0
+lc3tools-sys = "1.0.6-alpha0"
 ```
 
 TODO: fill in
@@ -36,7 +36,7 @@ PRs are (very) welcome! See [CONTRIBUTING.md] for details.
 [CONTRIBUTING.md]: https://github.com/rrbutani/lc3tools-sys/tree/main/.github/CONTRIBUTING.md
 
 [actions]: https://github.com/rrbutani/lc3tools-sys/actions
-[license]: https://opensource.org/licenses/MIT
+[license]: https://opensource.org/licenses/Apache-2.0
 [crates]: https://crates.io/crates/lc3tools-sys
 [docs]: https://rrbutani.github.io/lc3tools-sys/docs/lc3tools-sys
 
