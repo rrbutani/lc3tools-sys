@@ -95,29 +95,6 @@ fn main() -> Result<()> {
         .derive_debug(true)
         .generate_comments(true)
 
-        // .opaque_type("std::map")
-        // .opaque_type("std::iterator")
-        // .opaque_type("std::.*")
-        // .opaque_type("aligned_buffer.h")
-        // .opaque_type("*")
-
-        // .opaque_type("std::basic_string")
-        // .opaque_type("std::basic_ostream")
-        // .opaque_type("std::basic_istream")
-        // .opaque_type("std::basic_streambuf")
-        // .opaque_type("std::string")
-        // .opaque_type("std::size_t")
-        // .blacklist_item("std::*")
-        // .blacklist_item("*")
-        // .blacklist_item("Iterator")
-        // .opaque_type("std::*")
-        // .opaque_type("std::integral_constant")
-        // .opaque_type("std::integral_constant_type")
-        // .blacklist_item("std::__*")
-        // .opaque_type("std::value")
-        // .opaque_type("__gnu_cxx::__max")
-        // .opaque_type("__gnu_cxx::__min")
-
         .blacklist_item("std::value")
         .blacklist_item("__gnu_cxx::__max")
         .blacklist_item("__gnu_cxx::__min")
@@ -134,10 +111,6 @@ fn main() -> Result<()> {
         .blacklist_item("std::basic_istream_sentry___istream_type")
         .blacklist_item("std::basic_istream_sentry_traits_type")
         .blacklist_item("std::basic_istream_sentry___streambuf_type")
-        // .blacklist_item("std::basic_streambuf")
-
-        // .blacklist_item("__gnu_cxx::*")
-        // .opaque_type("lc3::optional")
 
         .generate()
         .expect("Unable to generate bindings!")
@@ -147,7 +120,7 @@ fn main() -> Result<()> {
     // Finally let's go gather the C++ files and do the build.
     let mut build = Build::new();
 
-    // // Turns out `cc` automatically grabs these.
+    // `cc` automatically handles `OPT_LEVEL` and `DEBUG`.
     // let (opt_level, debug) = (env!("OPT_LEVEL"), env!("DEBUG"));
     // let opt_level = match opt_level {
     //     "z" | "s" | "0" | "1" | "2" => opt_level,

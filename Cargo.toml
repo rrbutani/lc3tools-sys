@@ -24,7 +24,6 @@ links = "lc3core"
 
 [badges]
 github-actions = { repository = "rrbutani/lc3tools-sys", workflow = "full" }
-# [TODO] # codecov = { repository = "rrbutani/lc3tools-sys", branch = "main", service = "github" }
 
 is-it-maintained-issue-resolution = { repository = "rrbutani/lc3tools-sys" }
 is-it-maintained-open-issues = { repository = "rrbutani/lc3tools-sys" }
