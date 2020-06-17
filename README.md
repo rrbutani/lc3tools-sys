@@ -40,6 +40,6 @@ PRs are (very) welcome! See [CONTRIBUTING.md] for details.
 [actions]: https://github.com/rrbutani/lc3tools-sys/actions
 [license]: https://opensource.org/licenses/Apache-2.0
 [crates]: https://crates.io/crates/lc3tools-sys
-[docs]: https://rrbutani.github.io/lc3tools-sys/docs/lc3tools-sys
+[docs]: https://rrbutani.github.io/lc3tools-sys/docs/lc3tools_sys
 
 [lc3tools]: https://github.com/chiragsakhuja/lc3tools
