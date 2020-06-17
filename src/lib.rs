@@ -37,10 +37,6 @@
     unused_results,
     rust_2018_idioms
 )]
-#![deny(clippy::all)]
-#![deny(clippy::pedantic)]
-#![deny(clippy::missing_docs_in_private_items)]
-#![allow(clippy::type_repetition_in_bounds)]
 #![doc(test(attr(
     deny(rust_2018_idioms, warnings),
     allow(unused_extern_crates)
@@ -51,6 +47,7 @@
 )]
 #![allow(
     clippy::all,
+    clippy::pedantic,
     improper_ctypes,
     missing_docs,
     missing_debug_implementations,
