@@ -24,7 +24,7 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          # - windows-latest
+          - windows-latest
           # - wasm32-unknown-unknown
           # - wasm32-wasi
         features:
@@ -42,6 +42,7 @@ jobs:
 
       - name: Cache the binaries
         id: bin-cache
+        if: matrix.os != 'windows-latest'
         uses: actions/cache@v2
         with:
           path: |
@@ -66,7 +67,7 @@ jobs:
       - name: Install cargo-cache and cargo-sweep and rust-latest
         # The versions here are intentionally pinned.
         # When changing versions, remember to change them below, too.
-        if: steps.bin-cache.outputs.cache-hit != 'true'
+        if: steps.bin-cache.outputs.cache-hit != 'true' && matrix.os != 'windows-latest'
         run: |
           cargo install cargo-cache \
             --vers =${{ matrix.cargo-cache-ver }} \
@@ -79,6 +80,7 @@ jobs:
 
       - name: Get feature and toolchain key
         id: keys
+        if: matrix.os != 'windows-latest'
         run: |
           echo "::set-output name=features::$(echo '${{ matrix.features }}' | sed 's/,/+/g')"
           echo "::set-output name=toolchain::$(rust-latest -c '${{ matrix.rust }}')"
@@ -96,6 +98,7 @@ jobs:
       # created, iiuc) that this isn't a problem.
       - name: Cache the toolchain
         id: toolchain-cache
+        if: matrix.os != 'windows-latest'
         uses: actions/cache@v2
         with:
           path: |
@@ -120,6 +123,7 @@ jobs:
 
       - name: Cache the build artifacts
         uses: actions/cache@v2
+        if: matrix.os != 'windows-latest'
         with:
           path: target
           key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-${{ hashFiles('**/Cargo.lock') }}
@@ -128,6 +132,7 @@ jobs:
           # ^ means we don't have to start from scratch when the deps change
 
       - name: Mark all files for cargo-sweep
+        if: matrix.os != 'windows-latest'
         run: cargo-sweep sweep -s
 
       - name: Run cargo check
@@ -173,6 +178,7 @@ jobs:
             --release
 
       - name: Clean up the target folder and cargo's caches
+        if: matrix.os != 'windows-latest'
         # Since we're using the CI version of cargo-cache there aren't any
         # options, which is fine.
         run: |
