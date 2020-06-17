@@ -21,8 +21,10 @@ jobs:
           # - beta
           - nightly
           - 1.43.0
-        target:
-          - x86_64-unknown-linux-gnu
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
           # - wasm32-unknown-unknown
           # - wasm32-wasi
         features:
@@ -34,7 +36,7 @@ jobs:
 
     continue-on-error: ${{ matrix.rust == 'nightly' }}
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@master
 
@@ -103,13 +105,12 @@ jobs:
           # frequently slower than just grabbing the toolchain from rlo/dist
           # /usr/share/rust/.rustup
           # ^ == ~/.rustup; this action doesn't resolve the symlink
-          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.target }}-${{ steps.keys.outputs.features }}-toolchain
+          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-toolchain
 
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: ${{ matrix.rust }}
-          target: ${{ matrix.target }}
           override: true
 
       - name: Generate Cargo.lock
@@ -121,9 +122,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: target
-          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.target }}-${{ steps.keys.outputs.features }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ steps.keys.outputs.toolchain }}-${{ matrix.target }}-${{ steps.keys.outputs.features }}-cargo-
+            ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-
           # ^ means we don't have to start from scratch when the deps change
 
       - name: Mark all files for cargo-sweep
@@ -134,7 +135,6 @@ jobs:
         with:
           command: check
           args: >-
-            --target ${{ matrix.target }}
             --all-targets
             --no-default-features
             --features ${{ matrix.features }}
@@ -144,7 +144,6 @@ jobs:
         with:
           command: check
           args: >-
-            --target ${{ matrix.target }}
             --all-targets
             --no-default-features
             --features ${{ matrix.features }}
@@ -152,24 +151,22 @@ jobs:
 
       # Run the non-wasm tests:
       - name: Run cargo test
-        if: matrix.target == 'x86_64-unknown-linux-gnu'
+        continue-on-error: true
         uses: actions-rs/cargo@v1
         with:
           command: test
           args: >-
-            --target ${{ matrix.target }}
             --no-default-features
             --features ${{ matrix.features }}
             --no-fail-fast
 
       # Run the non-wasm tests:
       - name: Run cargo test release
-        if: matrix.target == 'x86_64-unknown-linux-gnu'
+        continue-on-error: true
         uses: actions-rs/cargo@v1
         with:
           command: test
           args: >-
-            --target ${{ matrix.target }}
             --no-default-features
             --features ${{ matrix.features }}
             --no-fail-fast
@@ -196,7 +193,7 @@ jobs:
 
     continue-on-error: ${{ matrix.rust == 'nightly' }}
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@master
 
@@ -244,7 +241,7 @@ jobs:
           # /usr/share/rust/.rustup
           # Update: we're going to skip caching the toolchain for now; the cache is
           # frequently slower than just grabbing the toolchain from rlo/dist
-          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.target }}-${{ steps.keys.outputs.features }}-toolchain
+          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-toolchain
 
       - uses: actions-rs/toolchain@v1
         with:
