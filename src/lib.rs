@@ -61,4 +61,4 @@
     unsafe_code,
     unused_qualifications
 )]
-include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+include!("../generated/bindings.rs");

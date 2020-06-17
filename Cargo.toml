@@ -38,7 +38,7 @@ maintenance = { status = "actively-developed" }
 [dev-dependencies]
 
 [build-dependencies]
-bindgen = "0.54.0"
+bindgen = { version = "0.54.0", optional = true }
 cc = { version = "1.0", features = ["parallel"] }
 pretty_assertions = "0.6"
 serde_json = "1.0"
@@ -51,6 +51,7 @@ lto = true
 
 [features]
 default = []
+generate-fresh = ["bindgen"]
 
 
 [package.metadata.docs.rs]

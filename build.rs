@@ -5,6 +5,7 @@ use std::io::{BufReader, Result};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
+#[cfg(feature = "generate-fresh")]
 use bindgen::{builder, Builder};
 use cc::Build;
 use pretty_assertions::assert_eq as eq;
@@ -65,6 +66,7 @@ fn main() -> Result<()> {
     let out = PathBuf::from(env::var_os("OUT_DIR").unwrap());
     let include = out.join("include");
     fs::create_dir_all(&include)?;
+    #[cfg(feature = "generate-fresh")]
     let mut builder: Builder = builder();
 
     println!("cargo:rerun-if-changed=lc3tools/backend");
@@ -79,9 +81,12 @@ fn main() -> Result<()> {
             continue;
         }
 
-        builder = builder
-            .header::<String>(path.to_str().unwrap().into())
-            .parse_callbacks(Box::new(bindgen::CargoCallbacks));
+        #[cfg(feature = "generate-fresh")]
+        {
+            builder = builder
+                .header::<String>(path.to_str().unwrap().into())
+                .parse_callbacks(Box::new(bindgen::CargoCallbacks));
+        }
 
         let to = include.join(path.file_name().unwrap());
         fs::copy(&path, &to).expect("Header file copy to succeed");
@@ -92,6 +97,7 @@ fn main() -> Result<()> {
 
     // Next let's go run bindgen:
     #[rustfmt::skip]
+    #[cfg(feature = "generate-fresh")]
     builder
         .enable_cxx_namespaces()
         .clang_arg("-xc++")
@@ -124,7 +130,7 @@ fn main() -> Result<()> {
 
         .generate()
         .expect("Unable to generate bindings!")
-        .write_to_file(out.join("bindings.rs"))
+        .write_to_file(PathBuf::from("generated/bindings.rs"))
         .expect("Couldn't write bindings!");
 
     // Finally let's go gather the C++ files and do the build.
