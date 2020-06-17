@@ -33,6 +33,11 @@ jobs:
         cargo-sweep-ver: ["0.5.0"]
         rust-latest-ver: ["1.4.0"]
         # Note: remember to update these below as well when making changes!
+        include:
+          - os: ubuntu-latest
+            features: "generate-fresh"
+            rust: [1.43.0, stable]
+            anew: true
 
     continue-on-error: ${{ matrix.rust == 'nightly' }}
 
@@ -177,6 +182,10 @@ jobs:
             --features ${{ matrix.features }}
             --no-fail-fast
             --release
+
+      - name: Compare the bindings
+        if: matrix.anew
+        run: git diff generated/
 
       - name: Clean up the target folder and cargo's caches
         if: matrix.os != 'windows-latest'
