@@ -67,7 +67,7 @@ fn main() -> Result<()> {
     fs::create_dir_all(&include)?;
     let mut builder: Builder = builder();
 
-    println!("cargo:rerun-if-changed={}", "lc3tools/backend");
+    println!("cargo:rerun-if-changed=lc3tools/backend");
     for header in in_dir_with_ext("lc3tools/backend", "h")
         .expect("Header files in lc3tools/backend")
     {
@@ -113,14 +113,14 @@ fn main() -> Result<()> {
         .blacklist_item("std::size_type")
         .blacklist_item("int_type")
         .blacklist_item("char_type")
+        .blacklist_item("__atomic_val_t")
+        .blacklist_item("__atomic_diff_t")
         .blacklist_item("std::__atomic_val_t")
         .blacklist_item("std::__atomic_diff_t")
         .blacklist_item("std::basic_ostream_sentry")
         .blacklist_item("std::basic_istream_sentry___istream_type")
         .blacklist_item("std::basic_istream_sentry_traits_type")
         .blacklist_item("std::basic_istream_sentry___streambuf_type")
-
-        .blacklist_item("std::.*")
 
         .generate()
         .expect("Unable to generate bindings!")
