@@ -38,10 +38,16 @@ jobs:
             features: "generate-fresh"
             rust: 1.43.0
             anew: true
+            cargo-cache-ver: "0.4.3"
+            cargo-sweep-ver: "0.5.0"
+            rust-latest-ver: "1.4.0"
           - os: ubuntu-latest
             features: "generate-fresh"
             rust: stable
             anew: true
+            cargo-cache-ver: "0.4.3"
+            cargo-sweep-ver: "0.5.0"
+            rust-latest-ver: "1.4.0"
 
     continue-on-error: ${{ matrix.rust == 'nightly' }}
 
