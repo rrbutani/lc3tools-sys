@@ -50,6 +50,7 @@
     html_root_url = "https://docs.rs/lc3tools-sys/*", // * → latest version
 )]
 #![allow(
+    clippy::all,
     improper_ctypes,
     missing_docs,
     missing_debug_implementations,
