@@ -18,11 +18,11 @@ macro_rules! env {
 }
 
 fn in_dir_with_ext<'s, D>(
-    dir: D,
+    dir: &D,
     ext: &'s str,
 ) -> Result<impl Iterator<Item = DirEntry> + 's>
 where
-    D: AsRef<OsStr>,
+    D: AsRef<OsStr> + ?Sized,
 {
     Ok(fs::read_dir(Path::new(&dir))?
         .filter_map(|d| d.ok())
@@ -30,6 +30,86 @@ where
         .filter(move |de| {
             de.path().extension().unwrap().to_str().unwrap() == ext
         }))
+}
+
+fn headers<I>(
+    inc_dirs: &I,
+    // inc_dirs: &[&I],
+    cpy_dir: &Path,
+    _out: &str,
+    // _gated_modules: Option<(&[&str], &str)>,
+) -> Result<()>
+where
+    I: AsRef<OsStr> + ?Sized,
+{
+    fs::create_dir_all(&cpy_dir)?;
+
+    #[cfg(feature = "generate-fresh")]
+    let mut builder: Builder = builder();
+
+    let inc_dir_str = inc_dir.as_ref().to_str().unwrap();
+    println!("cargo:rerun-if-changed={}", inc_dir_str);
+
+    for header in in_dir_with_ext(inc_dir, "h")
+        .expect(format!("Header files in `{}`", inc_dir_str).as_str())
+    {
+        let path = header.path();
+
+        // This file is not used and is broken.
+        if path.file_name().unwrap().to_str().unwrap() == "device.h" {
+            continue;
+        }
+
+        #[cfg(feature = "generate-fresh")]
+        {
+            builder = builder
+                .header::<String>(path.to_str().unwrap().into())
+                .parse_callbacks(Box::new(bindgen::CargoCallbacks));
+        }
+
+        let to = cpy_dir.join(path.file_name().unwrap());
+        fs::copy(&path, &to).expect("Header file copy to succeed");
+    }
+
+    #[rustfmt::skip]
+    #[cfg(feature = "generate-fresh")]
+    builder
+        .enable_cxx_namespaces()
+        .clang_arg("-xc++")
+        .clang_arg("-std=c++14")
+        .clang_arg("-Ilc3tools/backend")
+
+        .derive_debug(true)
+        .generate_comments(true)
+        // .rustfmt_bindings(true)
+
+        .blacklist_item("std::value")
+        .blacklist_item("__gnu_cxx::__max")
+        .blacklist_item("__gnu_cxx::__min")
+
+        .blacklist_item("std::collate_string_type")
+        .blacklist_item("std::collate_byname_string_type")
+        .blacklist_item("std::numpunct_string_type")
+        .blacklist_item("std::numpunct_byname_string_type")
+        .blacklist_item("size_type")
+        .blacklist_item("std::size_type")
+        .blacklist_item("int_type")
+        .blacklist_item("char_type")
+        .blacklist_item("__atomic_val_t")
+        .blacklist_item("__atomic_diff_t")
+        .blacklist_item("std::__atomic_val_t")
+        .blacklist_item("std::__atomic_diff_t")
+        .blacklist_item("std::basic_ostream_sentry")
+        .blacklist_item("std::basic_istream_sentry___istream_type")
+        .blacklist_item("std::basic_istream_sentry_traits_type")
+        .blacklist_item("std::basic_istream_sentry___streambuf_type")
+
+        .generate()
+        .expect("Unable to generate bindings!")
+        .write_to_file(PathBuf::from(format!("generated/{}.rs", _out)))
+        .expect("Couldn't write bindings!");
+
+    Ok(())
 }
 
 fn main() -> Result<()> {
@@ -65,73 +145,97 @@ fn main() -> Result<()> {
     // First, lets gather and copy over the header files.
     let out = PathBuf::from(env::var_os("OUT_DIR").unwrap());
     let include = out.join("include");
-    fs::create_dir_all(&include)?;
-    #[cfg(feature = "generate-fresh")]
-    let mut builder: Builder = builder();
+    // fs::create_dir_all(&include)?;
+    // #[cfg(feature = "generate-fresh")]
+    // let mut builder: Builder = builder();
 
-    println!("cargo:rerun-if-changed=lc3tools/backend");
-    for header in in_dir_with_ext("lc3tools/backend", "h")
-        .expect("Header files in lc3tools/backend")
-    {
-        // Tell cargo to invalidate if the file changes.
+    // println!("cargo:rerun-if-changed=lc3tools/backend");
+    // if cfg!(feature = "frontend") {
+    //     println!("cargo:rerun-if-changed=lc3tools/frontend/common");
+    // }
+    // if cfg!(feature = "grader") {
+    //     println!("cargo:rerun-if-changed=lc3tools/frontend/grader");
+    // }
 
-        let path = header.path();
-        // This file is not used and is broken.
-        if path.file_name().unwrap().to_str().unwrap() == "device.h" {
-            continue;
-        }
+    // let header_files = in_dir_with_ext("lc3tools/backend", "h")
+    //     .expect("Header files in lc3tools/backend");
 
-        #[cfg(feature = "generate-fresh")]
-        {
-            builder = builder
-                .header::<String>(path.to_str().unwrap().into())
-                .parse_callbacks(Box::new(bindgen::CargoCallbacks));
-        }
+    // #[cfg(feature = "frontend")]
+    // let header_files = header_files.chain(in_dir_with_ext("lc3tools/frontend/common", "h")
+    //     .expect("Header files in lc3tools/frontend/common"));
 
-        let to = include.join(path.file_name().unwrap());
-        fs::copy(&path, &to).expect("Header file copy to succeed");
-    }
+    // #[cfg(feature = "grader")]
+    // let header_files = header_files.chain(in_dir_with_ext("lc3tools/frontend/grader", "h")
+    //     .expect("Header files in lc3tools/frontend/grader"));
+
+    // for header in header_files {
+    //     // Tell cargo to invalidate if the file changes.
+
+    //     let path = header.path();
+    //     // This file is not used and is broken.
+    //     if path.file_name().unwrap().to_str().unwrap() == "device.h" {
+    //         continue;
+    //     }
+
+    //     #[cfg(feature = "generate-fresh")]
+    //     {
+    //         builder = builder
+    //             .header::<String>(path.to_str().unwrap().into())
+    //             .parse_callbacks(Box::new(bindgen::CargoCallbacks));
+    //     }
+
+    //     let to = include.join(path.file_name().unwrap());
+    //     fs::copy(&path, &to).expect("Header file copy to succeed");
+    // }
+
+    headers("lc3tools/backend", &include, "backend")?;
+
+    #[cfg(feature = "frontend")]
+    headers("lc3tools/frontend/common", &include, "frontend")?;
+
+    #[cfg(feature = "grader")]
+    headers("lc3tools/frontend/grader", &include, "grader")?;
 
     // TODO: is `canonicalize` actually broken? (rust#42869)
     println!("cargo:include={}", include.canonicalize()?.display());
 
-    // Next let's go run bindgen:
-    #[rustfmt::skip]
-    #[cfg(feature = "generate-fresh")]
-    builder
-        .enable_cxx_namespaces()
-        .clang_arg("-xc++")
-        .clang_arg("-std=c++14")
+    // // Next let's go run bindgen:
+    // #[rustfmt::skip]
+    // #[cfg(feature = "generate-fresh")]
+    // builder
+    //     .enable_cxx_namespaces()
+    //     .clang_arg("-xc++")
+    //     .clang_arg("-std=c++14")
 
-        .derive_debug(true)
-        .generate_comments(true)
-        // .rustfmt_bindings(true)
+    //     .derive_debug(true)
+    //     .generate_comments(true)
+    //     // .rustfmt_bindings(true)
 
-        .blacklist_item("std::value")
-        .blacklist_item("__gnu_cxx::__max")
-        .blacklist_item("__gnu_cxx::__min")
+    //     .blacklist_item("std::value")
+    //     .blacklist_item("__gnu_cxx::__max")
+    //     .blacklist_item("__gnu_cxx::__min")
 
-        .blacklist_item("std::collate_string_type")
-        .blacklist_item("std::collate_byname_string_type")
-        .blacklist_item("std::numpunct_string_type")
-        .blacklist_item("std::numpunct_byname_string_type")
-        .blacklist_item("size_type")
-        .blacklist_item("std::size_type")
-        .blacklist_item("int_type")
-        .blacklist_item("char_type")
-        .blacklist_item("__atomic_val_t")
-        .blacklist_item("__atomic_diff_t")
-        .blacklist_item("std::__atomic_val_t")
-        .blacklist_item("std::__atomic_diff_t")
-        .blacklist_item("std::basic_ostream_sentry")
-        .blacklist_item("std::basic_istream_sentry___istream_type")
-        .blacklist_item("std::basic_istream_sentry_traits_type")
-        .blacklist_item("std::basic_istream_sentry___streambuf_type")
+    //     .blacklist_item("std::collate_string_type")
+    //     .blacklist_item("std::collate_byname_string_type")
+    //     .blacklist_item("std::numpunct_string_type")
+    //     .blacklist_item("std::numpunct_byname_string_type")
+    //     .blacklist_item("size_type")
+    //     .blacklist_item("std::size_type")
+    //     .blacklist_item("int_type")
+    //     .blacklist_item("char_type")
+    //     .blacklist_item("__atomic_val_t")
+    //     .blacklist_item("__atomic_diff_t")
+    //     .blacklist_item("std::__atomic_val_t")
+    //     .blacklist_item("std::__atomic_diff_t")
+    //     .blacklist_item("std::basic_ostream_sentry")
+    //     .blacklist_item("std::basic_istream_sentry___istream_type")
+    //     .blacklist_item("std::basic_istream_sentry_traits_type")
+    //     .blacklist_item("std::basic_istream_sentry___streambuf_type")
 
-        .generate()
-        .expect("Unable to generate bindings!")
-        .write_to_file(PathBuf::from("generated/bindings.rs"))
-        .expect("Couldn't write bindings!");
+    //     .generate()
+    //     .expect("Unable to generate bindings!")
+    //     .write_to_file(PathBuf::from("generated/backend.rs"))
+    //     .expect("Couldn't write bindings!");
 
     // Finally let's go gather the C++ files and do the build.
     let mut build = Build::new();
@@ -165,9 +269,24 @@ fn main() -> Result<()> {
         build.define("_ENABLE_DEBUG", None);
     }
 
-    for source_file in in_dir_with_ext("lc3tools/backend", "cpp")
-        .expect("Source files in lc3tools/backend")
-    {
+    let source_files = in_dir_with_ext("lc3tools/backend", "cpp")
+        .expect("Source files in lc3tools/backend");
+
+    #[cfg(feature = "grader")]
+    let source_files = source_files.chain(in_dir_with_ext("lc3tools/frontend/grader", "cpp")
+        .expect("Source files in lc3tools/frontend/grader"));
+    if cfg!(feature = "grader") {
+        build.include("lc3tools/frontend/grader");
+    }
+
+    #[cfg(feature = "frontend")]
+    let source_files = source_files.chain(in_dir_with_ext("lc3tools/frontend/common", "cpp")
+        .expect("Source files in lc3tools/frontend/common"));
+    if cfg!(feature = "frontend") {
+        build.include("lc3tools/frontend/common");
+    }
+
+    for source_file in source_files {
         println!("cargo:rerun-if-changed={}", source_file.path().display());
         build.file(source_file.path());
     }
