@@ -36,7 +36,11 @@ jobs:
         include:
           - os: ubuntu-latest
             features: "generate-fresh"
-            rust: [1.43.0, stable]
+            rust: 1.43.0
+            anew: true
+          - os: ubuntu-latest
+            features: "generate-fresh"
+            rust: stable
             anew: true
 
     continue-on-error: ${{ matrix.rust == 'nightly' }}
