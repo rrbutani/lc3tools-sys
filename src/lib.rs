@@ -50,9 +50,12 @@
     html_root_url = "https://docs.rs/lc3tools-sys/*", // * → latest version
 )]
 #![allow(
-    non_upper_case_globals,
+    improper_ctypes,
+    missing_docs,
+    missing_debug_implementations,
     non_camel_case_types,
     non_snake_case,
+    non_upper_case_globals,
     unsafe_code,
     unused_qualifications,
 )]

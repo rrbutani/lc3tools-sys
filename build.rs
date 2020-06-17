@@ -63,10 +63,10 @@ fn main() -> Result<()> {
     fs::create_dir_all(&include)?;
     let mut builder: Builder = builder();
 
-    for header in in_dir_with_ext("lc3tools/backend/okay", "h")
+    println!("cargo:rerun-if-changed={}", "lc3tools/backend");
+    for header in in_dir_with_ext("lc3tools/backend", "h")
         .expect("Header files in lc3tools/backend") {
-        // // Tell cargo to invalidate if the file changes.
-        // println!("cargo:rerun-if-changed={}", file.path().display());
+        // Tell cargo to invalidate if the file changes.
 
         let path = header.path();
         // This file is not used and is broken.
@@ -92,6 +92,9 @@ fn main() -> Result<()> {
         .clang_arg("-xc++")
         .clang_arg("-std=c++14")
 
+        .derive_debug(true)
+        .generate_comments(true)
+
         // .opaque_type("std::map")
         // .opaque_type("std::iterator")
         // .opaque_type("std::.*")
@@ -103,19 +106,45 @@ fn main() -> Result<()> {
         // .opaque_type("std::basic_istream")
         // .opaque_type("std::basic_streambuf")
         // .opaque_type("std::string")
-        // .opaque_type("std::*")
         // .opaque_type("std::size_t")
         // .blacklist_item("std::*")
         // .blacklist_item("*")
         // .blacklist_item("Iterator")
-        .opaque_type("lc3::optional")
+        // .opaque_type("std::*")
+        // .opaque_type("std::integral_constant")
+        // .opaque_type("std::integral_constant_type")
+        // .blacklist_item("std::__*")
+        // .opaque_type("std::value")
+        // .opaque_type("__gnu_cxx::__max")
+        // .opaque_type("__gnu_cxx::__min")
+
+        .blacklist_item("std::value")
+        .blacklist_item("__gnu_cxx::__max")
+        .blacklist_item("__gnu_cxx::__min")
+
+        .blacklist_item("std::collate_string_type")
+        .blacklist_item("std::collate_byname_string_type")
+        .blacklist_item("std::numpunct_string_type")
+        .blacklist_item("std::numpunct_byname_string_type")
+        .blacklist_item("size_type")
+        .blacklist_item("std::size_type")
+        .blacklist_item("int_type")
+        .blacklist_item("char_type")
+        .blacklist_item("std::basic_ostream_sentry")
+        .blacklist_item("std::basic_istream_sentry___istream_type")
+        .blacklist_item("std::basic_istream_sentry_traits_type")
+        .blacklist_item("std::basic_istream_sentry___streambuf_type")
+        // .blacklist_item("std::basic_streambuf")
+
+        // .blacklist_item("__gnu_cxx::*")
+        // .opaque_type("lc3::optional")
 
         .generate()
         .expect("Unable to generate bindings!")
         .write_to_file(out.join("bindings.rs"))
         .expect("Couldn't write bindings!");
 
-    // Finally let's go gather the C files and do the build.
+    // Finally let's go gather the C++ files and do the build.
     let mut build = Build::new();
 
     // // Turns out `cc` automatically grabs these.
