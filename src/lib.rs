@@ -58,6 +58,6 @@
     non_upper_case_globals,
     trivial_casts,
     unsafe_code,
-    unused_qualifications,
+    unused_qualifications
 )]
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));

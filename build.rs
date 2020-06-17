@@ -5,26 +5,30 @@ use std::io::{BufReader, Result};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-use bindgen::{Builder, builder};
+use bindgen::{builder, Builder};
 use cc::Build;
 use pretty_assertions::assert_eq as eq;
 use serde_json::Value;
 
-macro_rules! env { ($var:literal) => { std::env::var($var).unwrap() }; }
+macro_rules! env {
+    ($var:literal) => {
+        std::env::var($var).unwrap()
+    };
+}
 
-fn in_dir_with_ext<'s, D>(dir: D, ext: &'s str) -> Result<impl Iterator<Item = DirEntry> + 's>
+fn in_dir_with_ext<'s, D>(
+    dir: D,
+    ext: &'s str,
+) -> Result<impl Iterator<Item = DirEntry> + 's>
 where
-    D: AsRef<OsStr>
+    D: AsRef<OsStr>,
 {
     Ok(fs::read_dir(Path::new(&dir))?
         .filter_map(|d| d.ok())
         .filter(|d| d.file_type().unwrap().is_file())
-        .filter(move |de| de.path()
-            .extension()
-            .unwrap()
-            .to_str()
-            .unwrap() == ext
-        ))
+        .filter(move |de| {
+            de.path().extension().unwrap().to_str().unwrap() == ext
+        }))
 }
 
 fn main() -> Result<()> {
@@ -65,13 +69,14 @@ fn main() -> Result<()> {
 
     println!("cargo:rerun-if-changed={}", "lc3tools/backend");
     for header in in_dir_with_ext("lc3tools/backend", "h")
-        .expect("Header files in lc3tools/backend") {
+        .expect("Header files in lc3tools/backend")
+    {
         // Tell cargo to invalidate if the file changes.
 
         let path = header.path();
         // This file is not used and is broken.
         if path.file_name().unwrap().to_str().unwrap() == "device.h" {
-            continue
+            continue;
         }
 
         builder = builder
@@ -79,8 +84,7 @@ fn main() -> Result<()> {
             .parse_callbacks(Box::new(bindgen::CargoCallbacks));
 
         let to = include.join(path.file_name().unwrap());
-        fs::copy(&path, &to)
-            .expect("Header file copy to succeed");
+        fs::copy(&path, &to).expect("Header file copy to succeed");
     }
 
     // TODO: is `canonicalize` actually broken? (rust#42869)
@@ -149,14 +153,13 @@ fn main() -> Result<()> {
     }
 
     for source_file in in_dir_with_ext("lc3tools/backend", "cpp")
-        .expect("Source files in lc3tools/backend") {
+        .expect("Source files in lc3tools/backend")
+    {
         println!("cargo:rerun-if-changed={}", source_file.path().display());
         build.file(source_file.path());
     }
 
-    build
-        .out_dir(out.join("build"))
-        .compile("lc3core");
+    build.out_dir(out.join("build")).compile("lc3core");
 
     println!("cargo:root={}", out.display());
 
