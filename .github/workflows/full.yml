@@ -193,7 +193,7 @@ jobs:
 
     continue-on-error: ${{ matrix.rust == 'nightly' }}
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
 
