@@ -99,7 +99,7 @@ fn main() -> Result<()> {
 
         .derive_debug(true)
         .generate_comments(true)
-        .rustfmt_bindings(true)
+        // .rustfmt_bindings(true)
 
         .blacklist_item("std::value")
         .blacklist_item("__gnu_cxx::__max")
@@ -113,12 +113,14 @@ fn main() -> Result<()> {
         .blacklist_item("std::size_type")
         .blacklist_item("int_type")
         .blacklist_item("char_type")
-        .blacklist_item("__atomic_val_t")
-        .blacklist_item("__atomic_diff_t")
+        .blacklist_item("std::__atomic_val_t")
+        .blacklist_item("std::__atomic_diff_t")
         .blacklist_item("std::basic_ostream_sentry")
         .blacklist_item("std::basic_istream_sentry___istream_type")
         .blacklist_item("std::basic_istream_sentry_traits_type")
         .blacklist_item("std::basic_istream_sentry___streambuf_type")
+
+        .blacklist_item("std::.*")
 
         .generate()
         .expect("Unable to generate bindings!")
@@ -146,6 +148,7 @@ fn main() -> Result<()> {
     build
         .include("lc3tools/backend")
         .flag_if_supported("-flto")
+        .flag_if_supported("-std=c++14")
         .flag_if_supported("-Wno-format-security")
         .cargo_metadata(true)
         .warnings(true)
