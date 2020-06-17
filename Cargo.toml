@@ -18,6 +18,9 @@ license = "Apache-2.0"
 
 exclude = [".github"]
 
+build = "build.rs"
+links = "lc3core"
+
 
 [badges]
 github-actions = { repository = "rrbutani/lc3tools-sys", workflow = "full" }
@@ -34,6 +37,12 @@ maintenance = { status = "actively-developed" }
 [dependencies]
 
 [dev-dependencies]
+
+[build-dependencies]
+bindgen = "0.54.0"
+cc = { version = "1.0", features = ["parallel"] }
+pretty_assertions = "0.6"
+serde_json = "1.0"
 
 
 [profile.release]

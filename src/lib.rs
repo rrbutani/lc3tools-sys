@@ -49,11 +49,11 @@
     html_logo_url = "https://github.com/chiragsakhuja/lc3tools/raw/848bb987d3675b45fdc794ebf995cba5c60373ac/frontend/gui/static/icons/256x256.png",
     html_root_url = "https://docs.rs/lc3tools-sys/*", // * → latest version
 )]
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+#![allow(
+    non_upper_case_globals,
+    non_camel_case_types,
+    non_snake_case,
+    unsafe_code,
+    unused_qualifications,
+)]
+include!(concat!(env!("OUT_DIR"), "/bindings.rs"));

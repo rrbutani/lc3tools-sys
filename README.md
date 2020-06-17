@@ -14,6 +14,8 @@ lc3tools-sys = "1.0.6-alpha0"
 
 TODO: fill in
 
+Headers are exposed at the path the `DEP_LC3CORE_LINKS` env var points to.
+
 ## Examples
 
 TODO: fill in
