@@ -113,6 +113,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
+          components: rustfmt
           toolchain: ${{ matrix.rust }}
           override: true
 

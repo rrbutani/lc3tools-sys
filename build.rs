@@ -99,6 +99,7 @@ fn main() -> Result<()> {
 
         .derive_debug(true)
         .generate_comments(true)
+        .rustfmt_bindings(true)
 
         .blacklist_item("std::value")
         .blacklist_item("__gnu_cxx::__max")
