@@ -17,6 +17,10 @@ macro_rules! env {
     };
 }
 
+const BACKEND: &'static str = "lc3tools/backend";
+const FRONTEND: &'static str = "lc3tools/frontend/common";
+const GRADER: &'static str = "lc3tools/frontend/grader";
+
 fn in_dir_with_ext<'s, D>(
     dir: &D,
     ext: &'s str,
@@ -27,25 +31,23 @@ where
     Ok(fs::read_dir(Path::new(&dir))?
         .filter_map(|d| d.ok())
         .filter(|d| d.file_type().unwrap().is_file())
+        .filter(|d|
+            // This file is not used and is broken.
+            d.path().file_name().unwrap().to_str().unwrap() != "device.h"
+        )
         .filter(move |de| {
             de.path().extension().unwrap().to_str().unwrap() == ext
         }))
 }
 
-fn headers<I>(
-    inc_dirs: &I,
-    // inc_dirs: &[&I],
+fn copy_headers<I>(
+    inc_dir: &I,
     cpy_dir: &Path,
-    _out: &str,
-    // _gated_modules: Option<(&[&str], &str)>,
 ) -> Result<()>
 where
     I: AsRef<OsStr> + ?Sized,
 {
     fs::create_dir_all(&cpy_dir)?;
-
-    #[cfg(feature = "generate-fresh")]
-    let mut builder: Builder = builder();
 
     let inc_dir_str = inc_dir.as_ref().to_str().unwrap();
     println!("cargo:rerun-if-changed={}", inc_dir_str);
@@ -54,34 +56,72 @@ where
         .expect(format!("Header files in `{}`", inc_dir_str).as_str())
     {
         let path = header.path();
+        let to = cpy_dir.join(path.file_name().unwrap());
+        fs::copy(&path, &to).expect("Header file copy to succeed");
+    }
 
-        // This file is not used and is broken.
-        if path.file_name().unwrap().to_str().unwrap() == "device.h" {
-            continue;
-        }
+    Ok(())
+}
 
-        #[cfg(feature = "generate-fresh")]
+// This is kind of a duplicate of `rustfmt` functions in the root of the
+// `bindgen` crate except we just run `rustfmt` straight on the generated files
+// rather than messing with pipes and threads. We can can do this since our use
+// case is much narrower.
+//
+// We also pretty much just assume `rustfmt` is in the PATH or in an env var
+// and don't try to search for it (`bindgen` uses `which::which` when the
+// `which-rustfmt` feature is enabled).
+#[cfg(feature = "generate-fresh")]
+fn run_rustfmt<F>(
+    files: impl IntoIterator<Item = F>,
+) -> Result<()>
+where
+    F: AsRef<OsStr> + ?Sized
+{
+    let rustfmt = if let Ok(rustfmt) = env::var("RUSTFMT") {
+        rustfmt
+    } else {
+        String::from("rustfmt")
+    };
+
+    let success = Command::new(rustfmt)
+        .args(files)
+        .status()?
+        .success();
+
+    assert!(success, "`rustfmt` failed.");
+}
+
+#[cfg(feature = "generate-fresh")]
+fn make_bindings<I>(
+    inc_dirs: &[&I],
+) -> std::result::Result<syn::File, Box<dyn std::error::Error>>
+where
+    I: AsRef<OsStr> + ?Sized,
+{
+    let mut builder: Builder = builder();
+
+    for dir in inc_dirs {
+        for header in in_dir_with_ext(dir, "h")
+            .expect(format!("Header files in `{}`", inc_dir_str).as_str())
         {
             builder = builder
                 .header::<String>(path.to_str().unwrap().into())
                 .parse_callbacks(Box::new(bindgen::CargoCallbacks));
         }
-
-        let to = cpy_dir.join(path.file_name().unwrap());
-        fs::copy(&path, &to).expect("Header file copy to succeed");
     }
 
     #[rustfmt::skip]
-    #[cfg(feature = "generate-fresh")]
-    builder
+    let res = builder
         .enable_cxx_namespaces()
         .clang_arg("-xc++")
         .clang_arg("-std=c++14")
         .clang_arg("-Ilc3tools/backend")
 
         .derive_debug(true)
+        .derive_default(true)
         .generate_comments(true)
-        // .rustfmt_bindings(true)
+        .rustfmt_bindings(false) // We'll run this ourselves after processing.
 
         .blacklist_item("std::value")
         .blacklist_item("__gnu_cxx::__max")
@@ -106,10 +146,264 @@ where
 
         .generate()
         .expect("Unable to generate bindings!")
-        .write_to_file(PathBuf::from(format!("generated/{}.rs", _out)))
-        .expect("Couldn't write bindings!");
+        .to_string();
 
-    Ok(())
+    // `bindgen` actually has a `proc_macro2::TokenStream` internally that it
+    // then turns into a String but since we've got no way to actually access
+    // that TokenStream we've gotta do this silly thing where we turn things
+    // into a String and then back into a TokenStream and then do the parse.
+    //
+    // This isn't great but since we don't expect users to run this, it should
+    // be okay.
+    let parsed: syn::File = syn::parse_str(res)?;
+
+    Ok(parsed)
+}
+
+#[cfg(feature = "generate-fresh")]
+pub mod binding_support {
+    use std::collections::HashMap;
+    use std::io::Write;
+
+    use syn::{
+        Attribute, File, Item, Ident, PathArguments, PathSegment,
+        punctuated::Punctuated,
+        token::Colon2,
+        visit::Visit,
+        visit_mut::VisitMut,
+    };
+
+    pub enum Feature {
+        Frontend,
+        Grader,
+    }
+
+    impl Feature {
+        pub fn to_attr(&self) -> Vec<Attribute> {
+            match self {
+                Feature::Frontend => todo!(),
+                Feature::Grader => todo!(),
+            }
+        }
+    }
+
+    pub type Path = Punctuated<PathSegment, Colon2>;
+    pub type Map = HashMap<Path, Option<Vec<Attribute>>>;
+
+    pub struct ItemRecorder<R, F: for<'ast> FnMut(&mut R, &'ast Item, &Path) -> bool> {
+        func: F,
+        path: Path,
+        record: R,
+    }
+
+    trait ToPathSegment {
+        fn to_path_seg(&self, path: &mut Path);
+    }
+
+    fn push_ident(s: &str, span: proc_macro2::Span, path: &mut Path) {
+        Ident::new(s, span).to_path_seg(path)
+    }
+
+    impl ToPathSegment for Ident {
+        fn to_path_seg(&self, path: &mut Path) {
+            let seg = PathSegment { ident: self.clone(), arguments: PathArguments::None };
+            path.push(seg);
+        }
+    }
+
+    impl ToPathSegment for syn::TypeParam {
+        fn to_path_seg(&self, path: &mut Path) {
+            let syn::TypeParam { ident, colon_token, /*bounds,*/ eq_token, default, .. } = self;
+            let span = ident.span();
+
+            let mut s = String::new();
+
+            if let Some(_) = colon_token { s.push_str("::"); }
+            s.push_str(format!("{}", ident).as_str());
+            if let Some(_) = eq_token { s.push_str("="); }
+            if let Some(_) = default { s.push_str("_def_"); }
+
+            // [HACK]: We bail and ignore bounds...
+
+            push_ident(s.as_str(), span, path)
+        }
+    }
+
+    impl ToPathSegment for syn::Generics {
+        fn to_path_seg(&self, path: &mut Path) {
+            let span = if let Some(lt) = self.lt_token {
+                lt.spans[0];
+            } else {
+                assert!(self.params.len() == 0);
+                return;
+            };
+
+            push_ident("%GEN%", span, path);
+
+            for ty in self.type_params {
+                ty.to_path_sef(path);
+            }
+
+            // let ident = format!("Gen({})-", self.type_params().fold(String::new(), |s, ty| {
+            //     // Assumes we won't have multiple impls with the same
+            //     // self type, generic arg names, and trait name **but**
+            //     // with different bounds on those generic args.
+            //     //
+            //     // This is definitely not always a valid assumption but
+            //     // we'll call it good enough for this!
+            //     // [HACK]
+            //     write!(s, "{},", ty).unwrap();
+            //     s
+            // });
+        }
+    }
+
+    impl ToPathSegment for syn::ItemImpl {
+        fn to_path_seg(&self, path: &mut Path) -> PathSegment {
+            let syn::ItemImpl { unsafety, defaultness, .. } = self;
+            let mut s = String::from("%IMPL%");
+
+            if let Some(_) = unsafety { s.push_str("_unsafe_") }
+            if let Some(_) = defaultness { s.push_str("_def_") }
+
+            push_ident(s.as_str(), self.impl_token.span, path);
+
+            let syn::ItemImpl { generics, trait_, self_ty, .. } = self;
+            generics.to_path_seg(path);
+            trait_.to_path_seg(path);
+            self_ty.to_path_seg(path);
+
+        }
+    }
+
+    impl<'ast, R, F: FnMut(&mut R, &'ast Item, &Path) -> bool> Visit<'ast> for ItemRecorder<R, F> {
+        fn visit_item(&mut self, i: &'ast Item) {
+            use Item::*;
+            match i {
+                ForeignMod(ItemForeignMod),
+
+                // Not perfect but should do...
+                //
+                // It's unfortunate that we're recreating a bad name mangler
+                // here.
+                Impl(syn::ItemImpl { generics, trait_, self_ty, .. }) => {
+                    let mut ident = String::new();
+
+                    write!(ident, "Gen({})-", generics.type_params().fold(String::new(), |s, ty| {
+                        // Assumes we won't have multiple impls with the same
+                        // self type, generic arg names, and trait name **but**
+                        // with different bounds on those generic args.
+                        //
+                        // This is definitely not always a valid assumption but
+                        // we'll call it good enough for this!
+                        // [HACK]
+                        write!(s, "{},", ty).unwrap();
+                        s
+                    }).unwrap();
+
+                    write!(ident, "Trait({})-", if let Some(neg, path, _) = trait_ {
+                        let mut s = String::new();
+
+                        if let Some(neg) = neg { s.push_str("!"); }
+
+                        let syn::Path { leading_colon, segments } = path;
+                        if let Some(_) = leading_colon { s.push_str("::") }
+
+                        let trait_path = segments.pairs().fold(String::new(), |s, p| {
+                            match p {
+                                syn::punctuated::Punctuated(seg, _) => {
+                                    write!(s, "{}", seg.ident).unwrap();
+
+                                    match seg.arguments {
+                                        syn::PathArguments::None,
+                                        syn::PathArguments::AngleBracketed(syn::AngleBracketedGenericArguments { colon2_token, args, .. }) => {
+                                            if let Some(_) = colon2_token { s.push_str("::") }
+
+                                            let arg = args.pairs().fold(String::new(), |s, p| {
+                                                // Here's where we bail.
+                                                // [HACK]
+                                                match p {
+                                                    syn::punctuated::Punctuated(ga, _) => {
+
+                                                    },
+
+                                                }
+                                            });
+
+                                            s.push_str(arg.as_str());
+                                        },
+                                        syn::PathArguments::Parenthesized(p) => {
+
+                                        }
+                                    }
+
+                                    s.push_str("::");
+                                }
+                                syn::punctuated::End(seg) => {
+                                    s.push_str();
+                                }
+                            }
+                        });
+
+                        s.push(trait_path.as_str());
+                    } else {
+                        String::new();
+                    }).unwrap();
+
+                    write!(ident, "For({})", self_ty.)
+                }
+
+                Const(syn::ItemConst { ident, .. }) |
+                Enum(syn::ItemEnum { ident, .. }) |
+                ExternCrate(syn::ItemExternCrate { ident, .. }) |
+                Fn(syn::ItemFn { sig: syn::Signature { ident, .. }, .. }) |
+                Macro(ItemMacro),
+                Macro2(ItemMacro2),
+                Mod(ItemMod),
+                Static(ItemStatic),
+                Struct(ItemStruct),
+                Trait(ItemTrait),
+                TraitAlias(ItemTraitAlias),
+                Type(ItemType),
+                Union(ItemUnion),
+                Use(ItemUse),
+                Verbatim(TokenStream),
+            }
+
+            if (self.func)(&mut self.record, i) {
+                syn::visit::visit_item(self, i)
+            }
+        }
+    }
+
+    impl<R, F> ItemRecorder<R, F>
+    where
+        F: for<'ast> FnMut(&mut R, &'ast Item, &Path) -> bool
+    {
+        pub /*const*/ fn new(record: R, func: F) -> Self {
+            Self {
+                func,
+                path: Punctuated::new(),
+                record,
+             }
+        }
+    }
+
+    fn baseline(file: &File) -> Map {
+        let visitor = ItemRecorder::new(Map::new(), |m, i, p| {
+
+        });
+
+        syn::visit::visit_file()
+    }
+
+    // impl<R, F: for<'ast> FnMut(&mut R, &'ast syn::Item) -> bool> VisitMut for ItemRecorder<R, F> {
+    //     fn visit_item_mut(&mut self, i: &mut Item) {
+    //         if (self.func)(&mut self.record, i) {
+    //             syn::visit_mut::visit_item(self, i)
+    //         }
+    //     }
+    // }
 }
 
 fn main() -> Result<()> {
@@ -145,118 +439,33 @@ fn main() -> Result<()> {
     // First, lets gather and copy over the header files.
     let out = PathBuf::from(env::var_os("OUT_DIR").unwrap());
     let include = out.join("include");
-    // fs::create_dir_all(&include)?;
-    // #[cfg(feature = "generate-fresh")]
-    // let mut builder: Builder = builder();
 
-    // println!("cargo:rerun-if-changed=lc3tools/backend");
-    // if cfg!(feature = "frontend") {
-    //     println!("cargo:rerun-if-changed=lc3tools/frontend/common");
-    // }
-    // if cfg!(feature = "grader") {
-    //     println!("cargo:rerun-if-changed=lc3tools/frontend/grader");
-    // }
-
-    // let header_files = in_dir_with_ext("lc3tools/backend", "h")
-    //     .expect("Header files in lc3tools/backend");
-
-    // #[cfg(feature = "frontend")]
-    // let header_files = header_files.chain(in_dir_with_ext("lc3tools/frontend/common", "h")
-    //     .expect("Header files in lc3tools/frontend/common"));
-
-    // #[cfg(feature = "grader")]
-    // let header_files = header_files.chain(in_dir_with_ext("lc3tools/frontend/grader", "h")
-    //     .expect("Header files in lc3tools/frontend/grader"));
-
-    // for header in header_files {
-    //     // Tell cargo to invalidate if the file changes.
-
-    //     let path = header.path();
-    //     // This file is not used and is broken.
-    //     if path.file_name().unwrap().to_str().unwrap() == "device.h" {
-    //         continue;
-    //     }
-
-    //     #[cfg(feature = "generate-fresh")]
-    //     {
-    //         builder = builder
-    //             .header::<String>(path.to_str().unwrap().into())
-    //             .parse_callbacks(Box::new(bindgen::CargoCallbacks));
-    //     }
-
-    //     let to = include.join(path.file_name().unwrap());
-    //     fs::copy(&path, &to).expect("Header file copy to succeed");
-    // }
-
-    headers("lc3tools/backend", &include, "backend")?;
-
-    #[cfg(feature = "frontend")]
-    headers("lc3tools/frontend/common", &include, "frontend")?;
-
-    #[cfg(feature = "grader")]
-    headers("lc3tools/frontend/grader", &include, "grader")?;
+    // TODO: right now this does not check if there are two header files with
+    // the same name. As of this writing, all the header files in lc3tools have
+    // unique names but if this were to change, we'd lose header files in the
+    // generated output without any warning.
+    copy_headers(BACKEND, &include)?;
+    if cfg!(feature = "frontend") { copy_headers(FRONTEND, &include)? }
+    if cfg!(feature = "grader") { copy_headers(GRADER, &include)? }
 
     // TODO: is `canonicalize` actually broken? (rust#42869)
     println!("cargo:include={}", include.canonicalize()?.display());
 
-    // // Next let's go run bindgen:
-    // #[rustfmt::skip]
-    // #[cfg(feature = "generate-fresh")]
-    // builder
-    //     .enable_cxx_namespaces()
-    //     .clang_arg("-xc++")
-    //     .clang_arg("-std=c++14")
+    // Next, let's do bindgen, if we're asked to.
+    #[cfg(feature = "generate-fresh")]
+    {
+        // First we want to get the baseline bindings — just the backend, no
+        // other features — and record what items this has.
+        let backend = make_bindings(&[BACKEND]).unwrap();
 
-    //     .derive_debug(true)
-    //     .generate_comments(true)
-    //     // .rustfmt_bindings(true)
-
-    //     .blacklist_item("std::value")
-    //     .blacklist_item("__gnu_cxx::__max")
-    //     .blacklist_item("__gnu_cxx::__min")
-
-    //     .blacklist_item("std::collate_string_type")
-    //     .blacklist_item("std::collate_byname_string_type")
-    //     .blacklist_item("std::numpunct_string_type")
-    //     .blacklist_item("std::numpunct_byname_string_type")
-    //     .blacklist_item("size_type")
-    //     .blacklist_item("std::size_type")
-    //     .blacklist_item("int_type")
-    //     .blacklist_item("char_type")
-    //     .blacklist_item("__atomic_val_t")
-    //     .blacklist_item("__atomic_diff_t")
-    //     .blacklist_item("std::__atomic_val_t")
-    //     .blacklist_item("std::__atomic_diff_t")
-    //     .blacklist_item("std::basic_ostream_sentry")
-    //     .blacklist_item("std::basic_istream_sentry___istream_type")
-    //     .blacklist_item("std::basic_istream_sentry_traits_type")
-    //     .blacklist_item("std::basic_istream_sentry___streambuf_type")
-
-    //     .generate()
-    //     .expect("Unable to generate bindings!")
-    //     .write_to_file(PathBuf::from("generated/backend.rs"))
-    //     .expect("Couldn't write bindings!");
+    }
 
     // Finally let's go gather the C++ files and do the build.
     let mut build = Build::new();
-
     // `cc` automatically handles `OPT_LEVEL` and `DEBUG`.
-    // let (opt_level, debug) = (env!("OPT_LEVEL"), env!("DEBUG"));
-    // let opt_level = match opt_level {
-    //     "z" | "s" | "0" | "1" | "2" => opt_level,
-    //     "3" => "2",
-    //     _ => panic!("Invalid opt level: {}", opt_level)
-    // };
-    // let debug = match debug {
-    //     "0" | "false" => false,
-    //     "1" | "2" | "true" => true,
-    //     _ => panic!("Invalid debug setting: {}", debug)
-    // };
-
     // `cc` also handles `fPIC`
 
     build
-        .include("lc3tools/backend")
         .flag_if_supported("-flto")
         .flag_if_supported("-std=c++14")
         .flag_if_supported("-Wno-format-security")
@@ -265,34 +474,34 @@ fn main() -> Result<()> {
         .extra_warnings(true)
         .cpp(true);
 
+    // Debug settings:
     if env!("PROFILE") == "debug" {
         build.define("_ENABLE_DEBUG", None);
     }
 
-    let source_files = in_dir_with_ext("lc3tools/backend", "cpp")
-        .expect("Source files in lc3tools/backend");
+    // Includes:
+    build.include(BACKEND)
+    if cfg!(feature = "grader") { build.include(GRADER); }
+    if cfg!(feature = "frontend") { build.include(FRONTEND); }
 
+    // Collecting files:
+    let cpp_dir_iter = |dir| in_dir_with_ext(dir, "cpp")
+        .expect(format!("Source files in `{}`", dir).as_str());
+
+    let files = cpp_dir_iter(BACKEND);
     #[cfg(feature = "grader")]
-    let source_files = source_files.chain(in_dir_with_ext("lc3tools/frontend/grader", "cpp")
-        .expect("Source files in lc3tools/frontend/grader"));
-    if cfg!(feature = "grader") {
-        build.include("lc3tools/frontend/grader");
-    }
-
+    let files = files.chain(cpp_dir_iter(GRADER));
     #[cfg(feature = "frontend")]
-    let source_files = source_files.chain(in_dir_with_ext("lc3tools/frontend/common", "cpp")
-        .expect("Source files in lc3tools/frontend/common"));
-    if cfg!(feature = "frontend") {
-        build.include("lc3tools/frontend/common");
-    }
+    let files = files.chain(cpp_dir_iter(FRONTEND);
 
     for source_file in source_files {
         println!("cargo:rerun-if-changed={}", source_file.path().display());
         build.file(source_file.path());
     }
 
+    // And finally, the build:
+    // `cc` automatically tells cargo to link to this statically.
     build.out_dir(out.join("build")).compile("lc3core");
-
     println!("cargo:root={}", out.display());
 
     Ok(())
