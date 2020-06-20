@@ -222,20 +222,6 @@ pub mod binding_support {
         ValueBased(Path, &'ast Item),
     }
 
-    // #[derive(Debug, Eq, PartialEq, Hash)]
-    // pub enum OwnedElement {
-    //     PathBased(Path),
-    //     ValueBased(Path, Item)
-    // }
-
-    // impl<'ast> Borrow<Element<'ast>> for OwnedElement {
-    //     fn borrow(&'ast self) -> &Element<'ast> {
-    //         match self {
-    //             OwnedElement::PathBased(p) => Element::PathBased()
-    //         }
-    //     }
-    // }
-
     pub type Map<'ast> = HashMap<Element<'ast>, Option<Feature>>;
 
     // We make some assumptions including:
@@ -258,8 +244,6 @@ pub mod binding_support {
             Element::ValueBased(self.current_path.clone(), item)
         }
 
-        // pub fn item_cow<'ast>(&self, item: &'ast Item) -> Cow<'ast, Element<'ast>>
-
         pub fn pop(&mut self) -> Option<syn::punctuated::Pair<PathSegment, Colon2>> { self.current_path.pop() }
     }
 
@@ -269,7 +253,7 @@ pub mod binding_support {
     }
 
     impl<'ast> ItemRecorder<'ast> {
-        pub /*const*/ fn new() -> Self {
+        pub fn new() -> Self {
             Self {
                 path: PathTrack::new(),
                 item_record: HashSet::new(),
@@ -325,7 +309,7 @@ pub mod binding_support {
     }
 
     impl<'ast> VisitMut for FeatureTag<'ast> {
-        fn visit_item_mut<'a>(&mut self, i: &'a mut Item) {
+        fn visit_item_mut(&mut self, i: &mut Item) {
             use Item::*;
 
             let item = i.clone(); // This is dumb but I can't seem to find a
