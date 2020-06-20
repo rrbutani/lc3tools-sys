@@ -51,9 +51,9 @@ where
     let inc_dir_str = inc_dir.as_ref().to_str().unwrap();
     println!("cargo:rerun-if-changed={}", inc_dir_str);
 
-    for header in in_dir_with_ext(inc_dir, "h")
-        .unwrap_or_else(|e| panic!("{}: expected header files in `{}`", e, inc_dir_str))
-    {
+    for header in in_dir_with_ext(inc_dir, "h").unwrap_or_else(|e| {
+        panic!("{}: expected header files in `{}`", e, inc_dir_str)
+    }) {
         let path = header.path();
         let to = cpy_dir.join(path.file_name().unwrap());
         fs::copy(&path, &to).expect("Header file copy to succeed");
@@ -98,9 +98,9 @@ where
     let mut builder: Builder = builder();
 
     for dir in inc_dirs {
-        for header in in_dir_with_ext(dir, "h")
-            .unwrap_or_else(|e| panic!("{}: expected header files in `{}`", e, dir))
-        {
+        for header in in_dir_with_ext(dir, "h").unwrap_or_else(|e| {
+            panic!("{}: expected header files in `{}`", e, dir)
+        }) {
             builder = builder
                 .header::<String>(header.path().to_str().unwrap().into())
                 .parse_callbacks(Box::new(bindgen::CargoCallbacks));
@@ -516,8 +516,9 @@ fn main() -> Result<()> {
 
     // Collecting files:
     let cpp_dir_iter = |dir| {
-        in_dir_with_ext(dir, "cpp")
-            .unwrap_or_else(|e| panic!("{}: expected source files in `{}`", e, dir))
+        in_dir_with_ext(dir, "cpp").unwrap_or_else(|e| {
+            panic!("{}: expected source files in `{}`", e, dir)
+        })
     };
 
     let files = cpp_dir_iter(BACKEND);
