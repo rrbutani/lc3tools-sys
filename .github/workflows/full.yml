@@ -152,19 +152,19 @@ jobs:
         if: matrix.os != 'windows-latest'
         run: cargo-sweep sweep -s
 
-      - name: Run cargo check
+      - name: Run cargo build
         uses: actions-rs/cargo@v1
         with:
-          command: check
+          command: build
           args: >-
             --all-targets
             --no-default-features
             --features ${{ matrix.features }}
 
-      - name: Run cargo check release
+      - name: Run cargo build release
         uses: actions-rs/cargo@v1
         with:
-          command: check
+          command: build
           args: >-
             --all-targets
             --no-default-features
