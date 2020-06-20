@@ -491,6 +491,10 @@ fn main() -> Result<()> {
     // `cc` automatically handles `OPT_LEVEL` and `DEBUG`.
     // `cc` also handles `fPIC`
 
+    if cfg!(windows) {
+        build.flag("/EHsc");
+    }
+
     build
         .flag_if_supported("-flto")
         .flag_if_supported("-std=c++14")
