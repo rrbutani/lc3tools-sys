@@ -17,12 +17,12 @@ macro_rules! env {
     };
 }
 
-const BACKEND: &'static str = "lc3tools/backend";
-const FRONTEND: &'static str = "lc3tools/frontend/common";
-const GRADER: &'static str = "lc3tools/frontend/grader";
+const BACKEND: &str = "lc3tools/backend";
+const FRONTEND: &str = "lc3tools/frontend/common";
+const GRADER: &str = "lc3tools/frontend/grader";
 
 #[cfg(feature = "generate-fresh")]
-const BINDINGS_PATH: &'static str = "generated/bindings.rs";
+const BINDINGS_PATH: &str = "generated/bindings.rs";
 
 fn in_dir_with_ext<'s, D>(
     dir: &D,
@@ -36,17 +36,13 @@ where
         .filter(|d| d.file_type().unwrap().is_file())
         .filter(|d|
             // This file is not used and is broken.
-            d.path().file_name().unwrap().to_str().unwrap() != "device.h"
-        )
+            d.path().file_name().unwrap().to_str().unwrap() != "device.h")
         .filter(move |de| {
             de.path().extension().unwrap().to_str().unwrap() == ext
         }))
 }
 
-fn copy_headers<I>(
-    inc_dir: &I,
-    cpy_dir: &Path,
-) -> Result<()>
+fn copy_headers<I>(inc_dir: &I, cpy_dir: &Path) -> Result<()>
 where
     I: AsRef<OsStr> + ?Sized,
 {
@@ -56,7 +52,7 @@ where
     println!("cargo:rerun-if-changed={}", inc_dir_str);
 
     for header in in_dir_with_ext(inc_dir, "h")
-        .expect(format!("Header files in `{}`", inc_dir_str).as_str())
+        .unwrap_or_else(|e| panic!("{}: expected header files in `{}`", e, inc_dir_str))
     {
         let path = header.path();
         let to = cpy_dir.join(path.file_name().unwrap());
@@ -75,11 +71,9 @@ where
 // and don't try to search for it (`bindgen` uses `which::which` when the
 // `which-rustfmt` feature is enabled).
 #[cfg(feature = "generate-fresh")]
-fn run_rustfmt<F>(
-    files: impl IntoIterator<Item = F>,
-) -> Result<()>
+fn run_rustfmt<F>(files: impl IntoIterator<Item = F>) -> Result<()>
 where
-    F: AsRef<OsStr>
+    F: AsRef<OsStr>,
 {
     let rustfmt = if let Ok(rustfmt) = env::var("RUSTFMT") {
         rustfmt
@@ -87,10 +81,7 @@ where
         String::from("rustfmt")
     };
 
-    let success = Command::new(rustfmt)
-        .args(files)
-        .status()?
-        .success();
+    let success = Command::new(rustfmt).args(files).status()?.success();
 
     assert!(success, "`rustfmt` failed.");
 
@@ -108,7 +99,7 @@ where
 
     for dir in inc_dirs {
         for header in in_dir_with_ext(dir, "h")
-            .expect(format!("Header files in `{}`", dir).as_str())
+            .unwrap_or_else(|e| panic!("{}: expected header files in `{}`", e, dir))
         {
             builder = builder
                 .header::<String>(header.path().to_str().unwrap().into())
@@ -170,11 +161,8 @@ pub mod binding_support {
     use std::collections::{HashMap, HashSet};
 
     use syn::{
-        Attribute, File, Item, Ident, PathSegment,
-        punctuated::Punctuated,
-        token::Colon2,
-        visit::Visit,
-        visit_mut::VisitMut,
+        punctuated::Punctuated, token::Colon2, visit::Visit,
+        visit_mut::VisitMut, Attribute, File, Ident, Item, PathSegment,
     };
 
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -189,27 +177,33 @@ pub mod binding_support {
                 Feature::Grader => {
                     let r#struct: Item = syn::parse_quote!(
                         #[cfg(feature = "grader")]
-                        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "grader")))]
+                        #[cfg_attr(
+                            all(docs, not(doctest)),
+                            doc(cfg(feature = "grader"))
+                        )]
                         struct Null;
                     );
 
                     match r#struct {
-                        Item::Struct(s) => { s.attrs },
+                        Item::Struct(s) => s.attrs,
                         _ => unreachable!(),
                     }
-                },
+                }
                 Feature::Frontend => {
                     let r#struct: Item = syn::parse_quote!(
                         #[cfg(feature = "frontend")]
-                        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+                        #[cfg_attr(
+                            all(docs, not(doctest)),
+                            doc(cfg(feature = "frontend"))
+                        )]
                         struct Null;
                     );
 
                     match r#struct {
-                        Item::Struct(s) => { s.attrs },
+                        Item::Struct(s) => s.attrs,
                         _ => unreachable!(),
                     }
-                },
+                }
             }
         }
     }
@@ -228,12 +222,17 @@ pub mod binding_support {
     //   - impls functions won't have other modules, types, impls, traits, etc.
     //     within them; just functions.
 
+    #[derive(Debug, Default)]
     pub struct PathTrack {
         current_path: Path,
     }
 
     impl PathTrack {
-        pub fn new() -> Self { Self { current_path: Punctuated::new() } }
+        pub fn new() -> Self {
+            Self {
+                current_path: Punctuated::new(),
+            }
+        }
 
         pub fn module<'ast>(&mut self, ident: Ident) -> Element<'ast> {
             self.current_path.push(PathSegment::from(ident));
@@ -244,12 +243,22 @@ pub mod binding_support {
             Element::ValueBased(self.current_path.clone(), item)
         }
 
-        pub fn pop(&mut self) -> Option<syn::punctuated::Pair<PathSegment, Colon2>> { self.current_path.pop() }
+        pub fn pop(
+            &mut self,
+        ) -> Option<syn::punctuated::Pair<PathSegment, Colon2>> {
+            self.current_path.pop()
+        }
     }
 
     pub struct ItemRecorder<'ast> {
         path: PathTrack,
         item_record: HashSet<Element<'ast>>,
+    }
+
+    impl<'ast> Default for ItemRecorder<'ast> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<'ast> ItemRecorder<'ast> {
@@ -265,21 +274,26 @@ pub mod binding_support {
         fn visit_item(&mut self, i: &'ast Item) {
             use Item::*;
             match i {
-                Const(_) | Enum(_) | ExternCrate(_) | Fn(_) | ForeignMod(_) |
-                Macro(_) | Macro2(_) | Impl(_) | Static(_) | Struct(_) |
-                Trait(_) | TraitAlias(_) | Type(_) | Union(_) |
-                Use(_) => assert!(self.item_record.insert(
-                    self.path.item(i)
-                ), "{:?} already exists!", i),
+                Const(_) | Enum(_) | ExternCrate(_) | Fn(_) | ForeignMod(_)
+                | Macro(_) | Macro2(_) | Impl(_) | Static(_) | Struct(_)
+                | Trait(_) | TraitAlias(_) | Type(_) | Union(_) | Use(_) => {
+                    assert!(
+                        self.item_record.insert(self.path.item(i)),
+                        "{:?} already exists!",
+                        i
+                    )
+                }
 
                 Mod(syn::ItemMod { ident, .. }) => {
-                    assert!(self.item_record.insert(self.path.module(ident.clone())));
+                    assert!(self
+                        .item_record
+                        .insert(self.path.module(ident.clone())));
 
                     // Recurse:
                     syn::visit::visit_item(self, i);
 
                     self.path.pop().unwrap();
-                },
+                }
 
                 Verbatim(_) => unreachable!(),
                 _ => unreachable!(),
@@ -315,27 +329,27 @@ pub mod binding_support {
             let item = i.clone(); // This is dumb but I can't seem to find a
                                   // way to shrink `i`'s lifetime..
             match i {
-                Const(syn::ItemConst { attrs, .. }) |
-                Enum(syn::ItemEnum { attrs, .. }) |
-                ExternCrate(syn::ItemExternCrate { attrs, .. }) |
-                Fn(syn::ItemFn { attrs, .. }) |
-                ForeignMod(syn::ItemForeignMod { attrs, .. }) |
-                Macro(syn::ItemMacro { attrs, .. }) |
-                Macro2(syn::ItemMacro2 { attrs, .. }) |
-                Impl(syn::ItemImpl { attrs, .. }) |
-                Static(syn::ItemStatic { attrs, .. }) |
-                Struct(syn::ItemStruct { attrs, .. }) |
-                Trait(syn::ItemTrait { attrs, .. }) |
-                TraitAlias(syn::ItemTraitAlias { attrs, .. }) |
-                Type(syn::ItemType { attrs, .. }) |
-                Union(syn::ItemUnion { attrs, .. }) |
-                Use(syn::ItemUse { attrs, .. }) => {
+                Const(syn::ItemConst { attrs, .. })
+                | Enum(syn::ItemEnum { attrs, .. })
+                | ExternCrate(syn::ItemExternCrate { attrs, .. })
+                | Fn(syn::ItemFn { attrs, .. })
+                | ForeignMod(syn::ItemForeignMod { attrs, .. })
+                | Macro(syn::ItemMacro { attrs, .. })
+                | Macro2(syn::ItemMacro2 { attrs, .. })
+                | Impl(syn::ItemImpl { attrs, .. })
+                | Static(syn::ItemStatic { attrs, .. })
+                | Struct(syn::ItemStruct { attrs, .. })
+                | Trait(syn::ItemTrait { attrs, .. })
+                | TraitAlias(syn::ItemTraitAlias { attrs, .. })
+                | Type(syn::ItemType { attrs, .. })
+                | Union(syn::ItemUnion { attrs, .. })
+                | Use(syn::ItemUse { attrs, .. }) => {
                     // We want to panic if we manage to look up an item that
                     // isn't in the map.
                     if let Some(feature) = self.map[&self.path.item(&item)] {
                         attrs.extend(feature.attrs())
                     }
-                },
+                }
 
                 Mod(syn::ItemMod { attrs, ident, .. }) => {
                     // Same here; we want to panic if the lookup fails.
@@ -348,7 +362,9 @@ pub mod binding_support {
                     // things within a module that are only active under a more
                     // specific feature than their parent module have
                     // incorrect doc feature tag).
-                    if let Some(feature) = self.map[&self.path.module(ident.clone())] {
+                    if let Some(feature) =
+                        self.map[&self.path.module(ident.clone())]
+                    {
                         attrs.extend(feature.attrs());
                     }
 
@@ -356,7 +372,7 @@ pub mod binding_support {
                     syn::visit_mut::visit_item_mut(self, i);
 
                     self.path.pop().unwrap();
-                },
+                }
 
                 Verbatim(_) => unreachable!(),
                 _ => unreachable!(),
@@ -409,8 +425,12 @@ fn main() -> Result<()> {
     // unique names but if this were to change, we'd lose header files in the
     // generated output without any warning.
     copy_headers(BACKEND, &include)?;
-    if cfg!(feature = "grader") { copy_headers(GRADER, &include)? }
-    if cfg!(feature = "frontend") { copy_headers(FRONTEND, &include)? }
+    if cfg!(feature = "grader") {
+        copy_headers(GRADER, &include)?
+    }
+    if cfg!(feature = "frontend") {
+        copy_headers(FRONTEND, &include)?
+    }
 
     // TODO: is `canonicalize` actually broken? (rust#42869)
     println!("cargo:include={}", include.canonicalize()?.display());
@@ -420,7 +440,7 @@ fn main() -> Result<()> {
     {
         use std::io::Write;
 
-        use binding_support::{Feature, Map, elements, tag};
+        use binding_support::{elements, tag, Feature, Map};
         use quote::ToTokens;
 
         // First we want to get the baseline bindings — just the backend, no
@@ -487,12 +507,18 @@ fn main() -> Result<()> {
 
     // Includes:
     build.include(BACKEND);
-    if cfg!(feature = "grader") { build.include(GRADER); }
-    if cfg!(feature = "frontend") { build.include(FRONTEND); }
+    if cfg!(feature = "grader") {
+        build.include(GRADER);
+    }
+    if cfg!(feature = "frontend") {
+        build.include(FRONTEND);
+    }
 
     // Collecting files:
-    let cpp_dir_iter = |dir| in_dir_with_ext(dir, "cpp")
-        .expect(format!("Source files in `{}`", dir).as_str());
+    let cpp_dir_iter = |dir| {
+        in_dir_with_ext(dir, "cpp")
+            .unwrap_or_else(|e| panic!("{}: expected source files in `{}`", e, dir))
+    };
 
     let files = cpp_dir_iter(BACKEND);
     #[cfg(feature = "grader")]
