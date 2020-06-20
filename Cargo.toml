@@ -38,10 +38,14 @@ maintenance = { status = "actively-developed" }
 [dev-dependencies]
 
 [build-dependencies]
-bindgen = { version = "0.54.0", optional = true }
 cc = { version = "1.0", features = ["parallel"] }
 pretty_assertions = "0.6"
 serde_json = "1.0"
+
+bindgen = { version = "0.54.0", optional = true }
+proc-macro2 = { version = "1.0", optional = true }
+quote = { version = "1.0", optional = true }
+syn = { version = "1.0", optional = true, default-features = false, features = ["clone-impls", "extra-traits", "full", "parsing", "printing", "visit", "visit-mut"] }
 
 
 [profile.release]
@@ -51,9 +55,10 @@ lto = true
 
 [features]
 default = ["grader", "frontend"]
-generate-fresh = ["bindgen", "grader", "frontend"]
-grader = []
+grader = ["frontend"]
 frontend = []
+
+generate-fresh = ["bindgen", "proc-macro2", "quote", "syn", "grader", "frontend"]
 
 
 [package.metadata.docs.rs]

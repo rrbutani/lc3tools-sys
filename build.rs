@@ -79,7 +79,7 @@ fn run_rustfmt<F>(
     files: impl IntoIterator<Item = F>,
 ) -> Result<()>
 where
-    F: AsRef<OsStr> + ?Sized
+    F: AsRef<OsStr>
 {
     let rustfmt = if let Ok(rustfmt) = env::var("RUSTFMT") {
         rustfmt
@@ -93,6 +93,8 @@ where
         .success();
 
     assert!(success, "`rustfmt` failed.");
+
+    Ok(())
 }
 
 #[cfg(feature = "generate-fresh")]
@@ -100,16 +102,16 @@ fn make_bindings<I>(
     inc_dirs: &[&I],
 ) -> std::result::Result<syn::File, Box<dyn std::error::Error>>
 where
-    I: AsRef<OsStr> + ?Sized,
+    I: AsRef<OsStr> + std::fmt::Display + ?Sized,
 {
     let mut builder: Builder = builder();
 
     for dir in inc_dirs {
         for header in in_dir_with_ext(dir, "h")
-            .expect(format!("Header files in `{}`", inc_dir_str).as_str())
+            .expect(format!("Header files in `{}`", dir).as_str())
         {
             builder = builder
-                .header::<String>(path.to_str().unwrap().into())
+                .header::<String>(header.path().to_str().unwrap().into())
                 .parse_callbacks(Box::new(bindgen::CargoCallbacks));
         }
     }
@@ -158,7 +160,7 @@ where
     //
     // This isn't great but since we don't expect users to run this, it should
     // be okay.
-    let parsed: syn::File = syn::parse_str(res)?;
+    let parsed: syn::File = syn::parse_str(&res)?;
 
     Ok(parsed)
 }
@@ -166,16 +168,16 @@ where
 #[cfg(feature = "generate-fresh")]
 pub mod binding_support {
     use std::collections::{HashMap, HashSet};
-    use std::io::Write;
 
     use syn::{
-        Attribute, File, Item, Ident, PathArguments, PathSegment,
+        Attribute, File, Item, Ident, PathSegment,
         punctuated::Punctuated,
         token::Colon2,
         visit::Visit,
         visit_mut::VisitMut,
     };
 
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
     pub enum Feature {
         Frontend,
         Grader,
@@ -220,6 +222,20 @@ pub mod binding_support {
         ValueBased(Path, &'ast Item),
     }
 
+    // #[derive(Debug, Eq, PartialEq, Hash)]
+    // pub enum OwnedElement {
+    //     PathBased(Path),
+    //     ValueBased(Path, Item)
+    // }
+
+    // impl<'ast> Borrow<Element<'ast>> for OwnedElement {
+    //     fn borrow(&'ast self) -> &Element<'ast> {
+    //         match self {
+    //             OwnedElement::PathBased(p) => Element::PathBased()
+    //         }
+    //     }
+    // }
+
     pub type Map<'ast> = HashMap<Element<'ast>, Option<Feature>>;
 
     // We make some assumptions including:
@@ -242,7 +258,9 @@ pub mod binding_support {
             Element::ValueBased(self.current_path.clone(), item)
         }
 
-        pub fn pop(&mut self) -> Option<(PathSegment, Colon2)> { self.current_path.pop() }
+        // pub fn item_cow<'ast>(&self, item: &'ast Item) -> Cow<'ast, Element<'ast>>
+
+        pub fn pop(&mut self) -> Option<syn::punctuated::Pair<PathSegment, Colon2>> { self.current_path.pop() }
     }
 
     pub struct ItemRecorder<'ast> {
@@ -280,11 +298,12 @@ pub mod binding_support {
                 },
 
                 Verbatim(_) => unreachable!(),
+                _ => unreachable!(),
             }
         }
     }
 
-    fn elements<'ast>(file: &'ast File) -> HashSet<Element<'ast>> {
+    pub fn elements<'ast>(file: &'ast File) -> HashSet<Element<'ast>> {
         let mut visitor = ItemRecorder::new();
         syn::visit::visit_file(&mut visitor, file);
 
@@ -306,9 +325,11 @@ pub mod binding_support {
     }
 
     impl<'ast> VisitMut for FeatureTag<'ast> {
-        fn visit_item_mut(&mut self, i: &mut Item) {
+        fn visit_item_mut<'a>(&mut self, i: &'a mut Item) {
             use Item::*;
 
+            let item = i.clone(); // This is dumb but I can't seem to find a
+                                  // way to shrink `i`'s lifetime..
             match i {
                 Const(syn::ItemConst { attrs, .. }) |
                 Enum(syn::ItemEnum { attrs, .. }) |
@@ -327,7 +348,7 @@ pub mod binding_support {
                 Use(syn::ItemUse { attrs, .. }) => {
                     // We want to panic if we manage to look up an item that
                     // isn't in the map.
-                    if let Some(feature) = self.map[self.path.item(i)] {
+                    if let Some(feature) = self.map[&self.path.item(&item)] {
                         attrs.extend(feature.attrs())
                     }
                 },
@@ -343,7 +364,7 @@ pub mod binding_support {
                     // things within a module that are only active under a more
                     // specific feature than their parent module have
                     // incorrect doc feature tag).
-                    if let Some(feature) = self.map[self.path.module(ident.clone())] {
+                    if let Some(feature) = self.map[&self.path.module(ident.clone())] {
                         attrs.extend(feature.attrs());
                     }
 
@@ -354,11 +375,12 @@ pub mod binding_support {
                 },
 
                 Verbatim(_) => unreachable!(),
+                _ => unreachable!(),
             }
         }
     }
 
-    fn tag<'ast: 'f, 'f>(file: &'f mut File, map: Map<'ast>) {
+    pub fn tag<'ast: 'f, 'f>(file: &'f mut File, map: Map<'ast>) {
         let mut visitor = FeatureTag::new(map);
         syn::visit_mut::visit_file_mut(&mut visitor, file);
     }
@@ -412,7 +434,9 @@ fn main() -> Result<()> {
     // Next, let's do bindgen, if we're asked to.
     #[cfg(feature = "generate-fresh")]
     {
-        use binding_support::{Feature, elements, tag};
+        use std::io::Write;
+
+        use binding_support::{Feature, Map, elements, tag};
         use quote::ToTokens;
 
         // First we want to get the baseline bindings — just the backend, no
@@ -425,23 +449,23 @@ fn main() -> Result<()> {
         let grader = make_bindings(&[BACKEND, FRONTEND, GRADER]).unwrap();
 
         // For each of the above configurations, get the set of elements:
-        let backend_elements = elements(&backend);
-        let frontend_elements = elements(&frontend);
-        let grader_elements = elements(&grader);
+        let mut backend_elements = elements(&backend);
+        let mut frontend_elements = elements(&frontend);
+        let mut grader_elements = elements(&grader);
 
         // And then assemble the attribute map.
-        let mut map = HashMap::with_capacity(grader_elements.len());
+        let mut map = Map::with_capacity(grader_elements.len());
         map.extend(backend_elements.drain().map(|k| (k, None)));
 
         assert!(frontend_elements.is_superset(&backend_elements));
         assert!(grader_elements.is_superset(&frontend_elements));
 
         for element in frontend_elements.drain() {
-            map.entry(element).or_insert(Feature::Frontend)
+            map.entry(element).or_insert(Some(Feature::Frontend));
         }
 
         for element in grader_elements.drain() {
-            map.entry(element).or_insert(Feature::Grader)
+            map.entry(element).or_insert(Some(Feature::Grader));
         }
 
         // Finally, tag the full binding set with the appropriate attrs, fmt,
