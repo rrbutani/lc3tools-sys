@@ -162,7 +162,7 @@ where
 
 #[cfg(feature = "generate-fresh")]
 pub mod binding_support {
-    use std::collections::HashMap;
+    use std::collections::{HashMap, HashSet};
     use std::io::Write;
 
     use syn::{
@@ -188,208 +188,71 @@ pub mod binding_support {
     }
 
     pub type Path = Punctuated<PathSegment, Colon2>;
-    pub type Map = HashMap<Path, Option<Vec<Attribute>>>;
 
-    pub struct ItemRecorder<R, F: for<'ast> FnMut(&mut R, &'ast Item, &Path) -> bool> {
-        func: F,
-        path: Path,
-        record: R,
+    #[derive(Debug, Eq, PartialEq, Hash)]
+    pub enum Element<'ast> {
+        PathBased(Path),
+        ValueBased(Path, &'ast Item),
     }
 
-    trait ToPathSegment {
-        fn to_path_seg(&self, path: &mut Path);
+    pub type Map<'ast> = HashMap<Element<'ast>, Option<Feature>>;
+
+    // We make some assumptions including:
+    //   - impls functions won't have other modules, types, impls, traits, etc.
+    //     within them; just functions.
+
+    pub struct ItemRecorder<'ast> {
+        current_path: Path,
+        item_record: HashSet<Element<'ast>>,
     }
 
-    fn push_ident(s: &str, span: proc_macro2::Span, path: &mut Path) {
-        Ident::new(s, span).to_path_seg(path)
-    }
-
-    impl ToPathSegment for Ident {
-        fn to_path_seg(&self, path: &mut Path) {
-            let seg = PathSegment { ident: self.clone(), arguments: PathArguments::None };
-            path.push(seg);
-        }
-    }
-
-    impl ToPathSegment for syn::TypeParam {
-        fn to_path_seg(&self, path: &mut Path) {
-            let syn::TypeParam { ident, colon_token, /*bounds,*/ eq_token, default, .. } = self;
-            let span = ident.span();
-
-            let mut s = String::new();
-
-            if let Some(_) = colon_token { s.push_str("::"); }
-            s.push_str(format!("{}", ident).as_str());
-            if let Some(_) = eq_token { s.push_str("="); }
-            if let Some(_) = default { s.push_str("_def_"); }
-
-            // [HACK]: We bail and ignore bounds...
-
-            push_ident(s.as_str(), span, path)
-        }
-    }
-
-    impl ToPathSegment for syn::Generics {
-        fn to_path_seg(&self, path: &mut Path) {
-            let span = if let Some(lt) = self.lt_token {
-                lt.spans[0];
-            } else {
-                assert!(self.params.len() == 0);
-                return;
-            };
-
-            push_ident("%GEN%", span, path);
-
-            for ty in self.type_params {
-                ty.to_path_sef(path);
+    impl<'ast> ItemRecorder<'ast> {
+        pub /*const*/ fn new() -> Self {
+            Self {
+                current_path: Punctuated::new(),
+                item_record: HashSet::new(),
             }
-
-            // let ident = format!("Gen({})-", self.type_params().fold(String::new(), |s, ty| {
-            //     // Assumes we won't have multiple impls with the same
-            //     // self type, generic arg names, and trait name **but**
-            //     // with different bounds on those generic args.
-            //     //
-            //     // This is definitely not always a valid assumption but
-            //     // we'll call it good enough for this!
-            //     // [HACK]
-            //     write!(s, "{},", ty).unwrap();
-            //     s
-            // });
         }
     }
 
-    impl ToPathSegment for syn::ItemImpl {
-        fn to_path_seg(&self, path: &mut Path) -> PathSegment {
-            let syn::ItemImpl { unsafety, defaultness, .. } = self;
-            let mut s = String::from("%IMPL%");
-
-            if let Some(_) = unsafety { s.push_str("_unsafe_") }
-            if let Some(_) = defaultness { s.push_str("_def_") }
-
-            push_ident(s.as_str(), self.impl_token.span, path);
-
-            let syn::ItemImpl { generics, trait_, self_ty, .. } = self;
-            generics.to_path_seg(path);
-            trait_.to_path_seg(path);
-            self_ty.to_path_seg(path);
-
-        }
-    }
-
-    impl<'ast, R, F: FnMut(&mut R, &'ast Item, &Path) -> bool> Visit<'ast> for ItemRecorder<R, F> {
+    impl<'ast> Visit<'ast> for ItemRecorder<'ast> {
         fn visit_item(&mut self, i: &'ast Item) {
             use Item::*;
             match i {
-                ForeignMod(ItemForeignMod),
+                Const(_) |
+                Enum(_) |
+                ExternCrate(_) |
+                Fn(_) |
+                ForeignMod(_) |
+                Macro(_) |
+                Macro2(_) |
+                Impl(_) |
+                Static(_) |
+                Struct(_) |
+                Trait(_) |
+                TraitAlias(_) |
+                Type(_) |
+                Union(_) |
+                Use(_) => assert!(self.item_record.insert(
+                    Element::ValueBased(self.current_path.clone(), i.clone())
+                ), "{:?} already existed!", i),
 
-                // Not perfect but should do...
-                //
-                // It's unfortunate that we're recreating a bad name mangler
-                // here.
-                Impl(syn::ItemImpl { generics, trait_, self_ty, .. }) => {
-                    let mut ident = String::new();
+                Mod(syn::ItemMod { ident, .. }) => {
+                    self.current_path.push(PathSegment::from(ident));
+                    assert!(self.item_record.insert(Element::PathBased(self.current_path.clone())));
 
-                    write!(ident, "Gen({})-", generics.type_params().fold(String::new(), |s, ty| {
-                        // Assumes we won't have multiple impls with the same
-                        // self type, generic arg names, and trait name **but**
-                        // with different bounds on those generic args.
-                        //
-                        // This is definitely not always a valid assumption but
-                        // we'll call it good enough for this!
-                        // [HACK]
-                        write!(s, "{},", ty).unwrap();
-                        s
-                    }).unwrap();
+                    // Recurse:
+                    syn::visit::visit_item(self, i);
 
-                    write!(ident, "Trait({})-", if let Some(neg, path, _) = trait_ {
-                        let mut s = String::new();
+                    self.current_path.pop().unwrap();
+                },
 
-                        if let Some(neg) = neg { s.push_str("!"); }
-
-                        let syn::Path { leading_colon, segments } = path;
-                        if let Some(_) = leading_colon { s.push_str("::") }
-
-                        let trait_path = segments.pairs().fold(String::new(), |s, p| {
-                            match p {
-                                syn::punctuated::Punctuated(seg, _) => {
-                                    write!(s, "{}", seg.ident).unwrap();
-
-                                    match seg.arguments {
-                                        syn::PathArguments::None,
-                                        syn::PathArguments::AngleBracketed(syn::AngleBracketedGenericArguments { colon2_token, args, .. }) => {
-                                            if let Some(_) = colon2_token { s.push_str("::") }
-
-                                            let arg = args.pairs().fold(String::new(), |s, p| {
-                                                // Here's where we bail.
-                                                // [HACK]
-                                                match p {
-                                                    syn::punctuated::Punctuated(ga, _) => {
-
-                                                    },
-
-                                                }
-                                            });
-
-                                            s.push_str(arg.as_str());
-                                        },
-                                        syn::PathArguments::Parenthesized(p) => {
-
-                                        }
-                                    }
-
-                                    s.push_str("::");
-                                }
-                                syn::punctuated::End(seg) => {
-                                    s.push_str();
-                                }
-                            }
-                        });
-
-                        s.push(trait_path.as_str());
-                    } else {
-                        String::new();
-                    }).unwrap();
-
-                    write!(ident, "For({})", self_ty.)
-                }
-
-                Const(syn::ItemConst { ident, .. }) |
-                Enum(syn::ItemEnum { ident, .. }) |
-                ExternCrate(syn::ItemExternCrate { ident, .. }) |
-                Fn(syn::ItemFn { sig: syn::Signature { ident, .. }, .. }) |
-                Macro(ItemMacro),
-                Macro2(ItemMacro2),
-                Mod(ItemMod),
-                Static(ItemStatic),
-                Struct(ItemStruct),
-                Trait(ItemTrait),
-                TraitAlias(ItemTraitAlias),
-                Type(ItemType),
-                Union(ItemUnion),
-                Use(ItemUse),
-                Verbatim(TokenStream),
-            }
-
-            if (self.func)(&mut self.record, i) {
-                syn::visit::visit_item(self, i)
+                Verbatim(_) => unreachable!(),
             }
         }
     }
 
-    impl<R, F> ItemRecorder<R, F>
-    where
-        F: for<'ast> FnMut(&mut R, &'ast Item, &Path) -> bool
-    {
-        pub /*const*/ fn new(record: R, func: F) -> Self {
-            Self {
-                func,
-                path: Punctuated::new(),
-                record,
-             }
-        }
-    }
-
-    fn baseline(file: &File) -> Map {
+    fn baseline<'ast>(file: &'ast File) ->  {
         let visitor = ItemRecorder::new(Map::new(), |m, i, p| {
 
         });
