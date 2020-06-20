@@ -505,6 +505,31 @@ fn main() -> Result<()> {
         build.define("_ENABLE_DEBUG", None);
     }
 
+    // Renamed `main` from framework.cpp if it's there and we're building with
+    // the grader feature.
+    if cfg!(feature = "grader") {
+        use std::io::{Read, Write};
+        let path = PathBuf::from(&GRADER).join("framework.cpp");
+
+        if let Ok(mut file) = File::open(&path) {
+            let mut contents =
+                String::with_capacity(file.metadata().unwrap().len() as usize);
+            file.read_to_string(&mut contents).unwrap();
+
+            if contents.contains("int main(") {
+                drop(file);
+                let mut file = File::create(path).unwrap();
+
+                write!(
+                    file,
+                    "{}",
+                    contents.replace("int main(", "int framework_main(")
+                )
+                .unwrap()
+            }
+        }
+    }
+
     // Includes:
     build.include(BACKEND);
     if cfg!(feature = "grader") {
