@@ -21,6 +21,9 @@ const BACKEND: &'static str = "lc3tools/backend";
 const FRONTEND: &'static str = "lc3tools/frontend/common";
 const GRADER: &'static str = "lc3tools/frontend/grader";
 
+#[cfg(feature = "generate-fresh")]
+const BINDINGS_PATH: &'static str = "generated/bindings.rs";
+
 fn in_dir_with_ext<'s, D>(
     dir: &D,
     ext: &'s str,
@@ -179,10 +182,32 @@ pub mod binding_support {
     }
 
     impl Feature {
-        pub fn to_attr(&self) -> Vec<Attribute> {
+        pub fn attrs(&self) -> Vec<Attribute> {
             match self {
-                Feature::Frontend => todo!(),
-                Feature::Grader => todo!(),
+                Feature::Grader => {
+                    let r#struct: Item = syn::parse_quote!(
+                        #[cfg(feature = "grader")]
+                        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "grader")))]
+                        struct Null;
+                    );
+
+                    match r#struct {
+                        Item::Struct(s) => { s.attrs },
+                        _ => unreachable!(),
+                    }
+                },
+                Feature::Frontend => {
+                    let r#struct: Item = syn::parse_quote!(
+                        #[cfg(feature = "frontend")]
+                        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+                        struct Null;
+                    );
+
+                    match r#struct {
+                        Item::Struct(s) => { s.attrs },
+                        _ => unreachable!(),
+                    }
+                },
             }
         }
     }
@@ -201,15 +226,34 @@ pub mod binding_support {
     //   - impls functions won't have other modules, types, impls, traits, etc.
     //     within them; just functions.
 
-    pub struct ItemRecorder<'ast> {
+    pub struct PathTrack {
         current_path: Path,
+    }
+
+    impl PathTrack {
+        pub fn new() -> Self { Self { current_path: Punctuated::new() } }
+
+        pub fn module<'ast>(&mut self, ident: Ident) -> Element<'ast> {
+            self.current_path.push(PathSegment::from(ident));
+            Element::PathBased(self.current_path.clone())
+        }
+
+        pub fn item<'ast>(&self, item: &'ast Item) -> Element<'ast> {
+            Element::ValueBased(self.current_path.clone(), item)
+        }
+
+        pub fn pop(&mut self) -> Option<(PathSegment, Colon2)> { self.current_path.pop() }
+    }
+
+    pub struct ItemRecorder<'ast> {
+        path: PathTrack,
         item_record: HashSet<Element<'ast>>,
     }
 
     impl<'ast> ItemRecorder<'ast> {
         pub /*const*/ fn new() -> Self {
             Self {
-                current_path: Punctuated::new(),
+                path: PathTrack::new(),
                 item_record: HashSet::new(),
             }
         }
@@ -219,32 +263,20 @@ pub mod binding_support {
         fn visit_item(&mut self, i: &'ast Item) {
             use Item::*;
             match i {
-                Const(_) |
-                Enum(_) |
-                ExternCrate(_) |
-                Fn(_) |
-                ForeignMod(_) |
-                Macro(_) |
-                Macro2(_) |
-                Impl(_) |
-                Static(_) |
-                Struct(_) |
-                Trait(_) |
-                TraitAlias(_) |
-                Type(_) |
-                Union(_) |
+                Const(_) | Enum(_) | ExternCrate(_) | Fn(_) | ForeignMod(_) |
+                Macro(_) | Macro2(_) | Impl(_) | Static(_) | Struct(_) |
+                Trait(_) | TraitAlias(_) | Type(_) | Union(_) |
                 Use(_) => assert!(self.item_record.insert(
-                    Element::ValueBased(self.current_path.clone(), i.clone())
-                ), "{:?} already existed!", i),
+                    self.path.item(i)
+                ), "{:?} already exists!", i),
 
                 Mod(syn::ItemMod { ident, .. }) => {
-                    self.current_path.push(PathSegment::from(ident));
-                    assert!(self.item_record.insert(Element::PathBased(self.current_path.clone())));
+                    assert!(self.item_record.insert(self.path.module(ident.clone())));
 
                     // Recurse:
                     syn::visit::visit_item(self, i);
 
-                    self.current_path.pop().unwrap();
+                    self.path.pop().unwrap();
                 },
 
                 Verbatim(_) => unreachable!(),
@@ -252,21 +284,84 @@ pub mod binding_support {
         }
     }
 
-    fn baseline<'ast>(file: &'ast File) ->  {
-        let visitor = ItemRecorder::new(Map::new(), |m, i, p| {
+    fn elements<'ast>(file: &'ast File) -> HashSet<Element<'ast>> {
+        let mut visitor = ItemRecorder::new();
+        syn::visit::visit_file(&mut visitor, file);
 
-        });
-
-        syn::visit::visit_file()
+        visitor.item_record
     }
 
-    // impl<R, F: for<'ast> FnMut(&mut R, &'ast syn::Item) -> bool> VisitMut for ItemRecorder<R, F> {
-    //     fn visit_item_mut(&mut self, i: &mut Item) {
-    //         if (self.func)(&mut self.record, i) {
-    //             syn::visit_mut::visit_item(self, i)
-    //         }
-    //     }
-    // }
+    pub struct FeatureTag<'ast> {
+        path: PathTrack,
+        map: Map<'ast>,
+    }
+
+    impl<'ast> FeatureTag<'ast> {
+        pub fn new(map: Map<'ast>) -> Self {
+            Self {
+                path: PathTrack::new(),
+                map,
+            }
+        }
+    }
+
+    impl<'ast> VisitMut for FeatureTag<'ast> {
+        fn visit_item_mut(&mut self, i: &mut Item) {
+            use Item::*;
+
+            match i {
+                Const(syn::ItemConst { attrs, .. }) |
+                Enum(syn::ItemEnum { attrs, .. }) |
+                ExternCrate(syn::ItemExternCrate { attrs, .. }) |
+                Fn(syn::ItemFn { attrs, .. }) |
+                ForeignMod(syn::ItemForeignMod { attrs, .. }) |
+                Macro(syn::ItemMacro { attrs, .. }) |
+                Macro2(syn::ItemMacro2 { attrs, .. }) |
+                Impl(syn::ItemImpl { attrs, .. }) |
+                Static(syn::ItemStatic { attrs, .. }) |
+                Struct(syn::ItemStruct { attrs, .. }) |
+                Trait(syn::ItemTrait { attrs, .. }) |
+                TraitAlias(syn::ItemTraitAlias { attrs, .. }) |
+                Type(syn::ItemType { attrs, .. }) |
+                Union(syn::ItemUnion { attrs, .. }) |
+                Use(syn::ItemUse { attrs, .. }) => {
+                    // We want to panic if we manage to look up an item that
+                    // isn't in the map.
+                    if let Some(feature) = self.map[self.path.item(i)] {
+                        attrs.extend(feature.attrs())
+                    }
+                },
+
+                Mod(syn::ItemMod { attrs, ident, .. }) => {
+                    // Same here; we want to panic if the lookup fails.
+                    //
+                    // Technically we needn't tack on the feature attrs for
+                    // modules since we mark everything within but it shouldn't
+                    // hurt (doc feature tags are inherited but _hopefully_ such
+                    // attrs on an item override ones that are inherited from
+                    // a parent module — if not we'll run into the issue where
+                    // things within a module that are only active under a more
+                    // specific feature than their parent module have
+                    // incorrect doc feature tag).
+                    if let Some(feature) = self.map[self.path.module(ident.clone())] {
+                        attrs.extend(feature.attrs());
+                    }
+
+                    // Recurse:
+                    syn::visit_mut::visit_item_mut(self, i);
+
+                    self.path.pop().unwrap();
+                },
+
+                Verbatim(_) => unreachable!(),
+            }
+        }
+    }
+
+    fn tag<'ast: 'f, 'f>(file: &'f mut File, map: Map<'ast>) {
+        let mut visitor = FeatureTag::new(map);
+        syn::visit_mut::visit_file_mut(&mut visitor, file);
+    }
 }
 
 fn main() -> Result<()> {
@@ -308,8 +403,8 @@ fn main() -> Result<()> {
     // unique names but if this were to change, we'd lose header files in the
     // generated output without any warning.
     copy_headers(BACKEND, &include)?;
-    if cfg!(feature = "frontend") { copy_headers(FRONTEND, &include)? }
     if cfg!(feature = "grader") { copy_headers(GRADER, &include)? }
+    if cfg!(feature = "frontend") { copy_headers(FRONTEND, &include)? }
 
     // TODO: is `canonicalize` actually broken? (rust#42869)
     println!("cargo:include={}", include.canonicalize()?.display());
@@ -317,10 +412,50 @@ fn main() -> Result<()> {
     // Next, let's do bindgen, if we're asked to.
     #[cfg(feature = "generate-fresh")]
     {
+        use binding_support::{Feature, elements, tag};
+        use quote::ToTokens;
+
         // First we want to get the baseline bindings — just the backend, no
         // other features — and record what items this has.
         let backend = make_bindings(&[BACKEND]).unwrap();
 
+        // Next, the bindings for the frontend and then for the grader + the
+        // frontend (the grader requires the frontend).
+        let frontend = make_bindings(&[BACKEND, FRONTEND]).unwrap();
+        let grader = make_bindings(&[BACKEND, FRONTEND, GRADER]).unwrap();
+
+        // For each of the above configurations, get the set of elements:
+        let backend_elements = elements(&backend);
+        let frontend_elements = elements(&frontend);
+        let grader_elements = elements(&grader);
+
+        // And then assemble the attribute map.
+        let mut map = HashMap::with_capacity(grader_elements.len());
+        map.extend(backend_elements.drain().map(|k| (k, None)));
+
+        assert!(frontend_elements.is_superset(&backend_elements));
+        assert!(grader_elements.is_superset(&frontend_elements));
+
+        for element in frontend_elements.drain() {
+            map.entry(element).or_insert(Feature::Frontend)
+        }
+
+        for element in grader_elements.drain() {
+            map.entry(element).or_insert(Feature::Grader)
+        }
+
+        // Finally, tag the full binding set with the appropriate attrs, fmt,
+        // and emit.
+        let mut full = grader.clone();
+        tag(&mut full, map);
+
+        let ts = full.into_token_stream();
+        let mut f = File::create(&BINDINGS_PATH)?;
+
+        write!(f, "{}", ts)?;
+        drop(f);
+
+        run_rustfmt(&[BINDINGS_PATH]).unwrap();
     }
 
     // Finally let's go gather the C++ files and do the build.
@@ -343,7 +478,7 @@ fn main() -> Result<()> {
     }
 
     // Includes:
-    build.include(BACKEND)
+    build.include(BACKEND);
     if cfg!(feature = "grader") { build.include(GRADER); }
     if cfg!(feature = "frontend") { build.include(FRONTEND); }
 
@@ -355,9 +490,9 @@ fn main() -> Result<()> {
     #[cfg(feature = "grader")]
     let files = files.chain(cpp_dir_iter(GRADER));
     #[cfg(feature = "frontend")]
-    let files = files.chain(cpp_dir_iter(FRONTEND);
+    let files = files.chain(cpp_dir_iter(FRONTEND));
 
-    for source_file in source_files {
+    for source_file in files {
         println!("cargo:rerun-if-changed={}", source_file.path().display());
         build.file(source_file.path());
     }
