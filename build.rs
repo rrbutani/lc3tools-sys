@@ -505,7 +505,7 @@ fn main() -> Result<()> {
         build.define("_ENABLE_DEBUG", None);
     }
 
-    // Renamed `main` from framework.cpp if it's there and we're building with
+    // Remove `main` from framework.cpp if it's there and we're building with
     // the grader feature.
     if cfg!(feature = "grader") {
         use std::io::{Read, Write};
@@ -523,7 +523,9 @@ fn main() -> Result<()> {
                 write!(
                     file,
                     "{}",
-                    contents.replace("int main(", "int framework_main(")
+                    contents
+                        .replace("int main(", "/* int framework_main(")
+                        .replace("return 0;\n}", "return 0;\n} */")
                 )
                 .unwrap()
             }
