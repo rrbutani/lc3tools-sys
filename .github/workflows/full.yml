@@ -194,6 +194,32 @@ jobs:
             --no-fail-fast
             --release
 
+      - name: Run the example
+        if: matrix.features != '''''' # Can't run the example without `frontend`
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: >-
+            --no-default-features
+            --features ${{ matrix.features }}
+            --example mul
+
+      - name: Run the example with LTO (in release mode)
+        # Not brave enough to try LTO on windows (also, don't want to deal with
+        # cmd's env vars)
+        if: matrix.features != '''''' && matrix.os != 'windows-latest'
+        run: |
+          clang --version || :
+          c++ --version || :
+
+          export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld"
+
+          cargo run \
+            --no-default-features \
+            --features ${{ matrix.features }},lto \
+            --release \
+            --example mul
+
       - name: Compare the bindings
         if: matrix.anew
         run: git diff generated/
