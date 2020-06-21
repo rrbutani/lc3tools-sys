@@ -495,9 +495,11 @@ fn main() -> Result<()> {
         build.flag("/EHsc");
     }
 
+    if cfg!(feature = "lto") {
+        build.flag_if_supported("-flto=thin");
+    }
+
     build
-        // .flag_if_supported("-flto")
-        // .flag_if_supported("-flto=thin")
         .flag_if_supported("-std=c++14")
         .flag_if_supported("-Wno-format-security")
         .cargo_metadata(true)

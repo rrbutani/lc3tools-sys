@@ -1,3 +1,5 @@
 [build]
 rustdocflags = ["--cfg", "docs"]
-rustflags = ["-Clinker-plugin-lto", "-Clinker=clang",  "-Clink-arg=-fuse-ld=lld"]
+
+# Uncomment this when using the `lto` feature.
+# rustflags = ["-Clinker-plugin-lto", "-Clinker=clang",  "-Clink-arg=-fuse-ld=lld"]
