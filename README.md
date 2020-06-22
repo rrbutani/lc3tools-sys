@@ -69,10 +69,13 @@ Actually figuring out and changing which compiler [`cc`][cc] uses is tricker; on
 [lto-flag]: https://github.com/rrbutani/lc3tools-sys/blob/c8139dc1a6af4f55e3e1b55ed8f68473c7e74687/build.rs#L499
 [cargo-config-lto]: https://github.com/rrbutani/lc3tools-sys/blob/c8139dc1a6af4f55e3e1b55ed8f68473c7e74687/.cargo/config#L4-L5
 
-
 ## Examples
 
-TODO: fill in
+Right now we have [one example][mul] that runs an LC-3 program that multiplies two unsigned numbers.
+
+`cargo run --example mul` _should_ run it.
+
+[mul]: https://github.com/rrbutani/lc3tools-sys/tree/main/examples/mul.rs
 
 ## Minimum Supported Rust Version (MSRV)
 
