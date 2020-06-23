@@ -17,6 +17,9 @@ macro_rules! env {
     };
 }
 
+const SHIMS_INC: &str = "extra";
+const SHIMS_CPP: &str = "extra/shims.cpp";
+
 const BACKEND: &str = "lc3tools/backend";
 const FRONTEND: &str = "lc3tools/frontend/common";
 const GRADER: &str = "lc3tools/frontend/grader";
@@ -538,6 +541,11 @@ fn main() -> Result<()> {
             }
         }
     }
+
+    // Extras:
+    build
+        .file(SHIMS_CPP)
+        .include(SHIMS_INC);
 
     // Includes:
     build.include(BACKEND);
