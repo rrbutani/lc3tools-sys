@@ -29,52 +29,47 @@ We offer a [`generate-fresh`](#generate-fresh) feature so that you can generate 
 For example, for reasons still unknown, when running the [C++ interface example][cpp-interface-ex], the `printer` [that's passed to the simulator][mystery] mysteriously turns into a `NULL` but _only_ in the copy of the logger that's given to the `state` instance; the copy that's in the `logger` remains unchanged. I was only able to get the example to work after making the following changes to `LC3Tools`:
 
 <details>
-  <summary>Click to show the diff.</summary>
-```diff
-diff --git a/backend/logger.h b/backend/logger.h
-index b7146ac..c172acb 100644
---- a/backend/logger.h
-+++ b/backend/logger.h
-@@ -28,10 +28,17 @@ namespace utils
-         template<typename ... Args>
-         void printf(PrintType level, bool bold, std::string const & format, Args ... args) const;
-         void newline(PrintType level = PrintType::P_ERROR) const {
--            if(static_cast<uint32_t>(level) <= print_level) { printer.newline(); }
-         }
-         void print(std::string const & str) {
--            if(print_level > static_cast<uint32_t>(PrintType::P_NONE)) { printer.print(str); }
-         }
-         uint32_t getPrintLevel(void) const { return print_level; }
-         void setPrintLevel(uint32_t print_level) { this->print_level = print_level; }
-diff --git a/backend/simulator.cpp b/backend/simulator.cpp
-index c8004e8..bd7f1db 100644
---- a/backend/simulator.cpp
-+++ b/backend/simulator.cpp
-@@ -110,7 +110,7 @@ void Simulator::simulate(void)
-         enableClock();
-
-         collecting_input = true;
--        inputter.beginInput();
-         if(threaded_input) {
-             input_thread = std::thread(&core::Simulator::inputThread, this);
-         }
-@@ -125,7 +125,7 @@ void Simulator::simulate(void)
-             executeEventChain(events);
-             updateDevices();
-             if(! threaded_input) {
--                collectInput();
-             }
-             checkAndSetupInterrupts();
-         }
-@@ -139,7 +139,7 @@ void Simulator::simulate(void)
-     if(threaded_input && input_thread.joinable()) {
-         input_thread.join();
-     }
--    inputter.endInput();
-
-     if(exception_valid) {
-         throw exception;
-```
+<summary>Click to show the diff.</summary>
+  ```diff
+  diff --git a/backend/logger.h b/backend/logger.h
+  index b7146ac..c172acb 100644
+  --- a/backend/logger.h
+  +++ b/backend/logger.h
+  @@ -28,10 +28,17 @@ namespace utils
+           template<typename ... Args>
+           void printf(PrintType level, bool bold, std::string const & format, Args ... args) const;
+           void newline(PrintType level = PrintType::P_ERROR) const {
+  -            if(static_cast<uint32_t>(level) <= print_level) { printer.newline(); }
+           }
+           void print(std::string const & str) {
+  -            if(print_level > static_cast<uint32_t>(PrintType::P_NONE)) { printer.print(str); }
+           }
+           uint32_t getPrintLevel(void) const { return print_level; }
+           void setPrintLevel(uint32_t print_level) { this->print_level = print_level; }
+  diff --git a/backend/simulator.cpp b/backend/simulator.cpp
+  index c8004e8..bd7f1db 100644
+  --- a/backend/simulator.cpp
+  +++ b/backend/simulator.cpp
+  @@ -112,7 +112,7 @@ void Simulator::simulate(void)
+           collecting_input = true;
+  -        inputter.beginInput();
+           if(threaded_input) {
+               input_thread = std::thread(&core::Simulator::inputThread, this);
+           }
+  @@ -125,7 +125,7 @@ void Simulator::simulate(void)
+               executeEventChain(events);
+               updateDevices();
+               if(! threaded_input) {
+  -                collectInput();
+               }
+               checkAndSetupInterrupts();
+           }
+  @@ -139,7 +139,7 @@ void Simulator::simulate(void)
+       if(threaded_input && input_thread.joinable()) {
+           input_thread.join();
+       }
+  -    inputter.endInput();
+  ```
 </details>
 
 ### Workarounds
