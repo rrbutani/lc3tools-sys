@@ -450,12 +450,12 @@ fn main() -> Result<()> {
 
         // First we want to get the baseline bindings — just the backend, no
         // other features — and record what items this has.
-        let backend = make_bindings(&[BACKEND, SHIMS_INC]).unwrap();
+        let backend = make_bindings(&[BACKEND, EXTRAS]).unwrap();
 
         // Next, the bindings for the frontend and then for the grader + the
         // frontend (the grader requires the frontend).
-        let frontend = make_bindings(&[BACKEND, SHIMS_INC, FRONTEND]).unwrap();
-        let grader = make_bindings(&[BACKEND, SHIMS_INC, FRONTEND, GRADER]).unwrap();
+        let frontend = make_bindings(&[BACKEND, EXTRAS, FRONTEND]).unwrap();
+        let grader = make_bindings(&[BACKEND, EXTRAS, FRONTEND, GRADER]).unwrap();
 
         // For each of the above configurations, get the set of elements:
         let mut backend_elements = elements(&backend);
