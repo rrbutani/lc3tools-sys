@@ -35,23 +35,23 @@ extern "C" {
     /// Creates a `Printer` that's backed by a buffer.
     lc3::utils::IPrinter *buffer_printer(
         size_t const len,
-        char buffer[/*len*/]
+        unsigned char buffer[/*len*/]
     );
     /// Creates an `Inputter` that's backed by a buffer.
     lc3::utils::IInputter *buffer_inputter(
         size_t const len,
-        char const buffer[/*len*/]
+        unsigned char const buffer[/*len*/]
     );
 
     // Callback I/O constructors:
     /// Creates a `Printer` that calls a function for every `char` that's
     /// emitted.
-    lc3::utils::IPrinter *callback_printer(void (*func)(char));
+    lc3::utils::IPrinter *callback_printer(void (*func)(unsigned char));
     /// Creates an `Inputter` that calls a function to get input `char`s.
     ///
     /// The function provided must eventually produce a `char` but is allowed
     /// to block.
-    lc3::utils::IInputter *callback_inputter(char (*func)(void));
+    lc3::utils::IInputter *callback_inputter(unsigned char (*func)(void));
 
     // Sim functions:
     /// Loads a program into memory (and resets memory, probably).

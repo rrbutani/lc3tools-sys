@@ -47,7 +47,7 @@ void lc3::shims::endInputNoOp(void) {}
 
 
 // BufferPrinter:
-bool lc3::shims::BufferPrinter::put(char c) {
+bool lc3::shims::BufferPrinter::put(unsigned char c) {
     if (this->pos < this->len) { this->buffer[this->len++] = c; return true; }
     else { return false; }
 }

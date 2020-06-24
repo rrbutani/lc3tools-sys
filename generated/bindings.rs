@@ -6786,7 +6786,7 @@ pub mod root {
                 pub _base: root::lc3::utils::IPrinter,
                 pub pos: root::size_t,
                 pub len: root::size_t,
-                pub buffer: *mut ::std::os::raw::c_char,
+                pub buffer: *mut ::std::os::raw::c_uchar,
             }
             #[test]
             fn bindgen_test_layout_BufferPrinter() {
@@ -6870,7 +6870,7 @@ pub mod root {
                 pub _base: root::lc3::utils::IInputter,
                 pub pos: root::size_t,
                 pub len: root::size_t,
-                pub buffer: *const ::std::os::raw::c_char,
+                pub buffer: *const ::std::os::raw::c_uchar,
             }
             #[test]
             fn bindgen_test_layout_BufferInputter() {
@@ -6954,7 +6954,7 @@ pub mod root {
             pub struct CallbackPrinter {
                 pub _base: root::lc3::utils::IPrinter,
                 pub func: ::std::option::Option<
-                    unsafe extern "C" fn(arg1: ::std::os::raw::c_char),
+                    unsafe extern "C" fn(arg1: ::std::os::raw::c_uchar),
                 >,
             }
             #[test]
@@ -7016,7 +7016,7 @@ pub mod root {
             pub struct CallbackInputter {
                 pub _base: root::lc3::utils::IInputter,
                 pub func: ::std::option::Option<
-                    unsafe extern "C" fn() -> ::std::os::raw::c_char,
+                    unsafe extern "C" fn() -> ::std::os::raw::c_uchar,
                 >,
             }
             #[test]
@@ -28627,14 +28627,14 @@ pub mod root {
         #[doc = " Creates a `Printer` that's backed by a buffer."]
         pub fn buffer_printer(
             len: root::size_t,
-            buffer: *mut ::std::os::raw::c_char,
+            buffer: *mut ::std::os::raw::c_uchar,
         ) -> *mut root::lc3::utils::IPrinter;
     }
     extern "C" {
         #[doc = " Creates an `Inputter` that's backed by a buffer."]
         pub fn buffer_inputter(
             len: root::size_t,
-            buffer: *const ::std::os::raw::c_char,
+            buffer: *const ::std::os::raw::c_uchar,
         ) -> *mut root::lc3::utils::IInputter;
     }
     extern "C" {
@@ -28642,7 +28642,7 @@ pub mod root {
         #[doc = " emitted."]
         pub fn callback_printer(
             func: ::std::option::Option<
-                unsafe extern "C" fn(arg1: ::std::os::raw::c_char),
+                unsafe extern "C" fn(arg1: ::std::os::raw::c_uchar),
             >,
         ) -> *mut root::lc3::utils::IPrinter;
     }
@@ -28653,7 +28653,7 @@ pub mod root {
         #[doc = " to block."]
         pub fn callback_inputter(
             func: ::std::option::Option<
-                unsafe extern "C" fn() -> ::std::os::raw::c_char,
+                unsafe extern "C" fn() -> ::std::os::raw::c_uchar,
             >,
         ) -> *mut root::lc3::utils::IInputter;
     }

@@ -61,25 +61,25 @@ namespace lc3 { namespace shims
     class BufferPrinter: public lc3::utils::IPrinter
     {
     public:
-        BufferPrinter(size_t len, char buffer[/*len*/]): len(len), buffer(buffer) {}
+        BufferPrinter(size_t len, unsigned char buffer[/*len*/]): len(len), buffer(buffer) {}
 
         virtual void setColor(lc3::utils::PrintColor color) override;
         virtual void print(std::string const & string) override;
         virtual void newline(void) override;
 
     private:
-        bool put(char c);
+        bool put(unsigned char c);
 
         size_t pos = 0;
         size_t len;
-        char* buffer;
+        unsigned char* buffer;
     };
 
     /// Gets inputs from a buffer.
     class BufferInputter: public lc3::utils::IInputter
     {
     public:
-        BufferInputter(size_t len, char const buffer[/*len*/]):
+        BufferInputter(size_t len, unsigned char const buffer[/*len*/]):
             len(len), buffer(buffer) {}
 
         virtual void beginInput(void) override;
@@ -89,21 +89,21 @@ namespace lc3 { namespace shims
     private:
         size_t pos = 0;
         size_t len;
-        char const* buffer;
+        unsigned char const* buffer;
     };
 
     /// Calls a function on output.
     class CallbackPrinter: public lc3::utils::IPrinter
     {
     public:
-        CallbackPrinter(void(*func)(char)): func(func) {}
+        CallbackPrinter(void(*func)(unsigned char)): func(func) {}
 
         virtual void setColor(lc3::utils::PrintColor color) override;
         virtual void print(std::string const & string) override;
         virtual void newline(void) override;
 
     private:
-        void (*func)(char);
+        void (*func)(unsigned char);
     };
 
     /// Calls a function to get an input.
@@ -112,13 +112,13 @@ namespace lc3 { namespace shims
     class CallbackInputter: public lc3::utils::IInputter
     {
     public:
-        CallbackInputter(char(*func)(void)): func(func) {}
+        CallbackInputter(unsigned char (*func)(void)): func(func) {}
 
         virtual void beginInput(void) override;
         virtual bool getChar(char & c) override;
         virtual void endInput(void) override;
 
     private:
-        char (*func)(void);
+        unsigned char (*func)(void);
     };
 }; };

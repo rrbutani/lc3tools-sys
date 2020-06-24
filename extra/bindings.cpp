@@ -29,7 +29,7 @@ extern "C" lc3::sim *new_sim_with_no_op_io(void) {
 
 extern "C" lc3::utils::IPrinter *buffer_printer(
     size_t const len,
-    char buffer[/*len*/]
+    unsigned char buffer[/*len*/]
 ) {
     auto printer = new lc3::shims::BufferPrinter(len, buffer);
     return (lc3::utils::IPrinter*)(printer);
@@ -37,21 +37,21 @@ extern "C" lc3::utils::IPrinter *buffer_printer(
 
 extern "C" lc3::utils::IInputter *buffer_inputter(
     size_t const len,
-    char const buffer[/*len*/]
+    unsigned char const buffer[/*len*/]
 ) {
     auto inputter = new lc3::shims::BufferInputter(len, buffer);
     return (lc3::utils::IInputter*)(inputter);
 }
 
 extern "C" lc3::utils::IPrinter *callback_printer(
-    void (*func)(char)
+    void (*func)(unsigned char)
 ) {
     auto printer = new lc3::shims::CallbackPrinter(func);
     return (lc3::utils::IPrinter*)(printer);
 }
 
 extern "C" lc3::utils::IInputter *callback_inputter(
-    char (*func)(void)
+    unsigned char (*func)(void)
 ) {
     auto inputter = new lc3::shims::CallbackInputter(func);
     return (lc3::utils::IInputter*)(inputter);
