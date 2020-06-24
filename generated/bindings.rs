@@ -6779,6 +6779,296 @@ pub mod root {
                 #[link_name = "\u{1}_ZN3lc35shims12endInputNoOpEv"]
                 pub fn endInputNoOp();
             }
+            #[doc = " Prints to a buffer."]
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct BufferPrinter {
+                pub _base: root::lc3::utils::IPrinter,
+                pub pos: root::size_t,
+                pub len: root::size_t,
+                pub buffer: *mut ::std::os::raw::c_char,
+            }
+            #[test]
+            fn bindgen_test_layout_BufferPrinter() {
+                assert_eq!(
+                    ::std::mem::size_of::<BufferPrinter>(),
+                    32usize,
+                    concat!("Size of: ", stringify!(BufferPrinter))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BufferPrinter>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BufferPrinter))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<BufferPrinter>())).pos
+                            as *const _ as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(BufferPrinter),
+                        "::",
+                        stringify!(pos)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<BufferPrinter>())).len
+                            as *const _ as usize
+                    },
+                    16usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(BufferPrinter),
+                        "::",
+                        stringify!(len)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<BufferPrinter>())).buffer
+                            as *const _ as usize
+                    },
+                    24usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(BufferPrinter),
+                        "::",
+                        stringify!(buffer)
+                    )
+                );
+            }
+            impl Default for BufferPrinter {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims13BufferPrinter8setColorENS_5utils10PrintColorE"]
+                pub fn BufferPrinter_setColor(
+                    this: *mut ::std::os::raw::c_void,
+                    color: root::lc3::utils::PrintColor,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims13BufferPrinter5printERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+                pub fn BufferPrinter_print(
+                    this: *mut ::std::os::raw::c_void,
+                    string: *const root::std::string,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims13BufferPrinter7newlineEv"]
+                pub fn BufferPrinter_newline(this: *mut ::std::os::raw::c_void);
+            }
+            #[doc = " Gets inputs from a buffer."]
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct BufferInputter {
+                pub _base: root::lc3::utils::IInputter,
+                pub pos: root::size_t,
+                pub len: root::size_t,
+                pub buffer: *const ::std::os::raw::c_char,
+            }
+            #[test]
+            fn bindgen_test_layout_BufferInputter() {
+                assert_eq!(
+                    ::std::mem::size_of::<BufferInputter>(),
+                    32usize,
+                    concat!("Size of: ", stringify!(BufferInputter))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BufferInputter>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BufferInputter))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<BufferInputter>())).pos
+                            as *const _ as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(BufferInputter),
+                        "::",
+                        stringify!(pos)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<BufferInputter>())).len
+                            as *const _ as usize
+                    },
+                    16usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(BufferInputter),
+                        "::",
+                        stringify!(len)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<BufferInputter>())).buffer
+                            as *const _ as usize
+                    },
+                    24usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(BufferInputter),
+                        "::",
+                        stringify!(buffer)
+                    )
+                );
+            }
+            impl Default for BufferInputter {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims14BufferInputter10beginInputEv"]
+                pub fn BufferInputter_beginInput(
+                    this: *mut ::std::os::raw::c_void,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims14BufferInputter7getCharERc"]
+                pub fn BufferInputter_getChar(
+                    this: *mut ::std::os::raw::c_void,
+                    c: *mut ::std::os::raw::c_char,
+                ) -> bool;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims14BufferInputter8endInputEv"]
+                pub fn BufferInputter_endInput(
+                    this: *mut ::std::os::raw::c_void,
+                );
+            }
+            #[doc = " Calls a function on output."]
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct CallbackPrinter {
+                pub _base: root::lc3::utils::IPrinter,
+                pub func: ::std::option::Option<
+                    unsafe extern "C" fn(arg1: ::std::os::raw::c_char),
+                >,
+            }
+            #[test]
+            fn bindgen_test_layout_CallbackPrinter() {
+                assert_eq!(
+                    ::std::mem::size_of::<CallbackPrinter>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(CallbackPrinter))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<CallbackPrinter>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(CallbackPrinter))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<CallbackPrinter>())).func
+                            as *const _ as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(CallbackPrinter),
+                        "::",
+                        stringify!(func)
+                    )
+                );
+            }
+            impl Default for CallbackPrinter {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims15CallbackPrinter8setColorENS_5utils10PrintColorE"]
+                pub fn CallbackPrinter_setColor(
+                    this: *mut ::std::os::raw::c_void,
+                    color: root::lc3::utils::PrintColor,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims15CallbackPrinter5printERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+                pub fn CallbackPrinter_print(
+                    this: *mut ::std::os::raw::c_void,
+                    string: *const root::std::string,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims15CallbackPrinter7newlineEv"]
+                pub fn CallbackPrinter_newline(
+                    this: *mut ::std::os::raw::c_void,
+                );
+            }
+            #[doc = " Calls a function to get an input."]
+            #[doc = ""]
+            #[doc = " Note: the function must ultimately produce a character but *can* block."]
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct CallbackInputter {
+                pub _base: root::lc3::utils::IInputter,
+                pub func: ::std::option::Option<
+                    unsafe extern "C" fn() -> ::std::os::raw::c_char,
+                >,
+            }
+            #[test]
+            fn bindgen_test_layout_CallbackInputter() {
+                assert_eq!(
+                    ::std::mem::size_of::<CallbackInputter>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(CallbackInputter))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<CallbackInputter>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(CallbackInputter))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<CallbackInputter>())).func
+                            as *const _ as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(CallbackInputter),
+                        "::",
+                        stringify!(func)
+                    )
+                );
+            }
+            impl Default for CallbackInputter {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims16CallbackInputter10beginInputEv"]
+                pub fn CallbackInputter_beginInput(
+                    this: *mut ::std::os::raw::c_void,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims16CallbackInputter7getCharERc"]
+                pub fn CallbackInputter_getChar(
+                    this: *mut ::std::os::raw::c_void,
+                    c: *mut ::std::os::raw::c_char,
+                ) -> bool;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims16CallbackInputter8endInputEv"]
+                pub fn CallbackInputter_endInput(
+                    this: *mut ::std::os::raw::c_void,
+                );
+            }
         }
         #[repr(C)]
         #[derive(Debug)]
@@ -28311,23 +28601,87 @@ pub mod root {
         );
     }
     extern "C" {
+        #[doc = " Creates a new [`sim`] with the given `Printer` and `Inputter`."]
+        #[doc = ""]
+        #[doc = " [`sim`]: crate::root::lc3::sim"]
+        pub fn new_sim(
+            printer: *mut root::lc3::utils::IPrinter,
+            inputter: *mut root::lc3::utils::IInputter,
+        ) -> *mut root::lc3::sim;
+    }
+    extern "C" {
+        #[doc = " Creates a new [`sim`] with the no-op `Printer` and `Inputter`."]
+        #[doc = ""]
+        #[doc = " [`sim`]: crate::root::lc3::sim"]
+        pub fn new_sim_with_no_op_io() -> *mut root::lc3::sim;
+    }
+    extern "C" {
+        #[doc = " Creates a no-op `Printer`."]
+        pub fn no_op_printer() -> *mut root::lc3::utils::IPrinter;
+    }
+    extern "C" {
+        #[doc = " Creates a no-op `Inputter`."]
+        pub fn no_op_inputter() -> *mut root::lc3::utils::IInputter;
+    }
+    extern "C" {
+        #[doc = " Creates a `Printer` that's backed by a buffer."]
+        pub fn buffer_printer(
+            len: root::size_t,
+            buffer: *mut ::std::os::raw::c_char,
+        ) -> *mut root::lc3::utils::IPrinter;
+    }
+    extern "C" {
+        #[doc = " Creates an `Inputter` that's backed by a buffer."]
+        pub fn buffer_inputter(
+            len: root::size_t,
+            buffer: *const ::std::os::raw::c_char,
+        ) -> *mut root::lc3::utils::IInputter;
+    }
+    extern "C" {
+        #[doc = " Creates a `Printer` that calls a function for every `char` that's"]
+        #[doc = " emitted."]
+        pub fn callback_printer(
+            func: ::std::option::Option<
+                unsafe extern "C" fn(arg1: ::std::os::raw::c_char),
+            >,
+        ) -> *mut root::lc3::utils::IPrinter;
+    }
+    extern "C" {
+        #[doc = " Creates an `Inputter` that calls a function to get input `char`s."]
+        #[doc = ""]
+        #[doc = " The function provided must eventually produce a `char` but is allowed"]
+        #[doc = " to block."]
+        pub fn callback_inputter(
+            func: ::std::option::Option<
+                unsafe extern "C" fn() -> ::std::os::raw::c_char,
+            >,
+        ) -> *mut root::lc3::utils::IInputter;
+    }
+    extern "C" {
+        #[doc = " Loads a program into memory (and resets memory, probably)."]
         pub fn load_program(
+            sim: *mut root::lc3::sim,
             len: u16,
             addresses: *const u16,
             words: *const u16,
-        ) -> *mut ::std::os::raw::c_void;
+        );
     }
     extern "C" {
-        pub fn get_mem(sim_ptr: *mut ::std::os::raw::c_void, addr: u16) -> u16;
+        #[doc = " Gets the value of a memory address."]
+        pub fn get_mem(sim: *mut root::lc3::sim, addr: u16) -> u16;
     }
     extern "C" {
-        pub fn run_program(
-            sim_ptr: *mut ::std::os::raw::c_void,
-            pc: u16,
-        ) -> root::State;
+        #[doc = " Runs the program starting at the given PC."]
+        #[doc = ""]
+        #[doc = " Returns the machine state when the program halts (or raises an"]
+        #[doc = " exception)."]
+        pub fn run_program(sim: *mut root::lc3::sim, pc: u16) -> root::State;
     }
     extern "C" {
-        pub fn free_sim(sim_ptr: *mut ::std::os::raw::c_void);
+        #[doc = " Frees the memory allocated to the given [`sim`] instance."]
+        #[doc = ""]
+        #[doc = " [`sim`]: crate::root::lc3::sim"]
+        pub fn free_sim(sim: *mut root::lc3::sim);
     }
     #[cfg(feature = "frontend")]
     #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
