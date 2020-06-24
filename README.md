@@ -12,11 +12,91 @@ Add this to your `Cargo.toml`:
 lc3tools-sys = "1.0.6-alpha0"
 ```
 
+Since the bindings this crate exposes are exactly one to one with the `LC3Tools` API, the `LC3Tools` source code and documentation are the best place to go for information about how to use this crate, especially the [API documentation][api-docs].
+
+### Headers
+
 Headers are exposed at the path the `DEP_LC3CORE_LINKS` env var points to.
 
-Since the bindings this crate exposes are exactly one to one with the `LC3Tools` API, the `LC3Tools` source code and documentation are the best place to go for information about how to use this crate, especially the [API documentation][api-docs]
+### Caveats
+
+However, note that `LC3Tools` exposes a C++ API. Though bindings for it are provided in this crate, it's extremely unlikely they will work with your OS/platform/compiler/compiler flags. Different platforms [seem to have different name-mangling conventions](https://github.com/google/bloaty/issues/43#issuecomment-288270723) and layout isn't (afaik) stable across different configurations (switching from `-O3` to `-O0` breaks the [C++ interface example][cpp-interface-ex] with my configuration, for example).
+
+All of this (mangled symbols, layout information) is encoded in the [generated bindings][bindings]. Note that [because linkers are often lazy](https://kornel.ski/rust-sys-crate#linking), even though the symbols in the generated bindings don't match those that are actually produced on your platform, you may not get a compile error unless/until you actually go to _use_ (transitively) those symbols in your final binary. This is why the [C++ interface example][cpp-interface-ex] is [feature gated][cpp-interface-ex-feature-gate].
+
+We offer a [`generate-fresh`](#generate-fresh) feature so that you can generate this file locally at build time, but it still remains unlikely that the C++ interface will work/be of use. Things like vtables are represented by opaque types and even if you [manage to get a hold of a C++ generated vtable to pass along][vtable] sometimes things still don't work.
+
+For example, for reasons still unknown, when running the [C++ interface example][cpp-interface-ex], the `printer` [that's passed to the simulator][mystery] mysteriously turns into a `NULL` but _only_ in the copy of the logger that's given to the `state` instance; the copy that's in the `logger` remains unchanged. I was only able to get the example to work after making the following changes to `LC3Tools`:
+
+<details>
+  <summary>Click to show the diff.</summary>
+```diff
+diff --git a/backend/logger.h b/backend/logger.h
+index b7146ac..c172acb 100644
+--- a/backend/logger.h
++++ b/backend/logger.h
+@@ -28,10 +28,17 @@ namespace utils
+         template<typename ... Args>
+         void printf(PrintType level, bool bold, std::string const & format, Args ... args) const;
+         void newline(PrintType level = PrintType::P_ERROR) const {
+-            if(static_cast<uint32_t>(level) <= print_level) { printer.newline(); }
+         }
+         void print(std::string const & str) {
+-            if(print_level > static_cast<uint32_t>(PrintType::P_NONE)) { printer.print(str); }
+         }
+         uint32_t getPrintLevel(void) const { return print_level; }
+         void setPrintLevel(uint32_t print_level) { this->print_level = print_level; }
+diff --git a/backend/simulator.cpp b/backend/simulator.cpp
+index c8004e8..bd7f1db 100644
+--- a/backend/simulator.cpp
++++ b/backend/simulator.cpp
+@@ -110,7 +110,7 @@ void Simulator::simulate(void)
+         enableClock();
+
+         collecting_input = true;
+-        inputter.beginInput();
+         if(threaded_input) {
+             input_thread = std::thread(&core::Simulator::inputThread, this);
+         }
+@@ -125,7 +125,7 @@ void Simulator::simulate(void)
+             executeEventChain(events);
+             updateDevices();
+             if(! threaded_input) {
+-                collectInput();
+             }
+             checkAndSetupInterrupts();
+         }
+@@ -139,7 +139,7 @@ void Simulator::simulate(void)
+     if(threaded_input && input_thread.joinable()) {
+         input_thread.join();
+     }
+-    inputter.endInput();
+
+     if(exception_valid) {
+         throw exception;
+```
+</details>
+
+### Workarounds
+
+To make this crate at least somewhat usable, we offer a [limited set of C bindings][c-bindings-header] that are only really good for running whole programs.
+
+This is incredibly clunky but it was good enough™ for our use case. If actual Rust bindings for `LC3Tools` are a thing you need, [`cxx`](https://github.com/dtolnay/cxx) is probably worth looking into. Since this crate [exports the `LC3Tools` headers](#headers) you could depend on this crate and use it for it's `cc` setup (ignoring the bindings it has).
+
+Alternatively, if there are specific additions to the C bindings you need, PRs are very welcome!
 
 [api-docs]: https://github.com/chiragsakhuja/lc3tools/blob/master/docs/API.md
+
+[cpp-interface-ex]: https://github.com/rrbutani/lc3tools-sys/blob/e2e6f72106b577be7a90a380540bd5cbb1e0f7a8/examples/mul.rs#L133-L180
+[c-interface-ex]: https://github.com/rrbutani/lc3tools-sys/blob/e2e6f72106b577be7a90a380540bd5cbb1e0f7a8/examples/mul.rs#L85-L131
+
+[cpp-interface-ex-feature-gate]: https://github.com/rrbutani/lc3tools-sys/blob/fac13ea6e385be076d7c12bd693bfdde1dc1d610/examples/mul.rs#L81
+
+[mystery]: https://github.com/chiragsakhuja/lc3tools/blob/433a4c224f3a70bee532d12a7b1cb227ba71dd77/backend/simulator.cpp#L25
+
+[vtable]: https://github.com/rrbutani/lc3tools-sys/blob/e2e6f72106b577be7a90a380540bd5cbb1e0f7a8/examples/mul.rs#L142-L143
+
+[c-bindings-header]: https://github.com/rrbutani/lc3tools-sys/tree/main/extra/bindings.h
 
 ## Features
 
@@ -42,7 +122,6 @@ By default, Rust bindings for `LC3Tools` aren't [generated][bindgen] anew when b
 You'll probably never need to, but if you find yourself wanting to generate these bindings yourself (i.e. because you modified some headers in `LC3Tools`), then you can build with the [`generate-fresh` feature][generate-fresh-feat] (`build.rs` goes and passes the right instructions to `cargo` so you can just leave the feature enabled — it'll only actually do the work when one of the headers/files in the build graph change).
 
 [bindgen]: https://github.com/rust-lang/rust-bindgen
-[bindings]: https://github.com/rrbutani/lc3tools-sys/tree/main/generated/bindings.rs
 
 [skip]: https://github.com/rrbutani/lc3tools-sys/blob/c8139dc1a6af4f55e3e1b55ed8f68473c7e74687/build.rs#L122-L141
 [generate-fresh-feat]: https://github.com/rrbutani/lc3tools-sys/blob/c8139dc1a6af4f55e3e1b55ed8f68473c7e74687/Cargo.toml#L62
@@ -71,9 +150,9 @@ Actually figuring out and changing which compiler [`cc`][cc] uses is tricker; on
 
 ## Examples
 
-Right now we have [one example][mul] that runs an LC-3 program that multiplies two unsigned numbers.
+Right now we have [one example][mul] that runs an LC-3 program that multiplies two unsigned numbers. As mentioned, it has a [C++ interface part][cpp-interface-ex] and a [C interface part][c-interface-ex]. By default the C++ part is [disabled][cpp-interface-ex-feature-gate] as it's [unlikely it will work on your machine](#caveats).
 
-`cargo run --example mul` _should_ run it.
+`cargo run --example mul` _should_ run the C interface part.
 
 [mul]: https://github.com/rrbutani/lc3tools-sys/tree/main/examples/mul.rs
 
@@ -100,3 +179,5 @@ PRs are (very) welcome! See [CONTRIBUTING.md] for details.
 [docs]: https://rrbutani.github.io/lc3tools-sys/docs/lc3tools_sys
 
 [lc3tools]: https://github.com/chiragsakhuja/lc3tools
+
+[bindings]: https://github.com/rrbutani/lc3tools-sys/tree/main/generated/bindings.rs

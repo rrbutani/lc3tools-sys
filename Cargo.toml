@@ -64,6 +64,8 @@ frontend = []
 generate-fresh = ["bindgen", "proc-macro2", "quote", "syn", "grader", "frontend"]
 lto = []
 
+cpp-interface-example = [] # Only for the example.
+
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin", "x86_64-pc-windows-msvc"]
