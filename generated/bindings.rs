@@ -6681,10 +6681,6 @@ pub mod root {
                 #[link_name = "\u{1}_ZN3lc35shims11newlineNoOpEv"]
                 pub fn newlineNoOp();
             }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35shims11testPrinterERNS_5utils8IPrinterE"]
-                pub fn testPrinter(printer: *mut root::lc3::utils::IPrinter);
-            }
             #[repr(C)]
             #[derive(Debug)]
             pub struct InputterShim {
@@ -28218,6 +28214,120 @@ pub mod root {
             __desc: root::wctrans_t,
             __locale: root::locale_t,
         ) -> root::wint_t;
+    }
+    #[repr(C)]
+    #[derive(Debug, Default, Copy, Clone)]
+    pub struct State {
+        pub regs: [u32; 8usize],
+        pub pc: u32,
+        pub cc: ::std::os::raw::c_char,
+        pub psr: u32,
+        pub mcr: u32,
+        pub success: bool,
+    }
+    #[test]
+    fn bindgen_test_layout_State() {
+        assert_eq!(
+            ::std::mem::size_of::<State>(),
+            52usize,
+            concat!("Size of: ", stringify!(State))
+        );
+        assert_eq!(
+            ::std::mem::align_of::<State>(),
+            4usize,
+            concat!("Alignment of ", stringify!(State))
+        );
+        assert_eq!(
+            unsafe {
+                &(*(::std::ptr::null::<State>())).regs as *const _ as usize
+            },
+            0usize,
+            concat!(
+                "Offset of field: ",
+                stringify!(State),
+                "::",
+                stringify!(regs)
+            )
+        );
+        assert_eq!(
+            unsafe {
+                &(*(::std::ptr::null::<State>())).pc as *const _ as usize
+            },
+            32usize,
+            concat!(
+                "Offset of field: ",
+                stringify!(State),
+                "::",
+                stringify!(pc)
+            )
+        );
+        assert_eq!(
+            unsafe {
+                &(*(::std::ptr::null::<State>())).cc as *const _ as usize
+            },
+            36usize,
+            concat!(
+                "Offset of field: ",
+                stringify!(State),
+                "::",
+                stringify!(cc)
+            )
+        );
+        assert_eq!(
+            unsafe {
+                &(*(::std::ptr::null::<State>())).psr as *const _ as usize
+            },
+            40usize,
+            concat!(
+                "Offset of field: ",
+                stringify!(State),
+                "::",
+                stringify!(psr)
+            )
+        );
+        assert_eq!(
+            unsafe {
+                &(*(::std::ptr::null::<State>())).mcr as *const _ as usize
+            },
+            44usize,
+            concat!(
+                "Offset of field: ",
+                stringify!(State),
+                "::",
+                stringify!(mcr)
+            )
+        );
+        assert_eq!(
+            unsafe {
+                &(*(::std::ptr::null::<State>())).success as *const _ as usize
+            },
+            48usize,
+            concat!(
+                "Offset of field: ",
+                stringify!(State),
+                "::",
+                stringify!(success)
+            )
+        );
+    }
+    extern "C" {
+        pub fn load_program(
+            len: u16,
+            addresses: *const u16,
+            words: *const u16,
+        ) -> *mut ::std::os::raw::c_void;
+    }
+    extern "C" {
+        pub fn get_mem(sim_ptr: *mut ::std::os::raw::c_void, addr: u16) -> u16;
+    }
+    extern "C" {
+        pub fn run_program(
+            sim_ptr: *mut ::std::os::raw::c_void,
+            pc: u16,
+        ) -> root::State;
+    }
+    extern "C" {
+        pub fn free_sim(sim_ptr: *mut ::std::os::raw::c_void);
     }
     #[cfg(feature = "frontend")]
     #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
