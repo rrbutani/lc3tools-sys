@@ -213,6 +213,8 @@ jobs:
 
           export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld"
 
+          cargo clean
+
           cargo run \
             --no-default-features \
             --features ${{ matrix.features }},lto \

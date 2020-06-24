@@ -2,7 +2,6 @@ use std::error::Error;
 use std::ops::Deref;
 use std::time::{Duration, Instant};
 
-use lc3tools_sys::root::lc3::shims::{noOpInputShim, noOpPrintShim};
 use lc3tools_sys::root::lc3::sim as Sim;
 use lc3tools_sys::root::{free_sim, get_mem, load_program, run_program, State};
 
@@ -132,6 +131,8 @@ fn c_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
 
 #[cfg(feature = "cpp-interface-example")]
 fn cpp_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
+    use lc3tools_sys::root::lc3::shims::{noOpInputShim, noOpPrintShim};
+
     let mut printer = Box::new(unsafe { noOpPrintShim() });
     let mut input = Box::new(unsafe { noOpInputShim() });
 
