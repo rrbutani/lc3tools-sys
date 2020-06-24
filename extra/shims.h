@@ -70,10 +70,10 @@ namespace lc3 { namespace shims
     private:
         bool put(char c);
 
-        size_t cursor = 0;
+        size_t pos = 0;
         size_t len;
         char* buffer;
-    }
+    };
 
     /// Gets inputs from a buffer.
     class BufferInputter: public lc3::utils::IInputter
@@ -89,22 +89,22 @@ namespace lc3 { namespace shims
     private:
         size_t pos = 0;
         size_t len;
-        char const buffer[];
-    }
+        char const* buffer;
+    };
 
     /// Calls a function on output.
     class CallbackPrinter: public lc3::utils::IPrinter
     {
     public:
-        CallbackPrinter(void(const *func)(char)): func(func) {}
+        CallbackPrinter(void(*func)(char)): func(func) {}
 
         virtual void setColor(lc3::utils::PrintColor color) override;
         virtual void print(std::string const & string) override;
         virtual void newline(void) override;
 
     private:
-        void (const *func)(char);
-    }
+        void (*func)(char);
+    };
 
     /// Calls a function to get an input.
     ///
@@ -112,13 +112,13 @@ namespace lc3 { namespace shims
     class CallbackInputter: public lc3::utils::IInputter
     {
     public:
-        CallbackInputter(char(const *func)(void)): func(func) {}
+        CallbackInputter(char(*func)(void)): func(func) {}
 
         virtual void beginInput(void) override;
         virtual bool getChar(char & c) override;
         virtual void endInput(void) override;
 
     private:
-        char (const *func)(void);
-    }
+        char (*func)(void);
+    };
 }; };

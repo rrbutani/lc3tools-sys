@@ -47,8 +47,9 @@ void lc3::shims::endInputNoOp(void) {}
 
 
 // BufferPrinter:
-void lc3::shims::BufferPrinter::put(char c) {
-    if (this->pos < this->len) { this->buffer[this->len++] = c; }
+bool lc3::shims::BufferPrinter::put(char c) {
+    if (this->pos < this->len) { this->buffer[this->len++] = c; return true; }
+    else { return false; }
 }
 void lc3::shims::BufferPrinter::setColor(UNUSED lc3::utils::PrintColor color) {}
 void lc3::shims::BufferPrinter::print(std::string const & string) {
@@ -60,7 +61,7 @@ void lc3::shims::BufferPrinter::newline(void) { this->put('\n'); }
 // BufferInputter:
 void lc3::shims::BufferInputter::beginInput(void) {}
 bool lc3::shims::BufferInputter::getChar(char & c) {
-    if (this->pos < this->len) { *c = this->buffer[this->len++]; return true; }
+    if (this->pos < this->len) { c = this->buffer[this->len++]; return true; }
     else { return false; }
 }
 void lc3::shims::BufferInputter::endInput(void) {}
@@ -77,7 +78,7 @@ void lc3::shims::CallbackPrinter::newline(void) { this->func('\n'); }
 // CallbackInputter:
 void lc3::shims::CallbackInputter::beginInput(void) {}
 bool lc3::shims::CallbackInputter::getChar(char & c) {
-    *c = this->func();
+    c = this->func();
     return true;
 }
 void lc3::shims::CallbackInputter::endInput(void) {}
