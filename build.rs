@@ -17,8 +17,7 @@ macro_rules! env {
     };
 }
 
-const SHIMS_INC: &str = "extra";
-const SHIMS_CPP: &str = "extra/shims.cpp";
+const EXTRAS: &str = "extra";
 
 const BACKEND: &str = "lc3tools/backend";
 const FRONTEND: &str = "lc3tools/frontend/common";
@@ -58,6 +57,8 @@ where
         panic!("{}: expected header files in `{}`", e, inc_dir_str)
     }) {
         let path = header.path();
+        println!("cargo:rerun-if-changed={}", path.display());
+
         let to = cpy_dir.join(path.file_name().unwrap());
         fs::copy(&path, &to).expect("Header file copy to succeed");
     }
@@ -428,6 +429,7 @@ fn main() -> Result<()> {
     // unique names but if this were to change, we'd lose header files in the
     // generated output without any warning.
     copy_headers(BACKEND, &include)?;
+    copy_headers(EXTRAS, &include)?;
     if cfg!(feature = "grader") {
         copy_headers(GRADER, &include)?
     }
@@ -448,12 +450,12 @@ fn main() -> Result<()> {
 
         // First we want to get the baseline bindings — just the backend, no
         // other features — and record what items this has.
-        let backend = make_bindings(&[BACKEND]).unwrap();
+        let backend = make_bindings(&[BACKEND, SHIMS_INC]).unwrap();
 
         // Next, the bindings for the frontend and then for the grader + the
         // frontend (the grader requires the frontend).
-        let frontend = make_bindings(&[BACKEND, FRONTEND]).unwrap();
-        let grader = make_bindings(&[BACKEND, FRONTEND, GRADER]).unwrap();
+        let frontend = make_bindings(&[BACKEND, SHIMS_INC, FRONTEND]).unwrap();
+        let grader = make_bindings(&[BACKEND, SHIMS_INC, FRONTEND, GRADER]).unwrap();
 
         // For each of the above configurations, get the set of elements:
         let mut backend_elements = elements(&backend);
@@ -542,13 +544,10 @@ fn main() -> Result<()> {
         }
     }
 
-    // Extras:
-    build
-        .file(SHIMS_CPP)
-        .include(SHIMS_INC);
-
     // Includes:
-    build.include(BACKEND);
+    build
+        .include(BACKEND)
+        .include(EXTRAS);
     if cfg!(feature = "grader") {
         build.include(GRADER);
     }
@@ -563,7 +562,7 @@ fn main() -> Result<()> {
         })
     };
 
-    let files = cpp_dir_iter(BACKEND);
+    let files = cpp_dir_iter(BACKEND).chain(cpp_dir_iter(EXTRAS));
     #[cfg(feature = "grader")]
     let files = files.chain(cpp_dir_iter(GRADER));
     #[cfg(feature = "frontend")]
