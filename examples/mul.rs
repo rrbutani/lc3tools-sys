@@ -85,9 +85,8 @@ fn c_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
     let test = |a: u16, b: u16| {
         print!("{:5} x {:5}: ", a, b);
         let prog: AssembledProgram = prog_gen(a, b);
-        let expected = a
-            .checked_mul(b)
-            .expect("multiplication does not overflow");
+        let expected =
+            a.checked_mul(b).expect("multiplication does not overflow");
 
         let (mut addrs, mut words) = (Vec::new(), Vec::new());
         for (addr, word) in &prog {
@@ -150,9 +149,8 @@ fn cpp_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
         });
 
         let prog: AssembledProgram = prog_gen(a, b);
-        let expected = a
-            .checked_mul(b)
-            .expect("multiplication does not overflow");
+        let expected =
+            a.checked_mul(b).expect("multiplication does not overflow");
 
         unsafe {
             sim.reinitialize();
