@@ -206,18 +206,19 @@ jobs:
       - name: Run the example with LTO (in release mode)
         # Not brave enough to try LTO on windows (also, don't want to deal with
         # cmd's env vars)
-        if: matrix.os != 'windows-latest'
+        #
+        # Nightly Rust's LLVM doesn't play nice with lld-9 which is what the CI machines
+        # seem to have:
+        #   » ld.lld-9: error: Invalid summary version 8. Version should be in the range [1-7].
+        if: matrix.os != 'windows-latest' && matrix.rust != 'nightly'
         run: |
           clang --version || :
           c++ --version || :
-          lld --version || :
-          ld.lld --version || :
-          lld-9 --version || :
-          ld.lld-9 --version || :
 
-          # Note that the lld version is hardcoded here; this will likely need to be
-          # bumped down the road..
-          export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld-9"
+          export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld"
+
+          # No lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
+          lld --version || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=ld64"
 
           cargo run \
             --target-dir not-cached \
