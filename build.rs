@@ -123,6 +123,8 @@ where
         .generate_comments(true)
         .rustfmt_bindings(false) // We'll run this ourselves after processing.
 
+        .blacklist_item("std::*")
+
         .blacklist_item("std::value")
         .blacklist_item("__gnu_cxx::__max")
         .blacklist_item("__gnu_cxx::__min")
