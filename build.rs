@@ -500,7 +500,9 @@ fn main() -> Result<()> {
     // `cc` also handles `fPIC`
 
     if cfg!(windows) {
-        build.flag("/EHsc");
+        build
+            .flag("/EHsc")
+            .flag("/std:c++latest");
     }
 
     if cfg!(feature = "lto") {

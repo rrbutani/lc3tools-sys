@@ -1,7 +1,11 @@
 #include "shims.h"
 #include <iostream>
 
+#if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32))
 #define UNUSED __attribute((unused))
+#else
+#define UNUSED [[maybe_unused]]
+#endif
 
 // If we were okay with being C++17+:
 // #define UNUSED [[maybe_unused]]
