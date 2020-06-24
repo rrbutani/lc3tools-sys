@@ -12,13 +12,6 @@ extern "C" void *load_program(
     uint16_t const addresses[len],
     uint16_t const words[len]
 ) {
-    // lc3::ConsolePrinter printer;
-    // lc3::ConsoleInputter inputter;
-    // lc3::sim simulator(printer, inputter, true, args.print_level, false);
-
-    // auto printer = lc3::shims::noOpPrintShim();
-    // auto inputter = lc3::shims::noOpInputShim();
-
     auto printer = new lc3::shims::PrinterShim(lc3::shims::noOpPrintShim());
     auto inputter = new lc3::shims::InputterShim(lc3::shims::noOpInputShim());
 
@@ -50,11 +43,9 @@ extern "C" State run_program(
     uint16_t const pc
 ) {
     auto sim = static_cast<lc3::sim*>(sim_ptr);
-
     sim->setPC(pc);
 
     auto success = sim->runUntilHalt();
-    // auto success = sim->run();
 
     return State {
         .regs = {
@@ -77,7 +68,7 @@ extern "C" State run_program(
 
 extern "C" void free_sim(void *sim_ptr) {
     auto sim = static_cast<lc3::sim*>(sim_ptr);
-    // delete sim->inputter; // TODO: inputter
-    // delete sim->inputter; // TODO: printer
+    // delete sim->inputter; // TODO: inputter!
+    // delete sim->inputter; // TODO: printer!
     delete sim;
 }

@@ -457,7 +457,8 @@ fn main() -> Result<()> {
         // Next, the bindings for the frontend and then for the grader + the
         // frontend (the grader requires the frontend).
         let frontend = make_bindings(&[BACKEND, EXTRAS, FRONTEND]).unwrap();
-        let grader = make_bindings(&[BACKEND, EXTRAS, FRONTEND, GRADER]).unwrap();
+        let grader =
+            make_bindings(&[BACKEND, EXTRAS, FRONTEND, GRADER]).unwrap();
 
         // For each of the above configurations, get the set of elements:
         let mut backend_elements = elements(&backend);
@@ -547,9 +548,7 @@ fn main() -> Result<()> {
     }
 
     // Includes:
-    build
-        .include(BACKEND)
-        .include(EXTRAS);
+    build.include(BACKEND).include(EXTRAS);
     if cfg!(feature = "grader") {
         build.include(GRADER);
     }
