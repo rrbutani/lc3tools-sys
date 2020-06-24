@@ -1112,6 +1112,5784 @@ pub mod root {
     pub const _GLIBCXX_ATOMIC: u32 = 1;
     pub const GLOBAL_RES_PATH: &'static [u8; 10usize] = b"@ResPath@\0";
     pub const GLOBAL_TEST_PATH: &'static [u8; 11usize] = b"@TestPath@\0";
+    pub mod lc3 {
+        #[allow(unused_imports)]
+        use self::super::super::root;
+        pub mod utils {
+            #[allow(unused_imports)]
+            use self::super::super::super::root;
+            #[repr(C)]
+            pub struct IInputter__bindgen_vtable(::std::os::raw::c_void);
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct IInputter {
+                pub vtable_: *const IInputter__bindgen_vtable,
+            }
+            #[test]
+            fn bindgen_test_layout_IInputter() {
+                assert_eq!(
+                    ::std::mem::size_of::<IInputter>(),
+                    8usize,
+                    concat!("Size of: ", stringify!(IInputter))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<IInputter>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(IInputter))
+                );
+            }
+            impl Default for IInputter {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct NullInputter {
+                pub _base: root::lc3::utils::IInputter,
+            }
+            #[test]
+            fn bindgen_test_layout_NullInputter() {
+                assert_eq!(
+                    ::std::mem::size_of::<NullInputter>(),
+                    8usize,
+                    concat!("Size of: ", stringify!(NullInputter))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<NullInputter>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(NullInputter))
+                );
+            }
+            impl Default for NullInputter {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            pub const PrintColor_RED: root::lc3::utils::PrintColor = 0;
+            pub const PrintColor_YELLOW: root::lc3::utils::PrintColor = 1;
+            pub const PrintColor_GREEN: root::lc3::utils::PrintColor = 2;
+            pub const PrintColor_MAGENTA: root::lc3::utils::PrintColor = 3;
+            pub const PrintColor_BLUE: root::lc3::utils::PrintColor = 4;
+            pub const PrintColor_GRAY: root::lc3::utils::PrintColor = 5;
+            pub const PrintColor_BOLD: root::lc3::utils::PrintColor = 6;
+            pub const PrintColor_RESET: root::lc3::utils::PrintColor = 7;
+            pub type PrintColor = i32;
+            pub const PrintType_P_NONE: root::lc3::utils::PrintType = 0;
+            pub const PrintType_P_SIM_OUTPUT: root::lc3::utils::PrintType = 1;
+            pub const PrintType_P_FATAL_ERROR: root::lc3::utils::PrintType = 2;
+            pub const PrintType_P_ERROR: root::lc3::utils::PrintType = 3;
+            pub const PrintType_P_WARNING: root::lc3::utils::PrintType = 4;
+            pub const PrintType_P_NOTE: root::lc3::utils::PrintType = 5;
+            pub const PrintType_P_INFO: root::lc3::utils::PrintType = 6;
+            pub const PrintType_P_DEBUG: root::lc3::utils::PrintType = 7;
+            pub const PrintType_P_EXTRA: root::lc3::utils::PrintType = 8;
+            pub const PrintType_P_SPAM: root::lc3::utils::PrintType = 9;
+            pub type PrintType = i32;
+            #[repr(C)]
+            pub struct IPrinter__bindgen_vtable(::std::os::raw::c_void);
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct IPrinter {
+                pub vtable_: *const IPrinter__bindgen_vtable,
+            }
+            #[test]
+            fn bindgen_test_layout_IPrinter() {
+                assert_eq!(
+                    ::std::mem::size_of::<IPrinter>(),
+                    8usize,
+                    concat!("Size of: ", stringify!(IPrinter))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<IPrinter>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(IPrinter))
+                );
+            }
+            impl Default for IPrinter {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils14getMagicHeaderB5cxx11Ev"]
+                pub fn getMagicHeader() -> root::std::string;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils16getVersionStringB5cxx11Ev"]
+                pub fn getVersionString() -> root::std::string;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils9udecToBinB5cxx11Ejj"]
+                pub fn udecToBin(
+                    value: u32,
+                    num_bits: u32,
+                ) -> root::std::string;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils8sextTo32Ejj"]
+                pub fn sextTo32(value: u32, num_bits: u32) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils6getBitEjj"]
+                pub fn getBit(value: u32, pos: u32) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils7getBitsEjjj"]
+                pub fn getBits(value: u32, end: u32, start: u32) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils12computePSRCCEjj"]
+                pub fn computePSRCC(value: u32, psr: u32) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils22computeBasePlusSOffsetEjjj"]
+                pub fn computeBasePlusSOffset(
+                    base: u32,
+                    signed_off: u32,
+                    width: u32,
+                ) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35utils7toLowerERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+                pub fn toLower(
+                    str: *const root::std::string,
+                ) -> root::std::string;
+            }
+            #[repr(C)]
+            pub struct exception {
+                pub _base: root::std::runtime_error,
+            }
+            #[test]
+            fn bindgen_test_layout_exception() {
+                assert_eq!(
+                    ::std::mem::size_of::<exception>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(exception))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<exception>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(exception))
+                );
+            }
+            impl Default for exception {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct fatal_exception {
+                pub _base: root::std::runtime_error,
+            }
+            #[test]
+            fn bindgen_test_layout_fatal_exception() {
+                assert_eq!(
+                    ::std::mem::size_of::<fatal_exception>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(fatal_exception))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<fatal_exception>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(fatal_exception))
+                );
+            }
+            impl Default for fatal_exception {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug, Copy, Clone)]
+            pub struct Logger {
+                pub printer: *mut root::lc3::utils::IPrinter,
+                pub print_level: u32,
+            }
+            #[test]
+            fn bindgen_test_layout_Logger() {
+                assert_eq!(
+                    ::std::mem::size_of::<Logger>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(Logger))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<Logger>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(Logger))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Logger>())).printer as *const _
+                            as usize
+                    },
+                    0usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Logger),
+                        "::",
+                        stringify!(printer)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Logger>())).print_level
+                            as *const _ as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Logger),
+                        "::",
+                        stringify!(print_level)
+                    )
+                );
+            }
+            impl Default for Logger {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct AssemblerLogger {
+                pub _base: root::lc3::utils::Logger,
+                pub filename: root::std::string,
+            }
+            #[test]
+            fn bindgen_test_layout_AssemblerLogger() {
+                assert_eq!(
+                    ::std::mem::size_of::<AssemblerLogger>(),
+                    48usize,
+                    concat!("Size of: ", stringify!(AssemblerLogger))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<AssemblerLogger>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(AssemblerLogger))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<AssemblerLogger>())).filename
+                            as *const _ as usize
+                    },
+                    16usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(AssemblerLogger),
+                        "::",
+                        stringify!(filename)
+                    )
+                );
+            }
+            impl Default for AssemblerLogger {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+        }
+        pub mod core {
+            #[allow(unused_imports)]
+            use self::super::super::super::root;
+            pub type PIOperand = root::std::shared_ptr;
+            pub type PIInstruction = root::std::shared_ptr;
+            pub type PIEvent = root::std::shared_ptr;
+            pub type SymbolTable = root::std::map;
+            pub mod asmbl {
+                #[allow(unused_imports)]
+                use self::super::super::super::super::root;
+                #[repr(C)]
+                pub struct Token {
+                    pub type_: root::lc3::core::asmbl::Token_Type,
+                    pub str: root::std::string,
+                    pub num: i32,
+                    pub row: u32,
+                    pub col: u32,
+                    pub len: u32,
+                    pub line: root::std::string,
+                }
+                pub const Token_Type_NUM: root::lc3::core::asmbl::Token_Type =
+                    0;
+                pub const Token_Type_STRING:
+                    root::lc3::core::asmbl::Token_Type = 1;
+                pub const Token_Type_EOL: root::lc3::core::asmbl::Token_Type =
+                    2;
+                pub const Token_Type_INVALID:
+                    root::lc3::core::asmbl::Token_Type = 3;
+                pub type Token_Type = i32;
+                #[test]
+                fn bindgen_test_layout_Token() {
+                    assert_eq!(
+                        ::std::mem::size_of::<Token>(),
+                        88usize,
+                        concat!("Size of: ", stringify!(Token))
+                    );
+                    assert_eq!(
+                        ::std::mem::align_of::<Token>(),
+                        8usize,
+                        concat!("Alignment of ", stringify!(Token))
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Token>())).type_ as *const _
+                                as usize
+                        },
+                        0usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Token),
+                            "::",
+                            stringify!(type_)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Token>())).str as *const _
+                                as usize
+                        },
+                        8usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Token),
+                            "::",
+                            stringify!(str)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Token>())).num as *const _
+                                as usize
+                        },
+                        40usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Token),
+                            "::",
+                            stringify!(num)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Token>())).row as *const _
+                                as usize
+                        },
+                        44usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Token),
+                            "::",
+                            stringify!(row)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Token>())).col as *const _
+                                as usize
+                        },
+                        48usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Token),
+                            "::",
+                            stringify!(col)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Token>())).len as *const _
+                                as usize
+                        },
+                        52usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Token),
+                            "::",
+                            stringify!(len)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Token>())).line as *const _
+                                as usize
+                        },
+                        56usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Token),
+                            "::",
+                            stringify!(line)
+                        )
+                    );
+                }
+                impl Default for Token {
+                    fn default() -> Self {
+                        unsafe { ::std::mem::zeroed() }
+                    }
+                }
+                #[repr(C)]
+                pub struct StatementPiece {
+                    pub type_: root::lc3::core::asmbl::StatementPiece_Type,
+                    pub str: root::std::string,
+                    pub num: u32,
+                    pub col: u32,
+                    pub len: u32,
+                }
+                pub const StatementPiece_Type_INST:
+                    root::lc3::core::asmbl::StatementPiece_Type = 0;
+                pub const StatementPiece_Type_PSEUDO:
+                    root::lc3::core::asmbl::StatementPiece_Type = 1;
+                pub const StatementPiece_Type_LABEL:
+                    root::lc3::core::asmbl::StatementPiece_Type = 2;
+                pub const StatementPiece_Type_REG:
+                    root::lc3::core::asmbl::StatementPiece_Type = 3;
+                pub const StatementPiece_Type_STRING:
+                    root::lc3::core::asmbl::StatementPiece_Type = 4;
+                pub const StatementPiece_Type_NUM:
+                    root::lc3::core::asmbl::StatementPiece_Type = 5;
+                pub const StatementPiece_Type_INVALID:
+                    root::lc3::core::asmbl::StatementPiece_Type = 6;
+                pub type StatementPiece_Type = i32;
+                #[test]
+                fn bindgen_test_layout_StatementPiece() {
+                    assert_eq!(
+                        ::std::mem::size_of::<StatementPiece>(),
+                        56usize,
+                        concat!("Size of: ", stringify!(StatementPiece))
+                    );
+                    assert_eq!(
+                        ::std::mem::align_of::<StatementPiece>(),
+                        8usize,
+                        concat!("Alignment of ", stringify!(StatementPiece))
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<StatementPiece>())).type_
+                                as *const _ as usize
+                        },
+                        0usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(StatementPiece),
+                            "::",
+                            stringify!(type_)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<StatementPiece>())).str
+                                as *const _ as usize
+                        },
+                        8usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(StatementPiece),
+                            "::",
+                            stringify!(str)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<StatementPiece>())).num
+                                as *const _ as usize
+                        },
+                        40usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(StatementPiece),
+                            "::",
+                            stringify!(num)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<StatementPiece>())).col
+                                as *const _ as usize
+                        },
+                        44usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(StatementPiece),
+                            "::",
+                            stringify!(col)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<StatementPiece>())).len
+                                as *const _ as usize
+                        },
+                        48usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(StatementPiece),
+                            "::",
+                            stringify!(len)
+                        )
+                    );
+                }
+                impl Default for StatementPiece {
+                    fn default() -> Self {
+                        unsafe { ::std::mem::zeroed() }
+                    }
+                }
+                #[repr(C)]
+                pub struct Statement {
+                    pub label: root::lc3::optional<
+                        root::lc3::core::asmbl::StatementPiece,
+                    >,
+                    pub base: root::lc3::optional<
+                        root::lc3::core::asmbl::StatementPiece,
+                    >,
+                    pub operands: root::std::vector,
+                    pub pc: u32,
+                    pub line: root::std::string,
+                    pub row: u32,
+                    pub valid: bool,
+                }
+                #[test]
+                fn bindgen_test_layout_Statement() {
+                    assert_eq!(
+                        ::std::mem::size_of::<Statement>(),
+                        200usize,
+                        concat!("Size of: ", stringify!(Statement))
+                    );
+                    assert_eq!(
+                        ::std::mem::align_of::<Statement>(),
+                        8usize,
+                        concat!("Alignment of ", stringify!(Statement))
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Statement>())).label
+                                as *const _ as usize
+                        },
+                        0usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Statement),
+                            "::",
+                            stringify!(label)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Statement>())).base
+                                as *const _ as usize
+                        },
+                        64usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Statement),
+                            "::",
+                            stringify!(base)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Statement>())).operands
+                                as *const _ as usize
+                        },
+                        128usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Statement),
+                            "::",
+                            stringify!(operands)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Statement>())).pc as *const _
+                                as usize
+                        },
+                        152usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Statement),
+                            "::",
+                            stringify!(pc)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Statement>())).line
+                                as *const _ as usize
+                        },
+                        160usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Statement),
+                            "::",
+                            stringify!(line)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Statement>())).row
+                                as *const _ as usize
+                        },
+                        192usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Statement),
+                            "::",
+                            stringify!(row)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Statement>())).valid
+                                as *const _ as usize
+                        },
+                        196usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Statement),
+                            "::",
+                            stringify!(valid)
+                        )
+                    );
+                }
+                impl Default for Statement {
+                    fn default() -> Self {
+                        unsafe { ::std::mem::zeroed() }
+                    }
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZN3lc34core5asmbl6getNumERKNS1_9StatementERKNS1_14StatementPieceEjbRNS_5utils15AssemblerLoggerEb"]
+                    pub fn getNum(
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        piece: *const root::lc3::core::asmbl::StatementPiece,
+                        width: u32,
+                        sext: bool,
+                        logger: *mut root::lc3::utils::AssemblerLogger,
+                        log_enable: bool,
+                    ) -> root::lc3::optional<u32>;
+                }
+                #[repr(C)]
+                pub struct InstructionEncoder {
+                    pub _base: root::lc3::core::InstructionHandler,
+                    pub logger: *mut root::lc3::utils::AssemblerLogger,
+                    pub enable_liberal_asm: bool,
+                    pub instructions_by_name: root::std::map,
+                }
+                #[test]
+                fn bindgen_test_layout_InstructionEncoder() {
+                    assert_eq!(
+                        ::std::mem::size_of::<InstructionEncoder>(),
+                        144usize,
+                        concat!("Size of: ", stringify!(InstructionEncoder))
+                    );
+                    assert_eq!(
+                        ::std::mem::align_of::<InstructionEncoder>(),
+                        8usize,
+                        concat!(
+                            "Alignment of ",
+                            stringify!(InstructionEncoder)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<InstructionEncoder>()))
+                                .logger as *const _
+                                as usize
+                        },
+                        80usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(InstructionEncoder),
+                            "::",
+                            stringify!(logger)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<InstructionEncoder>()))
+                                .enable_liberal_asm
+                                as *const _ as usize
+                        },
+                        88usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(InstructionEncoder),
+                            "::",
+                            stringify!(enable_liberal_asm)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<InstructionEncoder>()))
+                                .instructions_by_name
+                                as *const _ as usize
+                        },
+                        96usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(InstructionEncoder),
+                            "::",
+                            stringify!(instructions_by_name)
+                        )
+                    );
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder14isStringPseudoERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+                    pub fn InstructionEncoder_isStringPseudo(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        search: *const root::std::string,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder16isStringValidRegERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+                    pub fn InstructionEncoder_isStringValidReg(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        search: *const root::std::string,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder8isPseudoERKNS1_9StatementE"]
+                    pub fn InstructionEncoder_isPseudo(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder6isInstERKNS1_9StatementE"]
+                    pub fn InstructionEncoder_isInst(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder17isValidPseudoOrigERKNS1_9StatementEb"]
+                    pub fn InstructionEncoder_isValidPseudoOrig(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder17isValidPseudoFillERKNS1_9StatementEb"]
+                    pub fn InstructionEncoder_isValidPseudoFill(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder17isValidPseudoFillERKNS1_9StatementERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISC_ESaISt4pairIKSC_jEEEb"]
+                    pub fn InstructionEncoder_isValidPseudoFill1(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        symbols: *const root::lc3::core::SymbolTable,
+                        log_enable: bool,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder18isValidPseudoBlockERKNS1_9StatementEb"]
+                    pub fn InstructionEncoder_isValidPseudoBlock(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder19isValidPseudoStringERKNS1_9StatementEb"]
+                    pub fn InstructionEncoder_isValidPseudoString(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder16isValidPseudoEndERKNS1_9StatementEb"]
+                    pub fn InstructionEncoder_isValidPseudoEnd(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder35getDistanceToNearestInstructionNameERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+                    pub fn InstructionEncoder_getDistanceToNearestInstructionName(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        search: *const root::std::string,
+                    ) -> u32;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder14validatePseudoERKNS1_9StatementERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISC_ESaISt4pairIKSC_jEEE"]
+                    pub fn InstructionEncoder_validatePseudo(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        symbols: *const root::lc3::core::SymbolTable,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder19validateInstructionERKNS1_9StatementE"]
+                    pub fn InstructionEncoder_validateInstruction(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> root::lc3::optional<root::lc3::core::PIInstruction>;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder13getPseudoOrigERKNS1_9StatementE"]
+                    pub fn InstructionEncoder_getPseudoOrig(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> u32;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder13getPseudoFillERKNS1_9StatementERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISC_ESaISt4pairIKSC_jEEE"]
+                    pub fn InstructionEncoder_getPseudoFill(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        symbols: *const root::lc3::core::SymbolTable,
+                    ) -> u32;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder18getPseudoBlockSizeERKNS1_9StatementE"]
+                    pub fn InstructionEncoder_getPseudoBlockSize(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> u32;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder19getPseudoStringSizeERKNS1_9StatementE"]
+                    pub fn InstructionEncoder_getPseudoStringSize(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> u32;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder15getPseudoStringB5cxx11ERKNS1_9StatementE"]
+                    pub fn InstructionEncoder_getPseudoString(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> root::std::string;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder17encodeInstructionERKNS1_9StatementERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISC_ESaISt4pairIKSC_jEEESt10shared_ptrINS0_12IInstructionEE"]
+                    pub fn InstructionEncoder_encodeInstruction(
+                        this: *const root::lc3::core::asmbl::InstructionEncoder,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        symbols: *const root::lc3::core::SymbolTable,
+                        pattern: root::lc3::core::PIInstruction,
+                    ) -> root::lc3::optional<u32>;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZN3lc34core5asmbl18InstructionEncoderC1ERNS_5utils15AssemblerLoggerEb"]
+                    pub fn InstructionEncoder_InstructionEncoder(
+                        this: *mut root::lc3::core::asmbl::InstructionEncoder,
+                        logger: *mut root::lc3::utils::AssemblerLogger,
+                        enable_liberal_assembly: bool,
+                    );
+                }
+                impl Default for InstructionEncoder {
+                    fn default() -> Self {
+                        unsafe { ::std::mem::zeroed() }
+                    }
+                }
+                impl InstructionEncoder {
+                    #[inline]
+                    pub unsafe fn isStringPseudo(
+                        &self,
+                        search: *const root::std::string,
+                    ) -> bool {
+                        InstructionEncoder_isStringPseudo(self, search)
+                    }
+                    #[inline]
+                    pub unsafe fn isStringValidReg(
+                        &self,
+                        search: *const root::std::string,
+                    ) -> bool {
+                        InstructionEncoder_isStringValidReg(self, search)
+                    }
+                    #[inline]
+                    pub unsafe fn isPseudo(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> bool {
+                        InstructionEncoder_isPseudo(self, statement)
+                    }
+                    #[inline]
+                    pub unsafe fn isInst(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> bool {
+                        InstructionEncoder_isInst(self, statement)
+                    }
+                    #[inline]
+                    pub unsafe fn isValidPseudoOrig(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool {
+                        InstructionEncoder_isValidPseudoOrig(
+                            self, statement, log_enable,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn isValidPseudoFill(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool {
+                        InstructionEncoder_isValidPseudoFill(
+                            self, statement, log_enable,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn isValidPseudoFill1(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        symbols: *const root::lc3::core::SymbolTable,
+                        log_enable: bool,
+                    ) -> bool {
+                        InstructionEncoder_isValidPseudoFill1(
+                            self, statement, symbols, log_enable,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn isValidPseudoBlock(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool {
+                        InstructionEncoder_isValidPseudoBlock(
+                            self, statement, log_enable,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn isValidPseudoString(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool {
+                        InstructionEncoder_isValidPseudoString(
+                            self, statement, log_enable,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn isValidPseudoEnd(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        log_enable: bool,
+                    ) -> bool {
+                        InstructionEncoder_isValidPseudoEnd(
+                            self, statement, log_enable,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn getDistanceToNearestInstructionName(
+                        &self,
+                        search: *const root::std::string,
+                    ) -> u32 {
+                        InstructionEncoder_getDistanceToNearestInstructionName(
+                            self, search,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn validatePseudo(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        symbols: *const root::lc3::core::SymbolTable,
+                    ) -> bool {
+                        InstructionEncoder_validatePseudo(
+                            self, statement, symbols,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn validateInstruction(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> root::lc3::optional<root::lc3::core::PIInstruction>
+                    {
+                        InstructionEncoder_validateInstruction(self, statement)
+                    }
+                    #[inline]
+                    pub unsafe fn getPseudoOrig(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> u32 {
+                        InstructionEncoder_getPseudoOrig(self, statement)
+                    }
+                    #[inline]
+                    pub unsafe fn getPseudoFill(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        symbols: *const root::lc3::core::SymbolTable,
+                    ) -> u32 {
+                        InstructionEncoder_getPseudoFill(
+                            self, statement, symbols,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn getPseudoBlockSize(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> u32 {
+                        InstructionEncoder_getPseudoBlockSize(self, statement)
+                    }
+                    #[inline]
+                    pub unsafe fn getPseudoStringSize(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> u32 {
+                        InstructionEncoder_getPseudoStringSize(self, statement)
+                    }
+                    #[inline]
+                    pub unsafe fn getPseudoString(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                    ) -> root::std::string {
+                        InstructionEncoder_getPseudoString(self, statement)
+                    }
+                    #[inline]
+                    pub unsafe fn encodeInstruction(
+                        &self,
+                        statement: *const root::lc3::core::asmbl::Statement,
+                        symbols: *const root::lc3::core::SymbolTable,
+                        pattern: root::lc3::core::PIInstruction,
+                    ) -> root::lc3::optional<u32> {
+                        InstructionEncoder_encodeInstruction(
+                            self, statement, symbols, pattern,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn new(
+                        logger: *mut root::lc3::utils::AssemblerLogger,
+                        enable_liberal_assembly: bool,
+                    ) -> Self {
+                        let mut __bindgen_tmp =
+                            ::std::mem::MaybeUninit::uninit();
+                        InstructionEncoder_InstructionEncoder(
+                            __bindgen_tmp.as_mut_ptr(),
+                            logger,
+                            enable_liberal_assembly,
+                        );
+                        __bindgen_tmp.assume_init()
+                    }
+                }
+                #[repr(C)]
+                pub struct Tokenizer {
+                    pub buffer: *mut root::std::istream,
+                    pub get_new_line: bool,
+                    pub return_new_line: bool,
+                    pub line: root::std::string,
+                    pub row: u32,
+                    pub col: u32,
+                    pub done: bool,
+                    pub enable_liberal_asm: bool,
+                }
+                #[test]
+                fn bindgen_test_layout_Tokenizer() {
+                    assert_eq!(
+                        ::std::mem::size_of::<Tokenizer>(),
+                        64usize,
+                        concat!("Size of: ", stringify!(Tokenizer))
+                    );
+                    assert_eq!(
+                        ::std::mem::align_of::<Tokenizer>(),
+                        8usize,
+                        concat!("Alignment of ", stringify!(Tokenizer))
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Tokenizer>())).buffer
+                                as *const _ as usize
+                        },
+                        0usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Tokenizer),
+                            "::",
+                            stringify!(buffer)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Tokenizer>())).get_new_line
+                                as *const _ as usize
+                        },
+                        8usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Tokenizer),
+                            "::",
+                            stringify!(get_new_line)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Tokenizer>()))
+                                .return_new_line
+                                as *const _ as usize
+                        },
+                        9usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Tokenizer),
+                            "::",
+                            stringify!(return_new_line)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Tokenizer>())).line
+                                as *const _ as usize
+                        },
+                        16usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Tokenizer),
+                            "::",
+                            stringify!(line)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Tokenizer>())).row
+                                as *const _ as usize
+                        },
+                        48usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Tokenizer),
+                            "::",
+                            stringify!(row)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Tokenizer>())).col
+                                as *const _ as usize
+                        },
+                        52usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Tokenizer),
+                            "::",
+                            stringify!(col)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Tokenizer>())).done
+                                as *const _ as usize
+                        },
+                        56usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Tokenizer),
+                            "::",
+                            stringify!(done)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<Tokenizer>()))
+                                .enable_liberal_asm
+                                as *const _ as usize
+                        },
+                        57usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(Tokenizer),
+                            "::",
+                            stringify!(enable_liberal_asm)
+                        )
+                    );
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core5asmbl9Tokenizer6isDoneEv"]
+                    pub fn Tokenizer_isDone(
+                        this: *const root::lc3::core::asmbl::Tokenizer,
+                    ) -> bool;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZN3lc34core5asmbl9TokenizerC1ERSib"]
+                    pub fn Tokenizer_Tokenizer(
+                        this: *mut root::lc3::core::asmbl::Tokenizer,
+                        buffer: *mut root::std::istream,
+                        enable_liberal_asm: bool,
+                    );
+                }
+                impl Default for Tokenizer {
+                    fn default() -> Self {
+                        unsafe { ::std::mem::zeroed() }
+                    }
+                }
+                impl Tokenizer {
+                    #[inline]
+                    pub unsafe fn isDone(&self) -> bool {
+                        Tokenizer_isDone(self)
+                    }
+                    #[inline]
+                    pub unsafe fn new(
+                        buffer: *mut root::std::istream,
+                        enable_liberal_asm: bool,
+                    ) -> Self {
+                        let mut __bindgen_tmp =
+                            ::std::mem::MaybeUninit::uninit();
+                        Tokenizer_Tokenizer(
+                            __bindgen_tmp.as_mut_ptr(),
+                            buffer,
+                            enable_liberal_asm,
+                        );
+                        __bindgen_tmp.assume_init()
+                    }
+                }
+            }
+            #[repr(C)]
+            pub struct MemEntry {
+                pub value: u16,
+                pub orig: bool,
+                pub line: root::std::string,
+            }
+            #[test]
+            fn bindgen_test_layout_MemEntry() {
+                assert_eq!(
+                    ::std::mem::size_of::<MemEntry>(),
+                    40usize,
+                    concat!("Size of: ", stringify!(MemEntry))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<MemEntry>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(MemEntry))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MemEntry>())).value as *const _
+                            as usize
+                    },
+                    0usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MemEntry),
+                        "::",
+                        stringify!(value)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MemEntry>())).orig as *const _
+                            as usize
+                    },
+                    2usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MemEntry),
+                        "::",
+                        stringify!(orig)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MemEntry>())).line as *const _
+                            as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MemEntry),
+                        "::",
+                        stringify!(line)
+                    )
+                );
+            }
+            impl Default for MemEntry {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            pub type callback_func_t = [u64; 4usize];
+            #[repr(C)]
+            pub struct MachineState {
+                pub mem: root::std::vector,
+                pub regs: [u32; 8usize],
+                pub pc: u32,
+                pub sys_call_types: root::std::stack<root::std::deque>,
+                pub logger: *mut root::lc3::utils::Logger,
+                pub pre_instruction_callback_v: bool,
+                pub post_instruction_callback_v: bool,
+                pub interrupt_enter_callback_v: bool,
+                pub interrupt_exit_callback_v: bool,
+                pub exception_enter_callback_v: bool,
+                pub exception_exit_callback_v: bool,
+                pub sub_enter_callback_v: bool,
+                pub sub_exit_callback_v: bool,
+                pub wait_for_input_callback_v: bool,
+                pub pre_instruction_callback: root::lc3::core::callback_func_t,
+                pub post_instruction_callback: root::lc3::core::callback_func_t,
+                pub interrupt_enter_callback: root::lc3::core::callback_func_t,
+                pub interrupt_exit_callback: root::lc3::core::callback_func_t,
+                pub exception_enter_callback: root::lc3::core::callback_func_t,
+                pub exception_exit_callback: root::lc3::core::callback_func_t,
+                pub sub_enter_callback: root::lc3::core::callback_func_t,
+                pub sub_exit_callback: root::lc3::core::callback_func_t,
+                pub wait_for_input_callback: root::lc3::core::callback_func_t,
+                pub simulator: *mut root::lc3::sim,
+                pub ignore_privilege: bool,
+            }
+            pub const MachineState_SysCallType_TRAP:
+                root::lc3::core::MachineState_SysCallType = 0;
+            pub const MachineState_SysCallType_INT:
+                root::lc3::core::MachineState_SysCallType = 1;
+            pub const MachineState_SysCallType_EX:
+                root::lc3::core::MachineState_SysCallType = 2;
+            pub type MachineState_SysCallType = i32;
+            pub const MachineState_SPType_SSP:
+                root::lc3::core::MachineState_SPType = 0;
+            pub const MachineState_SPType_USP:
+                root::lc3::core::MachineState_SPType = 1;
+            pub type MachineState_SPType = i32;
+            #[test]
+            fn bindgen_test_layout_MachineState() {
+                assert_eq!(
+                    ::std::mem::size_of::<MachineState>(),
+                    472usize,
+                    concat!("Size of: ", stringify!(MachineState))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<MachineState>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(MachineState))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>())).mem as *const _
+                            as usize
+                    },
+                    0usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(mem)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>())).regs
+                            as *const _ as usize
+                    },
+                    24usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(regs)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>())).pc as *const _
+                            as usize
+                    },
+                    56usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(pc)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>())).sys_call_types
+                            as *const _ as usize
+                    },
+                    64usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(sys_call_types)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>())).logger
+                            as *const _ as usize
+                    },
+                    144usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(logger)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .pre_instruction_callback_v
+                            as *const _ as usize
+                    },
+                    152usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(pre_instruction_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .post_instruction_callback_v
+                            as *const _ as usize
+                    },
+                    153usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(post_instruction_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .interrupt_enter_callback_v
+                            as *const _ as usize
+                    },
+                    154usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(interrupt_enter_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .interrupt_exit_callback_v
+                            as *const _ as usize
+                    },
+                    155usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(interrupt_exit_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .exception_enter_callback_v
+                            as *const _ as usize
+                    },
+                    156usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(exception_enter_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .exception_exit_callback_v
+                            as *const _ as usize
+                    },
+                    157usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(exception_exit_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .sub_enter_callback_v
+                            as *const _ as usize
+                    },
+                    158usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(sub_enter_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .sub_exit_callback_v
+                            as *const _ as usize
+                    },
+                    159usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(sub_exit_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .wait_for_input_callback_v
+                            as *const _ as usize
+                    },
+                    160usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(wait_for_input_callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .pre_instruction_callback
+                            as *const _ as usize
+                    },
+                    168usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(pre_instruction_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .post_instruction_callback
+                            as *const _ as usize
+                    },
+                    200usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(post_instruction_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .interrupt_enter_callback
+                            as *const _ as usize
+                    },
+                    232usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(interrupt_enter_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .interrupt_exit_callback
+                            as *const _ as usize
+                    },
+                    264usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(interrupt_exit_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .exception_enter_callback
+                            as *const _ as usize
+                    },
+                    296usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(exception_enter_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .exception_exit_callback
+                            as *const _ as usize
+                    },
+                    328usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(exception_exit_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .sub_enter_callback
+                            as *const _ as usize
+                    },
+                    360usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(sub_enter_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .sub_exit_callback
+                            as *const _ as usize
+                    },
+                    392usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(sub_exit_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .wait_for_input_callback
+                            as *const _ as usize
+                    },
+                    424usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(wait_for_input_callback)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>())).simulator
+                            as *const _ as usize
+                    },
+                    456usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(simulator)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MachineState>()))
+                            .ignore_privilege
+                            as *const _ as usize
+                    },
+                    464usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MachineState),
+                        "::",
+                        stringify!(ignore_privilege)
+                    )
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core12MachineState12readMemEventEjRbRSt10shared_ptrINS0_6IEventEE"]
+                pub fn MachineState_readMemEvent(
+                    this: *const root::lc3::core::MachineState,
+                    addr: u32,
+                    change_mem: *mut bool,
+                    change: *mut root::std::shared_ptr,
+                ) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12MachineState11readMemSafeEj"]
+                pub fn MachineState_readMemSafe(
+                    this: *mut root::lc3::core::MachineState,
+                    addr: u32,
+                ) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core12MachineState10readMemRawEj"]
+                pub fn MachineState_readMemRaw(
+                    this: *const root::lc3::core::MachineState,
+                    addr: u32,
+                ) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12MachineState13writeMemEventEjtRbRSt10shared_ptrINS0_6IEventEE"]
+                pub fn MachineState_writeMemEvent(
+                    this: *mut root::lc3::core::MachineState,
+                    addr: u32,
+                    value: u16,
+                    change_mem: *mut bool,
+                    change: *mut root::std::shared_ptr,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12MachineState12writeMemSafeEjt"]
+                pub fn MachineState_writeMemSafe(
+                    this: *mut root::lc3::core::MachineState,
+                    addr: u32,
+                    value: u16,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12MachineState11writeMemRawEjt"]
+                pub fn MachineState_writeMemRaw(
+                    this: *mut root::lc3::core::MachineState,
+                    addr: u32,
+                    value: u16,
+                );
+            }
+            impl Default for MachineState {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            impl MachineState {
+                #[inline]
+                pub unsafe fn readMemEvent(
+                    &self,
+                    addr: u32,
+                    change_mem: *mut bool,
+                    change: *mut root::std::shared_ptr,
+                ) -> u32 {
+                    MachineState_readMemEvent(self, addr, change_mem, change)
+                }
+                #[inline]
+                pub unsafe fn readMemSafe(&mut self, addr: u32) -> u32 {
+                    MachineState_readMemSafe(self, addr)
+                }
+                #[inline]
+                pub unsafe fn readMemRaw(&self, addr: u32) -> u32 {
+                    MachineState_readMemRaw(self, addr)
+                }
+                #[inline]
+                pub unsafe fn writeMemEvent(
+                    &mut self,
+                    addr: u32,
+                    value: u16,
+                    change_mem: *mut bool,
+                    change: *mut root::std::shared_ptr,
+                ) {
+                    MachineState_writeMemEvent(
+                        self, addr, value, change_mem, change,
+                    )
+                }
+                #[inline]
+                pub unsafe fn writeMemSafe(&mut self, addr: u32, value: u16) {
+                    MachineState_writeMemSafe(self, addr, value)
+                }
+                #[inline]
+                pub unsafe fn writeMemRaw(&mut self, addr: u32, value: u16) {
+                    MachineState_writeMemRaw(self, addr, value)
+                }
+            }
+            pub const EventType_EVENT_REG: root::lc3::core::EventType = 0;
+            pub const EventType_EVENT_PSR: root::lc3::core::EventType = 1;
+            pub const EventType_EVENT_PC: root::lc3::core::EventType = 2;
+            pub const EventType_EVENT_MEM: root::lc3::core::EventType = 3;
+            pub const EventType_EVENT_SWAP_SP: root::lc3::core::EventType = 4;
+            pub const EventType_EVENT_CALLBACK: root::lc3::core::EventType = 5;
+            pub const EventType_PUSH_SYS_CALL_TYPE: root::lc3::core::EventType =
+                6;
+            pub const EventType_POP_SYS_CALL_TYPE: root::lc3::core::EventType =
+                7;
+            pub type EventType = i32;
+            #[repr(C)]
+            pub struct IEvent__bindgen_vtable(::std::os::raw::c_void);
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct IEvent {
+                pub vtable_: *const IEvent__bindgen_vtable,
+                pub type_: root::lc3::core::EventType,
+            }
+            #[test]
+            fn bindgen_test_layout_IEvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<IEvent>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(IEvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<IEvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(IEvent))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<IEvent>())).type_ as *const _
+                            as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(IEvent),
+                        "::",
+                        stringify!(type_)
+                    )
+                );
+            }
+            impl Default for IEvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct RegEvent {
+                pub _base: root::lc3::core::IEvent,
+                pub reg: u32,
+                pub value: u32,
+            }
+            #[test]
+            fn bindgen_test_layout_RegEvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<RegEvent>(),
+                    24usize,
+                    concat!("Size of: ", stringify!(RegEvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<RegEvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(RegEvent))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<RegEvent>())).reg as *const _
+                            as usize
+                    },
+                    12usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(RegEvent),
+                        "::",
+                        stringify!(reg)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<RegEvent>())).value as *const _
+                            as usize
+                    },
+                    16usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(RegEvent),
+                        "::",
+                        stringify!(value)
+                    )
+                );
+            }
+            impl Default for RegEvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct PSREvent {
+                pub _base: root::lc3::core::IEvent,
+                pub value: u32,
+            }
+            #[test]
+            fn bindgen_test_layout_PSREvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<PSREvent>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(PSREvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<PSREvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(PSREvent))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<PSREvent>())).value as *const _
+                            as usize
+                    },
+                    12usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(PSREvent),
+                        "::",
+                        stringify!(value)
+                    )
+                );
+            }
+            impl Default for PSREvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct PCEvent {
+                pub _base: root::lc3::core::IEvent,
+                pub value: u32,
+            }
+            #[test]
+            fn bindgen_test_layout_PCEvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<PCEvent>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(PCEvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<PCEvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(PCEvent))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<PCEvent>())).value as *const _
+                            as usize
+                    },
+                    12usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(PCEvent),
+                        "::",
+                        stringify!(value)
+                    )
+                );
+            }
+            impl Default for PCEvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct MemWriteEvent {
+                pub _base: root::lc3::core::IEvent,
+                pub addr: u32,
+                pub value: u32,
+            }
+            #[test]
+            fn bindgen_test_layout_MemWriteEvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<MemWriteEvent>(),
+                    24usize,
+                    concat!("Size of: ", stringify!(MemWriteEvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<MemWriteEvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(MemWriteEvent))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MemWriteEvent>())).addr
+                            as *const _ as usize
+                    },
+                    12usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MemWriteEvent),
+                        "::",
+                        stringify!(addr)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<MemWriteEvent>())).value
+                            as *const _ as usize
+                    },
+                    16usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(MemWriteEvent),
+                        "::",
+                        stringify!(value)
+                    )
+                );
+            }
+            impl Default for MemWriteEvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core13MemWriteEvent11updateStateERNS0_12MachineStateE"]
+                pub fn MemWriteEvent_updateState(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *mut root::lc3::core::MachineState,
+                );
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct SwapSPEvent {
+                pub _base: root::lc3::core::IEvent,
+            }
+            #[test]
+            fn bindgen_test_layout_SwapSPEvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<SwapSPEvent>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(SwapSPEvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<SwapSPEvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(SwapSPEvent))
+                );
+            }
+            impl Default for SwapSPEvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core11SwapSPEvent11updateStateERNS0_12MachineStateE"]
+                pub fn SwapSPEvent_updateState(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *mut root::lc3::core::MachineState,
+                );
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct CallbackEvent {
+                pub _base: root::lc3::core::IEvent,
+                pub callback_v: bool,
+                pub callback: root::lc3::core::callback_func_t,
+            }
+            #[test]
+            fn bindgen_test_layout_CallbackEvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<CallbackEvent>(),
+                    48usize,
+                    concat!("Size of: ", stringify!(CallbackEvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<CallbackEvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(CallbackEvent))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<CallbackEvent>())).callback_v
+                            as *const _ as usize
+                    },
+                    12usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(CallbackEvent),
+                        "::",
+                        stringify!(callback_v)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<CallbackEvent>())).callback
+                            as *const _ as usize
+                    },
+                    16usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(CallbackEvent),
+                        "::",
+                        stringify!(callback)
+                    )
+                );
+            }
+            impl Default for CallbackEvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct PushSysCallTypeEvent {
+                pub _base: root::lc3::core::IEvent,
+                pub call_type: root::lc3::core::MachineState_SysCallType,
+            }
+            #[test]
+            fn bindgen_test_layout_PushSysCallTypeEvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<PushSysCallTypeEvent>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(PushSysCallTypeEvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<PushSysCallTypeEvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(PushSysCallTypeEvent))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<PushSysCallTypeEvent>()))
+                            .call_type as *const _
+                            as usize
+                    },
+                    12usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(PushSysCallTypeEvent),
+                        "::",
+                        stringify!(call_type)
+                    )
+                );
+            }
+            impl Default for PushSysCallTypeEvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct PopSysCallTypeEvent {
+                pub _base: root::lc3::core::IEvent,
+            }
+            #[test]
+            fn bindgen_test_layout_PopSysCallTypeEvent() {
+                assert_eq!(
+                    ::std::mem::size_of::<PopSysCallTypeEvent>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(PopSysCallTypeEvent))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<PopSysCallTypeEvent>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(PopSysCallTypeEvent))
+                );
+            }
+            impl Default for PopSysCallTypeEvent {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            pub const OperType_FIXED: root::lc3::core::OperType = 0;
+            pub const OperType_NUM: root::lc3::core::OperType = 1;
+            pub const OperType_LABEL: root::lc3::core::OperType = 2;
+            pub const OperType_REG: root::lc3::core::OperType = 3;
+            pub const OperType_INVALID: root::lc3::core::OperType = 4;
+            pub type OperType = i32;
+            #[repr(C)]
+            pub struct IOperand__bindgen_vtable(::std::os::raw::c_void);
+            #[repr(C)]
+            pub struct IOperand {
+                pub vtable_: *const IOperand__bindgen_vtable,
+                pub type_: root::lc3::core::OperType,
+                pub type_str: root::std::string,
+                pub width: u32,
+                pub value: u32,
+            }
+            #[test]
+            fn bindgen_test_layout_IOperand() {
+                assert_eq!(
+                    ::std::mem::size_of::<IOperand>(),
+                    56usize,
+                    concat!("Size of: ", stringify!(IOperand))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<IOperand>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(IOperand))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<IOperand>())).type_ as *const _
+                            as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(IOperand),
+                        "::",
+                        stringify!(type_)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<IOperand>())).type_str
+                            as *const _ as usize
+                    },
+                    16usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(IOperand),
+                        "::",
+                        stringify!(type_str)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<IOperand>())).width as *const _
+                            as usize
+                    },
+                    48usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(IOperand),
+                        "::",
+                        stringify!(width)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<IOperand>())).value as *const _
+                            as usize
+                    },
+                    52usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(IOperand),
+                        "::",
+                        stringify!(value)
+                    )
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core8IOperand11isEqualTypeENS0_8OperTypeE"]
+                pub fn IOperand_isEqualType(
+                    this: *const root::lc3::core::IOperand,
+                    other: root::lc3::core::OperType,
+                ) -> bool;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core8IOperandC2ENS0_8OperTypeERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEj"]
+                pub fn IOperand_IOperand(
+                    this: *mut root::lc3::core::IOperand,
+                    type_: root::lc3::core::OperType,
+                    type_str: *const root::std::string,
+                    width: u32,
+                );
+            }
+            impl Default for IOperand {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            impl IOperand {
+                #[inline]
+                pub unsafe fn isEqualType(
+                    &self,
+                    other: root::lc3::core::OperType,
+                ) -> bool {
+                    IOperand_isEqualType(self, other)
+                }
+                #[inline]
+                pub unsafe fn new(
+                    type_: root::lc3::core::OperType,
+                    type_str: *const root::std::string,
+                    width: u32,
+                ) -> Self {
+                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
+                    IOperand_IOperand(
+                        __bindgen_tmp.as_mut_ptr(),
+                        type_,
+                        type_str,
+                        width,
+                    );
+                    __bindgen_tmp.assume_init()
+                }
+            }
+            #[repr(C)]
+            pub struct IInstruction__bindgen_vtable(::std::os::raw::c_void);
+            #[repr(C)]
+            pub struct IInstruction {
+                pub vtable_: *const IInstruction__bindgen_vtable,
+                pub name: root::std::string,
+                pub operands: root::std::vector,
+            }
+            #[test]
+            fn bindgen_test_layout_IInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<IInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(IInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<IInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(IInstruction))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<IInstruction>())).name
+                            as *const _ as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(IInstruction),
+                        "::",
+                        stringify!(name)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<IInstruction>())).operands
+                            as *const _ as usize
+                    },
+                    40usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(IInstruction),
+                        "::",
+                        stringify!(operands)
+                    )
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core12IInstruction14getNumOperandsEv"]
+                pub fn IInstruction_getNumOperands(
+                    this: *const root::lc3::core::IInstruction,
+                ) -> u32;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12IInstruction14assignOperandsEj"]
+                pub fn IInstruction_assignOperands(
+                    this: *mut root::lc3::core::IInstruction,
+                    encoded_inst: u32,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core12IInstruction14toFormatStringB5cxx11Ev"]
+                pub fn IInstruction_toFormatString(
+                    this: *const root::lc3::core::IInstruction,
+                ) -> root::std::string;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core12IInstruction13toValueStringB5cxx11Ev"]
+                pub fn IInstruction_toValueString(
+                    this: *const root::lc3::core::IInstruction,
+                ) -> root::std::string;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12IInstruction23buildSysCallEnterHelperERKNS0_12MachineStateEjNS2_11SysCallTypeESt8functionIFjjEE"]
+                pub fn IInstruction_buildSysCallEnterHelper(
+                    state: *const root::lc3::core::MachineState,
+                    vector_id: u32,
+                    call_type: root::lc3::core::MachineState_SysCallType,
+                    computeNewPSRValue: [u64; 4usize],
+                ) -> root::std::vector;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12IInstruction22buildSysCallExitHelperERKNS0_12MachineStateENS2_11SysCallTypeE"]
+                pub fn IInstruction_buildSysCallExitHelper(
+                    state: *const root::lc3::core::MachineState,
+                    call_type: root::lc3::core::MachineState_SysCallType,
+                ) -> root::std::vector;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12IInstructionC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKSt6vectorISt10shared_ptrINS0_8IOperandEESaISD_EE"]
+                pub fn IInstruction_IInstruction(
+                    this: *mut root::lc3::core::IInstruction,
+                    name: *const root::std::string,
+                    operands: *const root::std::vector,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12IInstructionC2ERKS1_"]
+                pub fn IInstruction_IInstruction1(
+                    this: *mut root::lc3::core::IInstruction,
+                    that: *const root::lc3::core::IInstruction,
+                );
+            }
+            impl Default for IInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            impl IInstruction {
+                #[inline]
+                pub unsafe fn getNumOperands(&self) -> u32 {
+                    IInstruction_getNumOperands(self)
+                }
+                #[inline]
+                pub unsafe fn assignOperands(&mut self, encoded_inst: u32) {
+                    IInstruction_assignOperands(self, encoded_inst)
+                }
+                #[inline]
+                pub unsafe fn toFormatString(&self) -> root::std::string {
+                    IInstruction_toFormatString(self)
+                }
+                #[inline]
+                pub unsafe fn toValueString(&self) -> root::std::string {
+                    IInstruction_toValueString(self)
+                }
+                #[inline]
+                pub unsafe fn buildSysCallEnterHelper(
+                    state: *const root::lc3::core::MachineState,
+                    vector_id: u32,
+                    call_type: root::lc3::core::MachineState_SysCallType,
+                    computeNewPSRValue: [u64; 4usize],
+                ) -> root::std::vector {
+                    IInstruction_buildSysCallEnterHelper(
+                        state,
+                        vector_id,
+                        call_type,
+                        computeNewPSRValue,
+                    )
+                }
+                #[inline]
+                pub unsafe fn buildSysCallExitHelper(
+                    state: *const root::lc3::core::MachineState,
+                    call_type: root::lc3::core::MachineState_SysCallType,
+                ) -> root::std::vector {
+                    IInstruction_buildSysCallExitHelper(state, call_type)
+                }
+                #[inline]
+                pub unsafe fn new(
+                    name: *const root::std::string,
+                    operands: *const root::std::vector,
+                ) -> Self {
+                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
+                    IInstruction_IInstruction(
+                        __bindgen_tmp.as_mut_ptr(),
+                        name,
+                        operands,
+                    );
+                    __bindgen_tmp.assume_init()
+                }
+                #[inline]
+                pub unsafe fn new1(
+                    that: *const root::lc3::core::IInstruction,
+                ) -> Self {
+                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
+                    IInstruction_IInstruction1(
+                        __bindgen_tmp.as_mut_ptr(),
+                        that,
+                    );
+                    __bindgen_tmp.assume_init()
+                }
+            }
+            #[repr(C)]
+            pub struct InstructionHandler__bindgen_vtable(
+                ::std::os::raw::c_void,
+            );
+            #[repr(C)]
+            pub struct InstructionHandler {
+                pub vtable_: *const InstructionHandler__bindgen_vtable,
+                pub instructions: root::std::vector,
+                pub regs: root::lc3::core::SymbolTable,
+            }
+            #[test]
+            fn bindgen_test_layout_InstructionHandler() {
+                assert_eq!(
+                    ::std::mem::size_of::<InstructionHandler>(),
+                    80usize,
+                    concat!("Size of: ", stringify!(InstructionHandler))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<InstructionHandler>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(InstructionHandler))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<InstructionHandler>()))
+                            .instructions as *const _
+                            as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(InstructionHandler),
+                        "::",
+                        stringify!(instructions)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<InstructionHandler>())).regs
+                            as *const _ as usize
+                    },
+                    32usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(InstructionHandler),
+                        "::",
+                        stringify!(regs)
+                    )
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core18InstructionHandlerC1Ev"]
+                pub fn InstructionHandler_InstructionHandler(
+                    this: *mut root::lc3::core::InstructionHandler,
+                );
+            }
+            impl Default for InstructionHandler {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            impl InstructionHandler {
+                #[inline]
+                pub unsafe fn new() -> Self {
+                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
+                    InstructionHandler_InstructionHandler(
+                        __bindgen_tmp.as_mut_ptr(),
+                    );
+                    __bindgen_tmp.assume_init()
+                }
+            }
+            #[repr(C)]
+            pub struct FixedOperand {
+                pub _base: root::lc3::core::IOperand,
+            }
+            #[test]
+            fn bindgen_test_layout_FixedOperand() {
+                assert_eq!(
+                    ::std::mem::size_of::<FixedOperand>(),
+                    56usize,
+                    concat!("Size of: ", stringify!(FixedOperand))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<FixedOperand>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(FixedOperand))
+                );
+            }
+            impl Default for FixedOperand {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12FixedOperand6encodeERKNS0_5asmbl9StatementERKNS2_14StatementPieceERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISF_ESaISt4pairIKSF_jEEESO_RNS_5utils15AssemblerLoggerE"]
+                pub fn FixedOperand_encode(
+                    this: *mut ::std::os::raw::c_void,
+                    statement: *const root::lc3::core::asmbl::Statement,
+                    piece: *const root::lc3::core::asmbl::StatementPiece,
+                    regs: *const root::lc3::core::SymbolTable,
+                    symbols: *const root::lc3::core::SymbolTable,
+                    logger: *mut root::lc3::utils::AssemblerLogger,
+                ) -> root::lc3::optional<u32>;
+            }
+            #[repr(C)]
+            pub struct RegOperand {
+                pub _base: root::lc3::core::IOperand,
+            }
+            #[test]
+            fn bindgen_test_layout_RegOperand() {
+                assert_eq!(
+                    ::std::mem::size_of::<RegOperand>(),
+                    56usize,
+                    concat!("Size of: ", stringify!(RegOperand))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<RegOperand>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(RegOperand))
+                );
+            }
+            impl Default for RegOperand {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core10RegOperand6encodeERKNS0_5asmbl9StatementERKNS2_14StatementPieceERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISF_ESaISt4pairIKSF_jEEESO_RNS_5utils15AssemblerLoggerE"]
+                pub fn RegOperand_encode(
+                    this: *mut ::std::os::raw::c_void,
+                    statement: *const root::lc3::core::asmbl::Statement,
+                    piece: *const root::lc3::core::asmbl::StatementPiece,
+                    regs: *const root::lc3::core::SymbolTable,
+                    symbols: *const root::lc3::core::SymbolTable,
+                    logger: *mut root::lc3::utils::AssemblerLogger,
+                ) -> root::lc3::optional<u32>;
+            }
+            #[repr(C)]
+            pub struct NumOperand {
+                pub _base: root::lc3::core::IOperand,
+                pub sext: bool,
+            }
+            #[test]
+            fn bindgen_test_layout_NumOperand() {
+                assert_eq!(
+                    ::std::mem::size_of::<NumOperand>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(NumOperand))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<NumOperand>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(NumOperand))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<NumOperand>())).sext as *const _
+                            as usize
+                    },
+                    56usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(NumOperand),
+                        "::",
+                        stringify!(sext)
+                    )
+                );
+            }
+            impl Default for NumOperand {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core10NumOperand6encodeERKNS0_5asmbl9StatementERKNS2_14StatementPieceERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISF_ESaISt4pairIKSF_jEEESO_RNS_5utils15AssemblerLoggerE"]
+                pub fn NumOperand_encode(
+                    this: *mut ::std::os::raw::c_void,
+                    statement: *const root::lc3::core::asmbl::Statement,
+                    piece: *const root::lc3::core::asmbl::StatementPiece,
+                    regs: *const root::lc3::core::SymbolTable,
+                    symbols: *const root::lc3::core::SymbolTable,
+                    logger: *mut root::lc3::utils::AssemblerLogger,
+                ) -> root::lc3::optional<u32>;
+            }
+            #[repr(C)]
+            pub struct LabelOperand {
+                pub _base: root::lc3::core::IOperand,
+            }
+            #[test]
+            fn bindgen_test_layout_LabelOperand() {
+                assert_eq!(
+                    ::std::mem::size_of::<LabelOperand>(),
+                    56usize,
+                    concat!("Size of: ", stringify!(LabelOperand))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<LabelOperand>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(LabelOperand))
+                );
+            }
+            impl Default for LabelOperand {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core12LabelOperand6encodeERKNS0_5asmbl9StatementERKNS2_14StatementPieceERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISF_ESaISt4pairIKSF_jEEESO_RNS_5utils15AssemblerLoggerE"]
+                pub fn LabelOperand_encode(
+                    this: *mut ::std::os::raw::c_void,
+                    statement: *const root::lc3::core::asmbl::Statement,
+                    piece: *const root::lc3::core::asmbl::StatementPiece,
+                    regs: *const root::lc3::core::SymbolTable,
+                    symbols: *const root::lc3::core::SymbolTable,
+                    logger: *mut root::lc3::utils::AssemblerLogger,
+                ) -> root::lc3::optional<u32>;
+            }
+            #[repr(C)]
+            pub struct ADDRegInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_ADDRegInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<ADDRegInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(ADDRegInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<ADDRegInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(ADDRegInstruction))
+                );
+            }
+            impl Default for ADDRegInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core17ADDRegInstruction7executeERKNS0_12MachineStateE"]
+                pub fn ADDRegInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct ADDImmInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_ADDImmInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<ADDImmInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(ADDImmInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<ADDImmInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(ADDImmInstruction))
+                );
+            }
+            impl Default for ADDImmInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core17ADDImmInstruction7executeERKNS0_12MachineStateE"]
+                pub fn ADDImmInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct ANDRegInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_ANDRegInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<ANDRegInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(ANDRegInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<ANDRegInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(ANDRegInstruction))
+                );
+            }
+            impl Default for ANDRegInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core17ANDRegInstruction7executeERKNS0_12MachineStateE"]
+                pub fn ANDRegInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct ANDImmInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_ANDImmInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<ANDImmInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(ANDImmInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<ANDImmInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(ANDImmInstruction))
+                );
+            }
+            impl Default for ANDImmInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core17ANDImmInstruction7executeERKNS0_12MachineStateE"]
+                pub fn ANDImmInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct BRInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_BRInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<BRInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(BRInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BRInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BRInstruction))
+                );
+            }
+            impl Default for BRInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core13BRInstruction7executeERKNS0_12MachineStateE"]
+                pub fn BRInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct BRnInstruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_BRnInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<BRnInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(BRnInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BRnInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BRnInstruction))
+                );
+            }
+            impl Default for BRnInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct BRzInstruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_BRzInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<BRzInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(BRzInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BRzInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BRzInstruction))
+                );
+            }
+            impl Default for BRzInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct BRpInstruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_BRpInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<BRpInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(BRpInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BRpInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BRpInstruction))
+                );
+            }
+            impl Default for BRpInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct BRnzInstruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_BRnzInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<BRnzInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(BRnzInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BRnzInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BRnzInstruction))
+                );
+            }
+            impl Default for BRnzInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct BRzpInstruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_BRzpInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<BRzpInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(BRzpInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BRzpInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BRzpInstruction))
+                );
+            }
+            impl Default for BRzpInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct BRnpInstruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_BRnpInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<BRnpInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(BRnpInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BRnpInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BRnpInstruction))
+                );
+            }
+            impl Default for BRnpInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct BRnzpInstruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_BRnzpInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<BRnzpInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(BRnzpInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<BRnzpInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(BRnzpInstruction))
+                );
+            }
+            impl Default for BRnzpInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct NOP0Instruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_NOP0Instruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<NOP0Instruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(NOP0Instruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<NOP0Instruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(NOP0Instruction))
+                );
+            }
+            impl Default for NOP0Instruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct NOP1Instruction {
+                pub _base: root::lc3::core::BRInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_NOP1Instruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<NOP1Instruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(NOP1Instruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<NOP1Instruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(NOP1Instruction))
+                );
+            }
+            impl Default for NOP1Instruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct JMPInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_JMPInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<JMPInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(JMPInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<JMPInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(JMPInstruction))
+                );
+            }
+            impl Default for JMPInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14JMPInstruction7executeERKNS0_12MachineStateE"]
+                pub fn JMPInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct JSRInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_JSRInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<JSRInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(JSRInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<JSRInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(JSRInstruction))
+                );
+            }
+            impl Default for JSRInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14JSRInstruction7executeERKNS0_12MachineStateE"]
+                pub fn JSRInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct JSRRInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_JSRRInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<JSRRInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(JSRRInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<JSRRInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(JSRRInstruction))
+                );
+            }
+            impl Default for JSRRInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core15JSRRInstruction7executeERKNS0_12MachineStateE"]
+                pub fn JSRRInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct LDInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_LDInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<LDInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(LDInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<LDInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(LDInstruction))
+                );
+            }
+            impl Default for LDInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core13LDInstruction7executeERKNS0_12MachineStateE"]
+                pub fn LDInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct LDIInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_LDIInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<LDIInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(LDIInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<LDIInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(LDIInstruction))
+                );
+            }
+            impl Default for LDIInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14LDIInstruction7executeERKNS0_12MachineStateE"]
+                pub fn LDIInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct LDRInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_LDRInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<LDRInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(LDRInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<LDRInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(LDRInstruction))
+                );
+            }
+            impl Default for LDRInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14LDRInstruction7executeERKNS0_12MachineStateE"]
+                pub fn LDRInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct LEAInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_LEAInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<LEAInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(LEAInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<LEAInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(LEAInstruction))
+                );
+            }
+            impl Default for LEAInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14LEAInstruction7executeERKNS0_12MachineStateE"]
+                pub fn LEAInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct NOTInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_NOTInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<NOTInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(NOTInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<NOTInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(NOTInstruction))
+                );
+            }
+            impl Default for NOTInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14NOTInstruction7executeERKNS0_12MachineStateE"]
+                pub fn NOTInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct RETInstruction {
+                pub _base: root::lc3::core::JMPInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_RETInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<RETInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(RETInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<RETInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(RETInstruction))
+                );
+            }
+            impl Default for RETInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct RTIInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_RTIInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<RTIInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(RTIInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<RTIInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(RTIInstruction))
+                );
+            }
+            impl Default for RTIInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14RTIInstruction7executeERKNS0_12MachineStateE"]
+                pub fn RTIInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct STInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_STInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<STInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(STInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<STInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(STInstruction))
+                );
+            }
+            impl Default for STInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core13STInstruction7executeERKNS0_12MachineStateE"]
+                pub fn STInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct STIInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_STIInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<STIInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(STIInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<STIInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(STIInstruction))
+                );
+            }
+            impl Default for STIInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14STIInstruction7executeERKNS0_12MachineStateE"]
+                pub fn STIInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct STRInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_STRInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<STRInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(STRInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<STRInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(STRInstruction))
+                );
+            }
+            impl Default for STRInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core14STRInstruction7executeERKNS0_12MachineStateE"]
+                pub fn STRInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct TRAPInstruction {
+                pub _base: root::lc3::core::IInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_TRAPInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<TRAPInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(TRAPInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<TRAPInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(TRAPInstruction))
+                );
+            }
+            impl Default for TRAPInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core15TRAPInstruction7executeERKNS0_12MachineStateE"]
+                pub fn TRAPInstruction_execute(
+                    this: *mut ::std::os::raw::c_void,
+                    state: *const root::lc3::core::MachineState,
+                ) -> root::std::vector;
+            }
+            #[repr(C)]
+            pub struct GETCInstruction {
+                pub _base: root::lc3::core::TRAPInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_GETCInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<GETCInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(GETCInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<GETCInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(GETCInstruction))
+                );
+            }
+            impl Default for GETCInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct OUTInstruction {
+                pub _base: root::lc3::core::TRAPInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_OUTInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<OUTInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(OUTInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<OUTInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(OUTInstruction))
+                );
+            }
+            impl Default for OUTInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct PUTCInstruction {
+                pub _base: root::lc3::core::TRAPInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_PUTCInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<PUTCInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(PUTCInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<PUTCInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(PUTCInstruction))
+                );
+            }
+            impl Default for PUTCInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct PUTSInstruction {
+                pub _base: root::lc3::core::TRAPInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_PUTSInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<PUTSInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(PUTSInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<PUTSInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(PUTSInstruction))
+                );
+            }
+            impl Default for PUTSInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct INInstruction {
+                pub _base: root::lc3::core::TRAPInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_INInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<INInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(INInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<INInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(INInstruction))
+                );
+            }
+            impl Default for INInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct PUTSPInstruction {
+                pub _base: root::lc3::core::TRAPInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_PUTSPInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<PUTSPInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(PUTSPInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<PUTSPInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(PUTSPInstruction))
+                );
+            }
+            impl Default for PUTSPInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct HALTInstruction {
+                pub _base: root::lc3::core::TRAPInstruction,
+            }
+            #[test]
+            fn bindgen_test_layout_HALTInstruction() {
+                assert_eq!(
+                    ::std::mem::size_of::<HALTInstruction>(),
+                    64usize,
+                    concat!("Size of: ", stringify!(HALTInstruction))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<HALTInstruction>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(HALTInstruction))
+                );
+            }
+            impl Default for HALTInstruction {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            #[repr(C)]
+            pub struct Assembler {
+                pub file_buffer: root::std::vector,
+                pub logger: root::lc3::utils::AssemblerLogger,
+                pub enable_liberal_asm: bool,
+                pub encoder: root::lc3::core::asmbl::InstructionEncoder,
+            }
+            #[test]
+            fn bindgen_test_layout_Assembler() {
+                assert_eq!(
+                    ::std::mem::size_of::<Assembler>(),
+                    224usize,
+                    concat!("Size of: ", stringify!(Assembler))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<Assembler>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(Assembler))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Assembler>())).file_buffer
+                            as *const _ as usize
+                    },
+                    0usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Assembler),
+                        "::",
+                        stringify!(file_buffer)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Assembler>())).logger as *const _
+                            as usize
+                    },
+                    24usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Assembler),
+                        "::",
+                        stringify!(logger)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Assembler>())).enable_liberal_asm
+                            as *const _ as usize
+                    },
+                    72usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Assembler),
+                        "::",
+                        stringify!(enable_liberal_asm)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Assembler>())).encoder
+                            as *const _ as usize
+                    },
+                    80usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Assembler),
+                        "::",
+                        stringify!(encoder)
+                    )
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Assembler8assembleB5cxx11ERSi"]
+                pub fn Assembler_assemble(
+                    this: *mut root::lc3::core::Assembler,
+                    buffer: *mut root::std::istream,
+                ) -> root::std::shared_ptr;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Assembler13setLiberalAsmEb"]
+                pub fn Assembler_setLiberalAsm(
+                    this: *mut root::lc3::core::Assembler,
+                    enable_liberal_asm: bool,
+                );
+            }
+            impl Default for Assembler {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            impl Assembler {
+                #[inline]
+                pub unsafe fn assemble(
+                    &mut self,
+                    buffer: *mut root::std::istream,
+                ) -> root::std::shared_ptr {
+                    Assembler_assemble(self, buffer)
+                }
+                #[inline]
+                pub unsafe fn setLiberalAsm(
+                    &mut self,
+                    enable_liberal_asm: bool,
+                ) {
+                    Assembler_setLiberalAsm(self, enable_liberal_asm)
+                }
+            }
+            #[repr(C)]
+            #[derive(Debug, Copy, Clone)]
+            pub struct Converter {
+                pub logger: root::lc3::utils::Logger,
+            }
+            #[test]
+            fn bindgen_test_layout_Converter() {
+                assert_eq!(
+                    ::std::mem::size_of::<Converter>(),
+                    16usize,
+                    concat!("Size of: ", stringify!(Converter))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<Converter>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(Converter))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Converter>())).logger as *const _
+                            as usize
+                    },
+                    0usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Converter),
+                        "::",
+                        stringify!(logger)
+                    )
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Converter10convertBinB5cxx11ERSi"]
+                pub fn Converter_convertBin(
+                    this: *mut root::lc3::core::Converter,
+                    buffer: *mut root::std::istream,
+                ) -> root::std::shared_ptr;
+            }
+            impl Default for Converter {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            impl Converter {
+                #[inline]
+                pub unsafe fn convertBin(
+                    &mut self,
+                    buffer: *mut root::std::istream,
+                ) -> root::std::shared_ptr {
+                    Converter_convertBin(self, buffer)
+                }
+            }
+            pub mod sim {
+                #[allow(unused_imports)]
+                use self::super::super::super::super::root;
+                #[repr(C)]
+                pub struct InstructionDecoder {
+                    pub _base: root::lc3::core::InstructionHandler,
+                    pub instructions_by_opcode: root::std::map,
+                }
+                #[test]
+                fn bindgen_test_layout_InstructionDecoder() {
+                    assert_eq!(
+                        ::std::mem::size_of::<InstructionDecoder>(),
+                        128usize,
+                        concat!("Size of: ", stringify!(InstructionDecoder))
+                    );
+                    assert_eq!(
+                        ::std::mem::align_of::<InstructionDecoder>(),
+                        8usize,
+                        concat!(
+                            "Alignment of ",
+                            stringify!(InstructionDecoder)
+                        )
+                    );
+                    assert_eq!(
+                        unsafe {
+                            &(*(::std::ptr::null::<InstructionDecoder>()))
+                                .instructions_by_opcode
+                                as *const _ as usize
+                        },
+                        80usize,
+                        concat!(
+                            "Offset of field: ",
+                            stringify!(InstructionDecoder),
+                            "::",
+                            stringify!(instructions_by_opcode)
+                        )
+                    );
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZNK3lc34core3sim18InstructionDecoder25findInstructionByEncodingEj"]
+                    pub fn InstructionDecoder_findInstructionByEncoding(
+                        this: *const root::lc3::core::sim::InstructionDecoder,
+                        encoding: u32,
+                    ) -> root::lc3::optional<root::lc3::core::PIInstruction>;
+                }
+                extern "C" {
+                    #[link_name = "\u{1}_ZN3lc34core3sim18InstructionDecoderC1Ev"]
+                    pub fn InstructionDecoder_InstructionDecoder(
+                        this: *mut root::lc3::core::sim::InstructionDecoder,
+                    );
+                }
+                impl Default for InstructionDecoder {
+                    fn default() -> Self {
+                        unsafe { ::std::mem::zeroed() }
+                    }
+                }
+                impl InstructionDecoder {
+                    #[inline]
+                    pub unsafe fn findInstructionByEncoding(
+                        &self,
+                        encoding: u32,
+                    ) -> root::lc3::optional<root::lc3::core::PIInstruction>
+                    {
+                        InstructionDecoder_findInstructionByEncoding(
+                            self, encoding,
+                        )
+                    }
+                    #[inline]
+                    pub unsafe fn new() -> Self {
+                        let mut __bindgen_tmp =
+                            ::std::mem::MaybeUninit::uninit();
+                        InstructionDecoder_InstructionDecoder(
+                            __bindgen_tmp.as_mut_ptr(),
+                        );
+                        __bindgen_tmp.assume_init()
+                    }
+                }
+            }
+            #[repr(C)]
+            pub struct Simulator {
+                pub decoder: root::lc3::core::sim::InstructionDecoder,
+                pub state: root::lc3::core::MachineState,
+                pub logger: root::lc3::utils::Logger,
+                pub inputter: *mut root::lc3::utils::IInputter,
+                pub threaded_input: bool,
+                pub collecting_input: root::std::atomic<bool>,
+            }
+            #[test]
+            fn bindgen_test_layout_Simulator() {
+                assert_eq!(
+                    ::std::mem::size_of::<Simulator>(),
+                    632usize,
+                    concat!("Size of: ", stringify!(Simulator))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<Simulator>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(Simulator))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Simulator>())).decoder
+                            as *const _ as usize
+                    },
+                    0usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Simulator),
+                        "::",
+                        stringify!(decoder)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Simulator>())).state as *const _
+                            as usize
+                    },
+                    128usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Simulator),
+                        "::",
+                        stringify!(state)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Simulator>())).logger as *const _
+                            as usize
+                    },
+                    600usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Simulator),
+                        "::",
+                        stringify!(logger)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Simulator>())).inputter
+                            as *const _ as usize
+                    },
+                    616usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Simulator),
+                        "::",
+                        stringify!(inputter)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Simulator>())).threaded_input
+                            as *const _ as usize
+                    },
+                    624usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Simulator),
+                        "::",
+                        stringify!(threaded_input)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<Simulator>())).collecting_input
+                            as *const _ as usize
+                    },
+                    625usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(Simulator),
+                        "::",
+                        stringify!(collecting_input)
+                    )
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator7loadObjERSi"]
+                pub fn Simulator_loadObj(
+                    this: *mut root::lc3::core::Simulator,
+                    buffer: *mut root::std::istream,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator8simulateEv"]
+                pub fn Simulator_simulate(
+                    this: *mut root::lc3::core::Simulator,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator11enableClockEv"]
+                pub fn Simulator_enableClock(
+                    this: *mut root::lc3::core::Simulator,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator12disableClockEv"]
+                pub fn Simulator_disableClock(
+                    this: *mut root::lc3::core::Simulator,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZNK3lc34core9Simulator14isClockEnabledEv"]
+                pub fn Simulator_isClockEnabled(
+                    this: *const root::lc3::core::Simulator,
+                ) -> bool;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator12reinitializeEv"]
+                pub fn Simulator_reinitialize(
+                    this: *mut root::lc3::core::Simulator,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator30registerPreInstructionCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerPreInstructionCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator31registerPostInstructionCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerPostInstructionCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator30registerInterruptEnterCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerInterruptEnterCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator29registerInterruptExitCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerInterruptExitCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator30registerExceptionEnterCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerExceptionEnterCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator29registerExceptionExitCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerExceptionExitCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator24registerSubEnterCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerSubEnterCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator23registerSubExitCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerSubExitCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator28registerWaitForInputCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
+                pub fn Simulator_registerWaitForInputCallback(
+                    this: *mut root::lc3::core::Simulator,
+                    func: root::lc3::core::callback_func_t,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9Simulator18setIgnorePrivilegeEb"]
+                pub fn Simulator_setIgnorePrivilege(
+                    this: *mut root::lc3::core::Simulator,
+                    ignore: bool,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core9SimulatorC1ERNS_3simERNS_5utils8IPrinterERNS4_9IInputterEjb"]
+                pub fn Simulator_Simulator(
+                    this: *mut root::lc3::core::Simulator,
+                    simulator: *mut root::lc3::sim,
+                    printer: *mut root::lc3::utils::IPrinter,
+                    inputter: *mut root::lc3::utils::IInputter,
+                    print_level: u32,
+                    threaded_input: bool,
+                );
+            }
+            impl Default for Simulator {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            impl Simulator {
+                #[inline]
+                pub unsafe fn loadObj(
+                    &mut self,
+                    buffer: *mut root::std::istream,
+                ) {
+                    Simulator_loadObj(self, buffer)
+                }
+                #[inline]
+                pub unsafe fn simulate(&mut self) {
+                    Simulator_simulate(self)
+                }
+                #[inline]
+                pub unsafe fn enableClock(&mut self) {
+                    Simulator_enableClock(self)
+                }
+                #[inline]
+                pub unsafe fn disableClock(&mut self) {
+                    Simulator_disableClock(self)
+                }
+                #[inline]
+                pub unsafe fn isClockEnabled(&self) -> bool {
+                    Simulator_isClockEnabled(self)
+                }
+                #[inline]
+                pub unsafe fn reinitialize(&mut self) {
+                    Simulator_reinitialize(self)
+                }
+                #[inline]
+                pub unsafe fn registerPreInstructionCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerPreInstructionCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn registerPostInstructionCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerPostInstructionCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn registerInterruptEnterCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerInterruptEnterCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn registerInterruptExitCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerInterruptExitCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn registerExceptionEnterCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerExceptionEnterCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn registerExceptionExitCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerExceptionExitCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn registerSubEnterCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerSubEnterCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn registerSubExitCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerSubExitCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn registerWaitForInputCallback(
+                    &mut self,
+                    func: root::lc3::core::callback_func_t,
+                ) {
+                    Simulator_registerWaitForInputCallback(self, func)
+                }
+                #[inline]
+                pub unsafe fn setIgnorePrivilege(&mut self, ignore: bool) {
+                    Simulator_setIgnorePrivilege(self, ignore)
+                }
+                #[inline]
+                pub unsafe fn new(
+                    simulator: *mut root::lc3::sim,
+                    printer: *mut root::lc3::utils::IPrinter,
+                    inputter: *mut root::lc3::utils::IInputter,
+                    print_level: u32,
+                    threaded_input: bool,
+                ) -> Self {
+                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
+                    Simulator_Simulator(
+                        __bindgen_tmp.as_mut_ptr(),
+                        simulator,
+                        printer,
+                        inputter,
+                        print_level,
+                        threaded_input,
+                    );
+                    __bindgen_tmp.assume_init()
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc34core8getOSSrcB5cxx11Ev"]
+                pub fn getOSSrc() -> root::std::string;
+            }
+        }
+        #[repr(C)]
+        #[derive(Debug, Copy, Clone)]
+        pub struct optional<T> {
+            pub valid: bool,
+            pub value: T,
+            pub _phantom_0:
+                ::std::marker::PhantomData<::std::cell::UnsafeCell<T>>,
+        }
+        impl<T> Default for optional<T> {
+            fn default() -> Self {
+                unsafe { ::std::mem::zeroed() }
+            }
+        }
+        #[repr(C)]
+        #[derive(Debug, Copy, Clone)]
+        pub struct Breakpoint {
+            pub id: u32,
+            pub loc: u32,
+            pub sim_int: *const root::lc3::sim,
+        }
+        #[test]
+        fn bindgen_test_layout_Breakpoint() {
+            assert_eq!(
+                ::std::mem::size_of::<Breakpoint>(),
+                16usize,
+                concat!("Size of: ", stringify!(Breakpoint))
+            );
+            assert_eq!(
+                ::std::mem::align_of::<Breakpoint>(),
+                8usize,
+                concat!("Alignment of ", stringify!(Breakpoint))
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<Breakpoint>())).id as *const _
+                        as usize
+                },
+                0usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(Breakpoint),
+                    "::",
+                    stringify!(id)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<Breakpoint>())).loc as *const _
+                        as usize
+                },
+                4usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(Breakpoint),
+                    "::",
+                    stringify!(loc)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<Breakpoint>())).sim_int as *const _
+                        as usize
+                },
+                8usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(Breakpoint),
+                    "::",
+                    stringify!(sim_int)
+                )
+            );
+        }
+        impl Default for Breakpoint {
+            fn default() -> Self {
+                unsafe { ::std::mem::zeroed() }
+            }
+        }
+        pub type callback_func_t = [u64; 4usize];
+        pub type breakpoint_callback_func_t = [u64; 4usize];
+        #[repr(C)]
+        pub struct sim {
+            pub printer: *mut root::lc3::utils::IPrinter,
+            pub simulator: root::lc3::core::Simulator,
+            pub inst_exec_count: u64,
+            pub total_inst_limit: u64,
+            pub inst_limit: u64,
+            pub remaining_inst_count: i64,
+            pub sub_depth: i32,
+            pub hit_internal_exception: bool,
+            pub pre_instruction_callback_v: bool,
+            pub post_instruction_callback_v: bool,
+            pub interrupt_enter_callback_v: bool,
+            pub interrupt_exit_callback_v: bool,
+            pub exception_enter_callback_v: bool,
+            pub exception_exit_callback_v: bool,
+            pub sub_enter_callback_v: bool,
+            pub sub_exit_callback_v: bool,
+            pub wait_for_input_callback_v: bool,
+            pub breakpoint_callback_v: bool,
+            pub pre_instruction_callback: root::lc3::callback_func_t,
+            pub post_instruction_callback: root::lc3::callback_func_t,
+            pub interrupt_enter_callback: root::lc3::callback_func_t,
+            pub interrupt_exit_callback: root::lc3::callback_func_t,
+            pub exception_enter_callback: root::lc3::callback_func_t,
+            pub exception_exit_callback: root::lc3::callback_func_t,
+            pub sub_enter_callback: root::lc3::callback_func_t,
+            pub sub_exit_callback: root::lc3::callback_func_t,
+            pub wait_for_input_callback: root::lc3::callback_func_t,
+            pub breakpoint_callback: root::lc3::breakpoint_callback_func_t,
+            pub breakpoint_id: u32,
+            pub breakpoints: root::std::vector,
+            pub propagate_exceptions: bool,
+            pub run_type: root::lc3::sim_RunType,
+        }
+        pub const sim_RunType_UNTIL_INPUT: root::lc3::sim_RunType = 0;
+        pub const sim_RunType_UNTIL_HALT: root::lc3::sim_RunType = 1;
+        pub const sim_RunType_UNTIL_DEPTH: root::lc3::sim_RunType = 2;
+        pub const sim_RunType_NORMAL: root::lc3::sim_RunType = 3;
+        pub type sim_RunType = i32;
+        #[test]
+        fn bindgen_test_layout_sim() {
+            assert_eq!(
+                ::std::mem::size_of::<sim>(),
+                1048usize,
+                concat!("Size of: ", stringify!(sim))
+            );
+            assert_eq!(
+                ::std::mem::align_of::<sim>(),
+                8usize,
+                concat!("Alignment of ", stringify!(sim))
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).printer as *const _ as usize
+                },
+                0usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(printer)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).simulator as *const _
+                        as usize
+                },
+                8usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(simulator)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).inst_exec_count as *const _
+                        as usize
+                },
+                640usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(inst_exec_count)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).total_inst_limit as *const _
+                        as usize
+                },
+                648usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(total_inst_limit)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).inst_limit as *const _
+                        as usize
+                },
+                656usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(inst_limit)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).remaining_inst_count
+                        as *const _ as usize
+                },
+                664usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(remaining_inst_count)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).sub_depth as *const _
+                        as usize
+                },
+                672usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(sub_depth)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).hit_internal_exception
+                        as *const _ as usize
+                },
+                676usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(hit_internal_exception)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).pre_instruction_callback_v
+                        as *const _ as usize
+                },
+                677usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(pre_instruction_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).post_instruction_callback_v
+                        as *const _ as usize
+                },
+                678usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(post_instruction_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).interrupt_enter_callback_v
+                        as *const _ as usize
+                },
+                679usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(interrupt_enter_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).interrupt_exit_callback_v
+                        as *const _ as usize
+                },
+                680usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(interrupt_exit_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).exception_enter_callback_v
+                        as *const _ as usize
+                },
+                681usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(exception_enter_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).exception_exit_callback_v
+                        as *const _ as usize
+                },
+                682usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(exception_exit_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).sub_enter_callback_v
+                        as *const _ as usize
+                },
+                683usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(sub_enter_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).sub_exit_callback_v
+                        as *const _ as usize
+                },
+                684usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(sub_exit_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).wait_for_input_callback_v
+                        as *const _ as usize
+                },
+                685usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(wait_for_input_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).breakpoint_callback_v
+                        as *const _ as usize
+                },
+                686usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(breakpoint_callback_v)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).pre_instruction_callback
+                        as *const _ as usize
+                },
+                688usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(pre_instruction_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).post_instruction_callback
+                        as *const _ as usize
+                },
+                720usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(post_instruction_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).interrupt_enter_callback
+                        as *const _ as usize
+                },
+                752usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(interrupt_enter_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).interrupt_exit_callback
+                        as *const _ as usize
+                },
+                784usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(interrupt_exit_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).exception_enter_callback
+                        as *const _ as usize
+                },
+                816usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(exception_enter_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).exception_exit_callback
+                        as *const _ as usize
+                },
+                848usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(exception_exit_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).sub_enter_callback
+                        as *const _ as usize
+                },
+                880usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(sub_enter_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).sub_exit_callback
+                        as *const _ as usize
+                },
+                912usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(sub_exit_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).wait_for_input_callback
+                        as *const _ as usize
+                },
+                944usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(wait_for_input_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).breakpoint_callback
+                        as *const _ as usize
+                },
+                976usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(breakpoint_callback)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).breakpoint_id as *const _
+                        as usize
+                },
+                1008usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(breakpoint_id)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).breakpoints as *const _
+                        as usize
+                },
+                1016usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(breakpoints)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).propagate_exceptions
+                        as *const _ as usize
+                },
+                1040usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(propagate_exceptions)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<sim>())).run_type as *const _
+                        as usize
+                },
+                1044usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(sim),
+                    "::",
+                    stringify!(run_type)
+                )
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim11loadObjFileERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+            pub fn sim_loadObjFile(
+                this: *mut root::lc3::sim,
+                obj_filename: *const root::std::string,
+            ) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim12reinitializeEv"]
+            pub fn sim_reinitialize(this: *mut root::lc3::sim);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim9randomizeEv"]
+            pub fn sim_randomize(this: *mut root::lc3::sim);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim7restartEv"]
+            pub fn sim_restart(this: *mut root::lc3::sim);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim15setRunInstLimitEm"]
+            pub fn sim_setRunInstLimit(
+                this: *mut root::lc3::sim,
+                inst_limit: u64,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim3runEv"]
+            pub fn sim_run(this: *mut root::lc3::sim) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim12runUntilHaltEv"]
+            pub fn sim_runUntilHalt(this: *mut root::lc3::sim) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim17runUntilInputPollEv"]
+            pub fn sim_runUntilInputPoll(this: *mut root::lc3::sim) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim5pauseEv"]
+            pub fn sim_pause(this: *mut root::lc3::sim);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim6stepInEv"]
+            pub fn sim_stepIn(this: *mut root::lc3::sim) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim8stepOverEv"]
+            pub fn sim_stepOver(this: *mut root::lc3::sim) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim7stepOutEv"]
+            pub fn sim_stepOut(this: *mut root::lc3::sim) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim15getMachineStateEv"]
+            pub fn sim_getMachineState(
+                this: *mut root::lc3::sim,
+            ) -> *mut root::lc3::core::MachineState;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim15getMachineStateEv"]
+            pub fn sim_getMachineState1(
+                this: *const root::lc3::sim,
+            ) -> *const root::lc3::core::MachineState;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim16getInstExecCountEv"]
+            pub fn sim_getInstExecCount(this: *const root::lc3::sim) -> u64;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim18didExceedInstLimitEv"]
+            pub fn sim_didExceedInstLimit(this: *const root::lc3::sim) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim14getBreakpointsEv"]
+            pub fn sim_getBreakpoints(
+                this: *const root::lc3::sim,
+            ) -> *const root::std::vector;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim6getRegEt"]
+            pub fn sim_getReg(this: *const root::lc3::sim, id: u16) -> u16;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim6getMemEt"]
+            pub fn sim_getMem(this: *const root::lc3::sim, addr: u16) -> u16;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim10getMemLineB5cxx11Et"]
+            pub fn sim_getMemLine(
+                this: *const root::lc3::sim,
+                addr: u16,
+            ) -> root::std::string;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim5getPCEv"]
+            pub fn sim_getPC(this: *const root::lc3::sim) -> u16;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim6getPSREv"]
+            pub fn sim_getPSR(this: *const root::lc3::sim) -> u16;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim6getMCREv"]
+            pub fn sim_getMCR(this: *const root::lc3::sim) -> u16;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim5getCCEv"]
+            pub fn sim_getCC(
+                this: *const root::lc3::sim,
+            ) -> ::std::os::raw::c_char;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim6setRegEtt"]
+            pub fn sim_setReg(this: *mut root::lc3::sim, id: u16, value: u16);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim6setMemEtt"]
+            pub fn sim_setMem(this: *mut root::lc3::sim, addr: u16, value: u16);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim12setMemStringEtRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+            pub fn sim_setMemString(
+                this: *mut root::lc3::sim,
+                addr: u16,
+                value: *const root::std::string,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim10setMemLineEtRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+            pub fn sim_setMemLine(
+                this: *mut root::lc3::sim,
+                addr: u16,
+                value: *const root::std::string,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim5setPCEt"]
+            pub fn sim_setPC(this: *mut root::lc3::sim, value: u16);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim6setPSREt"]
+            pub fn sim_setPSR(this: *mut root::lc3::sim, value: u16);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim6setMCREt"]
+            pub fn sim_setMCR(this: *mut root::lc3::sim, value: u16);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim5setCCEc"]
+            pub fn sim_setCC(
+                this: *mut root::lc3::sim,
+                value: ::std::os::raw::c_char,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim13setBreakpointEt"]
+            pub fn sim_setBreakpoint(
+                this: *mut root::lc3::sim,
+                addr: u16,
+            ) -> root::lc3::Breakpoint;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim20removeBreakpointByIDEj"]
+            pub fn sim_removeBreakpointByID(
+                this: *mut root::lc3::sim,
+                id: u32,
+            ) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim22removeBreakpointByAddrEt"]
+            pub fn sim_removeBreakpointByAddr(
+                this: *mut root::lc3::sim,
+                addr: u16,
+            ) -> bool;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim30registerPreInstructionCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerPreInstructionCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim31registerPostInstructionCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerPostInstructionCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim30registerInterruptEnterCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerInterruptEnterCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim29registerInterruptExitCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerInterruptExitCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim30registerExceptionEnterCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerExceptionEnterCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim29registerExceptionExitCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerExceptionExitCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim24registerSubEnterCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerSubEnterCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim23registerSubExitCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerSubExitCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim28registerWaitForInputCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
+            pub fn sim_registerWaitForInputCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim26registerBreakpointCallbackESt8functionIFvRNS_4core12MachineStateERKNS_10BreakpointEEE"]
+            pub fn sim_registerBreakpointCallback(
+                this: *mut root::lc3::sim,
+                func: root::lc3::breakpoint_callback_func_t,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim10getPrinterEv"]
+            pub fn sim_getPrinter(
+                this: *mut root::lc3::sim,
+            ) -> *mut root::lc3::utils::IPrinter;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZNK3lc33sim10getPrinterEv"]
+            pub fn sim_getPrinter1(
+                this: *const root::lc3::sim,
+            ) -> *const root::lc3::utils::IPrinter;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim13setPrintLevelEj"]
+            pub fn sim_setPrintLevel(
+                this: *mut root::lc3::sim,
+                print_level: u32,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim22setPropagateExceptionsEv"]
+            pub fn sim_setPropagateExceptions(this: *mut root::lc3::sim);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim24clearPropagateExceptionsEv"]
+            pub fn sim_clearPropagateExceptions(this: *mut root::lc3::sim);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33sim18setIgnorePrivilegeEb"]
+            pub fn sim_setIgnorePrivilege(
+                this: *mut root::lc3::sim,
+                ignore: bool,
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc33simC1ERNS_5utils8IPrinterERNS1_9IInputterEbjb"]
+            pub fn sim_sim(
+                this: *mut root::lc3::sim,
+                printer: *mut root::lc3::utils::IPrinter,
+                inputter: *mut root::lc3::utils::IInputter,
+                threaded_input: bool,
+                print_level: u32,
+                propagate_exceptions: bool,
+            );
+        }
+        impl Default for sim {
+            fn default() -> Self {
+                unsafe { ::std::mem::zeroed() }
+            }
+        }
+        impl sim {
+            #[inline]
+            pub unsafe fn loadObjFile(
+                &mut self,
+                obj_filename: *const root::std::string,
+            ) -> bool {
+                sim_loadObjFile(self, obj_filename)
+            }
+            #[inline]
+            pub unsafe fn reinitialize(&mut self) {
+                sim_reinitialize(self)
+            }
+            #[inline]
+            pub unsafe fn randomize(&mut self) {
+                sim_randomize(self)
+            }
+            #[inline]
+            pub unsafe fn restart(&mut self) {
+                sim_restart(self)
+            }
+            #[inline]
+            pub unsafe fn setRunInstLimit(&mut self, inst_limit: u64) {
+                sim_setRunInstLimit(self, inst_limit)
+            }
+            #[inline]
+            pub unsafe fn run(&mut self) -> bool {
+                sim_run(self)
+            }
+            #[inline]
+            pub unsafe fn runUntilHalt(&mut self) -> bool {
+                sim_runUntilHalt(self)
+            }
+            #[inline]
+            pub unsafe fn runUntilInputPoll(&mut self) -> bool {
+                sim_runUntilInputPoll(self)
+            }
+            #[inline]
+            pub unsafe fn pause(&mut self) {
+                sim_pause(self)
+            }
+            #[inline]
+            pub unsafe fn stepIn(&mut self) -> bool {
+                sim_stepIn(self)
+            }
+            #[inline]
+            pub unsafe fn stepOver(&mut self) -> bool {
+                sim_stepOver(self)
+            }
+            #[inline]
+            pub unsafe fn stepOut(&mut self) -> bool {
+                sim_stepOut(self)
+            }
+            #[inline]
+            pub unsafe fn getMachineState(
+                &mut self,
+            ) -> *mut root::lc3::core::MachineState {
+                sim_getMachineState(self)
+            }
+            #[inline]
+            pub unsafe fn getMachineState1(
+                &self,
+            ) -> *const root::lc3::core::MachineState {
+                sim_getMachineState1(self)
+            }
+            #[inline]
+            pub unsafe fn getInstExecCount(&self) -> u64 {
+                sim_getInstExecCount(self)
+            }
+            #[inline]
+            pub unsafe fn didExceedInstLimit(&self) -> bool {
+                sim_didExceedInstLimit(self)
+            }
+            #[inline]
+            pub unsafe fn getBreakpoints(&self) -> *const root::std::vector {
+                sim_getBreakpoints(self)
+            }
+            #[inline]
+            pub unsafe fn getReg(&self, id: u16) -> u16 {
+                sim_getReg(self, id)
+            }
+            #[inline]
+            pub unsafe fn getMem(&self, addr: u16) -> u16 {
+                sim_getMem(self, addr)
+            }
+            #[inline]
+            pub unsafe fn getMemLine(&self, addr: u16) -> root::std::string {
+                sim_getMemLine(self, addr)
+            }
+            #[inline]
+            pub unsafe fn getPC(&self) -> u16 {
+                sim_getPC(self)
+            }
+            #[inline]
+            pub unsafe fn getPSR(&self) -> u16 {
+                sim_getPSR(self)
+            }
+            #[inline]
+            pub unsafe fn getMCR(&self) -> u16 {
+                sim_getMCR(self)
+            }
+            #[inline]
+            pub unsafe fn getCC(&self) -> ::std::os::raw::c_char {
+                sim_getCC(self)
+            }
+            #[inline]
+            pub unsafe fn setReg(&mut self, id: u16, value: u16) {
+                sim_setReg(self, id, value)
+            }
+            #[inline]
+            pub unsafe fn setMem(&mut self, addr: u16, value: u16) {
+                sim_setMem(self, addr, value)
+            }
+            #[inline]
+            pub unsafe fn setMemString(
+                &mut self,
+                addr: u16,
+                value: *const root::std::string,
+            ) {
+                sim_setMemString(self, addr, value)
+            }
+            #[inline]
+            pub unsafe fn setMemLine(
+                &mut self,
+                addr: u16,
+                value: *const root::std::string,
+            ) {
+                sim_setMemLine(self, addr, value)
+            }
+            #[inline]
+            pub unsafe fn setPC(&mut self, value: u16) {
+                sim_setPC(self, value)
+            }
+            #[inline]
+            pub unsafe fn setPSR(&mut self, value: u16) {
+                sim_setPSR(self, value)
+            }
+            #[inline]
+            pub unsafe fn setMCR(&mut self, value: u16) {
+                sim_setMCR(self, value)
+            }
+            #[inline]
+            pub unsafe fn setCC(&mut self, value: ::std::os::raw::c_char) {
+                sim_setCC(self, value)
+            }
+            #[inline]
+            pub unsafe fn setBreakpoint(
+                &mut self,
+                addr: u16,
+            ) -> root::lc3::Breakpoint {
+                sim_setBreakpoint(self, addr)
+            }
+            #[inline]
+            pub unsafe fn removeBreakpointByID(&mut self, id: u32) -> bool {
+                sim_removeBreakpointByID(self, id)
+            }
+            #[inline]
+            pub unsafe fn removeBreakpointByAddr(&mut self, addr: u16) -> bool {
+                sim_removeBreakpointByAddr(self, addr)
+            }
+            #[inline]
+            pub unsafe fn registerPreInstructionCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerPreInstructionCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerPostInstructionCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerPostInstructionCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerInterruptEnterCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerInterruptEnterCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerInterruptExitCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerInterruptExitCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerExceptionEnterCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerExceptionEnterCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerExceptionExitCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerExceptionExitCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerSubEnterCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerSubEnterCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerSubExitCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerSubExitCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerWaitForInputCallback(
+                &mut self,
+                func: root::lc3::callback_func_t,
+            ) {
+                sim_registerWaitForInputCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn registerBreakpointCallback(
+                &mut self,
+                func: root::lc3::breakpoint_callback_func_t,
+            ) {
+                sim_registerBreakpointCallback(self, func)
+            }
+            #[inline]
+            pub unsafe fn getPrinter(
+                &mut self,
+            ) -> *mut root::lc3::utils::IPrinter {
+                sim_getPrinter(self)
+            }
+            #[inline]
+            pub unsafe fn getPrinter1(
+                &self,
+            ) -> *const root::lc3::utils::IPrinter {
+                sim_getPrinter1(self)
+            }
+            #[inline]
+            pub unsafe fn setPrintLevel(&mut self, print_level: u32) {
+                sim_setPrintLevel(self, print_level)
+            }
+            #[inline]
+            pub unsafe fn setPropagateExceptions(&mut self) {
+                sim_setPropagateExceptions(self)
+            }
+            #[inline]
+            pub unsafe fn clearPropagateExceptions(&mut self) {
+                sim_clearPropagateExceptions(self)
+            }
+            #[inline]
+            pub unsafe fn setIgnorePrivilege(&mut self, ignore: bool) {
+                sim_setIgnorePrivilege(self, ignore)
+            }
+            #[inline]
+            pub unsafe fn new(
+                printer: *mut root::lc3::utils::IPrinter,
+                inputter: *mut root::lc3::utils::IInputter,
+                threaded_input: bool,
+                print_level: u32,
+                propagate_exceptions: bool,
+            ) -> Self {
+                let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
+                sim_sim(
+                    __bindgen_tmp.as_mut_ptr(),
+                    printer,
+                    inputter,
+                    threaded_input,
+                    print_level,
+                    propagate_exceptions,
+                );
+                __bindgen_tmp.assume_init()
+            }
+        }
+        #[repr(C)]
+        pub struct as_ {
+            pub printer: *mut root::lc3::utils::IPrinter,
+            pub assembler: root::lc3::core::Assembler,
+            pub propagate_exceptions: bool,
+        }
+        #[test]
+        fn bindgen_test_layout_as_() {
+            assert_eq!(
+                ::std::mem::size_of::<as_>(),
+                240usize,
+                concat!("Size of: ", stringify!(as_))
+            );
+            assert_eq!(
+                ::std::mem::align_of::<as_>(),
+                8usize,
+                concat!("Alignment of ", stringify!(as_))
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<as_>())).printer as *const _ as usize
+                },
+                0usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(as_),
+                    "::",
+                    stringify!(printer)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<as_>())).assembler as *const _
+                        as usize
+                },
+                8usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(as_),
+                    "::",
+                    stringify!(assembler)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<as_>())).propagate_exceptions
+                        as *const _ as usize
+                },
+                232usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(as_),
+                    "::",
+                    stringify!(propagate_exceptions)
+                )
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc32as8assembleERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+            pub fn as_assemble(
+                this: *mut root::lc3::as_,
+                asm_filename: *const root::std::string,
+            ) -> root::lc3::optional<root::std::string>;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc32as22setPropagateExceptionsEv"]
+            pub fn as_setPropagateExceptions(this: *mut root::lc3::as_);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc32as24clearPropagateExceptionsEv"]
+            pub fn as_clearPropagateExceptions(this: *mut root::lc3::as_);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc32as19setEnableLiberalAsmEb"]
+            pub fn as_setEnableLiberalAsm(
+                this: *mut root::lc3::as_,
+                enable: bool,
+            );
+        }
+        impl Default for as_ {
+            fn default() -> Self {
+                unsafe { ::std::mem::zeroed() }
+            }
+        }
+        impl as_ {
+            #[inline]
+            pub unsafe fn assemble(
+                &mut self,
+                asm_filename: *const root::std::string,
+            ) -> root::lc3::optional<root::std::string> {
+                as_assemble(self, asm_filename)
+            }
+            #[inline]
+            pub unsafe fn setPropagateExceptions(&mut self) {
+                as_setPropagateExceptions(self)
+            }
+            #[inline]
+            pub unsafe fn clearPropagateExceptions(&mut self) {
+                as_clearPropagateExceptions(self)
+            }
+            #[inline]
+            pub unsafe fn setEnableLiberalAsm(&mut self, enable: bool) {
+                as_setEnableLiberalAsm(self, enable)
+            }
+        }
+        #[repr(C)]
+        #[derive(Debug, Copy, Clone)]
+        pub struct conv {
+            pub printer: *mut root::lc3::utils::IPrinter,
+            pub converter: root::lc3::core::Converter,
+            pub propagate_exceptions: bool,
+        }
+        #[test]
+        fn bindgen_test_layout_conv() {
+            assert_eq!(
+                ::std::mem::size_of::<conv>(),
+                32usize,
+                concat!("Size of: ", stringify!(conv))
+            );
+            assert_eq!(
+                ::std::mem::align_of::<conv>(),
+                8usize,
+                concat!("Alignment of ", stringify!(conv))
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<conv>())).printer as *const _
+                        as usize
+                },
+                0usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(conv),
+                    "::",
+                    stringify!(printer)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<conv>())).converter as *const _
+                        as usize
+                },
+                8usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(conv),
+                    "::",
+                    stringify!(converter)
+                )
+            );
+            assert_eq!(
+                unsafe {
+                    &(*(::std::ptr::null::<conv>())).propagate_exceptions
+                        as *const _ as usize
+                },
+                24usize,
+                concat!(
+                    "Offset of field: ",
+                    stringify!(conv),
+                    "::",
+                    stringify!(propagate_exceptions)
+                )
+            );
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc34conv10convertBinERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+            pub fn conv_convertBin(
+                this: *mut root::lc3::conv,
+                asm_filename: *const root::std::string,
+            ) -> root::lc3::optional<root::std::string>;
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc34conv22setPropagateExceptionsEv"]
+            pub fn conv_setPropagateExceptions(this: *mut root::lc3::conv);
+        }
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc34conv24clearPropagateExceptionsEv"]
+            pub fn conv_clearPropagateExceptions(this: *mut root::lc3::conv);
+        }
+        impl Default for conv {
+            fn default() -> Self {
+                unsafe { ::std::mem::zeroed() }
+            }
+        }
+        impl conv {
+            #[inline]
+            pub unsafe fn convertBin(
+                &mut self,
+                asm_filename: *const root::std::string,
+            ) -> root::lc3::optional<root::std::string> {
+                conv_convertBin(self, asm_filename)
+            }
+            #[inline]
+            pub unsafe fn setPropagateExceptions(&mut self) {
+                conv_setPropagateExceptions(self)
+            }
+            #[inline]
+            pub unsafe fn clearPropagateExceptions(&mut self) {
+                conv_clearPropagateExceptions(self)
+            }
+        }
+        pub mod shims {
+            #[allow(unused_imports)]
+            use self::super::super::super::root;
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct PrinterShim {
+                pub _base: root::lc3::utils::IPrinter,
+                pub setColorFunc: [u64; 4usize],
+                pub printFunc: [u64; 4usize],
+                pub newlineFunc: [u64; 4usize],
+            }
+            #[test]
+            fn bindgen_test_layout_PrinterShim() {
+                assert_eq!(
+                    ::std::mem::size_of::<PrinterShim>(),
+                    104usize,
+                    concat!("Size of: ", stringify!(PrinterShim))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<PrinterShim>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(PrinterShim))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<PrinterShim>())).setColorFunc
+                            as *const _ as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(PrinterShim),
+                        "::",
+                        stringify!(setColorFunc)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<PrinterShim>())).printFunc
+                            as *const _ as usize
+                    },
+                    40usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(PrinterShim),
+                        "::",
+                        stringify!(printFunc)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<PrinterShim>())).newlineFunc
+                            as *const _ as usize
+                    },
+                    72usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(PrinterShim),
+                        "::",
+                        stringify!(newlineFunc)
+                    )
+                );
+            }
+            impl Default for PrinterShim {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims11PrinterShim8setColorENS_5utils10PrintColorE"]
+                pub fn PrinterShim_setColor(
+                    this: *mut ::std::os::raw::c_void,
+                    color: root::lc3::utils::PrintColor,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims11PrinterShim5printERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+                pub fn PrinterShim_print(
+                    this: *mut ::std::os::raw::c_void,
+                    string: *const root::std::string,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims11PrinterShim7newlineEv"]
+                pub fn PrinterShim_newline(this: *mut ::std::os::raw::c_void);
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims13noOpPrintShimEv"]
+                pub fn noOpPrintShim() -> root::lc3::shims::PrinterShim;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims12setColorNoOpENS_5utils10PrintColorE"]
+                pub fn setColorNoOp(color: root::lc3::utils::PrintColor);
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims9printNoOpERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+                pub fn printNoOp(string: *const root::std::string);
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims11newlineNoOpEv"]
+                pub fn newlineNoOp();
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims11testPrinterERNS_5utils8IPrinterE"]
+                pub fn testPrinter(printer: *mut root::lc3::utils::IPrinter);
+            }
+            #[repr(C)]
+            #[derive(Debug)]
+            pub struct InputterShim {
+                pub _base: root::lc3::utils::IInputter,
+                pub beginInputFunc: [u64; 4usize],
+                pub getCharFunc: [u64; 4usize],
+                pub endInputFunc: [u64; 4usize],
+            }
+            #[test]
+            fn bindgen_test_layout_InputterShim() {
+                assert_eq!(
+                    ::std::mem::size_of::<InputterShim>(),
+                    104usize,
+                    concat!("Size of: ", stringify!(InputterShim))
+                );
+                assert_eq!(
+                    ::std::mem::align_of::<InputterShim>(),
+                    8usize,
+                    concat!("Alignment of ", stringify!(InputterShim))
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<InputterShim>())).beginInputFunc
+                            as *const _ as usize
+                    },
+                    8usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(InputterShim),
+                        "::",
+                        stringify!(beginInputFunc)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<InputterShim>())).getCharFunc
+                            as *const _ as usize
+                    },
+                    40usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(InputterShim),
+                        "::",
+                        stringify!(getCharFunc)
+                    )
+                );
+                assert_eq!(
+                    unsafe {
+                        &(*(::std::ptr::null::<InputterShim>())).endInputFunc
+                            as *const _ as usize
+                    },
+                    72usize,
+                    concat!(
+                        "Offset of field: ",
+                        stringify!(InputterShim),
+                        "::",
+                        stringify!(endInputFunc)
+                    )
+                );
+            }
+            impl Default for InputterShim {
+                fn default() -> Self {
+                    unsafe { ::std::mem::zeroed() }
+                }
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims12InputterShim10beginInputEv"]
+                pub fn InputterShim_beginInput(
+                    this: *mut ::std::os::raw::c_void,
+                );
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims12InputterShim7getCharERc"]
+                pub fn InputterShim_getChar(
+                    this: *mut ::std::os::raw::c_void,
+                    c: *mut ::std::os::raw::c_char,
+                ) -> bool;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims12InputterShim8endInputEv"]
+                pub fn InputterShim_endInput(this: *mut ::std::os::raw::c_void);
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims13noOpInputShimEv"]
+                pub fn noOpInputShim() -> root::lc3::shims::InputterShim;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims14beginInputNoOpEv"]
+                pub fn beginInputNoOp();
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims11getCharNoOpERc"]
+                pub fn getCharNoOp(c: *mut ::std::os::raw::c_char) -> bool;
+            }
+            extern "C" {
+                #[link_name = "\u{1}_ZN3lc35shims12endInputNoOpEv"]
+                pub fn endInputNoOp();
+            }
+        }
+        #[repr(C)]
+        #[derive(Debug)]
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        pub struct ConsoleInputter {
+            pub _base: root::lc3::utils::IInputter,
+        }
+        #[test]
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        fn bindgen_test_layout_ConsoleInputter() {
+            assert_eq!(
+                ::std::mem::size_of::<ConsoleInputter>(),
+                8usize,
+                concat!("Size of: ", stringify!(ConsoleInputter))
+            );
+            assert_eq!(
+                ::std::mem::align_of::<ConsoleInputter>(),
+                8usize,
+                concat!("Alignment of ", stringify!(ConsoleInputter))
+            );
+        }
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        impl Default for ConsoleInputter {
+            fn default() -> Self {
+                unsafe { ::std::mem::zeroed() }
+            }
+        }
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc315ConsoleInputter10beginInputEv"]
+            pub fn ConsoleInputter_beginInput(
+                this: *mut ::std::os::raw::c_void,
+            );
+        }
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc315ConsoleInputter7getCharERc"]
+            pub fn ConsoleInputter_getChar(
+                this: *mut ::std::os::raw::c_void,
+                c: *mut ::std::os::raw::c_char,
+            ) -> bool;
+        }
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc315ConsoleInputter8endInputEv"]
+            pub fn ConsoleInputter_endInput(this: *mut ::std::os::raw::c_void);
+        }
+        #[repr(C)]
+        #[derive(Debug)]
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        pub struct ConsolePrinter {
+            pub _base: root::lc3::utils::IPrinter,
+        }
+        #[test]
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        fn bindgen_test_layout_ConsolePrinter() {
+            assert_eq!(
+                ::std::mem::size_of::<ConsolePrinter>(),
+                8usize,
+                concat!("Size of: ", stringify!(ConsolePrinter))
+            );
+            assert_eq!(
+                ::std::mem::align_of::<ConsolePrinter>(),
+                8usize,
+                concat!("Alignment of ", stringify!(ConsolePrinter))
+            );
+        }
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        impl Default for ConsolePrinter {
+            fn default() -> Self {
+                unsafe { ::std::mem::zeroed() }
+            }
+        }
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc314ConsolePrinter8setColorENS_5utils10PrintColorE"]
+            pub fn ConsolePrinter_setColor(
+                this: *mut ::std::os::raw::c_void,
+                color: root::lc3::utils::PrintColor,
+            );
+        }
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc314ConsolePrinter5printERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
+            pub fn ConsolePrinter_print(
+                this: *mut ::std::os::raw::c_void,
+                string: *const root::std::string,
+            );
+        }
+        #[cfg(feature = "frontend")]
+        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
+        extern "C" {
+            #[link_name = "\u{1}_ZN3lc314ConsolePrinter7newlineEv"]
+            pub fn ConsolePrinter_newline(this: *mut ::std::os::raw::c_void);
+        }
+    }
     pub mod std {
         #[allow(unused_imports)]
         use self::super::super::root;
@@ -22240,5579 +28018,6 @@ pub mod root {
             *mut ::std::os::raw::c_char;
     }
     pub type error_t = ::std::os::raw::c_int;
-    pub mod lc3 {
-        #[allow(unused_imports)]
-        use self::super::super::root;
-        pub mod core {
-            #[allow(unused_imports)]
-            use self::super::super::super::root;
-            pub type PIOperand = root::std::shared_ptr;
-            pub type PIInstruction = root::std::shared_ptr;
-            pub type PIEvent = root::std::shared_ptr;
-            pub type SymbolTable = root::std::map;
-            pub mod asmbl {
-                #[allow(unused_imports)]
-                use self::super::super::super::super::root;
-                #[repr(C)]
-                pub struct Token {
-                    pub type_: root::lc3::core::asmbl::Token_Type,
-                    pub str: root::std::string,
-                    pub num: i32,
-                    pub row: u32,
-                    pub col: u32,
-                    pub len: u32,
-                    pub line: root::std::string,
-                }
-                pub const Token_Type_NUM: root::lc3::core::asmbl::Token_Type =
-                    0;
-                pub const Token_Type_STRING:
-                    root::lc3::core::asmbl::Token_Type = 1;
-                pub const Token_Type_EOL: root::lc3::core::asmbl::Token_Type =
-                    2;
-                pub const Token_Type_INVALID:
-                    root::lc3::core::asmbl::Token_Type = 3;
-                pub type Token_Type = i32;
-                #[test]
-                fn bindgen_test_layout_Token() {
-                    assert_eq!(
-                        ::std::mem::size_of::<Token>(),
-                        88usize,
-                        concat!("Size of: ", stringify!(Token))
-                    );
-                    assert_eq!(
-                        ::std::mem::align_of::<Token>(),
-                        8usize,
-                        concat!("Alignment of ", stringify!(Token))
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Token>())).type_ as *const _
-                                as usize
-                        },
-                        0usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Token),
-                            "::",
-                            stringify!(type_)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Token>())).str as *const _
-                                as usize
-                        },
-                        8usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Token),
-                            "::",
-                            stringify!(str)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Token>())).num as *const _
-                                as usize
-                        },
-                        40usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Token),
-                            "::",
-                            stringify!(num)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Token>())).row as *const _
-                                as usize
-                        },
-                        44usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Token),
-                            "::",
-                            stringify!(row)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Token>())).col as *const _
-                                as usize
-                        },
-                        48usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Token),
-                            "::",
-                            stringify!(col)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Token>())).len as *const _
-                                as usize
-                        },
-                        52usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Token),
-                            "::",
-                            stringify!(len)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Token>())).line as *const _
-                                as usize
-                        },
-                        56usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Token),
-                            "::",
-                            stringify!(line)
-                        )
-                    );
-                }
-                impl Default for Token {
-                    fn default() -> Self {
-                        unsafe { ::std::mem::zeroed() }
-                    }
-                }
-                #[repr(C)]
-                pub struct StatementPiece {
-                    pub type_: root::lc3::core::asmbl::StatementPiece_Type,
-                    pub str: root::std::string,
-                    pub num: u32,
-                    pub col: u32,
-                    pub len: u32,
-                }
-                pub const StatementPiece_Type_INST:
-                    root::lc3::core::asmbl::StatementPiece_Type = 0;
-                pub const StatementPiece_Type_PSEUDO:
-                    root::lc3::core::asmbl::StatementPiece_Type = 1;
-                pub const StatementPiece_Type_LABEL:
-                    root::lc3::core::asmbl::StatementPiece_Type = 2;
-                pub const StatementPiece_Type_REG:
-                    root::lc3::core::asmbl::StatementPiece_Type = 3;
-                pub const StatementPiece_Type_STRING:
-                    root::lc3::core::asmbl::StatementPiece_Type = 4;
-                pub const StatementPiece_Type_NUM:
-                    root::lc3::core::asmbl::StatementPiece_Type = 5;
-                pub const StatementPiece_Type_INVALID:
-                    root::lc3::core::asmbl::StatementPiece_Type = 6;
-                pub type StatementPiece_Type = i32;
-                #[test]
-                fn bindgen_test_layout_StatementPiece() {
-                    assert_eq!(
-                        ::std::mem::size_of::<StatementPiece>(),
-                        56usize,
-                        concat!("Size of: ", stringify!(StatementPiece))
-                    );
-                    assert_eq!(
-                        ::std::mem::align_of::<StatementPiece>(),
-                        8usize,
-                        concat!("Alignment of ", stringify!(StatementPiece))
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<StatementPiece>())).type_
-                                as *const _ as usize
-                        },
-                        0usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(StatementPiece),
-                            "::",
-                            stringify!(type_)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<StatementPiece>())).str
-                                as *const _ as usize
-                        },
-                        8usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(StatementPiece),
-                            "::",
-                            stringify!(str)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<StatementPiece>())).num
-                                as *const _ as usize
-                        },
-                        40usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(StatementPiece),
-                            "::",
-                            stringify!(num)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<StatementPiece>())).col
-                                as *const _ as usize
-                        },
-                        44usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(StatementPiece),
-                            "::",
-                            stringify!(col)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<StatementPiece>())).len
-                                as *const _ as usize
-                        },
-                        48usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(StatementPiece),
-                            "::",
-                            stringify!(len)
-                        )
-                    );
-                }
-                impl Default for StatementPiece {
-                    fn default() -> Self {
-                        unsafe { ::std::mem::zeroed() }
-                    }
-                }
-                #[repr(C)]
-                pub struct Statement {
-                    pub label: root::lc3::optional<
-                        root::lc3::core::asmbl::StatementPiece,
-                    >,
-                    pub base: root::lc3::optional<
-                        root::lc3::core::asmbl::StatementPiece,
-                    >,
-                    pub operands: root::std::vector,
-                    pub pc: u32,
-                    pub line: root::std::string,
-                    pub row: u32,
-                    pub valid: bool,
-                }
-                #[test]
-                fn bindgen_test_layout_Statement() {
-                    assert_eq!(
-                        ::std::mem::size_of::<Statement>(),
-                        200usize,
-                        concat!("Size of: ", stringify!(Statement))
-                    );
-                    assert_eq!(
-                        ::std::mem::align_of::<Statement>(),
-                        8usize,
-                        concat!("Alignment of ", stringify!(Statement))
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Statement>())).label
-                                as *const _ as usize
-                        },
-                        0usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Statement),
-                            "::",
-                            stringify!(label)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Statement>())).base
-                                as *const _ as usize
-                        },
-                        64usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Statement),
-                            "::",
-                            stringify!(base)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Statement>())).operands
-                                as *const _ as usize
-                        },
-                        128usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Statement),
-                            "::",
-                            stringify!(operands)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Statement>())).pc as *const _
-                                as usize
-                        },
-                        152usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Statement),
-                            "::",
-                            stringify!(pc)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Statement>())).line
-                                as *const _ as usize
-                        },
-                        160usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Statement),
-                            "::",
-                            stringify!(line)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Statement>())).row
-                                as *const _ as usize
-                        },
-                        192usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Statement),
-                            "::",
-                            stringify!(row)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Statement>())).valid
-                                as *const _ as usize
-                        },
-                        196usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Statement),
-                            "::",
-                            stringify!(valid)
-                        )
-                    );
-                }
-                impl Default for Statement {
-                    fn default() -> Self {
-                        unsafe { ::std::mem::zeroed() }
-                    }
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZN3lc34core5asmbl6getNumERKNS1_9StatementERKNS1_14StatementPieceEjbRNS_5utils15AssemblerLoggerEb"]
-                    pub fn getNum(
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        piece: *const root::lc3::core::asmbl::StatementPiece,
-                        width: u32,
-                        sext: bool,
-                        logger: *mut root::lc3::utils::AssemblerLogger,
-                        log_enable: bool,
-                    ) -> root::lc3::optional<u32>;
-                }
-                #[repr(C)]
-                pub struct InstructionEncoder {
-                    pub _base: root::lc3::core::InstructionHandler,
-                    pub logger: *mut root::lc3::utils::AssemblerLogger,
-                    pub enable_liberal_asm: bool,
-                    pub instructions_by_name: root::std::map,
-                }
-                #[test]
-                fn bindgen_test_layout_InstructionEncoder() {
-                    assert_eq!(
-                        ::std::mem::size_of::<InstructionEncoder>(),
-                        144usize,
-                        concat!("Size of: ", stringify!(InstructionEncoder))
-                    );
-                    assert_eq!(
-                        ::std::mem::align_of::<InstructionEncoder>(),
-                        8usize,
-                        concat!(
-                            "Alignment of ",
-                            stringify!(InstructionEncoder)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<InstructionEncoder>()))
-                                .logger as *const _
-                                as usize
-                        },
-                        80usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(InstructionEncoder),
-                            "::",
-                            stringify!(logger)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<InstructionEncoder>()))
-                                .enable_liberal_asm
-                                as *const _ as usize
-                        },
-                        88usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(InstructionEncoder),
-                            "::",
-                            stringify!(enable_liberal_asm)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<InstructionEncoder>()))
-                                .instructions_by_name
-                                as *const _ as usize
-                        },
-                        96usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(InstructionEncoder),
-                            "::",
-                            stringify!(instructions_by_name)
-                        )
-                    );
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder14isStringPseudoERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-                    pub fn InstructionEncoder_isStringPseudo(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        search: *const root::std::string,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder16isStringValidRegERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-                    pub fn InstructionEncoder_isStringValidReg(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        search: *const root::std::string,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder8isPseudoERKNS1_9StatementE"]
-                    pub fn InstructionEncoder_isPseudo(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder6isInstERKNS1_9StatementE"]
-                    pub fn InstructionEncoder_isInst(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder17isValidPseudoOrigERKNS1_9StatementEb"]
-                    pub fn InstructionEncoder_isValidPseudoOrig(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder17isValidPseudoFillERKNS1_9StatementEb"]
-                    pub fn InstructionEncoder_isValidPseudoFill(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder17isValidPseudoFillERKNS1_9StatementERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISC_ESaISt4pairIKSC_jEEEb"]
-                    pub fn InstructionEncoder_isValidPseudoFill1(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        symbols: *const root::lc3::core::SymbolTable,
-                        log_enable: bool,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder18isValidPseudoBlockERKNS1_9StatementEb"]
-                    pub fn InstructionEncoder_isValidPseudoBlock(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder19isValidPseudoStringERKNS1_9StatementEb"]
-                    pub fn InstructionEncoder_isValidPseudoString(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder16isValidPseudoEndERKNS1_9StatementEb"]
-                    pub fn InstructionEncoder_isValidPseudoEnd(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder35getDistanceToNearestInstructionNameERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-                    pub fn InstructionEncoder_getDistanceToNearestInstructionName(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        search: *const root::std::string,
-                    ) -> u32;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder14validatePseudoERKNS1_9StatementERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISC_ESaISt4pairIKSC_jEEE"]
-                    pub fn InstructionEncoder_validatePseudo(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        symbols: *const root::lc3::core::SymbolTable,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder19validateInstructionERKNS1_9StatementE"]
-                    pub fn InstructionEncoder_validateInstruction(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> root::lc3::optional<root::lc3::core::PIInstruction>;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder13getPseudoOrigERKNS1_9StatementE"]
-                    pub fn InstructionEncoder_getPseudoOrig(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> u32;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder13getPseudoFillERKNS1_9StatementERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISC_ESaISt4pairIKSC_jEEE"]
-                    pub fn InstructionEncoder_getPseudoFill(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        symbols: *const root::lc3::core::SymbolTable,
-                    ) -> u32;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder18getPseudoBlockSizeERKNS1_9StatementE"]
-                    pub fn InstructionEncoder_getPseudoBlockSize(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> u32;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder19getPseudoStringSizeERKNS1_9StatementE"]
-                    pub fn InstructionEncoder_getPseudoStringSize(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> u32;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder15getPseudoStringB5cxx11ERKNS1_9StatementE"]
-                    pub fn InstructionEncoder_getPseudoString(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> root::std::string;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl18InstructionEncoder17encodeInstructionERKNS1_9StatementERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISC_ESaISt4pairIKSC_jEEESt10shared_ptrINS0_12IInstructionEE"]
-                    pub fn InstructionEncoder_encodeInstruction(
-                        this: *const root::lc3::core::asmbl::InstructionEncoder,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        symbols: *const root::lc3::core::SymbolTable,
-                        pattern: root::lc3::core::PIInstruction,
-                    ) -> root::lc3::optional<u32>;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZN3lc34core5asmbl18InstructionEncoderC1ERNS_5utils15AssemblerLoggerEb"]
-                    pub fn InstructionEncoder_InstructionEncoder(
-                        this: *mut root::lc3::core::asmbl::InstructionEncoder,
-                        logger: *mut root::lc3::utils::AssemblerLogger,
-                        enable_liberal_assembly: bool,
-                    );
-                }
-                impl Default for InstructionEncoder {
-                    fn default() -> Self {
-                        unsafe { ::std::mem::zeroed() }
-                    }
-                }
-                impl InstructionEncoder {
-                    #[inline]
-                    pub unsafe fn isStringPseudo(
-                        &self,
-                        search: *const root::std::string,
-                    ) -> bool {
-                        InstructionEncoder_isStringPseudo(self, search)
-                    }
-                    #[inline]
-                    pub unsafe fn isStringValidReg(
-                        &self,
-                        search: *const root::std::string,
-                    ) -> bool {
-                        InstructionEncoder_isStringValidReg(self, search)
-                    }
-                    #[inline]
-                    pub unsafe fn isPseudo(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> bool {
-                        InstructionEncoder_isPseudo(self, statement)
-                    }
-                    #[inline]
-                    pub unsafe fn isInst(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> bool {
-                        InstructionEncoder_isInst(self, statement)
-                    }
-                    #[inline]
-                    pub unsafe fn isValidPseudoOrig(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool {
-                        InstructionEncoder_isValidPseudoOrig(
-                            self, statement, log_enable,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn isValidPseudoFill(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool {
-                        InstructionEncoder_isValidPseudoFill(
-                            self, statement, log_enable,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn isValidPseudoFill1(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        symbols: *const root::lc3::core::SymbolTable,
-                        log_enable: bool,
-                    ) -> bool {
-                        InstructionEncoder_isValidPseudoFill1(
-                            self, statement, symbols, log_enable,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn isValidPseudoBlock(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool {
-                        InstructionEncoder_isValidPseudoBlock(
-                            self, statement, log_enable,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn isValidPseudoString(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool {
-                        InstructionEncoder_isValidPseudoString(
-                            self, statement, log_enable,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn isValidPseudoEnd(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        log_enable: bool,
-                    ) -> bool {
-                        InstructionEncoder_isValidPseudoEnd(
-                            self, statement, log_enable,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn getDistanceToNearestInstructionName(
-                        &self,
-                        search: *const root::std::string,
-                    ) -> u32 {
-                        InstructionEncoder_getDistanceToNearestInstructionName(
-                            self, search,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn validatePseudo(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        symbols: *const root::lc3::core::SymbolTable,
-                    ) -> bool {
-                        InstructionEncoder_validatePseudo(
-                            self, statement, symbols,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn validateInstruction(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> root::lc3::optional<root::lc3::core::PIInstruction>
-                    {
-                        InstructionEncoder_validateInstruction(self, statement)
-                    }
-                    #[inline]
-                    pub unsafe fn getPseudoOrig(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> u32 {
-                        InstructionEncoder_getPseudoOrig(self, statement)
-                    }
-                    #[inline]
-                    pub unsafe fn getPseudoFill(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        symbols: *const root::lc3::core::SymbolTable,
-                    ) -> u32 {
-                        InstructionEncoder_getPseudoFill(
-                            self, statement, symbols,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn getPseudoBlockSize(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> u32 {
-                        InstructionEncoder_getPseudoBlockSize(self, statement)
-                    }
-                    #[inline]
-                    pub unsafe fn getPseudoStringSize(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> u32 {
-                        InstructionEncoder_getPseudoStringSize(self, statement)
-                    }
-                    #[inline]
-                    pub unsafe fn getPseudoString(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                    ) -> root::std::string {
-                        InstructionEncoder_getPseudoString(self, statement)
-                    }
-                    #[inline]
-                    pub unsafe fn encodeInstruction(
-                        &self,
-                        statement: *const root::lc3::core::asmbl::Statement,
-                        symbols: *const root::lc3::core::SymbolTable,
-                        pattern: root::lc3::core::PIInstruction,
-                    ) -> root::lc3::optional<u32> {
-                        InstructionEncoder_encodeInstruction(
-                            self, statement, symbols, pattern,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn new(
-                        logger: *mut root::lc3::utils::AssemblerLogger,
-                        enable_liberal_assembly: bool,
-                    ) -> Self {
-                        let mut __bindgen_tmp =
-                            ::std::mem::MaybeUninit::uninit();
-                        InstructionEncoder_InstructionEncoder(
-                            __bindgen_tmp.as_mut_ptr(),
-                            logger,
-                            enable_liberal_assembly,
-                        );
-                        __bindgen_tmp.assume_init()
-                    }
-                }
-                #[repr(C)]
-                pub struct Tokenizer {
-                    pub buffer: *mut root::std::istream,
-                    pub get_new_line: bool,
-                    pub return_new_line: bool,
-                    pub line: root::std::string,
-                    pub row: u32,
-                    pub col: u32,
-                    pub done: bool,
-                    pub enable_liberal_asm: bool,
-                }
-                #[test]
-                fn bindgen_test_layout_Tokenizer() {
-                    assert_eq!(
-                        ::std::mem::size_of::<Tokenizer>(),
-                        64usize,
-                        concat!("Size of: ", stringify!(Tokenizer))
-                    );
-                    assert_eq!(
-                        ::std::mem::align_of::<Tokenizer>(),
-                        8usize,
-                        concat!("Alignment of ", stringify!(Tokenizer))
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Tokenizer>())).buffer
-                                as *const _ as usize
-                        },
-                        0usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Tokenizer),
-                            "::",
-                            stringify!(buffer)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Tokenizer>())).get_new_line
-                                as *const _ as usize
-                        },
-                        8usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Tokenizer),
-                            "::",
-                            stringify!(get_new_line)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Tokenizer>()))
-                                .return_new_line
-                                as *const _ as usize
-                        },
-                        9usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Tokenizer),
-                            "::",
-                            stringify!(return_new_line)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Tokenizer>())).line
-                                as *const _ as usize
-                        },
-                        16usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Tokenizer),
-                            "::",
-                            stringify!(line)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Tokenizer>())).row
-                                as *const _ as usize
-                        },
-                        48usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Tokenizer),
-                            "::",
-                            stringify!(row)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Tokenizer>())).col
-                                as *const _ as usize
-                        },
-                        52usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Tokenizer),
-                            "::",
-                            stringify!(col)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Tokenizer>())).done
-                                as *const _ as usize
-                        },
-                        56usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Tokenizer),
-                            "::",
-                            stringify!(done)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<Tokenizer>()))
-                                .enable_liberal_asm
-                                as *const _ as usize
-                        },
-                        57usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(Tokenizer),
-                            "::",
-                            stringify!(enable_liberal_asm)
-                        )
-                    );
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core5asmbl9Tokenizer6isDoneEv"]
-                    pub fn Tokenizer_isDone(
-                        this: *const root::lc3::core::asmbl::Tokenizer,
-                    ) -> bool;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZN3lc34core5asmbl9TokenizerC1ERSib"]
-                    pub fn Tokenizer_Tokenizer(
-                        this: *mut root::lc3::core::asmbl::Tokenizer,
-                        buffer: *mut root::std::istream,
-                        enable_liberal_asm: bool,
-                    );
-                }
-                impl Default for Tokenizer {
-                    fn default() -> Self {
-                        unsafe { ::std::mem::zeroed() }
-                    }
-                }
-                impl Tokenizer {
-                    #[inline]
-                    pub unsafe fn isDone(&self) -> bool {
-                        Tokenizer_isDone(self)
-                    }
-                    #[inline]
-                    pub unsafe fn new(
-                        buffer: *mut root::std::istream,
-                        enable_liberal_asm: bool,
-                    ) -> Self {
-                        let mut __bindgen_tmp =
-                            ::std::mem::MaybeUninit::uninit();
-                        Tokenizer_Tokenizer(
-                            __bindgen_tmp.as_mut_ptr(),
-                            buffer,
-                            enable_liberal_asm,
-                        );
-                        __bindgen_tmp.assume_init()
-                    }
-                }
-            }
-            #[repr(C)]
-            pub struct MemEntry {
-                pub value: u16,
-                pub orig: bool,
-                pub line: root::std::string,
-            }
-            #[test]
-            fn bindgen_test_layout_MemEntry() {
-                assert_eq!(
-                    ::std::mem::size_of::<MemEntry>(),
-                    40usize,
-                    concat!("Size of: ", stringify!(MemEntry))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<MemEntry>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(MemEntry))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MemEntry>())).value as *const _
-                            as usize
-                    },
-                    0usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MemEntry),
-                        "::",
-                        stringify!(value)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MemEntry>())).orig as *const _
-                            as usize
-                    },
-                    2usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MemEntry),
-                        "::",
-                        stringify!(orig)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MemEntry>())).line as *const _
-                            as usize
-                    },
-                    8usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MemEntry),
-                        "::",
-                        stringify!(line)
-                    )
-                );
-            }
-            impl Default for MemEntry {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            pub type callback_func_t = [u64; 4usize];
-            #[repr(C)]
-            pub struct MachineState {
-                pub mem: root::std::vector,
-                pub regs: [u32; 8usize],
-                pub pc: u32,
-                pub sys_call_types: root::std::stack<root::std::deque>,
-                pub logger: *mut root::lc3::utils::Logger,
-                pub pre_instruction_callback_v: bool,
-                pub post_instruction_callback_v: bool,
-                pub interrupt_enter_callback_v: bool,
-                pub interrupt_exit_callback_v: bool,
-                pub exception_enter_callback_v: bool,
-                pub exception_exit_callback_v: bool,
-                pub sub_enter_callback_v: bool,
-                pub sub_exit_callback_v: bool,
-                pub wait_for_input_callback_v: bool,
-                pub pre_instruction_callback: root::lc3::core::callback_func_t,
-                pub post_instruction_callback: root::lc3::core::callback_func_t,
-                pub interrupt_enter_callback: root::lc3::core::callback_func_t,
-                pub interrupt_exit_callback: root::lc3::core::callback_func_t,
-                pub exception_enter_callback: root::lc3::core::callback_func_t,
-                pub exception_exit_callback: root::lc3::core::callback_func_t,
-                pub sub_enter_callback: root::lc3::core::callback_func_t,
-                pub sub_exit_callback: root::lc3::core::callback_func_t,
-                pub wait_for_input_callback: root::lc3::core::callback_func_t,
-                pub simulator: *mut root::lc3::sim,
-                pub ignore_privilege: bool,
-            }
-            pub const MachineState_SysCallType_TRAP:
-                root::lc3::core::MachineState_SysCallType = 0;
-            pub const MachineState_SysCallType_INT:
-                root::lc3::core::MachineState_SysCallType = 1;
-            pub const MachineState_SysCallType_EX:
-                root::lc3::core::MachineState_SysCallType = 2;
-            pub type MachineState_SysCallType = i32;
-            pub const MachineState_SPType_SSP:
-                root::lc3::core::MachineState_SPType = 0;
-            pub const MachineState_SPType_USP:
-                root::lc3::core::MachineState_SPType = 1;
-            pub type MachineState_SPType = i32;
-            #[test]
-            fn bindgen_test_layout_MachineState() {
-                assert_eq!(
-                    ::std::mem::size_of::<MachineState>(),
-                    472usize,
-                    concat!("Size of: ", stringify!(MachineState))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<MachineState>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(MachineState))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>())).mem as *const _
-                            as usize
-                    },
-                    0usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(mem)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>())).regs
-                            as *const _ as usize
-                    },
-                    24usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(regs)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>())).pc as *const _
-                            as usize
-                    },
-                    56usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(pc)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>())).sys_call_types
-                            as *const _ as usize
-                    },
-                    64usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(sys_call_types)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>())).logger
-                            as *const _ as usize
-                    },
-                    144usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(logger)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .pre_instruction_callback_v
-                            as *const _ as usize
-                    },
-                    152usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(pre_instruction_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .post_instruction_callback_v
-                            as *const _ as usize
-                    },
-                    153usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(post_instruction_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .interrupt_enter_callback_v
-                            as *const _ as usize
-                    },
-                    154usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(interrupt_enter_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .interrupt_exit_callback_v
-                            as *const _ as usize
-                    },
-                    155usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(interrupt_exit_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .exception_enter_callback_v
-                            as *const _ as usize
-                    },
-                    156usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(exception_enter_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .exception_exit_callback_v
-                            as *const _ as usize
-                    },
-                    157usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(exception_exit_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .sub_enter_callback_v
-                            as *const _ as usize
-                    },
-                    158usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(sub_enter_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .sub_exit_callback_v
-                            as *const _ as usize
-                    },
-                    159usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(sub_exit_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .wait_for_input_callback_v
-                            as *const _ as usize
-                    },
-                    160usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(wait_for_input_callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .pre_instruction_callback
-                            as *const _ as usize
-                    },
-                    168usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(pre_instruction_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .post_instruction_callback
-                            as *const _ as usize
-                    },
-                    200usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(post_instruction_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .interrupt_enter_callback
-                            as *const _ as usize
-                    },
-                    232usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(interrupt_enter_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .interrupt_exit_callback
-                            as *const _ as usize
-                    },
-                    264usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(interrupt_exit_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .exception_enter_callback
-                            as *const _ as usize
-                    },
-                    296usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(exception_enter_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .exception_exit_callback
-                            as *const _ as usize
-                    },
-                    328usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(exception_exit_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .sub_enter_callback
-                            as *const _ as usize
-                    },
-                    360usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(sub_enter_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .sub_exit_callback
-                            as *const _ as usize
-                    },
-                    392usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(sub_exit_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .wait_for_input_callback
-                            as *const _ as usize
-                    },
-                    424usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(wait_for_input_callback)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>())).simulator
-                            as *const _ as usize
-                    },
-                    456usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(simulator)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MachineState>()))
-                            .ignore_privilege
-                            as *const _ as usize
-                    },
-                    464usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MachineState),
-                        "::",
-                        stringify!(ignore_privilege)
-                    )
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core12MachineState12readMemEventEjRbRSt10shared_ptrINS0_6IEventEE"]
-                pub fn MachineState_readMemEvent(
-                    this: *const root::lc3::core::MachineState,
-                    addr: u32,
-                    change_mem: *mut bool,
-                    change: *mut root::std::shared_ptr,
-                ) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12MachineState11readMemSafeEj"]
-                pub fn MachineState_readMemSafe(
-                    this: *mut root::lc3::core::MachineState,
-                    addr: u32,
-                ) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core12MachineState10readMemRawEj"]
-                pub fn MachineState_readMemRaw(
-                    this: *const root::lc3::core::MachineState,
-                    addr: u32,
-                ) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12MachineState13writeMemEventEjtRbRSt10shared_ptrINS0_6IEventEE"]
-                pub fn MachineState_writeMemEvent(
-                    this: *mut root::lc3::core::MachineState,
-                    addr: u32,
-                    value: u16,
-                    change_mem: *mut bool,
-                    change: *mut root::std::shared_ptr,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12MachineState12writeMemSafeEjt"]
-                pub fn MachineState_writeMemSafe(
-                    this: *mut root::lc3::core::MachineState,
-                    addr: u32,
-                    value: u16,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12MachineState11writeMemRawEjt"]
-                pub fn MachineState_writeMemRaw(
-                    this: *mut root::lc3::core::MachineState,
-                    addr: u32,
-                    value: u16,
-                );
-            }
-            impl Default for MachineState {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            impl MachineState {
-                #[inline]
-                pub unsafe fn readMemEvent(
-                    &self,
-                    addr: u32,
-                    change_mem: *mut bool,
-                    change: *mut root::std::shared_ptr,
-                ) -> u32 {
-                    MachineState_readMemEvent(self, addr, change_mem, change)
-                }
-                #[inline]
-                pub unsafe fn readMemSafe(&mut self, addr: u32) -> u32 {
-                    MachineState_readMemSafe(self, addr)
-                }
-                #[inline]
-                pub unsafe fn readMemRaw(&self, addr: u32) -> u32 {
-                    MachineState_readMemRaw(self, addr)
-                }
-                #[inline]
-                pub unsafe fn writeMemEvent(
-                    &mut self,
-                    addr: u32,
-                    value: u16,
-                    change_mem: *mut bool,
-                    change: *mut root::std::shared_ptr,
-                ) {
-                    MachineState_writeMemEvent(
-                        self, addr, value, change_mem, change,
-                    )
-                }
-                #[inline]
-                pub unsafe fn writeMemSafe(&mut self, addr: u32, value: u16) {
-                    MachineState_writeMemSafe(self, addr, value)
-                }
-                #[inline]
-                pub unsafe fn writeMemRaw(&mut self, addr: u32, value: u16) {
-                    MachineState_writeMemRaw(self, addr, value)
-                }
-            }
-            pub const EventType_EVENT_REG: root::lc3::core::EventType = 0;
-            pub const EventType_EVENT_PSR: root::lc3::core::EventType = 1;
-            pub const EventType_EVENT_PC: root::lc3::core::EventType = 2;
-            pub const EventType_EVENT_MEM: root::lc3::core::EventType = 3;
-            pub const EventType_EVENT_SWAP_SP: root::lc3::core::EventType = 4;
-            pub const EventType_EVENT_CALLBACK: root::lc3::core::EventType = 5;
-            pub const EventType_PUSH_SYS_CALL_TYPE: root::lc3::core::EventType =
-                6;
-            pub const EventType_POP_SYS_CALL_TYPE: root::lc3::core::EventType =
-                7;
-            pub type EventType = i32;
-            #[repr(C)]
-            pub struct IEvent__bindgen_vtable(::std::os::raw::c_void);
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct IEvent {
-                pub vtable_: *const IEvent__bindgen_vtable,
-                pub type_: root::lc3::core::EventType,
-            }
-            #[test]
-            fn bindgen_test_layout_IEvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<IEvent>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(IEvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<IEvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(IEvent))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<IEvent>())).type_ as *const _
-                            as usize
-                    },
-                    8usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(IEvent),
-                        "::",
-                        stringify!(type_)
-                    )
-                );
-            }
-            impl Default for IEvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct RegEvent {
-                pub _base: root::lc3::core::IEvent,
-                pub reg: u32,
-                pub value: u32,
-            }
-            #[test]
-            fn bindgen_test_layout_RegEvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<RegEvent>(),
-                    24usize,
-                    concat!("Size of: ", stringify!(RegEvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<RegEvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(RegEvent))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<RegEvent>())).reg as *const _
-                            as usize
-                    },
-                    12usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(RegEvent),
-                        "::",
-                        stringify!(reg)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<RegEvent>())).value as *const _
-                            as usize
-                    },
-                    16usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(RegEvent),
-                        "::",
-                        stringify!(value)
-                    )
-                );
-            }
-            impl Default for RegEvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct PSREvent {
-                pub _base: root::lc3::core::IEvent,
-                pub value: u32,
-            }
-            #[test]
-            fn bindgen_test_layout_PSREvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<PSREvent>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(PSREvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<PSREvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(PSREvent))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<PSREvent>())).value as *const _
-                            as usize
-                    },
-                    12usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(PSREvent),
-                        "::",
-                        stringify!(value)
-                    )
-                );
-            }
-            impl Default for PSREvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct PCEvent {
-                pub _base: root::lc3::core::IEvent,
-                pub value: u32,
-            }
-            #[test]
-            fn bindgen_test_layout_PCEvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<PCEvent>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(PCEvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<PCEvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(PCEvent))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<PCEvent>())).value as *const _
-                            as usize
-                    },
-                    12usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(PCEvent),
-                        "::",
-                        stringify!(value)
-                    )
-                );
-            }
-            impl Default for PCEvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct MemWriteEvent {
-                pub _base: root::lc3::core::IEvent,
-                pub addr: u32,
-                pub value: u32,
-            }
-            #[test]
-            fn bindgen_test_layout_MemWriteEvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<MemWriteEvent>(),
-                    24usize,
-                    concat!("Size of: ", stringify!(MemWriteEvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<MemWriteEvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(MemWriteEvent))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MemWriteEvent>())).addr
-                            as *const _ as usize
-                    },
-                    12usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MemWriteEvent),
-                        "::",
-                        stringify!(addr)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<MemWriteEvent>())).value
-                            as *const _ as usize
-                    },
-                    16usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(MemWriteEvent),
-                        "::",
-                        stringify!(value)
-                    )
-                );
-            }
-            impl Default for MemWriteEvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core13MemWriteEvent11updateStateERNS0_12MachineStateE"]
-                pub fn MemWriteEvent_updateState(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *mut root::lc3::core::MachineState,
-                );
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct SwapSPEvent {
-                pub _base: root::lc3::core::IEvent,
-            }
-            #[test]
-            fn bindgen_test_layout_SwapSPEvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<SwapSPEvent>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(SwapSPEvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<SwapSPEvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(SwapSPEvent))
-                );
-            }
-            impl Default for SwapSPEvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core11SwapSPEvent11updateStateERNS0_12MachineStateE"]
-                pub fn SwapSPEvent_updateState(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *mut root::lc3::core::MachineState,
-                );
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct CallbackEvent {
-                pub _base: root::lc3::core::IEvent,
-                pub callback_v: bool,
-                pub callback: root::lc3::core::callback_func_t,
-            }
-            #[test]
-            fn bindgen_test_layout_CallbackEvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<CallbackEvent>(),
-                    48usize,
-                    concat!("Size of: ", stringify!(CallbackEvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<CallbackEvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(CallbackEvent))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<CallbackEvent>())).callback_v
-                            as *const _ as usize
-                    },
-                    12usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(CallbackEvent),
-                        "::",
-                        stringify!(callback_v)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<CallbackEvent>())).callback
-                            as *const _ as usize
-                    },
-                    16usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(CallbackEvent),
-                        "::",
-                        stringify!(callback)
-                    )
-                );
-            }
-            impl Default for CallbackEvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct PushSysCallTypeEvent {
-                pub _base: root::lc3::core::IEvent,
-                pub call_type: root::lc3::core::MachineState_SysCallType,
-            }
-            #[test]
-            fn bindgen_test_layout_PushSysCallTypeEvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<PushSysCallTypeEvent>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(PushSysCallTypeEvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<PushSysCallTypeEvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(PushSysCallTypeEvent))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<PushSysCallTypeEvent>()))
-                            .call_type as *const _
-                            as usize
-                    },
-                    12usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(PushSysCallTypeEvent),
-                        "::",
-                        stringify!(call_type)
-                    )
-                );
-            }
-            impl Default for PushSysCallTypeEvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct PopSysCallTypeEvent {
-                pub _base: root::lc3::core::IEvent,
-            }
-            #[test]
-            fn bindgen_test_layout_PopSysCallTypeEvent() {
-                assert_eq!(
-                    ::std::mem::size_of::<PopSysCallTypeEvent>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(PopSysCallTypeEvent))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<PopSysCallTypeEvent>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(PopSysCallTypeEvent))
-                );
-            }
-            impl Default for PopSysCallTypeEvent {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            pub const OperType_FIXED: root::lc3::core::OperType = 0;
-            pub const OperType_NUM: root::lc3::core::OperType = 1;
-            pub const OperType_LABEL: root::lc3::core::OperType = 2;
-            pub const OperType_REG: root::lc3::core::OperType = 3;
-            pub const OperType_INVALID: root::lc3::core::OperType = 4;
-            pub type OperType = i32;
-            #[repr(C)]
-            pub struct IOperand__bindgen_vtable(::std::os::raw::c_void);
-            #[repr(C)]
-            pub struct IOperand {
-                pub vtable_: *const IOperand__bindgen_vtable,
-                pub type_: root::lc3::core::OperType,
-                pub type_str: root::std::string,
-                pub width: u32,
-                pub value: u32,
-            }
-            #[test]
-            fn bindgen_test_layout_IOperand() {
-                assert_eq!(
-                    ::std::mem::size_of::<IOperand>(),
-                    56usize,
-                    concat!("Size of: ", stringify!(IOperand))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<IOperand>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(IOperand))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<IOperand>())).type_ as *const _
-                            as usize
-                    },
-                    8usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(IOperand),
-                        "::",
-                        stringify!(type_)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<IOperand>())).type_str
-                            as *const _ as usize
-                    },
-                    16usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(IOperand),
-                        "::",
-                        stringify!(type_str)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<IOperand>())).width as *const _
-                            as usize
-                    },
-                    48usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(IOperand),
-                        "::",
-                        stringify!(width)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<IOperand>())).value as *const _
-                            as usize
-                    },
-                    52usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(IOperand),
-                        "::",
-                        stringify!(value)
-                    )
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core8IOperand11isEqualTypeENS0_8OperTypeE"]
-                pub fn IOperand_isEqualType(
-                    this: *const root::lc3::core::IOperand,
-                    other: root::lc3::core::OperType,
-                ) -> bool;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core8IOperandC2ENS0_8OperTypeERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEj"]
-                pub fn IOperand_IOperand(
-                    this: *mut root::lc3::core::IOperand,
-                    type_: root::lc3::core::OperType,
-                    type_str: *const root::std::string,
-                    width: u32,
-                );
-            }
-            impl Default for IOperand {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            impl IOperand {
-                #[inline]
-                pub unsafe fn isEqualType(
-                    &self,
-                    other: root::lc3::core::OperType,
-                ) -> bool {
-                    IOperand_isEqualType(self, other)
-                }
-                #[inline]
-                pub unsafe fn new(
-                    type_: root::lc3::core::OperType,
-                    type_str: *const root::std::string,
-                    width: u32,
-                ) -> Self {
-                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
-                    IOperand_IOperand(
-                        __bindgen_tmp.as_mut_ptr(),
-                        type_,
-                        type_str,
-                        width,
-                    );
-                    __bindgen_tmp.assume_init()
-                }
-            }
-            #[repr(C)]
-            pub struct IInstruction__bindgen_vtable(::std::os::raw::c_void);
-            #[repr(C)]
-            pub struct IInstruction {
-                pub vtable_: *const IInstruction__bindgen_vtable,
-                pub name: root::std::string,
-                pub operands: root::std::vector,
-            }
-            #[test]
-            fn bindgen_test_layout_IInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<IInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(IInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<IInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(IInstruction))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<IInstruction>())).name
-                            as *const _ as usize
-                    },
-                    8usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(IInstruction),
-                        "::",
-                        stringify!(name)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<IInstruction>())).operands
-                            as *const _ as usize
-                    },
-                    40usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(IInstruction),
-                        "::",
-                        stringify!(operands)
-                    )
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core12IInstruction14getNumOperandsEv"]
-                pub fn IInstruction_getNumOperands(
-                    this: *const root::lc3::core::IInstruction,
-                ) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12IInstruction14assignOperandsEj"]
-                pub fn IInstruction_assignOperands(
-                    this: *mut root::lc3::core::IInstruction,
-                    encoded_inst: u32,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core12IInstruction14toFormatStringB5cxx11Ev"]
-                pub fn IInstruction_toFormatString(
-                    this: *const root::lc3::core::IInstruction,
-                ) -> root::std::string;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core12IInstruction13toValueStringB5cxx11Ev"]
-                pub fn IInstruction_toValueString(
-                    this: *const root::lc3::core::IInstruction,
-                ) -> root::std::string;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12IInstruction23buildSysCallEnterHelperERKNS0_12MachineStateEjNS2_11SysCallTypeESt8functionIFjjEE"]
-                pub fn IInstruction_buildSysCallEnterHelper(
-                    state: *const root::lc3::core::MachineState,
-                    vector_id: u32,
-                    call_type: root::lc3::core::MachineState_SysCallType,
-                    computeNewPSRValue: [u64; 4usize],
-                ) -> root::std::vector;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12IInstruction22buildSysCallExitHelperERKNS0_12MachineStateENS2_11SysCallTypeE"]
-                pub fn IInstruction_buildSysCallExitHelper(
-                    state: *const root::lc3::core::MachineState,
-                    call_type: root::lc3::core::MachineState_SysCallType,
-                ) -> root::std::vector;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12IInstructionC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKSt6vectorISt10shared_ptrINS0_8IOperandEESaISD_EE"]
-                pub fn IInstruction_IInstruction(
-                    this: *mut root::lc3::core::IInstruction,
-                    name: *const root::std::string,
-                    operands: *const root::std::vector,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12IInstructionC2ERKS1_"]
-                pub fn IInstruction_IInstruction1(
-                    this: *mut root::lc3::core::IInstruction,
-                    that: *const root::lc3::core::IInstruction,
-                );
-            }
-            impl Default for IInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            impl IInstruction {
-                #[inline]
-                pub unsafe fn getNumOperands(&self) -> u32 {
-                    IInstruction_getNumOperands(self)
-                }
-                #[inline]
-                pub unsafe fn assignOperands(&mut self, encoded_inst: u32) {
-                    IInstruction_assignOperands(self, encoded_inst)
-                }
-                #[inline]
-                pub unsafe fn toFormatString(&self) -> root::std::string {
-                    IInstruction_toFormatString(self)
-                }
-                #[inline]
-                pub unsafe fn toValueString(&self) -> root::std::string {
-                    IInstruction_toValueString(self)
-                }
-                #[inline]
-                pub unsafe fn buildSysCallEnterHelper(
-                    state: *const root::lc3::core::MachineState,
-                    vector_id: u32,
-                    call_type: root::lc3::core::MachineState_SysCallType,
-                    computeNewPSRValue: [u64; 4usize],
-                ) -> root::std::vector {
-                    IInstruction_buildSysCallEnterHelper(
-                        state,
-                        vector_id,
-                        call_type,
-                        computeNewPSRValue,
-                    )
-                }
-                #[inline]
-                pub unsafe fn buildSysCallExitHelper(
-                    state: *const root::lc3::core::MachineState,
-                    call_type: root::lc3::core::MachineState_SysCallType,
-                ) -> root::std::vector {
-                    IInstruction_buildSysCallExitHelper(state, call_type)
-                }
-                #[inline]
-                pub unsafe fn new(
-                    name: *const root::std::string,
-                    operands: *const root::std::vector,
-                ) -> Self {
-                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
-                    IInstruction_IInstruction(
-                        __bindgen_tmp.as_mut_ptr(),
-                        name,
-                        operands,
-                    );
-                    __bindgen_tmp.assume_init()
-                }
-                #[inline]
-                pub unsafe fn new1(
-                    that: *const root::lc3::core::IInstruction,
-                ) -> Self {
-                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
-                    IInstruction_IInstruction1(
-                        __bindgen_tmp.as_mut_ptr(),
-                        that,
-                    );
-                    __bindgen_tmp.assume_init()
-                }
-            }
-            #[repr(C)]
-            pub struct InstructionHandler__bindgen_vtable(
-                ::std::os::raw::c_void,
-            );
-            #[repr(C)]
-            pub struct InstructionHandler {
-                pub vtable_: *const InstructionHandler__bindgen_vtable,
-                pub instructions: root::std::vector,
-                pub regs: root::lc3::core::SymbolTable,
-            }
-            #[test]
-            fn bindgen_test_layout_InstructionHandler() {
-                assert_eq!(
-                    ::std::mem::size_of::<InstructionHandler>(),
-                    80usize,
-                    concat!("Size of: ", stringify!(InstructionHandler))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<InstructionHandler>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(InstructionHandler))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<InstructionHandler>()))
-                            .instructions as *const _
-                            as usize
-                    },
-                    8usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(InstructionHandler),
-                        "::",
-                        stringify!(instructions)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<InstructionHandler>())).regs
-                            as *const _ as usize
-                    },
-                    32usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(InstructionHandler),
-                        "::",
-                        stringify!(regs)
-                    )
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core18InstructionHandlerC1Ev"]
-                pub fn InstructionHandler_InstructionHandler(
-                    this: *mut root::lc3::core::InstructionHandler,
-                );
-            }
-            impl Default for InstructionHandler {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            impl InstructionHandler {
-                #[inline]
-                pub unsafe fn new() -> Self {
-                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
-                    InstructionHandler_InstructionHandler(
-                        __bindgen_tmp.as_mut_ptr(),
-                    );
-                    __bindgen_tmp.assume_init()
-                }
-            }
-            #[repr(C)]
-            pub struct FixedOperand {
-                pub _base: root::lc3::core::IOperand,
-            }
-            #[test]
-            fn bindgen_test_layout_FixedOperand() {
-                assert_eq!(
-                    ::std::mem::size_of::<FixedOperand>(),
-                    56usize,
-                    concat!("Size of: ", stringify!(FixedOperand))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<FixedOperand>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(FixedOperand))
-                );
-            }
-            impl Default for FixedOperand {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12FixedOperand6encodeERKNS0_5asmbl9StatementERKNS2_14StatementPieceERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISF_ESaISt4pairIKSF_jEEESO_RNS_5utils15AssemblerLoggerE"]
-                pub fn FixedOperand_encode(
-                    this: *mut ::std::os::raw::c_void,
-                    statement: *const root::lc3::core::asmbl::Statement,
-                    piece: *const root::lc3::core::asmbl::StatementPiece,
-                    regs: *const root::lc3::core::SymbolTable,
-                    symbols: *const root::lc3::core::SymbolTable,
-                    logger: *mut root::lc3::utils::AssemblerLogger,
-                ) -> root::lc3::optional<u32>;
-            }
-            #[repr(C)]
-            pub struct RegOperand {
-                pub _base: root::lc3::core::IOperand,
-            }
-            #[test]
-            fn bindgen_test_layout_RegOperand() {
-                assert_eq!(
-                    ::std::mem::size_of::<RegOperand>(),
-                    56usize,
-                    concat!("Size of: ", stringify!(RegOperand))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<RegOperand>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(RegOperand))
-                );
-            }
-            impl Default for RegOperand {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core10RegOperand6encodeERKNS0_5asmbl9StatementERKNS2_14StatementPieceERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISF_ESaISt4pairIKSF_jEEESO_RNS_5utils15AssemblerLoggerE"]
-                pub fn RegOperand_encode(
-                    this: *mut ::std::os::raw::c_void,
-                    statement: *const root::lc3::core::asmbl::Statement,
-                    piece: *const root::lc3::core::asmbl::StatementPiece,
-                    regs: *const root::lc3::core::SymbolTable,
-                    symbols: *const root::lc3::core::SymbolTable,
-                    logger: *mut root::lc3::utils::AssemblerLogger,
-                ) -> root::lc3::optional<u32>;
-            }
-            #[repr(C)]
-            pub struct NumOperand {
-                pub _base: root::lc3::core::IOperand,
-                pub sext: bool,
-            }
-            #[test]
-            fn bindgen_test_layout_NumOperand() {
-                assert_eq!(
-                    ::std::mem::size_of::<NumOperand>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(NumOperand))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<NumOperand>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(NumOperand))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<NumOperand>())).sext as *const _
-                            as usize
-                    },
-                    56usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(NumOperand),
-                        "::",
-                        stringify!(sext)
-                    )
-                );
-            }
-            impl Default for NumOperand {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core10NumOperand6encodeERKNS0_5asmbl9StatementERKNS2_14StatementPieceERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISF_ESaISt4pairIKSF_jEEESO_RNS_5utils15AssemblerLoggerE"]
-                pub fn NumOperand_encode(
-                    this: *mut ::std::os::raw::c_void,
-                    statement: *const root::lc3::core::asmbl::Statement,
-                    piece: *const root::lc3::core::asmbl::StatementPiece,
-                    regs: *const root::lc3::core::SymbolTable,
-                    symbols: *const root::lc3::core::SymbolTable,
-                    logger: *mut root::lc3::utils::AssemblerLogger,
-                ) -> root::lc3::optional<u32>;
-            }
-            #[repr(C)]
-            pub struct LabelOperand {
-                pub _base: root::lc3::core::IOperand,
-            }
-            #[test]
-            fn bindgen_test_layout_LabelOperand() {
-                assert_eq!(
-                    ::std::mem::size_of::<LabelOperand>(),
-                    56usize,
-                    concat!("Size of: ", stringify!(LabelOperand))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<LabelOperand>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(LabelOperand))
-                );
-            }
-            impl Default for LabelOperand {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core12LabelOperand6encodeERKNS0_5asmbl9StatementERKNS2_14StatementPieceERKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEjSt4lessISF_ESaISt4pairIKSF_jEEESO_RNS_5utils15AssemblerLoggerE"]
-                pub fn LabelOperand_encode(
-                    this: *mut ::std::os::raw::c_void,
-                    statement: *const root::lc3::core::asmbl::Statement,
-                    piece: *const root::lc3::core::asmbl::StatementPiece,
-                    regs: *const root::lc3::core::SymbolTable,
-                    symbols: *const root::lc3::core::SymbolTable,
-                    logger: *mut root::lc3::utils::AssemblerLogger,
-                ) -> root::lc3::optional<u32>;
-            }
-            #[repr(C)]
-            pub struct ADDRegInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_ADDRegInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<ADDRegInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(ADDRegInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<ADDRegInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(ADDRegInstruction))
-                );
-            }
-            impl Default for ADDRegInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core17ADDRegInstruction7executeERKNS0_12MachineStateE"]
-                pub fn ADDRegInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct ADDImmInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_ADDImmInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<ADDImmInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(ADDImmInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<ADDImmInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(ADDImmInstruction))
-                );
-            }
-            impl Default for ADDImmInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core17ADDImmInstruction7executeERKNS0_12MachineStateE"]
-                pub fn ADDImmInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct ANDRegInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_ANDRegInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<ANDRegInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(ANDRegInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<ANDRegInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(ANDRegInstruction))
-                );
-            }
-            impl Default for ANDRegInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core17ANDRegInstruction7executeERKNS0_12MachineStateE"]
-                pub fn ANDRegInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct ANDImmInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_ANDImmInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<ANDImmInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(ANDImmInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<ANDImmInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(ANDImmInstruction))
-                );
-            }
-            impl Default for ANDImmInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core17ANDImmInstruction7executeERKNS0_12MachineStateE"]
-                pub fn ANDImmInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct BRInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_BRInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<BRInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(BRInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<BRInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(BRInstruction))
-                );
-            }
-            impl Default for BRInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core13BRInstruction7executeERKNS0_12MachineStateE"]
-                pub fn BRInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct BRnInstruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_BRnInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<BRnInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(BRnInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<BRnInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(BRnInstruction))
-                );
-            }
-            impl Default for BRnInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct BRzInstruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_BRzInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<BRzInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(BRzInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<BRzInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(BRzInstruction))
-                );
-            }
-            impl Default for BRzInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct BRpInstruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_BRpInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<BRpInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(BRpInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<BRpInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(BRpInstruction))
-                );
-            }
-            impl Default for BRpInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct BRnzInstruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_BRnzInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<BRnzInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(BRnzInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<BRnzInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(BRnzInstruction))
-                );
-            }
-            impl Default for BRnzInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct BRzpInstruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_BRzpInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<BRzpInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(BRzpInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<BRzpInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(BRzpInstruction))
-                );
-            }
-            impl Default for BRzpInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct BRnpInstruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_BRnpInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<BRnpInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(BRnpInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<BRnpInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(BRnpInstruction))
-                );
-            }
-            impl Default for BRnpInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct BRnzpInstruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_BRnzpInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<BRnzpInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(BRnzpInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<BRnzpInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(BRnzpInstruction))
-                );
-            }
-            impl Default for BRnzpInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct NOP0Instruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_NOP0Instruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<NOP0Instruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(NOP0Instruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<NOP0Instruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(NOP0Instruction))
-                );
-            }
-            impl Default for NOP0Instruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct NOP1Instruction {
-                pub _base: root::lc3::core::BRInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_NOP1Instruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<NOP1Instruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(NOP1Instruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<NOP1Instruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(NOP1Instruction))
-                );
-            }
-            impl Default for NOP1Instruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct JMPInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_JMPInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<JMPInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(JMPInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<JMPInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(JMPInstruction))
-                );
-            }
-            impl Default for JMPInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14JMPInstruction7executeERKNS0_12MachineStateE"]
-                pub fn JMPInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct JSRInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_JSRInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<JSRInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(JSRInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<JSRInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(JSRInstruction))
-                );
-            }
-            impl Default for JSRInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14JSRInstruction7executeERKNS0_12MachineStateE"]
-                pub fn JSRInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct JSRRInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_JSRRInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<JSRRInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(JSRRInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<JSRRInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(JSRRInstruction))
-                );
-            }
-            impl Default for JSRRInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core15JSRRInstruction7executeERKNS0_12MachineStateE"]
-                pub fn JSRRInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct LDInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_LDInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<LDInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(LDInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<LDInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(LDInstruction))
-                );
-            }
-            impl Default for LDInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core13LDInstruction7executeERKNS0_12MachineStateE"]
-                pub fn LDInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct LDIInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_LDIInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<LDIInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(LDIInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<LDIInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(LDIInstruction))
-                );
-            }
-            impl Default for LDIInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14LDIInstruction7executeERKNS0_12MachineStateE"]
-                pub fn LDIInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct LDRInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_LDRInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<LDRInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(LDRInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<LDRInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(LDRInstruction))
-                );
-            }
-            impl Default for LDRInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14LDRInstruction7executeERKNS0_12MachineStateE"]
-                pub fn LDRInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct LEAInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_LEAInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<LEAInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(LEAInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<LEAInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(LEAInstruction))
-                );
-            }
-            impl Default for LEAInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14LEAInstruction7executeERKNS0_12MachineStateE"]
-                pub fn LEAInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct NOTInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_NOTInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<NOTInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(NOTInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<NOTInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(NOTInstruction))
-                );
-            }
-            impl Default for NOTInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14NOTInstruction7executeERKNS0_12MachineStateE"]
-                pub fn NOTInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct RETInstruction {
-                pub _base: root::lc3::core::JMPInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_RETInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<RETInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(RETInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<RETInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(RETInstruction))
-                );
-            }
-            impl Default for RETInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct RTIInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_RTIInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<RTIInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(RTIInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<RTIInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(RTIInstruction))
-                );
-            }
-            impl Default for RTIInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14RTIInstruction7executeERKNS0_12MachineStateE"]
-                pub fn RTIInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct STInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_STInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<STInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(STInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<STInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(STInstruction))
-                );
-            }
-            impl Default for STInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core13STInstruction7executeERKNS0_12MachineStateE"]
-                pub fn STInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct STIInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_STIInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<STIInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(STIInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<STIInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(STIInstruction))
-                );
-            }
-            impl Default for STIInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14STIInstruction7executeERKNS0_12MachineStateE"]
-                pub fn STIInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct STRInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_STRInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<STRInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(STRInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<STRInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(STRInstruction))
-                );
-            }
-            impl Default for STRInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core14STRInstruction7executeERKNS0_12MachineStateE"]
-                pub fn STRInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct TRAPInstruction {
-                pub _base: root::lc3::core::IInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_TRAPInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<TRAPInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(TRAPInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<TRAPInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(TRAPInstruction))
-                );
-            }
-            impl Default for TRAPInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core15TRAPInstruction7executeERKNS0_12MachineStateE"]
-                pub fn TRAPInstruction_execute(
-                    this: *mut ::std::os::raw::c_void,
-                    state: *const root::lc3::core::MachineState,
-                ) -> root::std::vector;
-            }
-            #[repr(C)]
-            pub struct GETCInstruction {
-                pub _base: root::lc3::core::TRAPInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_GETCInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<GETCInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(GETCInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<GETCInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(GETCInstruction))
-                );
-            }
-            impl Default for GETCInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct OUTInstruction {
-                pub _base: root::lc3::core::TRAPInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_OUTInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<OUTInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(OUTInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<OUTInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(OUTInstruction))
-                );
-            }
-            impl Default for OUTInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct PUTCInstruction {
-                pub _base: root::lc3::core::TRAPInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_PUTCInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<PUTCInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(PUTCInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<PUTCInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(PUTCInstruction))
-                );
-            }
-            impl Default for PUTCInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct PUTSInstruction {
-                pub _base: root::lc3::core::TRAPInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_PUTSInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<PUTSInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(PUTSInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<PUTSInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(PUTSInstruction))
-                );
-            }
-            impl Default for PUTSInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct INInstruction {
-                pub _base: root::lc3::core::TRAPInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_INInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<INInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(INInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<INInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(INInstruction))
-                );
-            }
-            impl Default for INInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct PUTSPInstruction {
-                pub _base: root::lc3::core::TRAPInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_PUTSPInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<PUTSPInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(PUTSPInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<PUTSPInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(PUTSPInstruction))
-                );
-            }
-            impl Default for PUTSPInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct HALTInstruction {
-                pub _base: root::lc3::core::TRAPInstruction,
-            }
-            #[test]
-            fn bindgen_test_layout_HALTInstruction() {
-                assert_eq!(
-                    ::std::mem::size_of::<HALTInstruction>(),
-                    64usize,
-                    concat!("Size of: ", stringify!(HALTInstruction))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<HALTInstruction>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(HALTInstruction))
-                );
-            }
-            impl Default for HALTInstruction {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct Assembler {
-                pub file_buffer: root::std::vector,
-                pub logger: root::lc3::utils::AssemblerLogger,
-                pub enable_liberal_asm: bool,
-                pub encoder: root::lc3::core::asmbl::InstructionEncoder,
-            }
-            #[test]
-            fn bindgen_test_layout_Assembler() {
-                assert_eq!(
-                    ::std::mem::size_of::<Assembler>(),
-                    224usize,
-                    concat!("Size of: ", stringify!(Assembler))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<Assembler>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(Assembler))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Assembler>())).file_buffer
-                            as *const _ as usize
-                    },
-                    0usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Assembler),
-                        "::",
-                        stringify!(file_buffer)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Assembler>())).logger as *const _
-                            as usize
-                    },
-                    24usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Assembler),
-                        "::",
-                        stringify!(logger)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Assembler>())).enable_liberal_asm
-                            as *const _ as usize
-                    },
-                    72usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Assembler),
-                        "::",
-                        stringify!(enable_liberal_asm)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Assembler>())).encoder
-                            as *const _ as usize
-                    },
-                    80usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Assembler),
-                        "::",
-                        stringify!(encoder)
-                    )
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Assembler8assembleB5cxx11ERSi"]
-                pub fn Assembler_assemble(
-                    this: *mut root::lc3::core::Assembler,
-                    buffer: *mut root::std::istream,
-                ) -> root::std::shared_ptr;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Assembler13setLiberalAsmEb"]
-                pub fn Assembler_setLiberalAsm(
-                    this: *mut root::lc3::core::Assembler,
-                    enable_liberal_asm: bool,
-                );
-            }
-            impl Default for Assembler {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            impl Assembler {
-                #[inline]
-                pub unsafe fn assemble(
-                    &mut self,
-                    buffer: *mut root::std::istream,
-                ) -> root::std::shared_ptr {
-                    Assembler_assemble(self, buffer)
-                }
-                #[inline]
-                pub unsafe fn setLiberalAsm(
-                    &mut self,
-                    enable_liberal_asm: bool,
-                ) {
-                    Assembler_setLiberalAsm(self, enable_liberal_asm)
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug, Copy, Clone)]
-            pub struct Converter {
-                pub logger: root::lc3::utils::Logger,
-            }
-            #[test]
-            fn bindgen_test_layout_Converter() {
-                assert_eq!(
-                    ::std::mem::size_of::<Converter>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(Converter))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<Converter>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(Converter))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Converter>())).logger as *const _
-                            as usize
-                    },
-                    0usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Converter),
-                        "::",
-                        stringify!(logger)
-                    )
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Converter10convertBinB5cxx11ERSi"]
-                pub fn Converter_convertBin(
-                    this: *mut root::lc3::core::Converter,
-                    buffer: *mut root::std::istream,
-                ) -> root::std::shared_ptr;
-            }
-            impl Default for Converter {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            impl Converter {
-                #[inline]
-                pub unsafe fn convertBin(
-                    &mut self,
-                    buffer: *mut root::std::istream,
-                ) -> root::std::shared_ptr {
-                    Converter_convertBin(self, buffer)
-                }
-            }
-            pub mod sim {
-                #[allow(unused_imports)]
-                use self::super::super::super::super::root;
-                #[repr(C)]
-                pub struct InstructionDecoder {
-                    pub _base: root::lc3::core::InstructionHandler,
-                    pub instructions_by_opcode: root::std::map,
-                }
-                #[test]
-                fn bindgen_test_layout_InstructionDecoder() {
-                    assert_eq!(
-                        ::std::mem::size_of::<InstructionDecoder>(),
-                        128usize,
-                        concat!("Size of: ", stringify!(InstructionDecoder))
-                    );
-                    assert_eq!(
-                        ::std::mem::align_of::<InstructionDecoder>(),
-                        8usize,
-                        concat!(
-                            "Alignment of ",
-                            stringify!(InstructionDecoder)
-                        )
-                    );
-                    assert_eq!(
-                        unsafe {
-                            &(*(::std::ptr::null::<InstructionDecoder>()))
-                                .instructions_by_opcode
-                                as *const _ as usize
-                        },
-                        80usize,
-                        concat!(
-                            "Offset of field: ",
-                            stringify!(InstructionDecoder),
-                            "::",
-                            stringify!(instructions_by_opcode)
-                        )
-                    );
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZNK3lc34core3sim18InstructionDecoder25findInstructionByEncodingEj"]
-                    pub fn InstructionDecoder_findInstructionByEncoding(
-                        this: *const root::lc3::core::sim::InstructionDecoder,
-                        encoding: u32,
-                    ) -> root::lc3::optional<root::lc3::core::PIInstruction>;
-                }
-                extern "C" {
-                    #[link_name = "\u{1}_ZN3lc34core3sim18InstructionDecoderC1Ev"]
-                    pub fn InstructionDecoder_InstructionDecoder(
-                        this: *mut root::lc3::core::sim::InstructionDecoder,
-                    );
-                }
-                impl Default for InstructionDecoder {
-                    fn default() -> Self {
-                        unsafe { ::std::mem::zeroed() }
-                    }
-                }
-                impl InstructionDecoder {
-                    #[inline]
-                    pub unsafe fn findInstructionByEncoding(
-                        &self,
-                        encoding: u32,
-                    ) -> root::lc3::optional<root::lc3::core::PIInstruction>
-                    {
-                        InstructionDecoder_findInstructionByEncoding(
-                            self, encoding,
-                        )
-                    }
-                    #[inline]
-                    pub unsafe fn new() -> Self {
-                        let mut __bindgen_tmp =
-                            ::std::mem::MaybeUninit::uninit();
-                        InstructionDecoder_InstructionDecoder(
-                            __bindgen_tmp.as_mut_ptr(),
-                        );
-                        __bindgen_tmp.assume_init()
-                    }
-                }
-            }
-            #[repr(C)]
-            pub struct Simulator {
-                pub decoder: root::lc3::core::sim::InstructionDecoder,
-                pub state: root::lc3::core::MachineState,
-                pub logger: root::lc3::utils::Logger,
-                pub inputter: *mut root::lc3::utils::IInputter,
-                pub threaded_input: bool,
-                pub collecting_input: root::std::atomic<bool>,
-            }
-            #[test]
-            fn bindgen_test_layout_Simulator() {
-                assert_eq!(
-                    ::std::mem::size_of::<Simulator>(),
-                    632usize,
-                    concat!("Size of: ", stringify!(Simulator))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<Simulator>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(Simulator))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Simulator>())).decoder
-                            as *const _ as usize
-                    },
-                    0usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Simulator),
-                        "::",
-                        stringify!(decoder)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Simulator>())).state as *const _
-                            as usize
-                    },
-                    128usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Simulator),
-                        "::",
-                        stringify!(state)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Simulator>())).logger as *const _
-                            as usize
-                    },
-                    600usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Simulator),
-                        "::",
-                        stringify!(logger)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Simulator>())).inputter
-                            as *const _ as usize
-                    },
-                    616usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Simulator),
-                        "::",
-                        stringify!(inputter)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Simulator>())).threaded_input
-                            as *const _ as usize
-                    },
-                    624usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Simulator),
-                        "::",
-                        stringify!(threaded_input)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Simulator>())).collecting_input
-                            as *const _ as usize
-                    },
-                    625usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Simulator),
-                        "::",
-                        stringify!(collecting_input)
-                    )
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator7loadObjERSi"]
-                pub fn Simulator_loadObj(
-                    this: *mut root::lc3::core::Simulator,
-                    buffer: *mut root::std::istream,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator8simulateEv"]
-                pub fn Simulator_simulate(
-                    this: *mut root::lc3::core::Simulator,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator11enableClockEv"]
-                pub fn Simulator_enableClock(
-                    this: *mut root::lc3::core::Simulator,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator12disableClockEv"]
-                pub fn Simulator_disableClock(
-                    this: *mut root::lc3::core::Simulator,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZNK3lc34core9Simulator14isClockEnabledEv"]
-                pub fn Simulator_isClockEnabled(
-                    this: *const root::lc3::core::Simulator,
-                ) -> bool;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator12reinitializeEv"]
-                pub fn Simulator_reinitialize(
-                    this: *mut root::lc3::core::Simulator,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator30registerPreInstructionCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerPreInstructionCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator31registerPostInstructionCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerPostInstructionCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator30registerInterruptEnterCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerInterruptEnterCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator29registerInterruptExitCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerInterruptExitCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator30registerExceptionEnterCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerExceptionEnterCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator29registerExceptionExitCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerExceptionExitCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator24registerSubEnterCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerSubEnterCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator23registerSubExitCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerSubExitCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator28registerWaitForInputCallbackESt8functionIFvRNS_3simERNS0_12MachineStateEEE"]
-                pub fn Simulator_registerWaitForInputCallback(
-                    this: *mut root::lc3::core::Simulator,
-                    func: root::lc3::core::callback_func_t,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9Simulator18setIgnorePrivilegeEb"]
-                pub fn Simulator_setIgnorePrivilege(
-                    this: *mut root::lc3::core::Simulator,
-                    ignore: bool,
-                );
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core9SimulatorC1ERNS_3simERNS_5utils8IPrinterERNS4_9IInputterEjb"]
-                pub fn Simulator_Simulator(
-                    this: *mut root::lc3::core::Simulator,
-                    simulator: *mut root::lc3::sim,
-                    printer: *mut root::lc3::utils::IPrinter,
-                    inputter: *mut root::lc3::utils::IInputter,
-                    print_level: u32,
-                    threaded_input: bool,
-                );
-            }
-            impl Default for Simulator {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            impl Simulator {
-                #[inline]
-                pub unsafe fn loadObj(
-                    &mut self,
-                    buffer: *mut root::std::istream,
-                ) {
-                    Simulator_loadObj(self, buffer)
-                }
-                #[inline]
-                pub unsafe fn simulate(&mut self) {
-                    Simulator_simulate(self)
-                }
-                #[inline]
-                pub unsafe fn enableClock(&mut self) {
-                    Simulator_enableClock(self)
-                }
-                #[inline]
-                pub unsafe fn disableClock(&mut self) {
-                    Simulator_disableClock(self)
-                }
-                #[inline]
-                pub unsafe fn isClockEnabled(&self) -> bool {
-                    Simulator_isClockEnabled(self)
-                }
-                #[inline]
-                pub unsafe fn reinitialize(&mut self) {
-                    Simulator_reinitialize(self)
-                }
-                #[inline]
-                pub unsafe fn registerPreInstructionCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerPreInstructionCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn registerPostInstructionCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerPostInstructionCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn registerInterruptEnterCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerInterruptEnterCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn registerInterruptExitCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerInterruptExitCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn registerExceptionEnterCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerExceptionEnterCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn registerExceptionExitCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerExceptionExitCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn registerSubEnterCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerSubEnterCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn registerSubExitCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerSubExitCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn registerWaitForInputCallback(
-                    &mut self,
-                    func: root::lc3::core::callback_func_t,
-                ) {
-                    Simulator_registerWaitForInputCallback(self, func)
-                }
-                #[inline]
-                pub unsafe fn setIgnorePrivilege(&mut self, ignore: bool) {
-                    Simulator_setIgnorePrivilege(self, ignore)
-                }
-                #[inline]
-                pub unsafe fn new(
-                    simulator: *mut root::lc3::sim,
-                    printer: *mut root::lc3::utils::IPrinter,
-                    inputter: *mut root::lc3::utils::IInputter,
-                    print_level: u32,
-                    threaded_input: bool,
-                ) -> Self {
-                    let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
-                    Simulator_Simulator(
-                        __bindgen_tmp.as_mut_ptr(),
-                        simulator,
-                        printer,
-                        inputter,
-                        print_level,
-                        threaded_input,
-                    );
-                    __bindgen_tmp.assume_init()
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc34core8getOSSrcB5cxx11Ev"]
-                pub fn getOSSrc() -> root::std::string;
-            }
-        }
-        #[repr(C)]
-        #[derive(Debug, Copy, Clone)]
-        pub struct optional<T> {
-            pub valid: bool,
-            pub value: T,
-            pub _phantom_0:
-                ::std::marker::PhantomData<::std::cell::UnsafeCell<T>>,
-        }
-        impl<T> Default for optional<T> {
-            fn default() -> Self {
-                unsafe { ::std::mem::zeroed() }
-            }
-        }
-        pub mod utils {
-            #[allow(unused_imports)]
-            use self::super::super::super::root;
-            pub const PrintColor_RED: root::lc3::utils::PrintColor = 0;
-            pub const PrintColor_YELLOW: root::lc3::utils::PrintColor = 1;
-            pub const PrintColor_GREEN: root::lc3::utils::PrintColor = 2;
-            pub const PrintColor_MAGENTA: root::lc3::utils::PrintColor = 3;
-            pub const PrintColor_BLUE: root::lc3::utils::PrintColor = 4;
-            pub const PrintColor_GRAY: root::lc3::utils::PrintColor = 5;
-            pub const PrintColor_BOLD: root::lc3::utils::PrintColor = 6;
-            pub const PrintColor_RESET: root::lc3::utils::PrintColor = 7;
-            pub type PrintColor = i32;
-            pub const PrintType_P_NONE: root::lc3::utils::PrintType = 0;
-            pub const PrintType_P_SIM_OUTPUT: root::lc3::utils::PrintType = 1;
-            pub const PrintType_P_FATAL_ERROR: root::lc3::utils::PrintType = 2;
-            pub const PrintType_P_ERROR: root::lc3::utils::PrintType = 3;
-            pub const PrintType_P_WARNING: root::lc3::utils::PrintType = 4;
-            pub const PrintType_P_NOTE: root::lc3::utils::PrintType = 5;
-            pub const PrintType_P_INFO: root::lc3::utils::PrintType = 6;
-            pub const PrintType_P_DEBUG: root::lc3::utils::PrintType = 7;
-            pub const PrintType_P_EXTRA: root::lc3::utils::PrintType = 8;
-            pub const PrintType_P_SPAM: root::lc3::utils::PrintType = 9;
-            pub type PrintType = i32;
-            #[repr(C)]
-            pub struct IPrinter__bindgen_vtable(::std::os::raw::c_void);
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct IPrinter {
-                pub vtable_: *const IPrinter__bindgen_vtable,
-            }
-            #[test]
-            fn bindgen_test_layout_IPrinter() {
-                assert_eq!(
-                    ::std::mem::size_of::<IPrinter>(),
-                    8usize,
-                    concat!("Size of: ", stringify!(IPrinter))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<IPrinter>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(IPrinter))
-                );
-            }
-            impl Default for IPrinter {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils14getMagicHeaderB5cxx11Ev"]
-                pub fn getMagicHeader() -> root::std::string;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils16getVersionStringB5cxx11Ev"]
-                pub fn getVersionString() -> root::std::string;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils9udecToBinB5cxx11Ejj"]
-                pub fn udecToBin(
-                    value: u32,
-                    num_bits: u32,
-                ) -> root::std::string;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils8sextTo32Ejj"]
-                pub fn sextTo32(value: u32, num_bits: u32) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils6getBitEjj"]
-                pub fn getBit(value: u32, pos: u32) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils7getBitsEjjj"]
-                pub fn getBits(value: u32, end: u32, start: u32) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils12computePSRCCEjj"]
-                pub fn computePSRCC(value: u32, psr: u32) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils22computeBasePlusSOffsetEjjj"]
-                pub fn computeBasePlusSOffset(
-                    base: u32,
-                    signed_off: u32,
-                    width: u32,
-                ) -> u32;
-            }
-            extern "C" {
-                #[link_name = "\u{1}_ZN3lc35utils7toLowerERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-                pub fn toLower(
-                    str: *const root::std::string,
-                ) -> root::std::string;
-            }
-            #[repr(C)]
-            pub struct exception {
-                pub _base: root::std::runtime_error,
-            }
-            #[test]
-            fn bindgen_test_layout_exception() {
-                assert_eq!(
-                    ::std::mem::size_of::<exception>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(exception))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<exception>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(exception))
-                );
-            }
-            impl Default for exception {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct fatal_exception {
-                pub _base: root::std::runtime_error,
-            }
-            #[test]
-            fn bindgen_test_layout_fatal_exception() {
-                assert_eq!(
-                    ::std::mem::size_of::<fatal_exception>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(fatal_exception))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<fatal_exception>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(fatal_exception))
-                );
-            }
-            impl Default for fatal_exception {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug, Copy, Clone)]
-            pub struct Logger {
-                pub printer: *mut root::lc3::utils::IPrinter,
-                pub print_level: u32,
-            }
-            #[test]
-            fn bindgen_test_layout_Logger() {
-                assert_eq!(
-                    ::std::mem::size_of::<Logger>(),
-                    16usize,
-                    concat!("Size of: ", stringify!(Logger))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<Logger>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(Logger))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Logger>())).printer as *const _
-                            as usize
-                    },
-                    0usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Logger),
-                        "::",
-                        stringify!(printer)
-                    )
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<Logger>())).print_level
-                            as *const _ as usize
-                    },
-                    8usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(Logger),
-                        "::",
-                        stringify!(print_level)
-                    )
-                );
-            }
-            impl Default for Logger {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct AssemblerLogger {
-                pub _base: root::lc3::utils::Logger,
-                pub filename: root::std::string,
-            }
-            #[test]
-            fn bindgen_test_layout_AssemblerLogger() {
-                assert_eq!(
-                    ::std::mem::size_of::<AssemblerLogger>(),
-                    48usize,
-                    concat!("Size of: ", stringify!(AssemblerLogger))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<AssemblerLogger>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(AssemblerLogger))
-                );
-                assert_eq!(
-                    unsafe {
-                        &(*(::std::ptr::null::<AssemblerLogger>())).filename
-                            as *const _ as usize
-                    },
-                    16usize,
-                    concat!(
-                        "Offset of field: ",
-                        stringify!(AssemblerLogger),
-                        "::",
-                        stringify!(filename)
-                    )
-                );
-            }
-            impl Default for AssemblerLogger {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            pub struct IInputter__bindgen_vtable(::std::os::raw::c_void);
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct IInputter {
-                pub vtable_: *const IInputter__bindgen_vtable,
-            }
-            #[test]
-            fn bindgen_test_layout_IInputter() {
-                assert_eq!(
-                    ::std::mem::size_of::<IInputter>(),
-                    8usize,
-                    concat!("Size of: ", stringify!(IInputter))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<IInputter>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(IInputter))
-                );
-            }
-            impl Default for IInputter {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-            #[repr(C)]
-            #[derive(Debug)]
-            pub struct NullInputter {
-                pub _base: root::lc3::utils::IInputter,
-            }
-            #[test]
-            fn bindgen_test_layout_NullInputter() {
-                assert_eq!(
-                    ::std::mem::size_of::<NullInputter>(),
-                    8usize,
-                    concat!("Size of: ", stringify!(NullInputter))
-                );
-                assert_eq!(
-                    ::std::mem::align_of::<NullInputter>(),
-                    8usize,
-                    concat!("Alignment of ", stringify!(NullInputter))
-                );
-            }
-            impl Default for NullInputter {
-                fn default() -> Self {
-                    unsafe { ::std::mem::zeroed() }
-                }
-            }
-        }
-        #[repr(C)]
-        #[derive(Debug, Copy, Clone)]
-        pub struct Breakpoint {
-            pub id: u32,
-            pub loc: u32,
-            pub sim_int: *const root::lc3::sim,
-        }
-        #[test]
-        fn bindgen_test_layout_Breakpoint() {
-            assert_eq!(
-                ::std::mem::size_of::<Breakpoint>(),
-                16usize,
-                concat!("Size of: ", stringify!(Breakpoint))
-            );
-            assert_eq!(
-                ::std::mem::align_of::<Breakpoint>(),
-                8usize,
-                concat!("Alignment of ", stringify!(Breakpoint))
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<Breakpoint>())).id as *const _
-                        as usize
-                },
-                0usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(Breakpoint),
-                    "::",
-                    stringify!(id)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<Breakpoint>())).loc as *const _
-                        as usize
-                },
-                4usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(Breakpoint),
-                    "::",
-                    stringify!(loc)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<Breakpoint>())).sim_int as *const _
-                        as usize
-                },
-                8usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(Breakpoint),
-                    "::",
-                    stringify!(sim_int)
-                )
-            );
-        }
-        impl Default for Breakpoint {
-            fn default() -> Self {
-                unsafe { ::std::mem::zeroed() }
-            }
-        }
-        pub type callback_func_t = [u64; 4usize];
-        pub type breakpoint_callback_func_t = [u64; 4usize];
-        #[repr(C)]
-        pub struct sim {
-            pub printer: *mut root::lc3::utils::IPrinter,
-            pub simulator: root::lc3::core::Simulator,
-            pub inst_exec_count: u64,
-            pub total_inst_limit: u64,
-            pub inst_limit: u64,
-            pub remaining_inst_count: i64,
-            pub sub_depth: i32,
-            pub hit_internal_exception: bool,
-            pub pre_instruction_callback_v: bool,
-            pub post_instruction_callback_v: bool,
-            pub interrupt_enter_callback_v: bool,
-            pub interrupt_exit_callback_v: bool,
-            pub exception_enter_callback_v: bool,
-            pub exception_exit_callback_v: bool,
-            pub sub_enter_callback_v: bool,
-            pub sub_exit_callback_v: bool,
-            pub wait_for_input_callback_v: bool,
-            pub breakpoint_callback_v: bool,
-            pub pre_instruction_callback: root::lc3::callback_func_t,
-            pub post_instruction_callback: root::lc3::callback_func_t,
-            pub interrupt_enter_callback: root::lc3::callback_func_t,
-            pub interrupt_exit_callback: root::lc3::callback_func_t,
-            pub exception_enter_callback: root::lc3::callback_func_t,
-            pub exception_exit_callback: root::lc3::callback_func_t,
-            pub sub_enter_callback: root::lc3::callback_func_t,
-            pub sub_exit_callback: root::lc3::callback_func_t,
-            pub wait_for_input_callback: root::lc3::callback_func_t,
-            pub breakpoint_callback: root::lc3::breakpoint_callback_func_t,
-            pub breakpoint_id: u32,
-            pub breakpoints: root::std::vector,
-            pub propagate_exceptions: bool,
-            pub run_type: root::lc3::sim_RunType,
-        }
-        pub const sim_RunType_UNTIL_INPUT: root::lc3::sim_RunType = 0;
-        pub const sim_RunType_UNTIL_HALT: root::lc3::sim_RunType = 1;
-        pub const sim_RunType_UNTIL_DEPTH: root::lc3::sim_RunType = 2;
-        pub const sim_RunType_NORMAL: root::lc3::sim_RunType = 3;
-        pub type sim_RunType = i32;
-        #[test]
-        fn bindgen_test_layout_sim() {
-            assert_eq!(
-                ::std::mem::size_of::<sim>(),
-                1048usize,
-                concat!("Size of: ", stringify!(sim))
-            );
-            assert_eq!(
-                ::std::mem::align_of::<sim>(),
-                8usize,
-                concat!("Alignment of ", stringify!(sim))
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).printer as *const _ as usize
-                },
-                0usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(printer)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).simulator as *const _
-                        as usize
-                },
-                8usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(simulator)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).inst_exec_count as *const _
-                        as usize
-                },
-                640usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(inst_exec_count)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).total_inst_limit as *const _
-                        as usize
-                },
-                648usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(total_inst_limit)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).inst_limit as *const _
-                        as usize
-                },
-                656usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(inst_limit)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).remaining_inst_count
-                        as *const _ as usize
-                },
-                664usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(remaining_inst_count)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).sub_depth as *const _
-                        as usize
-                },
-                672usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(sub_depth)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).hit_internal_exception
-                        as *const _ as usize
-                },
-                676usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(hit_internal_exception)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).pre_instruction_callback_v
-                        as *const _ as usize
-                },
-                677usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(pre_instruction_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).post_instruction_callback_v
-                        as *const _ as usize
-                },
-                678usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(post_instruction_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).interrupt_enter_callback_v
-                        as *const _ as usize
-                },
-                679usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(interrupt_enter_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).interrupt_exit_callback_v
-                        as *const _ as usize
-                },
-                680usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(interrupt_exit_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).exception_enter_callback_v
-                        as *const _ as usize
-                },
-                681usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(exception_enter_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).exception_exit_callback_v
-                        as *const _ as usize
-                },
-                682usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(exception_exit_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).sub_enter_callback_v
-                        as *const _ as usize
-                },
-                683usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(sub_enter_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).sub_exit_callback_v
-                        as *const _ as usize
-                },
-                684usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(sub_exit_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).wait_for_input_callback_v
-                        as *const _ as usize
-                },
-                685usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(wait_for_input_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).breakpoint_callback_v
-                        as *const _ as usize
-                },
-                686usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(breakpoint_callback_v)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).pre_instruction_callback
-                        as *const _ as usize
-                },
-                688usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(pre_instruction_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).post_instruction_callback
-                        as *const _ as usize
-                },
-                720usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(post_instruction_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).interrupt_enter_callback
-                        as *const _ as usize
-                },
-                752usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(interrupt_enter_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).interrupt_exit_callback
-                        as *const _ as usize
-                },
-                784usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(interrupt_exit_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).exception_enter_callback
-                        as *const _ as usize
-                },
-                816usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(exception_enter_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).exception_exit_callback
-                        as *const _ as usize
-                },
-                848usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(exception_exit_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).sub_enter_callback
-                        as *const _ as usize
-                },
-                880usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(sub_enter_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).sub_exit_callback
-                        as *const _ as usize
-                },
-                912usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(sub_exit_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).wait_for_input_callback
-                        as *const _ as usize
-                },
-                944usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(wait_for_input_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).breakpoint_callback
-                        as *const _ as usize
-                },
-                976usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(breakpoint_callback)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).breakpoint_id as *const _
-                        as usize
-                },
-                1008usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(breakpoint_id)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).breakpoints as *const _
-                        as usize
-                },
-                1016usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(breakpoints)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).propagate_exceptions
-                        as *const _ as usize
-                },
-                1040usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(propagate_exceptions)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<sim>())).run_type as *const _
-                        as usize
-                },
-                1044usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(sim),
-                    "::",
-                    stringify!(run_type)
-                )
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim11loadObjFileERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-            pub fn sim_loadObjFile(
-                this: *mut root::lc3::sim,
-                obj_filename: *const root::std::string,
-            ) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim12reinitializeEv"]
-            pub fn sim_reinitialize(this: *mut root::lc3::sim);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim9randomizeEv"]
-            pub fn sim_randomize(this: *mut root::lc3::sim);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim7restartEv"]
-            pub fn sim_restart(this: *mut root::lc3::sim);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim15setRunInstLimitEm"]
-            pub fn sim_setRunInstLimit(
-                this: *mut root::lc3::sim,
-                inst_limit: u64,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim3runEv"]
-            pub fn sim_run(this: *mut root::lc3::sim) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim12runUntilHaltEv"]
-            pub fn sim_runUntilHalt(this: *mut root::lc3::sim) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim17runUntilInputPollEv"]
-            pub fn sim_runUntilInputPoll(this: *mut root::lc3::sim) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim5pauseEv"]
-            pub fn sim_pause(this: *mut root::lc3::sim);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim6stepInEv"]
-            pub fn sim_stepIn(this: *mut root::lc3::sim) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim8stepOverEv"]
-            pub fn sim_stepOver(this: *mut root::lc3::sim) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim7stepOutEv"]
-            pub fn sim_stepOut(this: *mut root::lc3::sim) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim15getMachineStateEv"]
-            pub fn sim_getMachineState(
-                this: *mut root::lc3::sim,
-            ) -> *mut root::lc3::core::MachineState;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim15getMachineStateEv"]
-            pub fn sim_getMachineState1(
-                this: *const root::lc3::sim,
-            ) -> *const root::lc3::core::MachineState;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim16getInstExecCountEv"]
-            pub fn sim_getInstExecCount(this: *const root::lc3::sim) -> u64;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim18didExceedInstLimitEv"]
-            pub fn sim_didExceedInstLimit(this: *const root::lc3::sim) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim14getBreakpointsEv"]
-            pub fn sim_getBreakpoints(
-                this: *const root::lc3::sim,
-            ) -> *const root::std::vector;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim6getRegEt"]
-            pub fn sim_getReg(this: *const root::lc3::sim, id: u16) -> u16;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim6getMemEt"]
-            pub fn sim_getMem(this: *const root::lc3::sim, addr: u16) -> u16;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim10getMemLineB5cxx11Et"]
-            pub fn sim_getMemLine(
-                this: *const root::lc3::sim,
-                addr: u16,
-            ) -> root::std::string;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim5getPCEv"]
-            pub fn sim_getPC(this: *const root::lc3::sim) -> u16;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim6getPSREv"]
-            pub fn sim_getPSR(this: *const root::lc3::sim) -> u16;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim6getMCREv"]
-            pub fn sim_getMCR(this: *const root::lc3::sim) -> u16;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim5getCCEv"]
-            pub fn sim_getCC(
-                this: *const root::lc3::sim,
-            ) -> ::std::os::raw::c_char;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim6setRegEtt"]
-            pub fn sim_setReg(this: *mut root::lc3::sim, id: u16, value: u16);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim6setMemEtt"]
-            pub fn sim_setMem(this: *mut root::lc3::sim, addr: u16, value: u16);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim12setMemStringEtRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-            pub fn sim_setMemString(
-                this: *mut root::lc3::sim,
-                addr: u16,
-                value: *const root::std::string,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim10setMemLineEtRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-            pub fn sim_setMemLine(
-                this: *mut root::lc3::sim,
-                addr: u16,
-                value: *const root::std::string,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim5setPCEt"]
-            pub fn sim_setPC(this: *mut root::lc3::sim, value: u16);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim6setPSREt"]
-            pub fn sim_setPSR(this: *mut root::lc3::sim, value: u16);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim6setMCREt"]
-            pub fn sim_setMCR(this: *mut root::lc3::sim, value: u16);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim5setCCEc"]
-            pub fn sim_setCC(
-                this: *mut root::lc3::sim,
-                value: ::std::os::raw::c_char,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim13setBreakpointEt"]
-            pub fn sim_setBreakpoint(
-                this: *mut root::lc3::sim,
-                addr: u16,
-            ) -> root::lc3::Breakpoint;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim20removeBreakpointByIDEj"]
-            pub fn sim_removeBreakpointByID(
-                this: *mut root::lc3::sim,
-                id: u32,
-            ) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim22removeBreakpointByAddrEt"]
-            pub fn sim_removeBreakpointByAddr(
-                this: *mut root::lc3::sim,
-                addr: u16,
-            ) -> bool;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim30registerPreInstructionCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerPreInstructionCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim31registerPostInstructionCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerPostInstructionCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim30registerInterruptEnterCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerInterruptEnterCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim29registerInterruptExitCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerInterruptExitCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim30registerExceptionEnterCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerExceptionEnterCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim29registerExceptionExitCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerExceptionExitCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim24registerSubEnterCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerSubEnterCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim23registerSubExitCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerSubExitCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim28registerWaitForInputCallbackESt8functionIFvRNS_4core12MachineStateEEE"]
-            pub fn sim_registerWaitForInputCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim26registerBreakpointCallbackESt8functionIFvRNS_4core12MachineStateERKNS_10BreakpointEEE"]
-            pub fn sim_registerBreakpointCallback(
-                this: *mut root::lc3::sim,
-                func: root::lc3::breakpoint_callback_func_t,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim10getPrinterEv"]
-            pub fn sim_getPrinter(
-                this: *mut root::lc3::sim,
-            ) -> *mut root::lc3::utils::IPrinter;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZNK3lc33sim10getPrinterEv"]
-            pub fn sim_getPrinter1(
-                this: *const root::lc3::sim,
-            ) -> *const root::lc3::utils::IPrinter;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim13setPrintLevelEj"]
-            pub fn sim_setPrintLevel(
-                this: *mut root::lc3::sim,
-                print_level: u32,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim22setPropagateExceptionsEv"]
-            pub fn sim_setPropagateExceptions(this: *mut root::lc3::sim);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim24clearPropagateExceptionsEv"]
-            pub fn sim_clearPropagateExceptions(this: *mut root::lc3::sim);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33sim18setIgnorePrivilegeEb"]
-            pub fn sim_setIgnorePrivilege(
-                this: *mut root::lc3::sim,
-                ignore: bool,
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc33simC1ERNS_5utils8IPrinterERNS1_9IInputterEbjb"]
-            pub fn sim_sim(
-                this: *mut root::lc3::sim,
-                printer: *mut root::lc3::utils::IPrinter,
-                inputter: *mut root::lc3::utils::IInputter,
-                threaded_input: bool,
-                print_level: u32,
-                propagate_exceptions: bool,
-            );
-        }
-        impl Default for sim {
-            fn default() -> Self {
-                unsafe { ::std::mem::zeroed() }
-            }
-        }
-        impl sim {
-            #[inline]
-            pub unsafe fn loadObjFile(
-                &mut self,
-                obj_filename: *const root::std::string,
-            ) -> bool {
-                sim_loadObjFile(self, obj_filename)
-            }
-            #[inline]
-            pub unsafe fn reinitialize(&mut self) {
-                sim_reinitialize(self)
-            }
-            #[inline]
-            pub unsafe fn randomize(&mut self) {
-                sim_randomize(self)
-            }
-            #[inline]
-            pub unsafe fn restart(&mut self) {
-                sim_restart(self)
-            }
-            #[inline]
-            pub unsafe fn setRunInstLimit(&mut self, inst_limit: u64) {
-                sim_setRunInstLimit(self, inst_limit)
-            }
-            #[inline]
-            pub unsafe fn run(&mut self) -> bool {
-                sim_run(self)
-            }
-            #[inline]
-            pub unsafe fn runUntilHalt(&mut self) -> bool {
-                sim_runUntilHalt(self)
-            }
-            #[inline]
-            pub unsafe fn runUntilInputPoll(&mut self) -> bool {
-                sim_runUntilInputPoll(self)
-            }
-            #[inline]
-            pub unsafe fn pause(&mut self) {
-                sim_pause(self)
-            }
-            #[inline]
-            pub unsafe fn stepIn(&mut self) -> bool {
-                sim_stepIn(self)
-            }
-            #[inline]
-            pub unsafe fn stepOver(&mut self) -> bool {
-                sim_stepOver(self)
-            }
-            #[inline]
-            pub unsafe fn stepOut(&mut self) -> bool {
-                sim_stepOut(self)
-            }
-            #[inline]
-            pub unsafe fn getMachineState(
-                &mut self,
-            ) -> *mut root::lc3::core::MachineState {
-                sim_getMachineState(self)
-            }
-            #[inline]
-            pub unsafe fn getMachineState1(
-                &self,
-            ) -> *const root::lc3::core::MachineState {
-                sim_getMachineState1(self)
-            }
-            #[inline]
-            pub unsafe fn getInstExecCount(&self) -> u64 {
-                sim_getInstExecCount(self)
-            }
-            #[inline]
-            pub unsafe fn didExceedInstLimit(&self) -> bool {
-                sim_didExceedInstLimit(self)
-            }
-            #[inline]
-            pub unsafe fn getBreakpoints(&self) -> *const root::std::vector {
-                sim_getBreakpoints(self)
-            }
-            #[inline]
-            pub unsafe fn getReg(&self, id: u16) -> u16 {
-                sim_getReg(self, id)
-            }
-            #[inline]
-            pub unsafe fn getMem(&self, addr: u16) -> u16 {
-                sim_getMem(self, addr)
-            }
-            #[inline]
-            pub unsafe fn getMemLine(&self, addr: u16) -> root::std::string {
-                sim_getMemLine(self, addr)
-            }
-            #[inline]
-            pub unsafe fn getPC(&self) -> u16 {
-                sim_getPC(self)
-            }
-            #[inline]
-            pub unsafe fn getPSR(&self) -> u16 {
-                sim_getPSR(self)
-            }
-            #[inline]
-            pub unsafe fn getMCR(&self) -> u16 {
-                sim_getMCR(self)
-            }
-            #[inline]
-            pub unsafe fn getCC(&self) -> ::std::os::raw::c_char {
-                sim_getCC(self)
-            }
-            #[inline]
-            pub unsafe fn setReg(&mut self, id: u16, value: u16) {
-                sim_setReg(self, id, value)
-            }
-            #[inline]
-            pub unsafe fn setMem(&mut self, addr: u16, value: u16) {
-                sim_setMem(self, addr, value)
-            }
-            #[inline]
-            pub unsafe fn setMemString(
-                &mut self,
-                addr: u16,
-                value: *const root::std::string,
-            ) {
-                sim_setMemString(self, addr, value)
-            }
-            #[inline]
-            pub unsafe fn setMemLine(
-                &mut self,
-                addr: u16,
-                value: *const root::std::string,
-            ) {
-                sim_setMemLine(self, addr, value)
-            }
-            #[inline]
-            pub unsafe fn setPC(&mut self, value: u16) {
-                sim_setPC(self, value)
-            }
-            #[inline]
-            pub unsafe fn setPSR(&mut self, value: u16) {
-                sim_setPSR(self, value)
-            }
-            #[inline]
-            pub unsafe fn setMCR(&mut self, value: u16) {
-                sim_setMCR(self, value)
-            }
-            #[inline]
-            pub unsafe fn setCC(&mut self, value: ::std::os::raw::c_char) {
-                sim_setCC(self, value)
-            }
-            #[inline]
-            pub unsafe fn setBreakpoint(
-                &mut self,
-                addr: u16,
-            ) -> root::lc3::Breakpoint {
-                sim_setBreakpoint(self, addr)
-            }
-            #[inline]
-            pub unsafe fn removeBreakpointByID(&mut self, id: u32) -> bool {
-                sim_removeBreakpointByID(self, id)
-            }
-            #[inline]
-            pub unsafe fn removeBreakpointByAddr(&mut self, addr: u16) -> bool {
-                sim_removeBreakpointByAddr(self, addr)
-            }
-            #[inline]
-            pub unsafe fn registerPreInstructionCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerPreInstructionCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerPostInstructionCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerPostInstructionCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerInterruptEnterCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerInterruptEnterCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerInterruptExitCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerInterruptExitCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerExceptionEnterCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerExceptionEnterCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerExceptionExitCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerExceptionExitCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerSubEnterCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerSubEnterCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerSubExitCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerSubExitCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerWaitForInputCallback(
-                &mut self,
-                func: root::lc3::callback_func_t,
-            ) {
-                sim_registerWaitForInputCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn registerBreakpointCallback(
-                &mut self,
-                func: root::lc3::breakpoint_callback_func_t,
-            ) {
-                sim_registerBreakpointCallback(self, func)
-            }
-            #[inline]
-            pub unsafe fn getPrinter(
-                &mut self,
-            ) -> *mut root::lc3::utils::IPrinter {
-                sim_getPrinter(self)
-            }
-            #[inline]
-            pub unsafe fn getPrinter1(
-                &self,
-            ) -> *const root::lc3::utils::IPrinter {
-                sim_getPrinter1(self)
-            }
-            #[inline]
-            pub unsafe fn setPrintLevel(&mut self, print_level: u32) {
-                sim_setPrintLevel(self, print_level)
-            }
-            #[inline]
-            pub unsafe fn setPropagateExceptions(&mut self) {
-                sim_setPropagateExceptions(self)
-            }
-            #[inline]
-            pub unsafe fn clearPropagateExceptions(&mut self) {
-                sim_clearPropagateExceptions(self)
-            }
-            #[inline]
-            pub unsafe fn setIgnorePrivilege(&mut self, ignore: bool) {
-                sim_setIgnorePrivilege(self, ignore)
-            }
-            #[inline]
-            pub unsafe fn new(
-                printer: *mut root::lc3::utils::IPrinter,
-                inputter: *mut root::lc3::utils::IInputter,
-                threaded_input: bool,
-                print_level: u32,
-                propagate_exceptions: bool,
-            ) -> Self {
-                let mut __bindgen_tmp = ::std::mem::MaybeUninit::uninit();
-                sim_sim(
-                    __bindgen_tmp.as_mut_ptr(),
-                    printer,
-                    inputter,
-                    threaded_input,
-                    print_level,
-                    propagate_exceptions,
-                );
-                __bindgen_tmp.assume_init()
-            }
-        }
-        #[repr(C)]
-        pub struct as_ {
-            pub printer: *mut root::lc3::utils::IPrinter,
-            pub assembler: root::lc3::core::Assembler,
-            pub propagate_exceptions: bool,
-        }
-        #[test]
-        fn bindgen_test_layout_as_() {
-            assert_eq!(
-                ::std::mem::size_of::<as_>(),
-                240usize,
-                concat!("Size of: ", stringify!(as_))
-            );
-            assert_eq!(
-                ::std::mem::align_of::<as_>(),
-                8usize,
-                concat!("Alignment of ", stringify!(as_))
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<as_>())).printer as *const _ as usize
-                },
-                0usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(as_),
-                    "::",
-                    stringify!(printer)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<as_>())).assembler as *const _
-                        as usize
-                },
-                8usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(as_),
-                    "::",
-                    stringify!(assembler)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<as_>())).propagate_exceptions
-                        as *const _ as usize
-                },
-                232usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(as_),
-                    "::",
-                    stringify!(propagate_exceptions)
-                )
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc32as8assembleERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-            pub fn as_assemble(
-                this: *mut root::lc3::as_,
-                asm_filename: *const root::std::string,
-            ) -> root::lc3::optional<root::std::string>;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc32as22setPropagateExceptionsEv"]
-            pub fn as_setPropagateExceptions(this: *mut root::lc3::as_);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc32as24clearPropagateExceptionsEv"]
-            pub fn as_clearPropagateExceptions(this: *mut root::lc3::as_);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc32as19setEnableLiberalAsmEb"]
-            pub fn as_setEnableLiberalAsm(
-                this: *mut root::lc3::as_,
-                enable: bool,
-            );
-        }
-        impl Default for as_ {
-            fn default() -> Self {
-                unsafe { ::std::mem::zeroed() }
-            }
-        }
-        impl as_ {
-            #[inline]
-            pub unsafe fn assemble(
-                &mut self,
-                asm_filename: *const root::std::string,
-            ) -> root::lc3::optional<root::std::string> {
-                as_assemble(self, asm_filename)
-            }
-            #[inline]
-            pub unsafe fn setPropagateExceptions(&mut self) {
-                as_setPropagateExceptions(self)
-            }
-            #[inline]
-            pub unsafe fn clearPropagateExceptions(&mut self) {
-                as_clearPropagateExceptions(self)
-            }
-            #[inline]
-            pub unsafe fn setEnableLiberalAsm(&mut self, enable: bool) {
-                as_setEnableLiberalAsm(self, enable)
-            }
-        }
-        #[repr(C)]
-        #[derive(Debug, Copy, Clone)]
-        pub struct conv {
-            pub printer: *mut root::lc3::utils::IPrinter,
-            pub converter: root::lc3::core::Converter,
-            pub propagate_exceptions: bool,
-        }
-        #[test]
-        fn bindgen_test_layout_conv() {
-            assert_eq!(
-                ::std::mem::size_of::<conv>(),
-                32usize,
-                concat!("Size of: ", stringify!(conv))
-            );
-            assert_eq!(
-                ::std::mem::align_of::<conv>(),
-                8usize,
-                concat!("Alignment of ", stringify!(conv))
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<conv>())).printer as *const _
-                        as usize
-                },
-                0usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(conv),
-                    "::",
-                    stringify!(printer)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<conv>())).converter as *const _
-                        as usize
-                },
-                8usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(conv),
-                    "::",
-                    stringify!(converter)
-                )
-            );
-            assert_eq!(
-                unsafe {
-                    &(*(::std::ptr::null::<conv>())).propagate_exceptions
-                        as *const _ as usize
-                },
-                24usize,
-                concat!(
-                    "Offset of field: ",
-                    stringify!(conv),
-                    "::",
-                    stringify!(propagate_exceptions)
-                )
-            );
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc34conv10convertBinERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-            pub fn conv_convertBin(
-                this: *mut root::lc3::conv,
-                asm_filename: *const root::std::string,
-            ) -> root::lc3::optional<root::std::string>;
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc34conv22setPropagateExceptionsEv"]
-            pub fn conv_setPropagateExceptions(this: *mut root::lc3::conv);
-        }
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc34conv24clearPropagateExceptionsEv"]
-            pub fn conv_clearPropagateExceptions(this: *mut root::lc3::conv);
-        }
-        impl Default for conv {
-            fn default() -> Self {
-                unsafe { ::std::mem::zeroed() }
-            }
-        }
-        impl conv {
-            #[inline]
-            pub unsafe fn convertBin(
-                &mut self,
-                asm_filename: *const root::std::string,
-            ) -> root::lc3::optional<root::std::string> {
-                conv_convertBin(self, asm_filename)
-            }
-            #[inline]
-            pub unsafe fn setPropagateExceptions(&mut self) {
-                conv_setPropagateExceptions(self)
-            }
-            #[inline]
-            pub unsafe fn clearPropagateExceptions(&mut self) {
-                conv_clearPropagateExceptions(self)
-            }
-        }
-        #[repr(C)]
-        #[derive(Debug)]
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        pub struct ConsoleInputter {
-            pub _base: root::lc3::utils::IInputter,
-        }
-        #[test]
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        fn bindgen_test_layout_ConsoleInputter() {
-            assert_eq!(
-                ::std::mem::size_of::<ConsoleInputter>(),
-                8usize,
-                concat!("Size of: ", stringify!(ConsoleInputter))
-            );
-            assert_eq!(
-                ::std::mem::align_of::<ConsoleInputter>(),
-                8usize,
-                concat!("Alignment of ", stringify!(ConsoleInputter))
-            );
-        }
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        impl Default for ConsoleInputter {
-            fn default() -> Self {
-                unsafe { ::std::mem::zeroed() }
-            }
-        }
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc315ConsoleInputter10beginInputEv"]
-            pub fn ConsoleInputter_beginInput(
-                this: *mut ::std::os::raw::c_void,
-            );
-        }
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc315ConsoleInputter7getCharERc"]
-            pub fn ConsoleInputter_getChar(
-                this: *mut ::std::os::raw::c_void,
-                c: *mut ::std::os::raw::c_char,
-            ) -> bool;
-        }
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc315ConsoleInputter8endInputEv"]
-            pub fn ConsoleInputter_endInput(this: *mut ::std::os::raw::c_void);
-        }
-        #[repr(C)]
-        #[derive(Debug)]
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        pub struct ConsolePrinter {
-            pub _base: root::lc3::utils::IPrinter,
-        }
-        #[test]
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        fn bindgen_test_layout_ConsolePrinter() {
-            assert_eq!(
-                ::std::mem::size_of::<ConsolePrinter>(),
-                8usize,
-                concat!("Size of: ", stringify!(ConsolePrinter))
-            );
-            assert_eq!(
-                ::std::mem::align_of::<ConsolePrinter>(),
-                8usize,
-                concat!("Alignment of ", stringify!(ConsolePrinter))
-            );
-        }
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        impl Default for ConsolePrinter {
-            fn default() -> Self {
-                unsafe { ::std::mem::zeroed() }
-            }
-        }
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc314ConsolePrinter8setColorENS_5utils10PrintColorE"]
-            pub fn ConsolePrinter_setColor(
-                this: *mut ::std::os::raw::c_void,
-                color: root::lc3::utils::PrintColor,
-            );
-        }
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc314ConsolePrinter5printERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"]
-            pub fn ConsolePrinter_print(
-                this: *mut ::std::os::raw::c_void,
-                string: *const root::std::string,
-            );
-        }
-        #[cfg(feature = "frontend")]
-        #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
-        extern "C" {
-            #[link_name = "\u{1}_ZN3lc314ConsolePrinter7newlineEv"]
-            pub fn ConsolePrinter_newline(this: *mut ::std::os::raw::c_void);
-        }
-    }
     pub type wctype_t = ::std::os::raw::c_ulong;
     pub const __ISwupper: root::_bindgen_ty_46 = 0;
     pub const __ISwlower: root::_bindgen_ty_46 = 1;
