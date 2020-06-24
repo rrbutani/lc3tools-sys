@@ -7,7 +7,7 @@
 
 namespace lc3 { namespace shims
 {
-    class PrinterShim : public lc3::utils::IPrinter
+    class PrinterShim: public lc3::utils::IPrinter
     {
     public:
         PrinterShim(
@@ -19,6 +19,7 @@ namespace lc3 { namespace shims
         virtual void setColor(lc3::utils::PrintColor color) override;
         virtual void print(std::string const & string) override;
         virtual void newline(void) override;
+
     private:
         std::function<void(lc3::utils::PrintColor)> setColorFunc;
         std::function<void(std::string const&)> printFunc;
@@ -55,4 +56,69 @@ namespace lc3 { namespace shims
     void beginInputNoOp(void);
     bool getCharNoOp(char & c);
     void endInputNoOp(void);
+
+    /// Prints to a buffer.
+    class BufferPrinter: public lc3::utils::IPrinter
+    {
+    public:
+        BufferPrinter(size_t len, char buffer[/*len*/]): len(len), buffer(buffer) {}
+
+        virtual void setColor(lc3::utils::PrintColor color) override;
+        virtual void print(std::string const & string) override;
+        virtual void newline(void) override;
+
+    private:
+        bool put(char c);
+
+        size_t cursor = 0;
+        size_t len;
+        char* buffer;
+    }
+
+    /// Gets inputs from a buffer.
+    class BufferInputter: public lc3::utils::IInputter
+    {
+    public:
+        BufferInputter(size_t len, char const buffer[/*len*/]):
+            len(len), buffer(buffer) {}
+
+        virtual void beginInput(void) override;
+        virtual bool getChar(char & c) override;
+        virtual void endInput(void) override;
+
+    private:
+        size_t pos = 0;
+        size_t len;
+        char const buffer[];
+    }
+
+    /// Calls a function on output.
+    class CallbackPrinter: public lc3::utils::IPrinter
+    {
+    public:
+        CallbackPrinter(void(const *func)(char)): func(func) {}
+
+        virtual void setColor(lc3::utils::PrintColor color) override;
+        virtual void print(std::string const & string) override;
+        virtual void newline(void) override;
+
+    private:
+        void (const *func)(char);
+    }
+
+    /// Calls a function to get an input.
+    ///
+    /// Note: the function must ultimately produce a character but *can* block.
+    class CallbackInputter: public lc3::utils::IInputter
+    {
+    public:
+        CallbackInputter(char(const *func)(void)): func(func) {}
+
+        virtual void beginInput(void) override;
+        virtual bool getChar(char & c) override;
+        virtual void endInput(void) override;
+
+    private:
+        char (const *func)(void);
+    }
 }; };
