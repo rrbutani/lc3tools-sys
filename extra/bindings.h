@@ -13,8 +13,8 @@ extern "C" {
 
     void *load_program(
         uint16_t const len,
-        uint16_t const addresses[len],
-        uint16_t const words[len]
+        uint16_t const addresses[/*len*/],
+        uint16_t const words[/*len*/]
     );
 
     uint16_t get_mem(void* sim_ptr, uint16_t addr);

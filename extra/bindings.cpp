@@ -9,8 +9,8 @@
 
 extern "C" void *load_program(
     uint16_t const len,
-    uint16_t const addresses[len],
-    uint16_t const words[len]
+    uint16_t const addresses[/*len*/],
+    uint16_t const words[/*len*/]
 ) {
     auto printer = new lc3::shims::PrinterShim(lc3::shims::noOpPrintShim());
     auto inputter = new lc3::shims::InputterShim(lc3::shims::noOpInputShim());
