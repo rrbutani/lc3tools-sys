@@ -210,14 +210,17 @@ jobs:
         run: |
           clang --version || :
           c++ --version || :
+          lld --version || :
+          ld.lld --version || :
+          lld-9 --version || :
+          ld.lld-9 --version || :
 
           # Note that the lld version is hardcoded here; this will likely need to be
           # bumped down the road..
           export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld-9"
 
-          cargo clean
-
           cargo run \
+            --target-dir not-cached \
             --no-default-features \
             --features ${{ matrix.features }},lto \
             --release \
