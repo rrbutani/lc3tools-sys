@@ -41,20 +41,20 @@ fn time<R>(func: impl FnOnce() -> R) -> (R, Duration) {
 
 fn main() {
     #[rustfmt::skip]
-    let prog_gen = |foo: u16, bar: u16| program! {
+    let prog_gen = |a: u16, b: u16| program! {
         .ORIG #0x3000;
         BRnzp @START;
 
-        // Calculates foo * bar
-        @FOO .FILL #foo;
-        @BAR .FILL #bar;
+        // Calculates a * b
+        @A .FILL #a;
+        @B .FILL #b;
 
         @START
         AND R0, R0, #0; // R0 as acc
-        LD R1, @FOO;    // R1 as inc
-        LD R2, @BAR;    // R2 as count
+        LD R1, @A;      // R1 as inc
+        LD R2, @B;      // R2 as count
 
-        // TODO: if bar is negative, flip the signs of foo and bar.
+        // TODO: if b is negative, flip the signs of a and b.
         // i.e. 3 * -4 → -3 * 4
         //
         // For now, we'll just do unsigned numbers though.
@@ -76,18 +76,18 @@ fn main() {
 
     c_interface(&prog_gen);
 
-    println!("");
+    println!();
 
-    // #[cfg(feature = "cpp-interface-example")]
+    #[cfg(feature = "cpp-interface-example")]
     cpp_interface(&prog_gen);
 }
 
 fn c_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
-    let test = |foo: u16, bar: u16| {
-        print!("{:5} x {:5}: ", foo, bar);
-        let prog: AssembledProgram = prog_gen(foo, bar);
-        let expected = foo
-            .checked_mul(bar)
+    let test = |a: u16, b: u16| {
+        print!("{:5} x {:5}: ", a, b);
+        let prog: AssembledProgram = prog_gen(a, b);
+        let expected = a
+            .checked_mul(b)
             .expect("multiplication does not overflow");
 
         let (mut addrs, mut words) = (Vec::new(), Vec::new());
@@ -111,7 +111,7 @@ fn c_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
         let (state, elapsed) = time(|| unsafe { run_program(sim, 0x3000) });
         println!("[in {:?}]", elapsed);
 
-        let State { success, .. } = state.clone();
+        let State { success, .. } = state;
 
         let got = unsafe { get_mem(sim, 0x3020) };
         unsafe { free_sim(sim) };
@@ -130,12 +130,13 @@ fn c_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
     test(1, 65535); // This one has the worst runtime.
 }
 
+#[cfg(feature = "cpp-interface-example")]
 fn cpp_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
     let mut printer = Box::new(unsafe { noOpPrintShim() });
     let mut input = Box::new(unsafe { noOpInputShim() });
 
-    let mut test = |foo: u16, bar: u16| {
-        print!("{:5} x {:5}: ", foo, bar);
+    let mut test = |a: u16, b: u16| {
+        print!("{:5} x {:5}: ", a, b);
 
         let mut sim = Box::new(unsafe {
             Sim::new(
@@ -147,9 +148,9 @@ fn cpp_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
             )
         });
 
-        let prog: AssembledProgram = prog_gen(foo, bar);
-        let expected = foo
-            .checked_mul(bar)
+        let prog: AssembledProgram = prog_gen(a, b);
+        let expected = a
+            .checked_mul(b)
             .expect("multiplication does not overflow");
 
         unsafe {
