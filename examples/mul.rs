@@ -1,12 +1,9 @@
 use std::error::Error;
 use std::ops::Deref;
-use std::time::{Instant, Duration};
+use std::time::{Duration, Instant};
 
+use lc3tools_sys::root::lc3::shims::{noOpInputShim, noOpPrintShim};
 use lc3tools_sys::root::lc3::sim as Sim;
-use lc3tools_sys::root::lc3::shims::{
-    noOpInputShim,
-    noOpPrintShim,
-};
 use lc3tools_sys::root::{free_sim, get_mem, load_program, run_program, State};
 
 use lc3_isa::{
@@ -114,10 +111,7 @@ fn c_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
         let (state, elapsed) = time(|| unsafe { run_program(sim, 0x3000) });
         println!("[in {:?}]", elapsed);
 
-        let State {
-            success,
-            ..
-        } = state.clone();
+        let State { success, .. } = state.clone();
 
         let got = unsafe { get_mem(sim, 0x3020) };
         unsafe { free_sim(sim) };
@@ -143,23 +137,29 @@ fn cpp_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
     let mut test = |foo: u16, bar: u16| {
         print!("{:5} x {:5}: ", foo, bar);
 
-        let mut sim = Box::new(unsafe { Sim::new(
-            &mut printer._base as *mut _,
-            &mut input._base as *mut _,
-            true,
-            0,
-            false,
-        )});
+        let mut sim = Box::new(unsafe {
+            Sim::new(
+                &mut printer._base as *mut _,
+                &mut input._base as *mut _,
+                true,
+                0,
+                false,
+            )
+        });
 
         let prog: AssembledProgram = prog_gen(foo, bar);
         let expected = foo
             .checked_mul(bar)
             .expect("multiplication does not overflow");
 
-        unsafe { sim.reinitialize(); }
+        unsafe {
+            sim.reinitialize();
+        }
         sim.load::<AssembledProgram, _>(&prog).unwrap();
 
-        unsafe { sim.setPC(0x3000); }
+        unsafe {
+            sim.setPC(0x3000);
+        }
         let (success, elapsed) = time(|| unsafe { sim.runUntilHalt() });
 
         assert!(success);
