@@ -3,42 +3,81 @@
 #include "simulator.h"
 #include "shims.h"
 
-extern "C" void *load_program(
-    uint16_t const len,
-    uint16_t const addresses[/*len*/],
-    uint16_t const words[/*len*/]
-) {
-    auto printer = new lc3::shims::PrinterShim(lc3::shims::noOpPrintShim());
-    auto inputter = new lc3::shims::InputterShim(lc3::shims::noOpInputShim());
-
-    auto sim = new lc3::sim(
+extern "C" lc3::sim *new_sim(lc3::utils::IPrinter *printer, lc3::utils::IInputter *inputter) {
+    return new lc3::sim(
         *printer,
         *inputter,
         false,
         0,
         false
     );
+}
 
+extern "C" lc3::utils::IPrinter *no_op_printer(void) {
+    auto printer = new lc3::shims::PrinterShim(lc3::shims::noOpPrintShim());
+    return (lc3::utils::IPrinter*)(printer);
+}
+
+extern "C" lc3::utils::IInputter *no_op_inputter(void) {
+    auto inputter = new lc3::shims::InputterShim(lc3::shims::noOpInputShim());
+    return (lc3::utils::IInputter*)(inputter);
+}
+
+extern "C" lc3::sim *new_sim_with_no_op_io(void) {
+    return new_sim(no_op_printer(), no_op_inputter());
+}
+
+extern "C" lc3::utils::IPrinter *buffer_printer(
+    size_t const len,
+    char buffer[/*len*/]
+) {
+    auto printer = new lc3::shims::BufferPrinter(len, buffer);
+    return (lc3::utils::IPrinter*)(printer);
+}
+
+extern "C" lc3::utils::IInputter *buffer_inputter(
+    size_t const len,
+    char const buffer[/*len*/]
+) {
+    auto inputter = new lc3::shims::BufferInputter(len, buffer);
+    return (lc3::utils::IInputter*)(inputter);
+}
+
+extern "C" lc3::utils::IPrinter *callback_printer(
+    void (*func)(char)
+) {
+    auto printer = new lc3::shims::CallbackPrinter(func);
+    return (lc3::utils::IPrinter*)(printer);
+}
+
+extern "C" lc3::utils::IInputter *callback_inputter(
+    char (*func)(void)
+) {
+    auto inputter = new lc3::shims::CallbackInputter(func);
+    return (lc3::utils::IInputter*)(inputter);
+}
+
+extern "C" void load_program(
+    lc3::sim* sim,
+    uint16_t const len,
+    uint16_t const addresses[/*len*/],
+    uint16_t const words[/*len*/]
+) {
     sim->reinitialize();
 
     for (auto i = 0; i < len; i++) {
         sim->setMem(addresses[i], words[i]);
     }
-
-    return sim;
 }
 
-extern "C" uint16_t get_mem(void* sim_ptr, uint16_t addr) {
-    auto sim = static_cast<lc3::sim*>(sim_ptr);
-
+extern "C" uint16_t get_mem(lc3::sim* sim, uint16_t addr) {
     return sim->getMem(addr);
 }
 
 extern "C" State run_program(
-    void* sim_ptr,
+    lc3::sim* sim,
     uint16_t const pc
 ) {
-    auto sim = static_cast<lc3::sim*>(sim_ptr);
     sim->setPC(pc);
 
     auto success = sim->runUntilHalt();
@@ -62,8 +101,7 @@ extern "C" State run_program(
     };
 }
 
-extern "C" void free_sim(void *sim_ptr) {
-    auto sim = static_cast<lc3::sim*>(sim_ptr);
+extern "C" void free_sim(lc3::sim *sim) {
     // delete sim->inputter; // TODO: inputter!
     // delete sim->inputter; // TODO: printer!
     delete sim;
