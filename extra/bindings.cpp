@@ -3,10 +3,6 @@
 #include "simulator.h"
 #include "shims.h"
 
-// TODO: these require the frontend feature...
-#include "console_printer.h"
-#include "console_inputter.h"
-
 extern "C" void *load_program(
     uint16_t const len,
     uint16_t const addresses[/*len*/],
