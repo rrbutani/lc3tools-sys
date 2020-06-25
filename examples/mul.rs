@@ -41,6 +41,15 @@ fn time<R>(func: impl FnOnce() -> R) -> (R, Duration) {
 }
 
 fn main() {
+    std::thread::Builder::new()
+        .stack_size(4 * 1024 * 1024)
+        .spawn(inner_main)
+        .unwrap()
+        .join()
+        .unwrap()
+}
+
+fn inner_main() {
     #[rustfmt::skip]
     let prog_gen = |a: u16, b: u16| program! {
         .ORIG #0x3000;
