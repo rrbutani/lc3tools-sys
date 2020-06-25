@@ -214,12 +214,12 @@ jobs:
         run: |
           clang --version || :
           c++ --version || :
-
           export CC=clang
-          export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld"
 
           # No ld.lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
-          ld.lld --version || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=ld64"
+          test ${{ matrix.os }} == 'macos-latest' && \
+               export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=ld64" \
+            || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld"
 
           cargo run \
             --target-dir not-cached \
