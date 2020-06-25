@@ -218,8 +218,8 @@ jobs:
           export CC=clang
           export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld"
 
-          # No lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
-          lld --version || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=ld64"
+          # No ld.lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
+          ld.lld --version || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=ld64"
 
           cargo run \
             --target-dir not-cached \
