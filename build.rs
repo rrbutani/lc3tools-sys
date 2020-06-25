@@ -504,7 +504,22 @@ fn main() -> Result<()> {
     }
 
     if cfg!(feature = "lto") {
+        // We have to require that we're using clang here because otherwise
+        // the Rust's LTO is uses clang's LTO setup (it produces LLVM bitcode).
+        //
+        // `-flto=thin` will work with `gcc` but it will not produce LLVM
+        // bitcode. We end up explicitly asking `rustc` to use the LLVM linker
+        // (`lld`) because the regular binutils linker does not understand
+        // LLVM bitcode.
+        //
+        // So, if we don't explicitly make `cc` use `clang` (and if `cc` is gcc)
+        // here, `lld` will just not see the symbols from our C/C++ objects
+        // since they're in the GCC LTO format.
         build.flag_if_supported("-flto=thin");
+
+        if !build.get_compiler().is_like_clang() {
+            panic!("Must use clang with `cc` for whole program LTO. Try setting `CC`?")
+        }
     }
 
     build
@@ -578,6 +593,10 @@ fn main() -> Result<()> {
     // `cc` automatically tells cargo to link to this statically.
     build.out_dir(out.join("build")).compile("lc3core");
     println!("cargo:root={}", out.display());
+
+    // Since `cc` doesn't: https://github.com/alexcrichton/cc-rs/issues/413
+    println!("cargo:rerun-if-env-changed=CC");
+    println!("cargo:rerun-if-env-changed=AR");
 
     Ok(())
 }
