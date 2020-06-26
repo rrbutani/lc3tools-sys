@@ -65,7 +65,7 @@ jobs:
             ~/.cargo/bin
             ~/.cargo/.crates2.json
             ~/.cargo/.crates.toml
-          key: ${{ matrix.os }}-${{ matrix.cargo-cache-ver }}-${{ matrix.cargo-sweep-ver }}-${{ matrix.rust-latest-ver }}-cargo-bins-v0
+          key: ${{ matrix.os }}-${{ matrix.cargo-cache-ver }}-${{ matrix.cargo-sweep-ver }}-${{ matrix.rust-latest-ver }}-cargo-bins
 
       # We don't bother using actions-rs/install for this because:
       #  - we want to be able to install cargo-cache with specific features
