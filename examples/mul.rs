@@ -41,8 +41,15 @@ fn time<R>(func: impl FnOnce() -> R) -> (R, Duration) {
 }
 
 fn main() {
-    std::thread::Builder::new()
-        .stack_size(16 * 1024 * 1024)
+    #[cfg(not(windows))]
+    let builder = std::thread::Builder::new()
+        .stack_size(4 * 1024 * 1024);
+
+    #[cfg(windows)]
+    let builder = std::thread::Builder::new()
+        .stack_size(128 * 1024 * 1024);
+
+    builder
         .spawn(inner_main)
         .unwrap()
         .join()

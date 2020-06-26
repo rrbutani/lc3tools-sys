@@ -217,7 +217,6 @@ jobs:
           c++ --version || :
 
           export CC=clang
-          export AR=llvm-ar
 
           # No ld.lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
           test ${{ matrix.os }} == 'macos-latest' && \
