@@ -166,6 +166,7 @@ where
 pub mod binding_support {
     use std::collections::{HashMap, HashSet};
 
+    pub use quote::ToTokens;
     use syn::{
         punctuated::Punctuated, token::Colon2, visit::Visit,
         visit_mut::VisitMut, Attribute, File, Ident, Item, PathSegment,
@@ -220,6 +221,15 @@ pub mod binding_support {
     pub enum Element<'ast> {
         PathBased(Path),
         ValueBased(Path, &'ast Item),
+    }
+
+    impl<'ast> Element<'ast> {
+        pub fn get_path(&self) -> Path {
+            match self {
+                Element::PathBased(p) => p.clone(),
+                Element::ValueBased(p, _) => p.clone(),
+            }
+        }
     }
 
     pub type Map<'ast> = HashMap<Element<'ast>, Option<Feature>>;
@@ -285,7 +295,8 @@ pub mod binding_support {
                 | Trait(_) | TraitAlias(_) | Type(_) | Union(_) | Use(_) => {
                     if !self.item_record.insert(self.path.item(i)) {
                         println!(
-                            "cargo:warning=ItemRecorder: {:?} already exists!",
+                            "cargo:warning=ItemRecorder: [{}] {:?} already exists!",
+                            self.path.current_path.to_token_stream(),
                             i
                         )
                     }
@@ -448,8 +459,7 @@ fn main() -> Result<()> {
     {
         use std::io::Write;
 
-        use binding_support::{elements, tag, Feature, Map};
-        use quote::ToTokens;
+        use binding_support::{elements, tag, Feature, Map, ToTokens};
 
         // First we want to get the baseline bindings — just the backend, no
         // other features — and record what items this has.
@@ -470,8 +480,24 @@ fn main() -> Result<()> {
         let mut map = Map::with_capacity(grader_elements.len());
         map.extend(backend_elements.drain().map(|k| (k, None)));
 
-        assert!(frontend_elements.is_superset(&backend_elements));
-        assert!(grader_elements.is_superset(&frontend_elements));
+        macro_rules! superset {
+            ($baseset:ident is within $superset:ident) => {
+                if !$superset.is_superset(&$baseset) {
+                    panic!(
+                        "{} is not a superset of {}: {}",
+                        core::stringify!($superset),
+                        core::stringify!($baseset),
+                        $baseset.difference(&$  superset).map(|e| {
+                            format!("\n\n - [{}] {:?}", e.get_path().to_token_stream(), e)
+                        })
+                        .collect::<String>()
+                    )
+                }
+            };
+        }
+
+        superset!(backend_elements is within frontend_elements);
+        superset!(frontend_elements is within grader_elements);
 
         for element in frontend_elements.drain() {
             map.entry(element).or_insert(Some(Feature::Frontend));
