@@ -283,11 +283,12 @@ pub mod binding_support {
                 Const(_) | Enum(_) | ExternCrate(_) | Fn(_) | ForeignMod(_)
                 | Macro(_) | Macro2(_) | Impl(_) | Static(_) | Struct(_)
                 | Trait(_) | TraitAlias(_) | Type(_) | Union(_) | Use(_) => {
-                    assert!(
-                        self.item_record.insert(self.path.item(i)),
-                        "{:?} already exists!",
-                        i
-                    )
+                    if !self.item_record.insert(self.path.item(i)) {
+                        println!(
+                            "cargo:warning=ItemRecorder: {:?} already exists!",
+                            i
+                        )
+                    }
                 }
 
                 Mod(syn::ItemMod { ident, .. }) => {
