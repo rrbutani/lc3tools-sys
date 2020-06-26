@@ -488,10 +488,16 @@ fn main() -> Result<()> {
                         "{} is not a superset of {}: {}",
                         core::stringify!($superset),
                         core::stringify!($baseset),
-                        $baseset.difference(&$  superset).map(|e| {
-                            format!("\n\n - [{}] {:?}", e.get_path().to_token_stream(), e)
-                        })
-                        .collect::<String>()
+                        $baseset
+                            .difference(&$superset)
+                            .map(|e| {
+                                format!(
+                                    "\n\n - [{}] {:?}",
+                                    e.get_path().to_token_stream(),
+                                    e
+                                )
+                            })
+                            .collect::<String>()
                     )
                 }
             };
