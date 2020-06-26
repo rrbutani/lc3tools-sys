@@ -208,18 +208,21 @@ jobs:
         # cmd's env vars)
         #
         # Nightly Rust's LLVM doesn't play nice with lld-9 which is what the CI machines
-        # seem to have:
+        # seem to have (https://github.com/actions/virtual-environments/blob/73b1f4219b0d5d9c78a1deecba3a69e0c319f500/images/linux/scripts/installers/clang.sh#L40-L44):
         #   » ld.lld-9: error: Invalid summary version 8. Version should be in the range [1-7].
         if: matrix.os != 'windows-latest' && matrix.rust != 'nightly'
         run: |
           clang --version || :
+          ld.lld-9 --version || :
           c++ --version || :
+
           export CC=clang
+          export AR=llvm-ar
 
           # No ld.lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
           test ${{ matrix.os }} == 'macos-latest' && \
                export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=ld64" \
-            || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld"
+            || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld-9"
 
           cargo run \
             --target-dir not-cached \
