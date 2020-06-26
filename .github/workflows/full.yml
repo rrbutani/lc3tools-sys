@@ -27,7 +27,7 @@ jobs:
           - windows-latest
           # - wasm32-unknown-unknown
           # - wasm32-wasi
-        features:
+        features: # NOTE: Update the set of features clippy uses when linting when adding features..
           - "''"
           - "frontend,grader"
         cargo-cache-ver: ["0.4.3"]
@@ -345,7 +345,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --all --all-features -- -D warnings
+          args: --all --all-targets --features grader,frontend -- -D warnings
 
       - name: Clean up the target folder and cargo's caches
         run: |
