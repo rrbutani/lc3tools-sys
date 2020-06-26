@@ -219,8 +219,11 @@ jobs:
           export CC=clang
 
           # No ld.lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
+          # Also see:
+          #   - https://github.com/rust-lang/rust/issues/60059
+          #   - https://bcain-llvm.readthedocs.io/projects/clang/en/latest/ThinLTO/#id10
           test ${{ matrix.os }} == 'macos-latest' && \
-               export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=ld64" \
+               export RUSTFLAGS="-Clinker=clang -Clink-arg=-Wl,-mllvm,-threads=$(sysctl -n hw.ncpu)" \
             || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld-9"
 
           cargo run \
