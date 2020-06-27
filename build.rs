@@ -593,11 +593,11 @@ fn main() -> Result<()> {
                     contents
                         .replace(
                             "#endif\n        }",
-                            "#endif\n            delete chars;\n        }"
+                            "#endif\n            delete[] chars;\n        }"
                         )
                         .replace(
                             "#endif\r\n        }",
-                            "#endif\r\n            delete chars;\r\n        }"
+                            "#endif\r\n            delete[] chars;\r\n        }"
                         )
                 )
                 .unwrap()
