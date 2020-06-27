@@ -41,15 +41,6 @@ jobs:
 
           grep -q "# ${T_VER}" CHANGELOG.md || exit 3
 
-      # We modify framework.cpp and mem.cpp which is why we use `--no-verify` here.
-      - name: Publish
-        run: |
-          cargo publish --dry-run || :
-          cargo publish \
-            --token ${{ secrets.CARGO_TOKEN }} \
-            --allow-dirty \
-            --no-verify
-
       - name: Create Release
         uses: actions/create-release@latest
         env:
@@ -61,3 +52,12 @@ jobs:
             Check the [changelog](https://github.com/rrbutani/lc3tools-sys/blob/${{ steps.ver.outputs.version }}/CHANGELOG.md#${{ steps.ver.outputs.tag }}).
           draft: false
           prerelease: false
+
+      # We modify framework.cpp and mem.cpp which is why we use `--no-verify` here.
+      - name: Publish
+        run: |
+          cargo publish --dry-run || :
+          cargo publish \
+            --token ${{ secrets.CARGO_TOKEN }} \
+            --allow-dirty \
+            --no-verify
