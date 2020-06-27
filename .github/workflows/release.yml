@@ -25,10 +25,10 @@ jobs:
         run: |
           cargo update
           C_VER="$(cargo pkgid | cut -d'#' -f2)"
-          T_VER=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          T_VER="$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')"
 
           if [[ "${C_VER}" != "${T_VER}" ]]; then
-            echo "Crate version doesn't match the tag version! (`${C_VER}` vs `${T_VER}`)"
+            echo "Crate version doesn't match the tag version! (\"${C_VER}\" vs \"${T_VER}\")"
             exit 2
           fi
 
