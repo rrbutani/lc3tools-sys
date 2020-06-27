@@ -590,6 +590,10 @@ fn main() -> Result<()> {
                     contents
                         .replace("int main(", "/* int framework_main(")
                         .replace("return 0;\n}", "return 0;\n} */")
+                        // Windows..
+                        // Even though the original file uses Unix line endings
+                        // windows git will (by default, I think) convert them.
+                        .replace("return 0;\r\n}", "return 0;\r\n} */")
                 )
                 .unwrap()
             }
