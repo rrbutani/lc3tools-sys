@@ -130,7 +130,11 @@ So, we offer an [`lto` feature][lto-feat] that passes the compiler [`cc`][cc] in
 
 The final thing you need to do when using the `lto` feature is to make sure that the compiler that `cc` ends up using will work with the LTO linker plugin. The table [here][lto-setup] offers some information on what version should work, but it's somewhat out of date; if the same version of `clang` is used by `cc` to build `LC3Tools` and by `rustc` to do the linking, things should work (provided it's a relatively modern version of clang — CI in this repo uses version 9, successfully).
 
-Actually figuring out and changing which compiler [`cc`][cc] uses is tricker; on Linux based systems ensuring that the `c++` alias points to the desired version seems to do the trick (`update-alternatives` might be able to help you with this).
+Actually figuring out and changing which compiler [`cc`][cc] uses is tricker; on Linux based systems ensuring that the `c++` alias points to the desired version seems to do the trick (`update-alternatives` might be able to help you with this). Or just set `CC` to `clang` and `CXX` to `clang++`.
+
+macOS has slightly different flags; our [CI configuration][lto-ci] has details and an example.
+
+[lto-ci]: https://github.com/rrbutani/lc3tools-sys/blob/423a8b3c5a02373bfad5db2b57e5c67e1ca5a0ec/.github/workflows/full.yml#L208-L237
 
 [c1]: https://github.com/rrbutani/lc3tools-sys/commit/3cf85f4afbf35ffa711dc4a4eaa401ab74ff95c3
 [c2]: https://github.com/rrbutani/lc3tools-sys/commit/c8139dc1a6af4f55e3e1b55ed8f68473c7e74687
