@@ -51,5 +51,11 @@ jobs:
           prerelease: false
 
       - name: Publish
+        # TODO: remove `--no-verify` once `lc3-isa` is published..
         run: |
-          cargo publish --token ${{ secrets.CARGO_TOKEN }}
+          cargo publish --dry-run || :
+          cargo publish \
+            --token ${{ secrets.CARGO_TOKEN }} \
+            --dry-run \
+            --allow-dirty \
+            --no-verify
