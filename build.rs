@@ -534,7 +534,10 @@ fn main() -> Result<()> {
     // `cc` also handles `fPIC`
 
     if cfg!(windows) {
-        build.flag("/EHsc").flag("/std:c++latest");
+        build
+            .flag("/EHsc")
+            .flag("/std:c++latest")
+            .flag("/GS-"); // This is bad and temporary (TODO).
     }
 
     if cfg!(feature = "lto") {
@@ -567,6 +570,37 @@ fn main() -> Result<()> {
     // Debug settings:
     if env!("PROFILE") == "debug" {
         build.define("_ENABLE_DEBUG", None);
+    }
+
+    // Patch the load memory logic to actually free the memory it allocates:
+    //
+    // TODO: this should maybe be sent upstream, if this is real.
+    {
+        use std::io::{Read, Write};
+        let path: PathBuf = PathBuf::from(&BACKEND).join("mem.cpp");
+
+        if let Ok(mut file) = File::open(&path) {
+            let mut contents =
+                String::with_capacity(file.metadata().unwrap().len() as usize);
+            file.read_to_string(&mut contents).unwrap();
+
+            if contents.contains("#endif\n        }") || contents.contains("#endif\r\n        }") {
+                drop(file);
+                let mut file = File::create(path).unwrap();
+
+                write!(
+                    file,
+                    "{}",
+
+                    contents
+                        .replace("#endif\n        }", "#endif\n            delete chars;\n        }")
+                        .replace("#endif\r\n        }", "#endif\r\n            delete chars;\r\n        }")
+                )
+                .unwrap()
+            }
+
+
+        }
     }
 
     // Remove `main` from framework.cpp if it's there and we're building with
