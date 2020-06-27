@@ -142,7 +142,9 @@ jobs:
         uses: actions/cache@v2
         if: matrix.os != 'windows-latest'
         with:
-          path: target
+          path: |
+            target
+            lto-target
           key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-
@@ -228,7 +230,7 @@ jobs:
             || export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld-9"
 
           cargo run \
-            --target-dir not-cached \
+            --target-dir lto-target \
             --no-default-features \
             --features ${{ matrix.features }},lto \
             --release \
