@@ -16,7 +16,7 @@ categories = ["simulation", "external-ffi-bindings"]
 
 license = "Apache-2.0"
 
-exclude = [".github"]
+exclude = [".github", "lc3tools/docs"]
 
 build = "build.rs"
 links = "lc3core"
@@ -36,7 +36,7 @@ maintenance = { status = "actively-developed" }
 [dependencies]
 
 [dev-dependencies]
-lc3-isa = { version = "0.1.0", git = "https://github.com/ut-utp/core.git" }
+lc3-isa = "0.1.0-alpha0"
 pretty_assertions = "0.6"
 
 [build-dependencies]

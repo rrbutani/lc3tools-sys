@@ -9,7 +9,7 @@ Rust bindings for [`LC3Tools`][lc3tools].
 Add this to your `Cargo.toml`:
 ```TOML
 [dependencies]
-lc3tools-sys = "1.0.6-alpha0"
+lc3tools-sys = "1.0.6"
 ```
 
 Since the bindings this crate exposes are exactly one to one with the `LC3Tools` API, the `LC3Tools` source code and documentation are the best place to go for information about how to use this crate, especially the [API documentation][api-docs].

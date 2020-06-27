@@ -7,7 +7,7 @@ name: release
 
 jobs:
   publish:
-    name: Publishes to crates.io
+    name: Publish to crates.io
 
     runs-on: ubuntu-latest
     steps:
@@ -33,10 +33,22 @@ jobs:
           fi
 
       - name: Check that this version has a changelog entry
+        id: ver
         run: |
           T_VER=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          echo "::set-output name=version::${T_VER}"
+          echo "::set-output name=tag::$(echo "${T_VER}" | sed -e 's/\.//g')"
 
           grep -q "# ${T_VER}" CHANGELOG.md || exit 3
+
+      # We modify framework.cpp and mem.cpp which is why we use `--no-verify` here.
+      - name: Publish
+        run: |
+          cargo publish --dry-run || :
+          cargo publish \
+            --token ${{ secrets.CARGO_TOKEN }} \
+            --allow-dirty \
+            --no-verify
 
       - name: Create Release
         uses: actions/create-release@latest
@@ -44,18 +56,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          release_name: v${{ steps.ver.outputs.version }}
           body: |
-            Check the [changelog](https://github.com/rrbutani/lc3tools-sys/tree/${{ github.ref }}/CHANGELOG.md#${{ github.ref }}).
+            Check the [changelog](https://github.com/rrbutani/lc3tools-sys/blob/${{ steps.ver.outputs.version }}/CHANGELOG.md#${{ steps.ver.outputs.tag }}).
           draft: false
           prerelease: false
-
-      - name: Publish
-        # TODO: remove `--no-verify` once `lc3-isa` is published..
-        run: |
-          cargo publish --dry-run || :
-          cargo publish \
-            --token ${{ secrets.CARGO_TOKEN }} \
-            --dry-run \
-            --allow-dirty \
-            --no-verify
