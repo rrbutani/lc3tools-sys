@@ -1,6 +1,6 @@
 [package]
 name = "lc3tools-sys"
-version = "1.0.6"
+version = "1.0.6-alpha0"
 authors = ["Rahul Butani <r.r.butan.i+crates@gmail.com>"]
 edition = "2018"
 
