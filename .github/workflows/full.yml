@@ -217,6 +217,7 @@ jobs:
           c++ --version || :
 
           export CC=clang
+          export CXX=clang++
 
           # No ld.lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
           # Also see:
