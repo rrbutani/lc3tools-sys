@@ -408,7 +408,7 @@ pub mod binding_support {
 fn main() -> Result<()> {
     // For path/git deps (when grabbing from crates.io lc3tools will be rolled
     // into the package).
-    if !Path::new("lc3tools/.git").exists() {
+    if !Path::new(BACKEND).exists() {
         let exit_code = Command::new("git")
             .args(&["submodule", "update", "--init"])
             .status()?;
@@ -423,7 +423,15 @@ fn main() -> Result<()> {
     // tag of the submodule whose name matches the version we're looking for but
     // we don't keep `.git` around when we publish to `crates.io` so this will
     // have to do.)
-    let crate_version = env!("CARGO_PKG_VERSION");
+
+    // Doing the below instead of using `CARGO_PKG_VERSION` allows for the crate
+    // to have an extra pre-release version.
+    let crate_version = format!(
+        "{}.{}.{}",
+        env!("CARGO_PKG_VERSION_MAJOR"),
+        env!("CARGO_PKG_VERSION_MINOR"),
+        env!("CARGO_PKG_VERSION_PATCH"),
+    );
 
     let lc3tools_package_json = Path::new("lc3tools/frontend/gui/package.json");
     let lc3tools_package_json = File::open(lc3tools_package_json)
