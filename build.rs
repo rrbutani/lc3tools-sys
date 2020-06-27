@@ -534,10 +534,7 @@ fn main() -> Result<()> {
     // `cc` also handles `fPIC`
 
     if cfg!(windows) {
-        build
-            .flag("/EHsc")
-            .flag("/std:c++latest")
-            .flag("/GS-"); // This is bad and temporary (TODO).
+        build.flag("/EHsc").flag("/std:c++latest");
     }
 
     if cfg!(feature = "lto") {
@@ -584,22 +581,27 @@ fn main() -> Result<()> {
                 String::with_capacity(file.metadata().unwrap().len() as usize);
             file.read_to_string(&mut contents).unwrap();
 
-            if contents.contains("#endif\n        }") || contents.contains("#endif\r\n        }") {
+            if contents.contains("#endif\n        }")
+                || contents.contains("#endif\r\n        }")
+            {
                 drop(file);
                 let mut file = File::create(path).unwrap();
 
                 write!(
                     file,
                     "{}",
-
                     contents
-                        .replace("#endif\n        }", "#endif\n            delete chars;\n        }")
-                        .replace("#endif\r\n        }", "#endif\r\n            delete chars;\r\n        }")
+                        .replace(
+                            "#endif\n        }",
+                            "#endif\n            delete chars;\n        }"
+                        )
+                        .replace(
+                            "#endif\r\n        }",
+                            "#endif\r\n            delete chars;\r\n        }"
+                        )
                 )
                 .unwrap()
             }
-
-
         }
     }
 
