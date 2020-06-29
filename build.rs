@@ -579,7 +579,8 @@ fn main() -> Result<()> {
 
     // Patch the load memory logic to actually free the memory it allocates:
     //
-    // TODO: this should maybe be sent upstream, if this is real.
+    // TODO: Since chiragsakhuja/lc3tools#12 was merged, remove this once
+    // there's a new release.
     {
         use std::io::{Read, Write};
         let path: PathBuf = PathBuf::from(&BACKEND).join("mem.cpp");
