@@ -1,5 +1,4 @@
 #include "shims.h"
-#include <iostream>
 
 #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32))
 #define UNUSED __attribute((unused))
@@ -48,7 +47,7 @@ void lc3::shims::endInputNoOp(void) {}
 
 // BufferPrinter:
 bool lc3::shims::BufferPrinter::put(unsigned char c) {
-    if (this->pos < this->len) { this->buffer[this->len++] = c; return true; }
+    if (this->pos < this->len) { this->buffer[this->pos++] = c; return true; }
     else { return false; }
 }
 void lc3::shims::BufferPrinter::setColor(UNUSED lc3::utils::PrintColor color) {}
@@ -61,7 +60,7 @@ void lc3::shims::BufferPrinter::newline(void) { this->put('\n'); }
 // BufferInputter:
 void lc3::shims::BufferInputter::beginInput(void) {}
 bool lc3::shims::BufferInputter::getChar(char & c) {
-    if (this->pos < this->len) { c = this->buffer[this->len++]; return true; }
+    if (this->pos < this->len) { c = this->buffer[this->pos++]; return true; }
     else { return false; }
 }
 void lc3::shims::BufferInputter::endInput(void) {}
