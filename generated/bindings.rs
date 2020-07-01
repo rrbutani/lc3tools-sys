@@ -28607,13 +28607,16 @@ pub mod root {
         pub fn new_sim(
             printer: *mut root::lc3::utils::IPrinter,
             inputter: *mut root::lc3::utils::IInputter,
+            print_level: root::lc3::utils::PrintType,
         ) -> *mut root::lc3::sim;
     }
     extern "C" {
         #[doc = " Creates a new [`sim`] with the no-op `Printer` and `Inputter`."]
         #[doc = ""]
         #[doc = " [`sim`]: crate::root::lc3::sim"]
-        pub fn new_sim_with_no_op_io() -> *mut root::lc3::sim;
+        pub fn new_sim_with_no_op_io(
+            print_level: root::lc3::utils::PrintType,
+        ) -> *mut root::lc3::sim;
     }
     extern "C" {
         #[doc = " Creates a no-op `Printer`."]

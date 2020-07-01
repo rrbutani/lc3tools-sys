@@ -3,6 +3,7 @@ use std::ops::Deref;
 use std::time::{Duration, Instant};
 
 use lc3tools_sys::root::lc3::sim as Sim;
+use lc3tools_sys::root::lc3::utils::PrintType_P_NONE as PrintTypeNone;
 use lc3tools_sys::root::{
     free_sim, get_mem, load_program, new_sim_with_no_op_io, run_program, State,
 };
@@ -110,7 +111,7 @@ fn c_interface(prog_gen: &impl Fn(u16, u16) -> AssembledProgram) {
         let words_ptr = words.as_ptr();
         let len = addrs.len();
 
-        let sim = unsafe { new_sim_with_no_op_io() };
+        let sim = unsafe { new_sim_with_no_op_io(PrintTypeNone) };
         unsafe { load_program(sim, len as u16, addrs_ptr, words_ptr) };
 
         drop((addrs, words));

@@ -18,12 +18,13 @@ extern "C" {
     /// [`sim`]: crate::root::lc3::sim
     lc3::sim *new_sim(
         lc3::utils::IPrinter *printer,
-        lc3::utils::IInputter *inputter
+        lc3::utils::IInputter *inputter,
+        lc3::utils::PrintType print_level
     );
     /// Creates a new [`sim`] with the no-op `Printer` and `Inputter`.
     ///
     /// [`sim`]: crate::root::lc3::sim
-    lc3::sim *new_sim_with_no_op_io(void);
+    lc3::sim *new_sim_with_no_op_io(lc3::utils::PrintType print_level);
 
     // No-op I/O constructors:
     /// Creates a no-op `Printer`.

@@ -3,12 +3,16 @@
 #include "simulator.h"
 #include "shims.h"
 
-extern "C" lc3::sim *new_sim(lc3::utils::IPrinter *printer, lc3::utils::IInputter *inputter) {
+extern "C" lc3::sim *new_sim(
+    lc3::utils::IPrinter *printer,
+    lc3::utils::IInputter *inputter,
+    lc3::utils::PrintType print_level
+) {
     return new lc3::sim(
         *printer,
         *inputter,
         false,
-        0,
+        static_cast<uint32_t>(print_level),
         false
     );
 }
@@ -23,8 +27,8 @@ extern "C" lc3::utils::IInputter *no_op_inputter(void) {
     return (lc3::utils::IInputter*)(inputter);
 }
 
-extern "C" lc3::sim *new_sim_with_no_op_io(void) {
-    return new_sim(no_op_printer(), no_op_inputter());
+extern "C" lc3::sim *new_sim_with_no_op_io(lc3::utils::PrintType print_level) {
+    return new_sim(no_op_printer(), no_op_inputter(), print_level);
 }
 
 extern "C" lc3::utils::IPrinter *buffer_printer(
