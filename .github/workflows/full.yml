@@ -139,8 +139,8 @@ jobs:
           command: update
 
       - name: Cache the build artifacts
-        uses: actions/cache@v2
         if: matrix.os != 'windows-latest'
+        uses: actions/cache@v2
         with:
           path: |
             target
@@ -308,7 +308,7 @@ jobs:
           # /usr/share/rust/.rustup
           # Update: we're going to skip caching the toolchain for now; the cache is
           # frequently slower than just grabbing the toolchain from rlo/dist
-          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-toolchain
+          key: ${{ steps.keys.outputs.toolchain }}-${{ steps.keys.outputs.features }}-toolchain
 
       - uses: actions-rs/toolchain@v1
         with:
