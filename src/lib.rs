@@ -26,7 +26,7 @@
     unused,
     bad_style,
     missing_debug_implementations,
-    intra_doc_link_resolution_failure,
+    broken_intra_doc_links,
     missing_docs,
     unsafe_code,
     trivial_casts,
@@ -58,24 +58,5 @@
     unsafe_code,
     unused_qualifications
 )]
-
-// #[cfg(all(not(feature = "grader"), not(feature = "frontend")))]
-// include!("../generated/backend-none-none.rs");
-
-// #[cfg(all(feature = "grader", not(feature = "frontend")))]
-// include!("../generated/backend-grader-none.rs");
-
-// #[cfg(all(not(feature = "grader"), feature = "frontend"))]
-// include!("../generated/backend-none-frontend.rs");
-
-// #[cfg(all(feature = "grader", feature = "frontend"))]
-// include!("../generated/backend-grader-frontend.rs");
-
-// #[cfg(feature = "grader")]
-// #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "grader")))]
-// // include!("../generated/grader.rs");
-
-// // #[cfg(feature = "frontend")]
-// // #[cfg_attr(all(docs, not(doctest)), doc(cfg(feature = "frontend")))]
 
 include!("../generated/bindings.rs");
