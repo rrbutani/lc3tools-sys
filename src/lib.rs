@@ -58,6 +58,7 @@
     unsafe_code,
     unused_qualifications
 )]
+#![deny(clippy::cargo)]
 // Note: Our MSRV doesn't have `broken_intra_doc_links` so we do this.
 #![allow(unknown_lints)]
 #![deny(broken_intra_doc_links)]
