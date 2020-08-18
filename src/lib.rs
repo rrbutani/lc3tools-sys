@@ -26,7 +26,7 @@
     unused,
     bad_style,
     missing_debug_implementations,
-    broken_intra_doc_links,
+    intra_doc_link_resolution_failure,
     missing_docs,
     unsafe_code,
     trivial_casts,
@@ -58,5 +58,9 @@
     unsafe_code,
     unused_qualifications
 )]
+// Note: Our MSRV doesn't have `broken_intra_doc_links` so we do this.
+#![allow(unknown_lints)]
+#![deny(broken_intra_doc_links)]
+#![warn(unknown_lints)]
 
 include!("../generated/bindings.rs");

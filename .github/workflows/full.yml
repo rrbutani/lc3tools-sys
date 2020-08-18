@@ -355,7 +355,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --all --all-targets --all-features -- -D warnings ${{ steps.args.outputs.extra }}
+          args: --all --all-targets --features grader,frontend -- -D warnings ${{ steps.args.outputs.extra }}
 
       - name: Clean up the target folder and cargo's caches
         run: |
