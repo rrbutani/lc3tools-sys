@@ -252,6 +252,14 @@ jobs:
           cargo-cache
           cargo-sweep sweep -f
 
+      # Workaround for actions/cache#403 (https://github.com/actions/cache/issues/403)
+      #
+      # rust-lang/cargo#8603 has the exact bug that we run into
+      # (https://github.com/rust-lang/cargo/issues/8603)
+      - name: Flush the disk cache for macOS
+        if: matrix.os == 'macos-latest'
+        run: sudo /usr/sbin/purge
+
   lint:
     name: Format + run clippy
 
