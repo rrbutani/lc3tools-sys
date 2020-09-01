@@ -215,6 +215,8 @@ jobs:
 
           export CC=clang
           export CXX=clang++
+          export LLVM_VER=11
+          export UBUNTU_VER_CODENAME="$(lsb_release -cs)"
 
           # No ld.lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
           # Also see:
@@ -223,8 +225,12 @@ jobs:
           test ${{ matrix.os }} == 'macos-latest' && \
                export RUSTFLAGS="-Clinker=clang -Clink-arg=-Wl,-mllvm,-threads=$(sysctl -n hw.ncpu)" \
             || {
-              sudo apt update && sudo apt install -y lld-10
-              export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld-10"
+              cat <<-EOF >> /etc/apt/source.list
+          			deb http://apt.llvm.org/bionic/ llvm-toolchain-${UBUNTU_VER_CODENAME}-${LLVM_VER} main
+          			deb-src http://apt.llvm.org/bionic/ llvm-toolchain-${UBUNTU_VER_CODENAME}-${LLVM_VER} main
+              EOF
+              sudo apt update && sudo apt install -y lld-${LLVM_VER}
+              export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld-${LLVM_VER}"
             }
 
           cargo run \
