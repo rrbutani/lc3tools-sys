@@ -145,9 +145,9 @@ jobs:
           path: |
             target
             lto-target
-          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-0-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-
+            ${{ steps.keys.outputs.toolchain }}-${{ matrix.os }}-${{ steps.keys.outputs.features }}-cargo-0-
           # ^ means we don't have to start from scratch when the deps change
 
       - name: Mark all files for cargo-sweep
@@ -216,7 +216,6 @@ jobs:
           export CC=clang
           export CXX=clang++
           export LLVM_VER=11
-          export UBUNTU_VER_CODENAME="$(lsb_release -cs)"
 
           # No ld.lld on macOS: http://lists.llvm.org/pipermail/cfe-dev/2019-March/061666.html
           # Also see:
@@ -225,11 +224,11 @@ jobs:
           test ${{ matrix.os }} == 'macos-latest' && \
                export RUSTFLAGS="-Clinker=clang -Clink-arg=-Wl,-mllvm,-threads=$(sysctl -n hw.ncpu)" \
             || {
-              cat <<-EOF >> /etc/apt/source.list
-          			deb http://apt.llvm.org/bionic/ llvm-toolchain-${UBUNTU_VER_CODENAME}-${LLVM_VER} main
-          			deb-src http://apt.llvm.org/bionic/ llvm-toolchain-${UBUNTU_VER_CODENAME}-${LLVM_VER} main
-              EOF
-              sudo apt update && sudo apt install -y lld-${LLVM_VER}
+              export UBUNTU_VER_CODENAME="$(lsb_release -cs)"
+              wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+              sudo add-apt-repository "deb http://apt.llvm.org/${UBUNTU_VER_CODENAME}/ llvm-toolchain-${UBUNTU_VER_CODENAME}-${LLVM_VER} main"
+
+              sudo apt install -y lld-${LLVM_VER}
               export RUSTFLAGS="-Clinker-plugin-lto -Clinker=clang -Clink-arg=-fuse-ld=lld-${LLVM_VER}"
             }
 
