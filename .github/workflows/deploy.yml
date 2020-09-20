@@ -35,14 +35,16 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: doc
-          args: --features=grader,frontend --document-private-items
+          args: --workspace --features=grader,frontend --document-private-items
           # → target/doc
 
       - name: Run cargo rustdoc # just to show the stats!
-        uses: actions-rs/cargo@v1
-        with:
-          command: rustdoc
-          args: --features=grader,frontend -- --cfg docs -Z unstable-options --show-coverage
+        run: |
+          RUSTFLAGS=-Awarnings
+          # With credit to: https://shift.click/blog/github-actions-rust/#verifying-code-formatting-with-rustfmt
+          for pkg in $(cargo metadata --no-deps --format-version=1 | jq -r '.packages[] | .name'); do
+            cargo rustdoc -p "${pkg}" --all-features -q -- --cfg docs -Z unstable-options --show-coverage
+          done
 
       - name: Move everything into place
         run: |

@@ -159,6 +159,7 @@ jobs:
         with:
           command: build
           args: >-
+            --workspace
             --all-targets
             --no-default-features
             --features ${{ matrix.features }}
@@ -168,6 +169,7 @@ jobs:
         with:
           command: build
           args: >-
+            --workspace
             --all-targets
             --no-default-features
             --features ${{ matrix.features }}
@@ -180,6 +182,7 @@ jobs:
         with:
           command: test
           args: >-
+            --workspace
             --no-default-features
             --features ${{ matrix.features }}
             --no-fail-fast
@@ -191,6 +194,7 @@ jobs:
         with:
           command: test
           args: >-
+            --workspace
             --no-default-features
             --features ${{ matrix.features }}
             --no-fail-fast
@@ -368,7 +372,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --all --all-targets --features grader,frontend -- -D warnings ${{ steps.args.outputs.extra }}
+          args: --workspace --all-targets --features grader,frontend -- -D warnings ${{ steps.args.outputs.extra }}
 
       - name: Clean up the target folder and cargo's caches
         run: |
