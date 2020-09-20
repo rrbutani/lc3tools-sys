@@ -128,7 +128,7 @@ Unfortunately, we can't enable LTO by default as it requires some setup and some
 
 So, we offer an [`lto` feature][lto-feat] that passes the compiler [`cc`][cc] invokes [the necessary flag][lto-flag]. When using this feature you'll also need to make sure that you pass `rustc` the LTO linker plugin flag and instruct it to use an appropriate linker, as described [here][lto-setup]. For this specific crate the necessary flags exist [here][cargo-config-lto], but commented out.
 
-The final thing you need to do when using the `lto` feature is to make sure that the compiler that `cc` ends up using will work with the LTO linker plugin. The table [here][lto-setup] offers some information on what version should work, but it's somewhat out of date; if the same version of `clang` is used by `cc` to build `LC3Tools` and by `rustc` to do the linking, things should work (provided it's a relatively modern version of clang — CI in this repo uses version 9, successfully).
+The final thing you need to do when using the `lto` feature is to make sure that the compiler that `cc` ends up using will work with the LTO linker plugin. The table [here][lto-setup] offers some information on what version should work, but it's somewhat out of date; if the same version of `clang` is used by `cc` to build `LC3Tools` and by `rustc` to do the linking, things should work (provided it's a relatively modern version of clang — CI in this repo uses version 11, successfully).
 
 Actually figuring out and changing which compiler [`cc`][cc] uses is tricker; on Linux based systems ensuring that the `c++` alias points to the desired version seems to do the trick (`update-alternatives` might be able to help you with this). Or just set `CC` to `clang` and `CXX` to `clang++`.
 
