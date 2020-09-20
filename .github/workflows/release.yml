@@ -96,7 +96,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: v${{ steps.ver.outputs.version }}
           body: |
-            The following is from the [changelog](https://github.com/rrbutani/{{{ repo name }}}/blob/${{ steps.ver.outputs.version }}/CHANGELOG.md#${{ steps.ver.outputs.tag }}).
+            The following is from the [changelog](https://github.com/rrbutani/lc3tools-sys/blob/${{ steps.ver.outputs.version }}/CHANGELOG.md#${{ steps.ver.outputs.tag }}).
 
             ${{ steps.ver.outputs.section }}
           draft: false
