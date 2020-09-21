@@ -52,6 +52,7 @@ jobs:
           # `docs.rs/crate-name/*` which will send them to the 0.2.0 docs.
           grep -q "html_root_url = \"https://docs.rs/.*/${T_VER}\"" src/lib.rs || exit 4
 
+          set +x
           # Now extract the body of the changelog entry:
           PREVIOUS_TAG="$(git describe --tags $(git rev-list --skip=1 --tags --max-count=1) --abbrev=0)" && {
             # If we *did* find a previous tag, we'll grab everything _until_ that tag's section:
