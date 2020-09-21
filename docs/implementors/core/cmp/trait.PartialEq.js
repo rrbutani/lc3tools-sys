@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["lc3tools_sys"] = [{"text":"impl&lt;Storage:&nbsp;PartialEq, Align:&nbsp;PartialEq&gt; PartialEq&lt;__BindgenBitfieldUnit&lt;Storage, Align&gt;&gt; for __BindgenBitfieldUnit&lt;Storage, Align&gt;","synthetic":false,"types":[]},{"text":"impl&lt;T&gt; PartialEq&lt;__BindgenUnionField&lt;T&gt;&gt; for __BindgenUnionField&lt;T&gt;","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
