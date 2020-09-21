@@ -37,7 +37,7 @@ __2020-06-27__
 A test release; yanked.
 
 [Unreleased]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha5...HEAD
-[1.0.6-alpha4]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha4...1.0.6-alpha5
+[1.0.6-alpha5]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha4...1.0.6-alpha5
 [1.0.6-alpha4]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha3...1.0.6-alpha4
 [1.0.6-alpha3]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha2...1.0.6-alpha3
 [1.0.6-alpha2]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6...1.0.6-alpha2
