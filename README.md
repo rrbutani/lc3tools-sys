@@ -16,7 +16,7 @@ Since the bindings this crate exposes are exactly one to one with the `LC3Tools`
 
 ### Headers
 
-Headers are exposed at the path the `DEP_LC3CORE_LINKS` env var points to.
+Headers are exposed at the path the `DEP_LC3CORE_INCLUDE` env var points to.
 
 ### Caveats
 
