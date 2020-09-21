@@ -4,6 +4,10 @@ Loosely based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0).
 
 ## [Unreleased]
 
+## [1.0.6-alpha5]
+__2020-09-20__
+One more test release!
+
 ## [1.0.6-alpha4]
 __2020-09-20__
 Yet another test release.
@@ -32,7 +36,8 @@ A test release; also yanked.
 __2020-06-27__
 A test release; yanked.
 
-[Unreleased]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha4...HEAD
+[Unreleased]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha5...HEAD
+[1.0.6-alpha4]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha4...1.0.6-alpha5
 [1.0.6-alpha4]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha3...1.0.6-alpha4
 [1.0.6-alpha3]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6-alpha2...1.0.6-alpha3
 [1.0.6-alpha2]: https://github.com/rrbutani/lc3tools-sys/compare/1.0.6...1.0.6-alpha2
