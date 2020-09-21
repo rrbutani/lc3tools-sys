@@ -71,6 +71,11 @@ jobs:
           #
           # This means we can just always trim the first and last line.
           SECTION="$(echo "${SECTION}" | head -n-1 | tail -n+2)"
+
+          # To escape newlines, as per: https://github.community/t/set-output-truncates-multiline-strings/16852/5
+          SECTION="${SECTION//'%'/'%25'}"
+          SECTION="${SECTION//$'\n'/'%0A'}"
+          SECTION="${SECTION//$'\r'/'%0D'}"
           echo "::set-output name=section::${SECTION}"
 
           # Now check if we've got a prerelease tag:
