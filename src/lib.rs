@@ -43,7 +43,7 @@
 )))]
 #![doc(
     html_logo_url = "https://github.com/chiragsakhuja/lc3tools/raw/848bb987d3675b45fdc794ebf995cba5c60373ac/frontend/gui/static/icons/256x256.png",
-    html_root_url = "https://docs.rs/lc3tools-sys/1.0.6-alpha3", // remember to bump!
+    html_root_url = "https://docs.rs/lc3tools-sys/1.0.6-alpha4", // remember to bump!
 )]
 #![allow(
     clippy::all,
